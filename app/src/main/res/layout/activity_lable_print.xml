@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+   <!-- <RelativeLayout
+        android:id="@+id/rl_label"
+        android:layout_width="500dp"
+        android:layout_height="280dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        >
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="序列号"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:paddingBottom="6dp"
+                android:paddingTop="4dp"
+                android:text="12345678"
+                android:textSize="12sp" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginLeft="1dp"
+                android:text="打印"
+                android:background="@color/bg_colorSecondPrimary"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="@dimen/text_size_list"
+                android:textColor="@color/text_colorSecondPrimary"
+                android:onClick="print"/>
+        </LinearLayout>
+
+    </RelativeLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/lblIPAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IP Address:"
+            android:textSize="20.0dip"/>
+        <EditText
+            android:id="@+id/txtIPAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:text="172.16.90.126"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/lblPort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Port:"
+            android:digits="0123456789."
+            android:textSize="20.0dip"/>
+        <EditText
+            android:id="@+id/txtWifiPort"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:digits="0123456789"
+            android:textStyle="bold"
+            android:text="9100"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/btnconnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:onClick="onClickConnect"
+            android:text="Connect"/>
+
+        <Button android:id="@+id/btncancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:onClick="onClickCancel"
+            android:text="Cancel"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/lblCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code:"
+            android:digits="0123456789."
+            android:textSize="20.0dip"/>
+        <EditText
+            android:id="@+id/txtWifiCode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:digits="0123456789"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button android:id="@+id/btnprint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:onClick="onClickPrint"
+            android:text="Print"/>
+
+
+    </LinearLayout>
+</LinearLayout>

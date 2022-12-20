@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.TransferOrderDetailActivity">
+
+  <LinearLayout
+      android:id="@+id/ll_list_items"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:focusable="true"
+      android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/tv_column1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="10"
+        android:textSize="@dimen/text_size_list" />
+
+    <TextView
+        android:id="@+id/tv_column2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="1.5"
+        android:gravity="left"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="P01013666"
+        android:textSize="@dimen/text_size_list" />
+
+    <TextView
+        android:id="@+id/tv_column3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_weight="2.5"
+        android:gravity="left"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="收款机-商米-T2"
+        android:textSize="@dimen/text_size_list" />
+
+    <EditText
+        android:id="@+id/et_column4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="2"
+        android:gravity="left"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        android:singleLine="false"
+        android:textSize="@dimen/text_size_list" />
+
+    <TextView
+        android:id="@+id/tv_column5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="@dimen/text_size_list" />
+
+    <TextView
+        android:id="@+id/tv_column6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="@dimen/text_size_list" />
+
+    <TextView
+        android:id="@+id/tv_column7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="address"
+        android:textSize="@dimen/text_size_list" />
+    <TextView
+        android:id="@+id/tv_column8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="1dp"
+        android:text="@string/text_split"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="12sp" />
+  </LinearLayout>
+  </RelativeLayout>

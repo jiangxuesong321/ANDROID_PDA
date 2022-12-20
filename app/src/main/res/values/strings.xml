@@ -1,0 +1,408 @@
+<resources>
+    <string name="app_name">条码管理系统</string>
+    <!--<string name="sap_url_host">https://vhsscqs4ci.sap.sunmi.com:44300</string>-->
+    <!--    <string name="sap_url_host">https://vhsscds4ci.sap.sunmi.com:44300</string>-->
+    <!--vhsscds4ci ->  vhsscqs4ci-->
+
+    <!--D-->
+    <!--<string name="sap_url_host">https://sapdev.sunmi.com</string>-->
+
+    <!--Q-->
+    <!--<string name="sap_url_host">https://sapqas.sunmi.com</string>-->
+    <string name="default_environment">Q</string>
+    <!--<string name="default_environment">P</string>-->
+    <!--P-->
+    <string name="sap_url_host">https://sap.sunmi.com</string>
+
+
+    <string name="sap_url_host_q">https://sapqas.sunmi.com</string>
+    <!--<string name="sap_url_client">\?sap-client=110</string>-->
+    <string name="sap_url_client">\?sap-client=100</string>
+    <string name="sap_url_plant">/sap/opu/odata/sap/ZSTORAGELOCATION_CDS/ZSTORAGELOCATION</string>
+    <string name="sap_url_logistics_provider">/sap/opu/odata/sap/ZCDS_LOGISTICS_PROVIDER_CDS/ZCDS_LOGISTICS_PROVIDER</string>
+    <string name="sap_url_material">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_CDS/ZCDS_PDA_MATERIAL</string>
+    <string name="sap_url_material_picking">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_PICKING_CDS/ZCDS_PDA_MATERIAL_PICKING</string>
+    <string name="sap_url_po">/sap/opu/odata/sap/ZPDA_PO_DOWNLOAD_CDS/ZPDA_PO_DOWNLOAD</string>
+    <string name="sap_url_po_posting">/sap/pda_goodsmvt</string>
+    <string name="sap_url_stock">/sap/opu/odata/sap/ZCDS_PDA_BATCH_STOCK_CDS/ZCDS_PDA_BATCH_STOCK</string>
+    <string name="sap_url_posting">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="sap_url_sales_invoice">/sap/opu/odata/sap/ZCDS_PDA_SALES_INVOICE_CDS/ZCDS_PDA_SALES_INVOICE</string>
+    <string name="sap_url_sales_invoice_sn">/sap/opu/odata/sap/ZCDS_PDA_SALES_INVOICE_SN_CDS/ZCDS_PDA_SALES_INVOICE_SN</string>
+    <string name="sap_url_prototype_borrow">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_LEND_CDS/ZCDS_PDA_MATERIAL_LEND</string>
+    <string name="sap_url_picking">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_PICKING_CDS/ZCDS_PDA_MATERIAL_PICKING</string>
+    <string name="sap_url_material_voucher">/sap/opu/odata/sap/ZCDS_MATERIAL_VOUCHER_CDS/ZCDS_MATERIAL_VOUCHER</string>
+    <string name="sap_url_stock_in_out">/sap/opu/odata/sap/ZCDS_PDA_STOCK_IN_OUT_CDS/ZCDS_PDA_STOCK_IN_OUT</string>
+    <string name="sap_url_order_invoice_others">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_ALL_CDS/ZCDS_PDA_MATERIAL_ALL</string>
+
+    <string name="sap_url_sales_invoice_posting">/sap/pda_outb_dn</string>
+    <string name="sap_url_sales_invoice_posting_temp">/sap/pda_outb_dn_chg</string>
+    <string name="sap_url_material_lend">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_LEND_CDS/ZCDS_PDA_MATERIAL_LEND</string>
+    <string name="sap_url_transfer_order">/sap/opu/odata/sap/ZCDS_PDA_TRANSFER_ORDER_CDS/ZCDS_PDA_TRANSFER_ORDER</string>
+    <string name="sap_url_user">/sap/opu/odata/sap/ZCDS_UMAIN_DATA_CDS/ZCDS_UMAIN_DATA</string>
+    <string name="sap_url_serialInfo">/sap/serial_query</string>
+
+    <string name="sap_url_shipping_label">/sap/opu/odata/sap/ZCDS_SHIPPING_LABEL_CDS/ZCDS_SHIPPING_LABEL</string>
+    <string name="sap_url_receive_label">/sap/opu/odata/sap/ZCDS_RECEIVE_LABEL_CDS/ZCDS_RECEIVE_LABEL</string>
+
+    <string name="sap_url_po_return">/sap/opu/odata/sap/zcds_pda_return_po_dn_cds/ZCDS_PDA_RETURN_PO_DN</string>
+    <string name="sap_url_po_return_posting">/sap/pda_goodsmvt_re</string>
+
+    <string name="sap_url_po_sub_contract_out">/sap/opu/odata/sap/ZCDS_PDA_SUBCONTRACT_PO_DN_CDS/ZCDS_PDA_SUBCONTRACT_PO_DN</string>
+    <string name="sap_url_po_sub_contract_out_post">/sap/pda_goodsmvt_su</string>
+
+    <string name="sap_url_po_sub_contract_in">/sap/opu/odata/sap/ZCDS_PDA_SUBC_PO_DN_CDS/ZCDS_PDA_SUBC_PO_DN</string>
+    <string name="sap_url_po_sub_contract_in_post">/sap/pda_goodsmvt_sc</string>
+
+    <string name="sap_url_po_gi">/sap/opu/odata/sap/ZCDS_PDA_PO_GI_DOWNLOAD_CDS/ZCDS_PDA_PO_GI_DOWNLOAD</string>
+    <string name="sap_url_po_gi_post">sap/pda_po_gi</string>
+
+    <string name="sap_url_po_pgr">/sap/opu/odata/sap/ZCDS_PDA_PO_PGR_DOWNLOAD_CDS/ZCDS_PDA_PO_PGR_DOWNLOAD</string>
+    <string name="sap_url_po_pgr_post">sap/pda_po_pgr</string>
+
+    <string name="sap_url_po_gr">/sap/opu/odata/sap/ZCDS_PDA_PO_GR_DOWNLOAD_CDS/ZCDS_PDA_PO_GR_DOWNLOAD</string>
+    <string name="sap_url_po_gr_post">sap/pda_po_gr</string>
+
+    <string name="sap_url_login">/zcl_mm_002</string>
+    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>
+    <string name="sap_username">EXT_USER</string>
+    <string name="sap_password">Sunmi@1qaz2wsx$</string>
+
+    <!--Constants-->
+    <string name="storage_location_all">0001</string>
+    <string name="plant_all">0001</string>
+    <string name="function_all">99</string>
+    <string name="function_all_code">99</string>
+
+    <!--Filters-->
+    <string name="material_voucher_order_by">$orderby=rspos</string>
+    <string name="filter_shipment_status">ShipmentStatus eq \'A\'</string>
+    <string name="filter_language">Language eq \'ZH\'</string>
+    <string name="url_language_param">(p_language=\'1\')/Set</string>
+    <string name="header_language_key">Accept-Language</string>
+    <string name="header_language_value">1</string>
+
+    <!--通用-->
+    <string name="text_info">信息</string>
+    <string name="text_address">地址</string>
+    <string name="text_scan">扫码</string>
+    <string name="text_delete">删除</string>
+    <string name="text_chuantian">川田</string>
+    <string name="text_sunmi">商米</string>
+    <string name="text_shanghai_sunmi">上海商米</string>
+    <string name="text_scan_out">扫码出库</string>
+    <string name="text_scan_in">扫码入库</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="text_master_data">基础数据</string>
+    <string name="error_order_not_found">无此单据、或单据已发货、或用户无权限，请确认输入的单据号码</string>
+    <string name="error_no_material_data">请下载物料数据</string>
+    <string name="error_no_location_data">请下载库存地点数据</string>
+    <string name="text_serial_number">序列号</string>
+    <string name="text_confirm_date">过账日期</string>
+    <string name="text_update_user_data">请更新用户数据！</string>
+    <string name="text_version">版本信息</string>
+    <!--登录-->
+    <string name="login_title">商米PDA</string>
+    <string name="login_account">账号</string>
+    <string name="login_app_title">条码管理系统</string>
+    <string name="login_pwd">密码</string>
+    <string name="login_btn_text">登录</string>
+    <string name="login_qas">QAS</string>
+    <string name="login_prd">Production</string>
+    <string name="alert_waiting">正在连接服务请稍候...</string>
+    <string name="login_failed">登录失败</string>
+    <string name="text_material">物料</string>
+    <string name="text_material_label">物料标签</string>
+    <string name="text_supplier">供应商</string>
+    <string name="text_delivery_number">送货单号</string>
+    <string name="text_po_number">采购订单号</string>
+    <string name="text_sales_number">销售订单号</string>
+    <string name="text_material_number">物料编码</string>
+    <string name="text_plant">工厂</string>
+    <string name="text_plant_desc">工厂描述</string>
+    <string name="text_location">库存地点</string>
+    <string name="text_location_desc">库存地点描述</string>
+    <string name="text_sales_item">销售订单行</string>
+    <string name="text_material_desc">物料描述</string>
+    <string name="text_basic_unit">基本单位</string>
+    <string name="text_unit">单位</string>
+    <string name="text_quantity">数量</string>
+    <string name="text_weight">重量(KG)</string>
+    <string name="text_batch">批次</string>
+    <string name="text_batch_management">批次管理</string>
+    <string name="text_sn_management">序列号管理</string>
+    <string name="text_bar_code">条形码</string>
+    <string name="text_delivery_date">送货日期</string>
+    <string name="text_search">查询</string>
+    <string name="text_to">到</string>
+    <string name="text_create_date">创建日期</string>
+    <string name="text_detail">详细</string>
+    <string name="text_more">详情</string>
+    <string name="text_operation">操作</string>
+    <string name="text_item">行号</string>
+    <string name="text_unreceived_quantity">未收货</string>
+    <string name="text_receipt_quantity">入库数量</string>
+    <string name="text_split">拆分</string>
+    <string name="text_post">过账</string>
+    <string name="text_post_temp">暂存</string>
+    <string name="text_alert_waiting">正在连接服务请稍候...</string>
+    <string name="text_service_authorization_error">通信账号验证失败，请联系管理员</string>
+    <string name="text_service_failed">连接服务器失败，请稍后重试</string>
+    <string name="text_service_on_result">未查询到相应记录</string>
+    <string name="text_service_no_result_po">未查询到相应记录或已经全部收货完成</string>
+    <string name="text_service_no_result">无此单据、或单据已发货、或用户无权限</string>
+    <string name="text_prompt">提示</string>
+    <string name="text_close">关闭</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_ok">确定</string>
+    <string name="text_material_document">过账成功，物料凭证为 </string>
+    <string name="text_sales_order">过账成功，发货单为 </string>
+    <string name="text_sales_order_temp_save_success">暂存成功 </string>
+    <string name="text_make_sure_split">确定要将此采购行项目进行拆分吗？</string>
+    <string name="text_input_quantity">请为拆分出来的行项目输入数量</string>
+    <string name="text_less_receive">请至少收货一个项目</string>
+    <string name="text_input_batch">请输批次号</string>
+    <string name="text_greater_than_zero">输入的数量必须大于0</string>
+    <string name="text_input_delivery_from_date">请填入计划收货起始日期</string>
+    <string name="text_select_order_type">请选择单据类型</string>
+    <string name="text_input_material">请填入物料编码</string>
+    <string name="text_no_material">无法找到此物料</string>
+    <string name="text_input_create_from_date">请填入创建起始日期</string>
+    <string name="text_excess">入库数量不可以大于未收获数量</string>
+    <string name="text_storage_location">仓库</string>
+    <string name="text_sn_number">产品码</string>
+    <string name="text_scan_count">扫描数量</string>
+    <string name="text_scan_total_count">已扫总数</string>
+    <string name="text_repeat_scan">同一个序列号不能重复扫描</string>
+    <string name="text_max_scan_count">该物料扫描数量超限，请核对</string>
+    <string name="text_confirm_delete">确定删除该项吗？</string>
+    <string name="text_logistics_provider_id">物流商ID</string>
+    <string name="text_logistics_provider_name">物流商名称</string>
+    <string name="text_confirm_logout">确认登出吗？</string>
+    <string name="text_consignee">收货人</string>
+    <string name="text_contact_way">联系方式</string>
+    <string name="text_require_count">所需数量</string>
+    <string name="text_input_count">输入数量</string>
+    <string name="text_download">下载</string>
+    <string name="text_review">查看</string>
+    <string name="text_basic_data">基础数据管理</string>
+    <string name="text_user">用户</string>
+    <string name="text_last_change_date">最后更新时间</string>
+    <string name="text_download_material_succeed">物料主数据下载成功</string>
+    <string name="text_download_material_failed">物料主数据下载失败</string>
+    <string name="text_download_location_succeed">库存地点主数据下载成功</string>
+    <string name="text_download_location_failed">库存地点主数据下载失败</string>
+    <string name="text_download_user_succeed">用户主数据下载成功</string>
+    <string name="text_download_user_failed">用户主数据下载失败</string>
+    <string name="text_download_logistics_succeed">物流商主数据下载成功</string>
+    <string name="text_download_logistics_failed">物流商主数据下载失败</string>
+    <string name="text_download_all">全部下载</string>
+    <string name="text_continue">继续</string>
+    <string name="text_discard_offline_data">放弃暂存数据</string>
+    <string name="text_offline_warning">所选操作有暂存数据，是否继续暂存操作？</string>
+    <string name="text_offline_ask_save">所选操作有暂存数据，是否暂存本次业务操作数据？</string>
+    <string name="text_offline_not_finished">当前业务过账未完成，是否暂存本次业务操作数据？</string>
+    <string name="text_confirm_back">当前业务过账未完成，确定返回？</string>
+    <string name="text_yes">是</string>
+    <string name="text_no">否</string>
+    <string name="text_user_id">用户ID</string>
+    <string name="text_user_name">用户名称</string>
+    <string name="text_user_group">组织</string>
+    <string name="text_user_department">部门</string>
+    <string name="text_receiving_storage_location">收货仓库</string>
+
+    <string name="text_please_select">请选择</string>
+    <string name="text_export_failed">导出文件失败</string>
+
+    <!--借出单-->
+    <string name="text_prototype_borrow">样机借用发货</string>
+    <string name="text_prototype_borrow_detail">借出单明细</string>
+    <string name="text_borrow_list">借出单</string>
+    <string name="text_input_borrow_number">请输借出单号</string>
+    <string name="text_not_shipped_count">未发货</string>
+    <string name="error_low_quantity">扫描数量不足，请继续扫描</string>
+    <string name="error_more_quantity">已扫数量不能大于需求数量</string>
+    <string name="text_scan_receiving">扫码收货</string>
+    <string name="text_no_master_data">暂无主数据</string>
+    <!--领料单-->
+    <string name="text_picking">材料领用</string>
+    <string name="text_picking_order">领用单</string>
+    <string name="text_picking_department">领料部门</string>
+    <string name="text_picking_detail">领用单明细</string>
+    <!--样机领用-->
+    <string name="text_picking_material">样机领用</string>
+    <string name="text_picking_order_material">样机领用单</string>
+    <string name="text_picking_lend_department">借机部门</string>
+    <string name="text_picking_detail_material">样机领用单明细</string>
+
+    <string name="text_returning_material">借机还回</string>
+
+    <!--采购-->
+    <string name="text_po_download">下载采购订单</string>
+    <string name="text_po_receiving">采购收货</string>
+    <string name="text_po_order">采购订单</string>
+    <string name="text_po_receiving_date">计划收货日期</string>
+    <string name="text_order_number">单据号</string>
+    <string name="text_order_date">单据日期</string>
+    <string name="text_receive_done">收货完成</string>
+    <string name="title_activity_po_home">采购收货</string>
+    <string name="title_activity_po_order">采购订单</string>
+    <string name="title_activity_po_order_detail">采购订单明细</string>
+
+    <!--销售发货-->
+    <string name="title_sales_invoice">销售发货</string>
+    <string name="title_sales_invoice_detail">销售发货明细</string>
+    <string name="text_sales_invoice_download">下载发货单</string>
+    <string name="text_sales_invoice_order">发货单</string>
+    <string name="text_sales_invoice_request_delivery_date">要求发货日期</string>
+    <string name="text_sales_invoice_entry_exit_date">出入库日期</string>
+    <string name="text_sales_invoice_delivery_date">发货日期</string>
+    <string name="text_sales_invoice_delivery_state">发货状态</string>
+    <string name="text_delivery_done">发货完成</string>
+    <string name="text_logistics_provider">物流商</string>
+    <string name="text_logistics_number">物流单号</string>
+    <string name="text_sales_invoice_to_sent_quantity">待发数量</string>
+    <string name="text_sales_invoice_sent_quantity">实发数量</string>
+    <string name="warning_delivery_document_require">请输入发货单</string>
+    <string name="text_product">产品码</string>
+    <string name="title_activity_logistics_provider">LogisticsProvider</string>
+    <string name="error_no_material">物料不存在!</string>
+    <string name="error_require_field_empty">请输入物料信息!</string>
+    <string name="text_add">添加</string>
+    <string name="error_sn_empty">请输入产品码!</string>
+    <string name="error_sn_length_shangmi">序列号应为13位!</string>
+    <string name="error_sn_length_chuantian">序列号应为16位!</string>
+    <string name="error_sn_code_chuantian">序列号13至16位应为流水码数字!</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="error_sales_invoice_status_c">该出库单已经出库，请扫描其他发货单</string>
+    <string name="error_barcode_material_not_match">该序列号%1$s 和物料%2$s 不匹配，请检查</string>
+    <string name="error_input_sn">请扫描或者输入序列号</string>
+    <string name="error_count_not_match">扫描数量与所需数量不匹配</string>
+    <string name="error_barcode_not_complete">出库扫码与所需数量不一致，无法发货</string>
+    <string name="error_require_fields">物流商和物流单号为必填</string>
+    <string name="error_in_out_same">发出仓与接收仓不可相同</string>
+    <string name="error_require_delivery_number">送货单号为必填</string>
+    <!--调拨-->
+    <string name="title_transfer_order">调拨发出</string>
+    <string name="text_transfer_order_send">发出单</string>
+    <string name="text_transfer_order_receive">接收单</string>
+    <string name="title_transfer_order_detail">发出单明细</string>
+    <string name="text_transfer_order_reserved_no">申请单号</string>
+    <string name="error_order_number_required">请扫输入申请单号</string>
+    <string name="text_transfer_order_sent_quantity">发出数量</string>
+    <string name="text_transfer_order_sent_quantity_total">发出总量</string>
+    <string name="text_transfer_order_receive_quantity">接收数量</string>
+    <string name="text_transfer_order_receive_quantity_total">接收总量</string>
+    <string name="text_transfer_order_sent_loc">发出地点</string>
+    <string name="error_require_location">请选择库存地点</string>
+    <string name="title_transfer_order_detail_receive">调拨接收</string>
+
+    <!--库存转移-->
+    <string name="title_stock_transfer">库存转移</string>
+    <string name="text_location_from">发出库存地点</string>
+    <string name="text_location_to">接收库存地点</string>
+    <string name="text_checkSerial">检查序列号</string>
+    <string name="text_get_batch">获取批次</string>
+    <string name="error_no_serial">请扫描条码</string>
+    <string name="error_check_serial_first">请点击按钮\"检查序列号\"检查条码</string>
+    <string name="error_location_from_equal_to">发出库存地点与接收库存地点应为不同地点</string>
+    <string name="text_add_manually">手动添加</string>
+    <string name="text_delete_sn">删除条码</string>
+    <string name="text_confirm_delete_all_sn">确定删除所有条码吗？</string>
+    <string name="error_no_serial_for_delete">尚未扫描条码，无法删除</string>
+
+    <!--发货指令-->
+    <string name="title_order_query">发货指令</string>
+    <string name="text_order_type">单据类型</string>
+
+    <string name="title_storage_report">出入库报表</string>
+    <string name="title_serial_query">序列号查询</string>
+    <string name="title_serial_query_detail">序列号查询</string>
+    <string name="text_export_success">数据已导出至SUNMI文件夹</string>
+    <string name="text_export">导出</string>
+
+    <string name="text_location_size_more_100">要查询的仓库数量不可以超过100个</string>
+
+    <!--打印-->
+    <string name="text_print_code">编码(Code)</string>
+    <string name="text_print_name">名称(Name)</string>
+    <string name="text_print_spec">规格(Spec)</string>
+    <string name="text_print_model">型号(Model)</string>
+    <string name="text_print_unit">单位(Unit)</string>
+    <string name="text_print_quantity">数量(Quantity)</string>
+    <string name="text_print_batch">批次(Batch)</string>
+    <string name="text_print_date">日期(Date)</string>
+    <string name="text_print_order">订单(Order)</string>
+    <string name="text_print_remarks">备注(Remarks)</string>
+    <string name="text_print_count">打印数量</string>
+    <string name="text_print">打印</string>
+    <string name="text_name">名称</string>
+    <string name="text_order">订单</string>
+    <string name="text_shipping_label">发货标签打印</string>
+    <string name="text_receive_label">收货标签打印</string>
+    <string name="text_print_manual">手工打印</string>
+    <string name="text_delivery_document">发货单号</string>
+    <string name="text_purchase_document">采购单号</string>
+    <string name="text_print_setting">打印设置</string>
+
+    <!--  无价值工厂  -->
+    <string name="text_no_value_in_bound">无价值工厂收货</string>
+    <string name="text_no_value_out_bound">无价值工厂发货</string>
+    <string name="title_activity_no_value_in_bound">无价值工厂收货</string>
+    <string name="title_activity_no_value_out_bound">无价值工厂发货</string>
+    <string name="error_no_value_input_material_required">请填入物料</string>
+    <string name="error_no_value_input_qty_required">请填入数量</string>
+    <string name="error_no_value_input_batch_required">请填入批次</string>
+    <string name="error_no_value_input_no_material">物料不存在</string>
+    <string name="error_no_value_no_authorization">当前用户未配置无价值工厂</string>
+
+    <!-- 采购退货 -->
+    <string name="text_po_return">采购退货</string>
+    <string name="text_material_document_number">收货凭证</string>
+    <string name="text_po_return_detail">采购退货明细</string>
+    <string name="text_input_material_document_number">请输入收货凭证号</string>
+    <string name="text_year">年份</string>
+    <string name="text_no_return_quantity">未退数量</string>
+    <string name="text_return_quantity">退货数量</string>
+    <string name="text_return_reason">退货原因</string>
+    <string name="text_input_year">请输入年份</string>
+
+    <!-- 委外采购 -->
+    <string name="text_po_sub_contract_out">委外发货</string>
+    <string name="text_po_sub_contract_out_detail">委外发货明细</string>
+    <string name="text_po_sub_contract_in">委外收货</string>
+    <string name="text_po_sub_contract_in_detail">委外收货明细</string>
+    <string name="text_please_scan_first">请先扫描序列号</string>
+    <string name="text_component">组件</string>
+    <string name="text_component_quantity">数量</string>
+    <string name="text_component_consume_quantity">消耗数量</string>
+    <string name="text_component_edit">编辑</string>
+    <string name="title_activity_po_order_sub_detail">组件明细</string>
+    <string name="text_out_of_gauge">数量超限</string>
+    <string name="text_unout_quantity">未发货</string>
+
+    <!-- 生成订单 -->
+    <string name="text_po_nr">生产订单</string>
+    <string name="text_po_nr_detail">生产订单明细</string>
+    <string name="text_po_gi">生产发料</string>
+    <string name="text_po_gi_detail">生产发料明细</string>
+    <string name="text_po_gi_nr">生产订单号</string>
+
+    <string name="text_po_pgr_title_parts">拆解收料</string>
+    <string name="text_po_pgr_detail">拆解收料明细</string>
+    <string name="text_po_pgr_parts">零件</string>
+    <string name="text_po_pgr_complete">整机</string>
+
+    <string name="text_po_pgr">工单收货</string>
+
+    <string name="text_po_gr">生产收货</string>
+    <string name="text_out_count">发料数量</string>
+    <string name="text_not_out_count">未发数量</string>
+
+    <string name="text_excess_gi"> 出库数量不能大于工单数量</string>
+</resources>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="16dp"
+            android:text="@string/text_add_manually"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp">
+    <TextView
+        android:id="@+id/tv_item_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/text_material"
+        android:textSize="@dimen/text_size_label_title"/>
+    <EditText
+        android:id="@+id/et_material_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_label_text"/>
+
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <TextView
+            android:id="@+id/tv_material_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/text_quantity"
+            android:textSize="@dimen/text_size_label_title"/>
+        <EditText
+            android:id="@+id/et_quantity_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp"
+            android:gravity="center_vertical"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_label_text"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_storage_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <TextView
+            android:id="@+id/tv_label_supplier"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="@string/text_batch"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_label_title" />
+        <EditText
+            android:id="@+id/et_batch_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_label_text"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <TextView
+            android:id="@+id/tv_error_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:textStyle="bold|italic"
+            android:textColor="@color/colorRed"
+            android:visibility="invisible"
+            android:text="@string/error_require_field_empty"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_list" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/bg_colorSecondPrimary"
+        android:textColor="@color/text_colorSecondPrimary"
+        android:text="@string/text_ok"
+        android:textSize="@dimen/text_size_btn">
+
+    </Button>
+</LinearLayout>

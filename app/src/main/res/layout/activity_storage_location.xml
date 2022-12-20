@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MaterialActivity">
+    <View
+        android:id="@+id/v_top_line"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_height="1dp"
+        android:background="@color/text_light_gray_color" />
+    <LinearLayout
+        android:id="@+id/ll_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/v_top_line"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="@color/bg_colorFourthPrimary"
+            android:gravity="center"
+            android:text="@string/text_plant"
+            android:textSize="@dimen/text_size_list_header"
+            android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="left"
+            android:text="@string/text_plant_desc"
+            android:layout_marginLeft="1dp"
+            android:background="@color/bg_colorFourthPrimary"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+
+            android:textSize="@dimen/text_size_list_header"
+            android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="1dp"
+            android:text="@string/text_location"
+            android:background="@color/bg_colorFourthPrimary"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textSize="@dimen/text_size_list_header"
+            android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.6"
+            android:layout_marginLeft="1dp"
+            android:text="@string/text_location_desc"
+            android:background="@color/bg_colorFourthPrimary"
+            android:gravity="left"
+            android:textSize="@dimen/text_size_list_header"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_below="@id/ll_list_header"
+        android:layout_marginBottom="8dp"
+        android:layout_height="1dp"
+        android:background="@color/text_light_gray_color" />
+
+    <ListView
+        android:id="@+id/lv_storage_location"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/v_bottom_line"
+        android:divider="@color/colorDivider">
+
+    </ListView>
+</RelativeLayout>

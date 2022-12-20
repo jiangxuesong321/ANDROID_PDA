@@ -1,0 +1,11 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_menu_export"
+        android:text="@string/text_export"
+        android:icon="@mipmap/ic_logout"
+        app:showAsAction="ifRoom"
+        android:title="sn_export" />
+</menu>
