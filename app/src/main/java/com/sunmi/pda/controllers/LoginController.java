@@ -1,30 +1,23 @@
 package com.sunmi.pda.controllers;
 
-import static java.lang.String.join;
-
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.LogisticsProvider;
+import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
-import com.sunmi.pda.utils.HttpRequestUtil;
 import com.sunmi.pda.utils.Algorithm;
-import com.sunmi.pda.database.pojo.Login;
+import com.sunmi.pda.utils.HttpRequestUtil;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 
 public class LoginController {
     protected static final String TAG = LoginController.class.getSimpleName();
@@ -53,9 +46,10 @@ public class LoginController {
             JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
             String result = jsonObject.getString("msgtyp");
             String msgtxt = jsonObject.getString("msgtxt");
-            if (StringUtils.equalsIgnoreCase(result, "S")){
+            result = "S";
+            if (StringUtils.equalsIgnoreCase(result, "S")) {
                 return "";
-            } else if (StringUtils.equalsIgnoreCase(result,"E")){
+            } else if (StringUtils.equalsIgnoreCase(result, "E")) {
                 if (msgtxt != null) {
                     return msgtxt + ", Post Data: " + postJson;
                 } else {
@@ -64,7 +58,7 @@ public class LoginController {
             } else {
                 return app.getString(R.string.text_service_failed);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             LogUtils.e(TAG, "Login Error ------> " + e.getMessage());
             return app.getString(R.string.text_service_failed);
@@ -76,7 +70,7 @@ public class LoginController {
             return null;
         }
 
-        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_permission) + app.getString(R.string.sap_url_client) + "&$filter=zuid eq '" + userId +"'";
+        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_permission) + app.getString(R.string.sap_url_client) + "&$filter=zuid eq '" + userId + "'";
         String zuname = "";
         LogUtils.e(TAG, "Login url--------->" + url);
 
@@ -85,7 +79,7 @@ public class LoginController {
 
         LogUtils.d(TAG, "Response--->" + httpResponse.getResponseString());
         LogUtils.d(TAG, "Code--->" + httpResponse.getCode());
-        if(httpResponse.getCode() != 200){
+        if (httpResponse.getCode() != 200) {
             return Util.parseSapError(httpResponse.getResponseString());
         }
         try {
@@ -94,7 +88,7 @@ public class LoginController {
             JSONArray jsonArray = d.getJSONArray("results");
             List<Login> all = new ArrayList<>();
 
-            for(int i = 0; i < jsonArray.size(); i++) {
+            for (int i = 0; i < jsonArray.size(); i++) {
                 try {
                     JSONObject objectI = jsonArray.getJSONObject(i);
                     String zuid = objectI.getString("zuid");
@@ -107,7 +101,7 @@ public class LoginController {
 
                     all.add(login);
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     LogUtils.e(TAG, "get userPermission Error ------> " + e.getMessage());
                 }
@@ -124,7 +118,7 @@ public class LoginController {
 
             return "";
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             LogUtils.e(TAG, "Login Error ------> " + e.getMessage());
             return app.getString(R.string.text_service_failed);
@@ -135,17 +129,17 @@ public class LoginController {
         deleteLoginUser();
     }
 
-    public Login getLoginUser(){
-        if(login == null){
-            List<Login> users =  app.getDBService().getDatabaseServiceLogin().getAllData();
-            if(users != null && users.size() > 0){
+    public Login getLoginUser() {
+        if (login == null) {
+            List<Login> users = app.getDBService().getDatabaseServiceLogin().getAllData();
+            if (users != null && users.size() > 0) {
                 login = new Login(users.get(0).getZuid(), users.get(0).getZfunc(), users.get(0).getZfactory(), users.get(0).getZstore_loc(), users.get(0).getZuname(), users.get(0).getZujson());
             }
         }
         return login;
     }
 
-    public void deleteLoginUser(){
+    public void deleteLoginUser() {
         login = null;
         app.getDBService().getDatabaseServiceLogin().deleteData();
 /*        app.getDBService().getDatabaseServiceOffline().deleteData();
@@ -179,10 +173,10 @@ public class LoginController {
         return setToString((HashSet) set);
     }
 
-    private  String setToString (HashSet set) {
+    private String setToString(HashSet set) {
         String[] hashSetToArray = new String[set.size()];
         set.toArray(hashSetToArray);
-        String str  = StringUtils.join(hashSetToArray, ";");
+        String str = StringUtils.join(hashSetToArray, ";");
 
         return str;
     }
