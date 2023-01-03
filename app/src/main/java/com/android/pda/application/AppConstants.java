@@ -14,7 +14,7 @@ public class AppConstants {
     public static final int OFFLINE_DATE_EXISTING = 15;
     public static final int REQUEST_CONFIRM_BACK = 17;
 
-    public static final String ACTION_DATA_CODE_RECEIVED = "com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED";
+    public static final String ACTION_DATA_CODE_RECEIVED = "com.android.scanner.ACTION_DATA_CODE_RECEIVED";
     public static final String DATA = "data";
     public static final String SOURCE = "source_byte";
 

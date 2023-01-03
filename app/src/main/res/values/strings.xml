@@ -400,6 +400,8 @@
 
     <string name="text_po_pgr">工单收货</string>
 
+    <string name="text_po_pgr1">工单收货111</string>
+
     <string name="text_po_gr">生产收货</string>
     <string name="text_out_count">发料数量</string>
     <string name="text_not_out_count">未发数量</string>

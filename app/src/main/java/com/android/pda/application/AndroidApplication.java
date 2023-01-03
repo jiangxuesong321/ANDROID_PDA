@@ -11,7 +11,6 @@ import com.android.pda.R;
 import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
 import com.android.pda.controllers.BatchStockController;
 import com.android.pda.controllers.InOutboundReportController;
-import com.android.pda.controllers.LendBackController;
 import com.android.pda.controllers.LogisticsProviderController;
 import com.android.pda.controllers.NoValueController;
 import com.android.pda.controllers.OfflineController;
@@ -22,7 +21,6 @@ import com.android.pda.controllers.PrototypeBorrowController;
 import com.android.pda.controllers.PurchaseOrderGiController;
 import com.android.pda.controllers.PurchaseOrderGrController;
 import com.android.pda.controllers.PurchaseOrderSubContractController;
-import com.android.pda.controllers.SalesInvoiceController;
 import com.android.pda.controllers.ScanController;
 import com.android.pda.controllers.SerialInfoController;
 import com.android.pda.controllers.StockTransferController;
@@ -54,13 +52,11 @@ public class AndroidApplication extends Application {
     private static PurchaseOrderController poController;
     private static BatchStockController batchStockController;
     private static LoginController loginController;
-    private static SalesInvoiceController salesInvoiceController;
     private static ScanController scanController;
     private static UserController userController;
     private static PrototypeBorrowController prototypeBorrowController;
     private static PickingController pickingController;
     private static OfflineController offlineController;
-    private static LendBackController lendBackController;
     private static InOutboundReportController inOutboundReportController;
     private static PrintController printController;
     private static NoValueController noValueController;
@@ -103,13 +99,6 @@ public class AndroidApplication extends Application {
             inOutboundReportController = new InOutboundReportController();
         }
         return inOutboundReportController;
-    }
-
-    public static LendBackController getLendBackController() {
-        if (lendBackController == null) {
-            lendBackController = new LendBackController();
-        }
-        return lendBackController;
     }
 
     public static OfflineController getOfflineController() {
@@ -214,13 +203,6 @@ public class AndroidApplication extends Application {
             userController = new UserController();
         }
         return userController;
-    }
-
-    public SalesInvoiceController getSalesInvoiceController() {
-        if (salesInvoiceController == null) {
-            salesInvoiceController = new SalesInvoiceController();
-        }
-        return salesInvoiceController;
     }
 
     public TransferOrderController getTransferOrderController() {
