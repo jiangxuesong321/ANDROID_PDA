@@ -23,31 +23,23 @@ import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.DialogPurchaseOrder;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.adapters.PurchaseOrderDetailAdapter;
 import com.sunmi.pda.adapters.PurchaseOrderGrDetailAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PurchaseOrdeGiPostingTask;
-import com.sunmi.pda.asynctasks.PurchaseOrderPostingTask;
-import com.sunmi.pda.asynctasks.PurchaseOrderReturnPostingTask;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.controllers.OfflineController;
-import com.sunmi.pda.controllers.PurchaseOrderController;
 import com.sunmi.pda.controllers.PurchaseOrderGrController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.Offline;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.PurchaseOrderGi;
 import com.sunmi.pda.models.PurchaseOrderGiPostingRequest;
 import com.sunmi.pda.models.PurchaseOrderGr;
-import com.sunmi.pda.models.PurchaseOrderPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderReturnPostingRequest;
 import com.sunmi.pda.models.Reason;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.models.SerialInfo;
@@ -56,20 +48,16 @@ import com.sunmi.pda.utils.DateUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
-
 public class PoOrderGrDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PurchaseOrderGrDetailAdapter.SplitCallback, PurchaseOrderGrDetailAdapter.OnItemClickListener,
         DialogPurchaseOrder.InputCallback{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderGrController purchaseOrderController = app.getPurchaseOrderGrController();
     private List<StorageLocation> storageLocations;
     private static final String INTENT_KEY_PO = "PO";

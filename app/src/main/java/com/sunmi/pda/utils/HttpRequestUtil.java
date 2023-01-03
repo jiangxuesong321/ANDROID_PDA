@@ -1,7 +1,7 @@
 package com.sunmi.pda.utils;
 
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.log.LogUtils;
@@ -24,7 +24,7 @@ public class HttpRequestUtil {
 	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String CONTENT_TYPE_VALUE = "application/json";
 
-	private final static SunmiApplication app = SunmiApplication.getInstance();
+	private final static AndroidApplication app = AndroidApplication.getInstance();
 	static public OkHttpClient client;
 	private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 

@@ -9,9 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.LogisticsProviderTask;
-import com.sunmi.pda.asynctasks.MasterTask;
 import com.sunmi.pda.asynctasks.MaterialTask;
 import com.sunmi.pda.asynctasks.StorageLocationTask;
 import com.sunmi.pda.asynctasks.UserTask;
@@ -19,7 +18,7 @@ import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
 
 public class TestActivity extends AppCompatActivity {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final String ACTION_DATA_CODE_RECEIVED = "com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED";
     private static final String DATA = "data";
     private static final String SOURCE = "source_byte";

@@ -4,13 +4,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.controllers.PurchaseOrderGiController;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.PurchaseOrderGrController;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.listeners.OnTaskEventListener;
-import com.sunmi.pda.models.PurchaseOrderGi;
 import com.sunmi.pda.models.PurchaseOrderGr;
 import com.sunmi.pda.models.PurchaseOrderQuery;
 
@@ -20,7 +18,7 @@ import java.util.List;
 
 public class PurchaseOrderGrTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderGrController purchaseOrderController = app.getPurchaseOrderGrController();
 
     private OnTaskEventListener<String> mCallBack;

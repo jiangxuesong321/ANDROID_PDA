@@ -3,30 +3,20 @@ package com.sunmi.pda.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.adapters.LogisticsProviderAdapter;
-import com.sunmi.pda.adapters.MaterialAdapter;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.LogisticsProviderController;
-import com.sunmi.pda.controllers.MaterialController;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.Material;
 
 import java.util.List;
 
 public class LogisticsProviderActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final LogisticsProviderController controller = app.getLogisticsProviderController();
     private List<LogisticsProvider> logisticsProviders;
     private LogisticsProviderAdapter adapter;

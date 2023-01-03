@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.adapters.SpinnerAdapter;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.controllers.StorageLocationController;
 import com.sunmi.pda.controllers.UserController;
@@ -26,7 +26,7 @@ import java.util.List;
 
 
 public class DialogInput extends Dialog {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final UserController userController = app.getUserController();
     private Button btnOk;

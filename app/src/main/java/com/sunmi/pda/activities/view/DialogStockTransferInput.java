@@ -7,26 +7,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.adapters.SpinnerAdapter;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.MaterialController;
-import com.sunmi.pda.controllers.StorageLocationController;
 import com.sunmi.pda.database.pojo.Material;
-import com.sunmi.pda.database.pojo.StorageLocation;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 
 public class DialogStockTransferInput extends Dialog {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialController materialController = app.getMaterialController();
 
     private Button btnOk;

@@ -27,7 +27,7 @@ import com.sunmi.pda.adapters.LendBackDetailAdapter;
 import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import com.sunmi.pda.asynctasks.LendBackPostingTask;
 import com.sunmi.pda.controllers.LendBackController;
@@ -62,7 +62,7 @@ import java.util.Date;
 import java.util.List;
 
 public class LendBacDetailActivity extends AppCompatActivity implements ActivityInitialization {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final LogisticsProviderController logisticsProviderController = app.getLogisticsProviderController();
     private static final UserController userController = app.getUserController();

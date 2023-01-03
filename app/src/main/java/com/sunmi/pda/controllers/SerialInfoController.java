@@ -4,23 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.Material;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.GeneralMaterialDocumentItemResults;
 import com.sunmi.pda.models.HttpResponse;
-import com.sunmi.pda.models.Picking;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumber;
 import com.sunmi.pda.models.SerialNumberResults;
-import com.sunmi.pda.utils.AppUtil;
-import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.HttpRequestUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class SerialInfoController {
     protected static final String TAG = SerialInfoController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public final static int ERROR_REPEAT_SCAN = 0;
     public final static int ERROR_MAX_COUNT = 1;

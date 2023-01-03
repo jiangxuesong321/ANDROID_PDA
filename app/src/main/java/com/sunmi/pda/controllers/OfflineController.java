@@ -1,7 +1,7 @@
 package com.sunmi.pda.controllers;
 
 import com.alibaba.fastjson.JSON;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
 import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.database.pojo.StorageLocation;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class OfflineController {
     protected static final String TAG = OfflineController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public void saveOfflineData(String id, String orderBody, String orderNumber,
                                 LogisticsProvider logisticsProvider, String logisticNumber, String plant,

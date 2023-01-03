@@ -4,15 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
-import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.log.FileUtils;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.DeliveryStatus;
 import com.sunmi.pda.models.HttpResponse;
 import com.sunmi.pda.models.SalesInvoiceQuery;
 import com.sunmi.pda.models.SalesInvoice;
@@ -41,7 +38,7 @@ import jxl.write.WriteException;
 
 public class SalesInvoiceController {
     protected static final String TAG = SalesInvoiceController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController userController = app.getUserController();
 
     public final static int ERROR_REQUIRE_FIELDS = 0;

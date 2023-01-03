@@ -21,7 +21,7 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.adapters.SnSearchAdapter;
 
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 
 import com.sunmi.pda.controllers.ScanController;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SnSearchActivity extends AppCompatActivity implements ActivityInitialization, SnSearchAdapter.DeleteCallback{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
 
     private ListView lvSerial;

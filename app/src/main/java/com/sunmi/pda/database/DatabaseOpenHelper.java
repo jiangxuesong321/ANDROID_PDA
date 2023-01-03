@@ -4,11 +4,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper implements DatabaseConstants {
 
-	private static final SunmiApplication app = SunmiApplication.getInstance();
+	private static final AndroidApplication app = AndroidApplication.getInstance();
 
 	private static final String TAG = DatabaseOpenHelper.class.getSimpleName();
 

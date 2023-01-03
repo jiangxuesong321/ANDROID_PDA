@@ -21,14 +21,13 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
-import com.sunmi.pda.activities.view.DialogInput;
 import com.sunmi.pda.activities.view.DialogPurchaseOrder;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 
 import com.sunmi.pda.adapters.PurchaseOrderDetailAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PurchaseOrderPostingTask;
 
 import com.sunmi.pda.asynctasks.PurchaseOrderReturnPostingTask;
@@ -43,7 +42,6 @@ import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.Picking;
 import com.sunmi.pda.models.PurchaseOrderPostingRequest;
 import com.sunmi.pda.models.PurchaseOrderReturnPostingRequest;
 import com.sunmi.pda.models.Reason;
@@ -68,7 +66,7 @@ import jxl.write.WriteException;
 public class PoOrderDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PurchaseOrderDetailAdapter.SplitCallback, PurchaseOrderDetailAdapter.OnItemClickListener,
         DialogPurchaseOrder.InputCallback{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderController purchaseOrderController = app.getPurchaseOrderController();
     private List<StorageLocation> storageLocations;
     private static final String INTENT_KEY_PO = "PO";

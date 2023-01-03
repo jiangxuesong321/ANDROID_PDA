@@ -34,7 +34,7 @@ import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.adapters.PrototypeBorrowDetailAdapter;
 
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PrototypeBorrowPostingTask;
 import com.sunmi.pda.asynctasks.PrototypeBorrowTask;
 
@@ -53,7 +53,6 @@ import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.Picking;
 import com.sunmi.pda.models.PrototypeBorrow;
 import com.sunmi.pda.models.GeneralPostingRequest;
 import com.sunmi.pda.models.BusinessOrderQuery;
@@ -61,7 +60,6 @@ import com.sunmi.pda.models.BusinessOrderQuery;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumberResults;
-import com.sunmi.pda.models.TransferOrder;
 import com.sunmi.pda.utils.DateUtils;
 
 
@@ -72,14 +70,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class PrototypeBorrowDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PrototypeBorrowDetailAdapter.OnItemClickListener, PrototypeBorrowDetailAdapter.SplitCallback, DialogInput.InputCallback {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PrototypeBorrowController controller = app.getPrototypeBorrowController();
 
     private static final LogisticsProviderController logisticsProviderController = app.getLogisticsProviderController();

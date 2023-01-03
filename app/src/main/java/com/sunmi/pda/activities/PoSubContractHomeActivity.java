@@ -18,14 +18,10 @@ import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.asynctasks.PurchaseOrderTask;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.OfflineController;
-import com.sunmi.pda.controllers.PurchaseOrderController;
 import com.sunmi.pda.controllers.PurchaseOrderSubContractController;
 import com.sunmi.pda.database.pojo.Offline;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
-import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.models.PurchaseOrderQuery;
 import com.sunmi.pda.models.PurchaseOrderSubContract;
 import com.sunmi.pda.utils.AppUtil;
@@ -37,7 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class PoSubContractHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private EditText etReceivingDateFrom;
     private EditText etReceivingDateTo;

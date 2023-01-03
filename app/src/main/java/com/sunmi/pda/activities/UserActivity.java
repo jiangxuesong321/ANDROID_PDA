@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.sunmi.pda.R;
 
 import com.sunmi.pda.adapters.UserAdapter;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import com.sunmi.pda.controllers.UserController;
 
@@ -20,7 +20,7 @@ import com.sunmi.pda.database.pojo.User;
 import java.util.List;
 
 public class UserActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController controller = app.getUserController();
     private List<User> users;
     private UserAdapter adapter;

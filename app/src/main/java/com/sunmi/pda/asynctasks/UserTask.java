@@ -3,7 +3,7 @@ package com.sunmi.pda.asynctasks;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.models.HttpResponse;
@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class UserTask extends AsyncTask<Void, Void, String> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController userController = app.getUserController();
 
     private OnTaskEventListener<String> mCallBack;

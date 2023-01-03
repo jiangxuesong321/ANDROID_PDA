@@ -1,8 +1,6 @@
 package com.sunmi.pda.log;
 
-import android.os.Environment;
-
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -17,7 +15,7 @@ import java.util.List;
 public class LogFileManager {
     private static final int LOG_FILES_MAX_NUM = 10; //文件最多有5个
     private static final int LOG_FILE_MAX_SIZE = 1000 * 1000; //文件最大1MB
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final SimpleDateFormat LOG_FILE_DATE_FORMAT = new SimpleDateFormat("yyyyMMddHHmm");
 
     private File mCurrentLogFile;

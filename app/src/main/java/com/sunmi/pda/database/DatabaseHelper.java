@@ -7,7 +7,7 @@ import android.database.DatabaseUtils.InsertHelper;
 import com.delawareconsulting.libtools.database.PojoDBObject;
 import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
 import com.delawareconsulting.libtools.database.SimplePojoDBObject;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
 import com.sunmi.pda.database.pojo.Offline;
@@ -22,7 +22,7 @@ import com.sunmi.pda.database.pojo.User;
  * 
  */
 class DatabaseHelper implements DatabaseConstants {
-	private final static SunmiApplication app = SunmiApplication.getInstance();
+	private final static AndroidApplication app = AndroidApplication.getInstance();
 
 	PojoDBObject<Login> login;
 	PojoDBObject<StorageLocation> plant;

@@ -16,10 +16,7 @@ import android.widget.Toast;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.utils.PrintUtil;
-import com.sunmi.pda.utils.UtilityTooth;
+import com.sunmi.pda.application.AndroidApplication;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -30,7 +27,7 @@ import ZPL.ZPLPrinterHelper;
 
 
 public class LabelPrintActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final String ACTION_DATA_CODE_RECEIVED = "com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED";
     private static final String DATA = "data";
     private static final String SOURCE = "source_byte";

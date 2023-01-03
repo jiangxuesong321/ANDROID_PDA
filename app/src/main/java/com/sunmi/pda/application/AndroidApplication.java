@@ -37,16 +37,15 @@ import com.sunmi.pda.database.DatabaseService;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.OdataService;
 import com.sunmi.pda.utils.AppUtil;
-import com.sunmi.pda.utils.CrashHandler;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.FileUtil;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
 
-public class SunmiApplication extends Application {
+public class AndroidApplication extends Application {
 
-    private static SunmiApplication instance;
+    private static AndroidApplication instance;
     private DatabaseService databaseService;
     private OdataService odataService;
     private static StorageLocationController storageLocationController;
@@ -274,19 +273,19 @@ public class SunmiApplication extends Application {
 
         LogUtils.d("SunmiApplication", "Alarm set at: " + DateUtils.dateToString(cal.getTime(), DateUtils.FormatFullDate));
 
-        Intent intent = new Intent(SunmiApplication.getInstance(), AlarmsBroadcastReceiver.class);
+        Intent intent = new Intent(AndroidApplication.getInstance(), AlarmsBroadcastReceiver.class);
         int RequestCode = REQUESTCODE_MATERIAL_SYNC;
         intent.putExtra("RequestCode", RequestCode);
-        PendingIntent sender = PendingIntent.getBroadcast(SunmiApplication.getInstance(), RequestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent sender = PendingIntent.getBroadcast(AndroidApplication.getInstance(), RequestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = (AlarmManager) SunmiApplication.getInstance().getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) AndroidApplication.getInstance().getSystemService(Context.ALARM_SERVICE);
         //am.cancel(sender);
         am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, sender);
 
         alarmSet = true;
     }
 
-    public static SunmiApplication getInstance() {
+    public static AndroidApplication getInstance() {
         return instance;
     }
 

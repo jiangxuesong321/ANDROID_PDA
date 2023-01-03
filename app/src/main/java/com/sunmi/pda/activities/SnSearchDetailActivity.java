@@ -1,54 +1,28 @@
 package com.sunmi.pda.activities;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 
-import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.adapters.LendBackDetailAdapter;
-import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.adapters.SnSearchDetailAdapter;
-import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.asynctasks.LendBackPostingTask;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
-import com.sunmi.pda.controllers.LendBackController;
-import com.sunmi.pda.controllers.LoginController;
-import com.sunmi.pda.controllers.LogisticsProviderController;
-import com.sunmi.pda.controllers.OfflineController;
 import com.sunmi.pda.controllers.SerialInfoController;
-import com.sunmi.pda.controllers.StorageLocationController;
-import com.sunmi.pda.controllers.UserController;
-import com.sunmi.pda.database.pojo.Login;
-import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.Offline;
-import com.sunmi.pda.database.pojo.StorageLocation;
-import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.FileUtils;
-import com.sunmi.pda.models.GeneralMaterialDocumentItemResults;
-import com.sunmi.pda.models.GeneralPostingRequest;
-import com.sunmi.pda.models.OrderInvoiceOthersResult;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumberResults;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.ExcelUtils;
 import com.sunmi.pda.utils.FileUtil;
-import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -63,7 +37,7 @@ import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 
 public class SnSearchDetailActivity extends AppCompatActivity implements ActivityInitialization {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private static final SerialInfoController serialInfoController = app.getSerialInfoController();
 

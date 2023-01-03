@@ -10,11 +10,10 @@ import android.widget.TextView;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.StorageLocationController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.database.pojo.Login;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.models.PurchaseOrderSubContract;
 
@@ -29,7 +28,7 @@ public class PurchaseOrderSubContractDetailAdapter extends BaseAdapter {
     private Context context;
     private boolean isCancel;
     private List<StorageLocation> storageLocations, filterdStorageLocations;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final UserController userController = app.getUserController();
     private Login login;

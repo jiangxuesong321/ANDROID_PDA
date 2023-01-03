@@ -6,16 +6,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.log.FileUtils;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
 import com.sunmi.pda.models.Picking;
-import com.sunmi.pda.models.PrototypeBorrow;
 import com.sunmi.pda.models.GeneralMaterialDocumentItem;
 import com.sunmi.pda.models.GeneralMaterialDocumentItemResults;
 import com.sunmi.pda.models.GeneralPostingRequest;
@@ -24,7 +22,6 @@ import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumber;
 import com.sunmi.pda.models.SerialNumberResults;
 import com.sunmi.pda.utils.ComparatorPickingItem;
-import com.sunmi.pda.utils.ComparatorPrototypeBorrowItem;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.ExcelUtils;
 import com.sunmi.pda.utils.FileUtil;
@@ -48,7 +45,7 @@ import jxl.write.WriteException;
 
 public class PickingController {
     protected static final String TAG = PickingController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController userController = app.getUserController();
     public List<Picking> syncData(BusinessOrderQuery query, int functionId) throws Exception {
         String filter = buildFilter(query, functionId);//"$filter=ReservedNo eq '" + query.getNumber() + "'";

@@ -5,18 +5,14 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.Login;
-import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
 import com.sunmi.pda.models.MenuList;
-import com.sunmi.pda.models.SerialNumberResults;
-import com.sunmi.pda.utils.Algorithm;
 import com.sunmi.pda.utils.AppUtil;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.HttpRequestUtil;
@@ -26,13 +22,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserController {
     protected static final String TAG = UserController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private final static LoginController loginController = app.getLoginController();
     private User user;
 

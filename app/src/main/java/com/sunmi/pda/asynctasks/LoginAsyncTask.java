@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.database.pojo.Login;
 
 
 public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
-    private static final SunmiApplication application = SunmiApplication.getInstance();
+    private static final AndroidApplication application = AndroidApplication.getInstance();
     private static final LoginController loginController = application.getLoginController();
     protected static final String TAG = LoginAsyncTask.class.getSimpleName();
     public static final String PARAM_OUT_ERROR = "PARAM_OUT_ERROR";

@@ -3,7 +3,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
 
 import com.sunmi.pda.log.LogUtils;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class LogisticsProviderController {
     protected static final String TAG = LogisticsProviderController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public HttpResponse syncData() throws Exception {
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_logistics_provider) + app.getString(R.string.sap_url_client);

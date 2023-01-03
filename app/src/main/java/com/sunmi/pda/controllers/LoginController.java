@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
@@ -25,7 +25,7 @@ public class LoginController {
     public static final int FLAG_LOGOUT = 0;
 
     public static boolean isLogin;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private Login login;
 
     public String login(String userId, String pwd, String env) throws Exception {

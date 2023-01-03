@@ -5,8 +5,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.sunmi.pda.R;
@@ -25,11 +22,10 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.adapters.MenuItemAdapter;
 
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.controllers.OfflineController;
-import com.sunmi.pda.controllers.PrintController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.Offline;
@@ -37,17 +33,15 @@ import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.MenuList;
 import com.sunmi.pda.utils.FileUtil;
-import com.sunmi.pda.utils.PrintUtil;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ActivityInitialization, AdapterView.OnItemClickListener{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final LoginController loginController = app.getLoginController();
     private static final UserController userController = app.getUserController();
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 1234;

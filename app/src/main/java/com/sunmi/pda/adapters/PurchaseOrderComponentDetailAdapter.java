@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 import com.sunmi.pda.R;
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.StorageLocationController;
 import com.sunmi.pda.controllers.UserController;
 
 import com.sunmi.pda.models.Component;
-import com.sunmi.pda.models.PurchaseOrderSubContract;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class PurchaseOrderComponentDetailAdapter extends BaseAdapter {
     private List<Component> objects;
     private Context context;
 
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final UserController userController = app.getUserController();
 

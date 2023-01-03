@@ -15,7 +15,7 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.SalesInvoiceAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.SalesInvoiceTask;
 import com.sunmi.pda.controllers.SalesInvoiceController;
 import com.sunmi.pda.models.SalesInvoice;
@@ -29,7 +29,7 @@ import java.util.List;
 public class SalesInvoiceResultActivity extends AppCompatActivity implements ActivityInitialization,
         AdapterView.OnItemClickListener{
 
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final SalesInvoiceController salesInvoiceController = app.getSalesInvoiceController();
 
     private static final String INTENT_KEY_SALESINVOICE = "SalesInvoice";

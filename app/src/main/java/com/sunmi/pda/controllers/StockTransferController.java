@@ -1,23 +1,17 @@
 package com.sunmi.pda.controllers;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.LogisticsProvider;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
-import com.sunmi.pda.models.PrototypeBorrow;
 import com.sunmi.pda.models.GeneralMaterialDocumentItem;
 import com.sunmi.pda.models.GeneralMaterialDocumentItemResults;
 import com.sunmi.pda.models.GeneralPostingRequest;
-import com.sunmi.pda.models.BusinessOrderQuery;
 
-import com.sunmi.pda.models.SalesInvoice;
-import com.sunmi.pda.models.SalesInvoiceResult;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumber;
 import com.sunmi.pda.models.SerialNumberResults;
@@ -25,10 +19,7 @@ import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.HttpRequestUtil;
 import com.sunmi.pda.utils.Util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class StockTransferController {
     protected static final String TAG = StockTransferController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public GeneralPostingRequest buildRequest(List<SerialInfo> serialInfos, String locationFrom, String locationTo, String plant, String confirmDate){
         String documentDate = DateUtils.dateToString(new Date(), DateUtils.FormatY_M_D) + "T00:00:00";

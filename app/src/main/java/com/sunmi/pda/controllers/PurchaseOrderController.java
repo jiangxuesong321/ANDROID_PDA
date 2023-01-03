@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
@@ -44,7 +44,7 @@ import jxl.write.WriteException;
 
 public class PurchaseOrderController {
     protected static final String TAG = PurchaseOrderController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialController materialController = app.getMaterialController();
     private static final UserController userController = app.getUserController();
     public List<PurchaseOrder> syncData(PurchaseOrderQuery purchaseOrderQuery) throws AuthorizationException, GeneralException {

@@ -14,7 +14,7 @@ import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.OfflineController;
 import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.models.BusinessOrderQuery;
@@ -28,7 +28,7 @@ import java.util.List;
 
 
 public class PickingHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final String INTENT_KEY_FUNCTION_ID = "FunctionId";
     private EditText etPickingValue;
     private WaitDialog waitDialog;

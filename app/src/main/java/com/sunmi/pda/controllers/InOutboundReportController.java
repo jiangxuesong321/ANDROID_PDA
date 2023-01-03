@@ -4,7 +4,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import com.sunmi.pda.log.FileUtils;
 import com.sunmi.pda.log.LogUtils;
@@ -30,7 +30,7 @@ import jxl.write.WriteException;
 
 public class InOutboundReportController {
     protected static final String TAG = InOutboundReportController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public boolean syncData(InOutboundReportQuery query) throws Exception {
         String filter = "";

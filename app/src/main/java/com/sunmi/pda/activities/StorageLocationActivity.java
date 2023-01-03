@@ -7,20 +7,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
-import com.sunmi.pda.adapters.MaterialAdapter;
 import com.sunmi.pda.adapters.StorageLocationAdapter;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.controllers.MaterialController;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.StorageLocationController;
-import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.database.pojo.StorageLocation;
 
 import java.util.List;
 
 public class StorageLocationActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController controller = app.getStorageLocationController();
     private List<StorageLocation> storageLocations;
     private StorageLocationAdapter adapter;

@@ -5,9 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
@@ -20,15 +19,10 @@ import com.sunmi.pda.models.GeneralMaterialDocumentItemResults;
 import com.sunmi.pda.models.GeneralPostingRequest;
 import com.sunmi.pda.models.BusinessOrderQuery;
 
-import com.sunmi.pda.models.SalesInvoice;
-import com.sunmi.pda.models.SalesInvoiceQuery;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumber;
 import com.sunmi.pda.models.SerialNumberResults;
-import com.sunmi.pda.models.TransferOrder;
-import com.sunmi.pda.utils.ComparatorItem;
 import com.sunmi.pda.utils.ComparatorPrototypeBorrowItem;
-import com.sunmi.pda.utils.ComparatorTransferOrderItem;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.ExcelUtils;
 import com.sunmi.pda.utils.FileUtil;
@@ -52,7 +46,7 @@ import jxl.write.WriteException;
 
 public class PrototypeBorrowController {
     protected static final String TAG = PrototypeBorrowController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController userController = app.getUserController();
     public List<PrototypeBorrow> syncData(BusinessOrderQuery query) throws Exception {
         String filter = buildFilter(query);  //"$filter=ReservationNumber eq '" + query.getNumber() + "'";

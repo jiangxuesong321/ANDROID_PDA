@@ -4,12 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.Login;
-import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.TransferOrder;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +19,7 @@ import java.util.stream.Collectors;
 public class DatabaseServiceStorageLocation implements DatabaseConstants{
 
     private final DatabaseHelper dbHelper;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     protected static final String TAG = DatabaseService.class.getSimpleName();
 
     public DatabaseServiceStorageLocation() {

@@ -29,7 +29,7 @@ import com.sunmi.pda.adapters.NoValueAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapterPlant;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.NoValuePostingTask;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
 import com.sunmi.pda.controllers.MaterialController;
@@ -55,7 +55,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class NoValueOutBoundActivity extends AppCompatActivity implements ActivityInitialization, DialogNoValueInput.InputCallback, NoValueAdapter.CallbackDelete, NoValueAdapter.OnItemClickListener {
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
 
     //    controllers
     private static final UserController userCtrl = app.getUserController();

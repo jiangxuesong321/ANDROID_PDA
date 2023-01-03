@@ -1,8 +1,7 @@
 package com.sunmi.pda.database;
 
 import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.Login;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.log.LogUtils;
 
@@ -11,7 +10,7 @@ import java.util.List;
 public class DatabaseServiceUser implements DatabaseConstants{
 
     private final DatabaseHelper dbHelper;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     protected static final String TAG = DatabaseServiceUser.class.getSimpleName();
 
     public DatabaseServiceUser() {

@@ -19,7 +19,7 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.PurchaseOrderAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PurchaseOrderTask;
 import com.sunmi.pda.controllers.OfflineController;
 import com.sunmi.pda.controllers.PurchaseOrderController;
@@ -47,7 +47,7 @@ public class PoOrderResultActivity extends AppCompatActivity implements Activity
     private ListView lvPurchase;
     private WaitDialog waitDialog;
     private PurchaseOrderQuery query;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderController purchaseOrderController = app.getPurchaseOrderController();
     private static final OfflineController offlineController = app.getOfflineController();
     private Offline offline;

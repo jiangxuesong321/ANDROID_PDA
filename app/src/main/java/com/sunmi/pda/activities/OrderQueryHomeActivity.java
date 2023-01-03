@@ -22,7 +22,7 @@ import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.DeliveryStatusSpinnerAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.OrderInvoiceOthersTask;
 import com.sunmi.pda.asynctasks.PickingTask;
 import com.sunmi.pda.asynctasks.PrototypeBorrowTask;
@@ -63,7 +63,7 @@ import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 
 public class OrderQueryHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final SalesInvoiceController salesInvoiceController = app.getSalesInvoiceController();
     private static final TransferOrderController transferOrderController = app.getTransferOrderController();

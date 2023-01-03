@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.PrintController;
 import com.sunmi.pda.utils.AppUtil;
 
@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 
 
 public class PrintHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final String INTENT_KEY_LabelFlag = "LabelFlag";
     private EditText etPrintSearchValue;
     private String labelFlag;

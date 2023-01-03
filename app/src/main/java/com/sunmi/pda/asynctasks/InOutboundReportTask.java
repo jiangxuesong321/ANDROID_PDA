@@ -4,23 +4,17 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.InOutboundReportController;
-import com.sunmi.pda.controllers.PickingController;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.listeners.OnTaskEventListener;
-import com.sunmi.pda.models.BusinessOrderQuery;
-import com.sunmi.pda.models.InOutboundReport;
 import com.sunmi.pda.models.InOutboundReportQuery;
-import com.sunmi.pda.models.Picking;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 public class InOutboundReportTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final InOutboundReportController controller = app.getInOutboundReportController();
 
     private OnTaskEventListener<String> mCallBack;

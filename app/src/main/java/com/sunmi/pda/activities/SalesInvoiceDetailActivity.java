@@ -30,7 +30,7 @@ import com.sunmi.pda.activities.view.WaitDialog;
 
 import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.adapters.SalesInvoiceDetailAdapter;
 import com.sunmi.pda.asynctasks.SalesInvoicePostingTask;
 import com.sunmi.pda.asynctasks.SalesInvoiceTask;
@@ -49,7 +49,6 @@ import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
 
-import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.SalesInvoice;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 
@@ -71,7 +70,7 @@ import java.util.List;
 
 
 public class SalesInvoiceDetailActivity extends AppCompatActivity implements ActivityInitialization, SalesInvoiceDetailAdapter.OnItemClickListener, DialogInput.InputCallback {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final SalesInvoiceController controller = app.getSalesInvoiceController();
     private static final LogisticsProviderController logisticsProviderController = app.getLogisticsProviderController();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();

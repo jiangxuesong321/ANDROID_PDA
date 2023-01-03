@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.MaterialController;
 import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.models.FieldCheck;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DialogNoValueInput extends Dialog {
-    private static final SunmiApplication _app = SunmiApplication.getInstance();
+    private static final AndroidApplication _app = AndroidApplication.getInstance();
     private static final MaterialController _materialCtrl = _app.getMaterialController();
 
     private String _material = "";

@@ -3,58 +3,36 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
-import com.sunmi.pda.log.FileUtils;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
-import com.sunmi.pda.models.MaterialDocumentItem;
-import com.sunmi.pda.models.MaterialDocumentItemResults;
 import com.sunmi.pda.models.PurchaseOrderGi;
 import com.sunmi.pda.models.PurchaseOrderGiPostingRequest;
 import com.sunmi.pda.models.PurchaseOrderGiResult;
-import com.sunmi.pda.models.PurchaseOrderPostingRequest;
 import com.sunmi.pda.models.PurchaseOrderQuery;
-import com.sunmi.pda.models.PurchaseOrderResult;
-import com.sunmi.pda.models.PurchaseOrderReturnPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderSubContract;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNo;
-import com.sunmi.pda.models.SerialNumber;
-import com.sunmi.pda.models.SerialNumberPoReturn;
-import com.sunmi.pda.models.SerialNumberResults;
-import com.sunmi.pda.utils.ComparatorItem;
-import com.sunmi.pda.utils.ComparatorPoSubContractItem;
 import com.sunmi.pda.utils.DateUtils;
-import com.sunmi.pda.utils.ExcelUtils;
-import com.sunmi.pda.utils.FileUtil;
 import com.sunmi.pda.utils.HttpRequestUtil;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
-
 public class PurchaseOrderGiController {
     protected static final String TAG = PurchaseOrderGiController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialController materialController = app.getMaterialController();
     private static final UserController userController = app.getUserController();
     public List<PurchaseOrderGi> syncData(PurchaseOrderQuery purchaseOrderQuery, String functionId) throws AuthorizationException, GeneralException {

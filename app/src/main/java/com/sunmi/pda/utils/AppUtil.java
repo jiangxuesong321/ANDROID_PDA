@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,7 +45,7 @@ public class AppUtil {
 
 
 	private static final String PREFERENCES = "com.sunmi.pda";
-	private static final SunmiApplication app = SunmiApplication.getInstance();
+	private static final AndroidApplication app = AndroidApplication.getInstance();
 	
 	public static void saveServiceHost(Context context, String host){
 		SharedPreferences.Editor editor = getVersionPreferences(context).edit();

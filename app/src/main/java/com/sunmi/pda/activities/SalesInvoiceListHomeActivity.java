@@ -18,7 +18,7 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.DeliveryStatusSpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.SalesInvoiceController;
 import com.sunmi.pda.models.DeliveryStatusList;
 import com.sunmi.pda.models.DeliveryStatus;
@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SalesInvoiceListHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private WaitDialog waitDialog;
 

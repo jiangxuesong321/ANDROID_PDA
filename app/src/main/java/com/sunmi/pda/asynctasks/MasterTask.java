@@ -3,16 +3,13 @@ package com.sunmi.pda.asynctasks;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.LogisticsProviderController;
 import com.sunmi.pda.controllers.MaterialController;
-import com.sunmi.pda.controllers.PurchaseOrderController;
-import com.sunmi.pda.controllers.BatchStockController;
 import com.sunmi.pda.controllers.StorageLocationController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.HttpResponse;
 import com.sunmi.pda.utils.DateUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +19,7 @@ import java.util.Date;
 
 public class MasterTask extends AsyncTask<Void, Void, String> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController userController = app.getUserController();
     private static final LogisticsProviderController logisticsProviderController = app.getLogisticsProviderController();
     private static final MaterialController materialController = app.getMaterialController();

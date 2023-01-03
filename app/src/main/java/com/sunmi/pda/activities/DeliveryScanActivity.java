@@ -22,12 +22,11 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
-import com.sunmi.pda.adapters.PrototypeBorrowDetailAdapter;
 import com.sunmi.pda.adapters.ReasonSpinnerAdapter;
 import com.sunmi.pda.adapters.ScannerAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.OfflineController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.controllers.LoginController;
@@ -40,21 +39,18 @@ import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.PrototypeBorrow;
 import com.sunmi.pda.models.Reason;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class DeliveryScanActivity extends AppCompatActivity implements ActivityInitialization, ScannerAdapter.DeleteCallback {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final ScanController scanController = app.getScanController();
     private static final UserController userController = app.getUserController();

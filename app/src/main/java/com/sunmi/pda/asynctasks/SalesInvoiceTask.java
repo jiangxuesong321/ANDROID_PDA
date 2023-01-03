@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.SalesInvoiceController;
 import com.sunmi.pda.models.SalesInvoice;
 import com.sunmi.pda.exceptions.AuthorizationException;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class SalesInvoiceTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final SalesInvoiceController salesInvoiceController = app.getSalesInvoiceController();
 
     private OnTaskEventListener<String> mCallBack;

@@ -29,9 +29,8 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.adapters.PickingAdapter;
-import com.sunmi.pda.adapters.PrototypeBorrowDetailAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PickingPostingTask;
 import com.sunmi.pda.asynctasks.PickingTask;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
@@ -51,8 +50,6 @@ import com.sunmi.pda.models.BusinessOrderQuery;
 import com.sunmi.pda.models.Picking;
 import com.sunmi.pda.models.GeneralPostingRequest;
 
-import com.sunmi.pda.models.PrototypeBorrow;
-import com.sunmi.pda.models.SalesInvoice;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumberResults;
@@ -64,14 +61,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class PickingDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PickingAdapter.OnItemClickListener, PickingAdapter.SplitCallback, DialogInput.InputCallback {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PickingController controller = app.getPickingController();
     private static final LogisticsProviderController logisticsProviderController = app.getLogisticsProviderController();
     private static final UserController userController = app.getUserController();

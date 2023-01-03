@@ -17,7 +17,7 @@ import com.sunmi.pda.activities.view.WaitDialog;
 
 import com.sunmi.pda.adapters.PrintLabelAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PrintTask;
 
 import com.sunmi.pda.controllers.PrintController;
@@ -40,7 +40,7 @@ public class PrintResultActivity extends AppCompatActivity implements ActivityIn
     private PrintLabelAdapter adapter;
     private List<PrintLabel> printLabels = new ArrayList<>();
     private WaitDialog waitDialog;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private String labelFlag;
     private String number;
     @Override

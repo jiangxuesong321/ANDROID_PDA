@@ -29,10 +29,8 @@ import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.adapters.PurchaseOrderGiDetailAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PurchaseOrdeGiPostingTask;
-import com.sunmi.pda.asynctasks.PurchaseOrderPostingTask;
-import com.sunmi.pda.asynctasks.PurchaseOrderReturnPostingTask;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.controllers.LogisticsProviderController;
@@ -49,9 +47,6 @@ import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.PurchaseOrderGi;
 import com.sunmi.pda.models.PurchaseOrderGiPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderGiResult;
-import com.sunmi.pda.models.PurchaseOrderPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderReturnPostingRequest;
 import com.sunmi.pda.models.Reason;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.models.SerialInfo;
@@ -64,14 +59,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class PoOrderGiDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PurchaseOrderGiDetailAdapter.SplitCallback, PurchaseOrderGiDetailAdapter.OnItemClickListener,
         DialogPurchaseOrder.InputCallback{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderGiController purchaseOrderController = app.getPurchaseOrderGiController();
     private List<StorageLocation> storageLocations;
     private static final String INTENT_KEY_PO = "PO";

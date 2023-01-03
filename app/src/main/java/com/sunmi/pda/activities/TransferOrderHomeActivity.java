@@ -1,6 +1,5 @@
 package com.sunmi.pda.activities;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.OfflineController;
 import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.models.DeliveryStatus;
@@ -25,11 +22,10 @@ import com.sunmi.pda.models.SalesInvoiceQuery;
 import com.sunmi.pda.utils.AppUtil;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class TransferOrderHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static String functionId;
     private EditText etTransferOrderNr;
     private WaitDialog waitDialog;

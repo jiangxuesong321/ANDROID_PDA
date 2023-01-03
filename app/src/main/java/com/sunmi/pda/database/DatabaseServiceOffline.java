@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteBlobTooBigException;
 
 import com.alibaba.fastjson.JSON;
 import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
 import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.log.LogUtils;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DatabaseServiceOffline implements DatabaseConstants{
 
     private final DatabaseHelper dbHelper;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     protected static final String TAG = DatabaseServiceOffline.class.getSimpleName();
 
     public DatabaseServiceOffline() {

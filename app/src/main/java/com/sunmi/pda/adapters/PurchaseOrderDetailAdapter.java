@@ -1,35 +1,26 @@
 package com.sunmi.pda.adapters;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.StorageLocationController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.database.pojo.StorageLocation;
 
-import com.sunmi.pda.database.pojo.User;
-import com.sunmi.pda.utils.DateUtils;
-
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PurchaseOrderDetailAdapter extends BaseAdapter {
@@ -38,7 +29,7 @@ public class PurchaseOrderDetailAdapter extends BaseAdapter {
     private Context context;
     private boolean isCancel;
     private List<StorageLocation> storageLocations, filterdStorageLocations;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final UserController userController = app.getUserController();
     private Login login;

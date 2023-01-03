@@ -12,20 +12,17 @@ import android.widget.TextView;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.adapters.MaterialAdapter;
-import com.sunmi.pda.adapters.PurchaseOrderDetailAdapter;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.MaterialController;
 import com.sunmi.pda.database.pojo.Material;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MaterialActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialController materialController = app.getMaterialController();
     private List<Material> materials = new ArrayList<>();
     private MaterialAdapter adapter;

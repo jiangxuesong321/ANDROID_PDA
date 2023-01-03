@@ -10,22 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.DialogPrintSetting;
-import com.sunmi.pda.activities.view.DialogStockTransferInput;
 import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.controllers.PrintController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.database.pojo.Login;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.database.pojo.User;
-import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.PrintLabel;
 import com.sunmi.pda.utils.AppUtil;
 import com.sunmi.pda.utils.Util;
@@ -38,7 +33,7 @@ import ZPL.ZPLPrinterHelper;
 
 
 public class PrintDetailActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private WaitDialog waitDialog;
 

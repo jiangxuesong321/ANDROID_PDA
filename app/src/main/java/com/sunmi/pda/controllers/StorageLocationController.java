@@ -3,7 +3,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class StorageLocationController {
     protected static final String TAG = StorageLocationController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public HttpResponse syncData() throws Exception {
         String filter = "&$filter=" + app.getString(R.string.filter_language);

@@ -14,22 +14,18 @@ import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.adapters.PurchaseOrderAdapter;
 import com.sunmi.pda.adapters.PurchaseOrderGiAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PurchaseOrderGiTask;
-import com.sunmi.pda.asynctasks.PurchaseOrderTask;
 import com.sunmi.pda.controllers.OfflineController;
 
 import com.sunmi.pda.controllers.PurchaseOrderGiController;
 import com.sunmi.pda.database.pojo.Offline;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.models.PurchaseOrderGi;
 import com.sunmi.pda.models.PurchaseOrderGiResult;
 import com.sunmi.pda.models.PurchaseOrderQuery;
-import com.sunmi.pda.models.PurchaseOrderResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +43,7 @@ public class PoOrderGiResultActivity extends AppCompatActivity implements Activi
     private ListView lvPurchase;
     private WaitDialog waitDialog;
     private PurchaseOrderQuery query;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderGiController purchaseOrderGiController = app.getPurchaseOrderGiController();
     private static final OfflineController offlineController = app.getOfflineController();
     private Offline offline;

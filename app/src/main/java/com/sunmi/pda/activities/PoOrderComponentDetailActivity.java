@@ -12,29 +12,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.alibaba.fastjson.JSON;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.DialogInputComponent;
 
-import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.adapters.PurchaseOrderComponentDetailAdapter;
 
-import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 
-import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.models.Component;
 
 import com.sunmi.pda.models.PurchaseOrderSubContract;
-import com.sunmi.pda.models.Reason;
-import com.sunmi.pda.models.ScanResult;
 
 import java.util.List;
 
 
 public class PoOrderComponentDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PurchaseOrderComponentDetailAdapter.OnItemClickListener, DialogInputComponent.InputCallback{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private static final String INTENT_KEY_PO = "PO";
     public static final String INTENT_KEY_ORDER = "Order";

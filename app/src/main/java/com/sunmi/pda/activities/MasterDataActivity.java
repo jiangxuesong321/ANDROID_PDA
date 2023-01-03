@@ -9,29 +9,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.activities.view.NoticeDialog;
-import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.LogisticsProviderTask;
 import com.sunmi.pda.asynctasks.MaterialTask;
 import com.sunmi.pda.asynctasks.StorageLocationTask;
 import com.sunmi.pda.asynctasks.UserTask;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.listeners.OnTaskEventListener;
-import com.sunmi.pda.models.BusinessOrderQuery;
 import com.sunmi.pda.utils.AppUtil;
-
-import org.apache.commons.lang3.StringUtils;
 
 
 public class MasterDataActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private ProgressBar pbLogisticsProvider, pbUser, pbLocation, pbMaterial;
     private TextView tvLastChangeDateMaterial, tvLastChangeDateLocation, tvLastChangeDateUser,
             tvLastChangeDateLogisticsProvider, tvVersion;

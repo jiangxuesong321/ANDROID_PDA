@@ -3,8 +3,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.LogisticsProvider;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
@@ -17,7 +16,6 @@ import com.sunmi.pda.models.SalesInvoiceQuery;
 import com.sunmi.pda.models.SerialNumber;
 import com.sunmi.pda.models.SerialNumberResults;
 import com.sunmi.pda.models.MaterialVoucher;
-import com.sunmi.pda.models.TransferOrder;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.HttpRequestUtil;
 import com.sunmi.pda.utils.Util;
@@ -32,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class MaterialVoucherController {
     protected static final String TAG = MaterialVoucherController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final UserController userController = app.getUserController();
 
     /**

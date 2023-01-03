@@ -1,11 +1,8 @@
 package com.sunmi.pda.activities;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,7 +21,7 @@ import android.widget.Toast;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.NoticeDialog;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.LoginAsyncTask;
 import com.sunmi.pda.asynctasks.LogisticsProviderTask;
 import com.sunmi.pda.asynctasks.MaterialTask;
@@ -40,8 +36,6 @@ import com.sunmi.pda.utils.AppUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Calendar;
-
 public class LoginActivity extends AppCompatActivity implements ActivityInitialization{
     private EditText etUser;
     private EditText etPwd;
@@ -53,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     private LinearLayout llSelectEnv;
     private String env;
     protected static final String TAG = LoginActivity.class.getSimpleName();
-    private static final SunmiApplication application = SunmiApplication.getInstance();
+    private static final AndroidApplication application = AndroidApplication.getInstance();
     private static final LoginController loginController = application.getLoginController();
     private static final MaterialController materialController = application.getMaterialController();
     private static final StorageLocationController storageLocationController = application.getStorageLocationController();

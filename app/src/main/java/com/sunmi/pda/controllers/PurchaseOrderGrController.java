@@ -3,18 +3,13 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.LogisticsProvider;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
-import com.sunmi.pda.models.PurchaseOrderGi;
 import com.sunmi.pda.models.PurchaseOrderGiPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderGiResult;
 import com.sunmi.pda.models.PurchaseOrderGr;
 import com.sunmi.pda.models.PurchaseOrderGrResult;
 import com.sunmi.pda.models.PurchaseOrderQuery;
@@ -35,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class PurchaseOrderGrController {
     protected static final String TAG = PurchaseOrderGrController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialController materialController = app.getMaterialController();
     private static final UserController userController = app.getUserController();
     public List<PurchaseOrderGr> syncData(PurchaseOrderQuery purchaseOrderQuery, String functionId) throws AuthorizationException, GeneralException {

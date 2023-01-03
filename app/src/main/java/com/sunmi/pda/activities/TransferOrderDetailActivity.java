@@ -12,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.sunmi.pda.R;
 import com.sunmi.pda.activities.view.DialogAddress;
 import com.sunmi.pda.activities.view.DialogInput;
@@ -31,7 +29,7 @@ import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.adapters.TransferOrderAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PrototypeBorrowPostingTask;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
 import com.sunmi.pda.asynctasks.TransferOrderTask;
@@ -49,30 +47,23 @@ import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.GeneralPostingRequest;
-import com.sunmi.pda.models.Picking;
-import com.sunmi.pda.models.PrototypeBorrow;
-import com.sunmi.pda.models.SalesInvoice;
 import com.sunmi.pda.models.SalesInvoiceQuery;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumberResults;
 import com.sunmi.pda.models.TransferOrder;
-import com.sunmi.pda.utils.AppUtil;
 import com.sunmi.pda.utils.DateUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class TransferOrderDetailActivity extends AppCompatActivity implements ActivityInitialization,
         TransferOrderAdapter.OnItemClickListener, TransferOrderAdapter.SplitCallback, DialogInput.InputCallback {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final TransferOrderController controller = app.getTransferOrderController();
     private static final LogisticsProviderController logisticsProviderController = app.getLogisticsProviderController();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();

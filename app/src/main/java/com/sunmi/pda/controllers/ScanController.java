@@ -2,9 +2,7 @@ package com.sunmi.pda.controllers;
 
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.Material;
-import com.sunmi.pda.models.SalesInvoice;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +14,7 @@ import java.util.List;
 public class ScanController {
 
     protected static final String TAG = PurchaseOrderController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     public final static int ERROR_REPEAT_SCAN = 0;
     public final static int ERROR_MAX_COUNT = 1;
     public final static int ERROR_NOT_MATCH_MATERIAL = 2;

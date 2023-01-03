@@ -27,38 +27,28 @@ import com.sunmi.pda.activities.view.DialogPurchaseOrder;
 import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.LogisticSpinnerAdapter;
-import com.sunmi.pda.adapters.PurchaseOrderDetailAdapter;
 import com.sunmi.pda.adapters.PurchaseOrderSubContractDetailAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.asynctasks.PurchaseOrderPostingTask;
-import com.sunmi.pda.asynctasks.PurchaseOrderReturnPostingTask;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.PurchaseOrderSubContractInPostingTask;
 import com.sunmi.pda.asynctasks.PurchaseOrderSubContractPostingTask;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
 import com.sunmi.pda.controllers.LoginController;
 import com.sunmi.pda.controllers.LogisticsProviderController;
 import com.sunmi.pda.controllers.OfflineController;
-import com.sunmi.pda.controllers.PurchaseOrderController;
 import com.sunmi.pda.controllers.PurchaseOrderSubContractController;
 import com.sunmi.pda.controllers.SerialInfoController;
 import com.sunmi.pda.controllers.UserController;
 import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
 import com.sunmi.pda.database.pojo.Offline;
-import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
-import com.sunmi.pda.models.Component;
-import com.sunmi.pda.models.Picking;
-import com.sunmi.pda.models.PurchaseOrderPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderReturnPostingRequest;
 import com.sunmi.pda.models.PurchaseOrderSubContract;
 import com.sunmi.pda.models.PurchaseOrderSubContractInPostingRequest;
 import com.sunmi.pda.models.PurchaseOrderSubContractOutPosting;
-import com.sunmi.pda.models.PurchaseOrderSubContractOutPostingRequest;
 import com.sunmi.pda.models.Reason;
 import com.sunmi.pda.models.ScanResult;
 import com.sunmi.pda.models.SerialInfo;
@@ -67,22 +57,16 @@ import com.sunmi.pda.utils.DateUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import jxl.read.biff.BiffException;
-import jxl.write.WriteException;
 
 public class PoOrderSubContractDetailActivity extends AppCompatActivity implements ActivityInitialization,
         PurchaseOrderSubContractDetailAdapter.SplitCallback, PurchaseOrderSubContractDetailAdapter.OnItemClickListener,
         DialogPurchaseOrder.InputCallback, PurchaseOrderSubContractDetailAdapter.SubCallback{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderSubContractController purchaseOrderController = app.getPurchaseOrderSubContractController();
     private List<StorageLocation> storageLocations;
     private static final String INTENT_KEY_PO = "PO";

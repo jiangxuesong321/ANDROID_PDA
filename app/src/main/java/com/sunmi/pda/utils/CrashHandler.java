@@ -2,7 +2,7 @@ package com.sunmi.pda.utils;
 
 
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.log.LogUtils;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
@@ -33,6 +33,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         // 在这里将崩溃日志读取出来，然后保存到SD卡，或者直接上传到日志服务器
         // 注意 保存或者上传到日志服务器需要将系统版本，手机唯一标识等系统信息和崩溃信息一同上传，方便分析crash问题
         // 如果用户没有处理则让系统默认的异常处理器来处理
-        LogUtils.d("CrashHandler", "ex--->" + AppUtil.getVersionName(SunmiApplication.getInstance()) + "----->"+ ex.getMessage());
+        LogUtils.d("CrashHandler", "ex--->" + AppUtil.getVersionName(AndroidApplication.getInstance()) + "----->"+ ex.getMessage());
     }
 }

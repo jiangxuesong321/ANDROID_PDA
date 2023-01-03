@@ -2,7 +2,7 @@ package com.sunmi.pda.broadcastreceivers;
 
 
 
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.MasterTask;
 
 import com.sunmi.pda.log.LogUtils;
@@ -26,7 +26,7 @@ public class AlarmsBroadcastReceiver extends BroadcastReceiver {
 		try {
 			Bundle bundle = intent.getExtras();
 			int e_requestCode = bundle.getInt("RequestCode");
-			if (e_requestCode == SunmiApplication.REQUESTCODE_MATERIAL_SYNC) {
+			if (e_requestCode == AndroidApplication.REQUESTCODE_MATERIAL_SYNC) {
 				MasterTask task = new MasterTask(context, null);
 				task.execute();
 				LogUtils.d(TAG, "AlarmsBroadcast Receivered...");

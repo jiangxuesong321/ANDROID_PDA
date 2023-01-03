@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.PurchaseOrderSubContractController;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.models.HttpResponse;
 import com.sunmi.pda.models.PurchaseOrderSubContractInPostingRequest;
-import com.sunmi.pda.models.PurchaseOrderSubContractOutPosting;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class PurchaseOrderSubContractInPostingTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderSubContractController purchaseOrderController = app.getPurchaseOrderSubContractController();
 
     private OnTaskEventListener<String> mCallBack;

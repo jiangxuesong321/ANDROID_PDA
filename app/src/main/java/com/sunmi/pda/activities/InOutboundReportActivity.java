@@ -22,7 +22,7 @@ import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.DeliveryStatusSpinnerAdapter;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.InOutboundReportTask;
 import com.sunmi.pda.controllers.InOutboundReportController;
 import com.sunmi.pda.controllers.UserController;
@@ -30,7 +30,6 @@ import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.DeliveryStatus;
-import com.sunmi.pda.models.InOutboundReport;
 import com.sunmi.pda.models.InOutboundReportQuery;
 import com.sunmi.pda.models.OrderTypeList;
 import com.sunmi.pda.utils.DateUtils;
@@ -43,7 +42,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class InOutboundReportActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private static final UserController userController = app.getUserController();
     private static final InOutboundReportController controller = app.getInOutboundReportController();

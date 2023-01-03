@@ -2,33 +2,21 @@ package com.sunmi.pda.activities.view;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.adapters.SpinnerAdapter;
-import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.controllers.LoginController;
-import com.sunmi.pda.controllers.StorageLocationController;
-import com.sunmi.pda.controllers.UserController;
-import com.sunmi.pda.database.pojo.Login;
-import com.sunmi.pda.database.pojo.StorageLocation;
+import com.sunmi.pda.application.AndroidApplication;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 
 public class DialogInputComponent extends Dialog {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     private Button btnOk;
     private Activity context;

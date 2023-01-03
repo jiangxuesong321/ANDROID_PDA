@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.OrderInvoiceOthersController;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.listeners.OnTaskEventListener;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class OrderInvoiceOthersTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final OrderInvoiceOthersController orderBatchInvoiceController = app.getOrderInvoiceOthersController();
 
     private OnTaskEventListener<String> mCallBack;

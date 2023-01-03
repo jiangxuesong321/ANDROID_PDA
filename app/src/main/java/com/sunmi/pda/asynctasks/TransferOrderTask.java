@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.TransferOrderController;
 import com.sunmi.pda.models.TransferOrder;
 import com.sunmi.pda.exceptions.AuthorizationException;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TransferOrderTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final TransferOrderController controller = app.getTransferOrderController();
 
     private OnTaskEventListener<String> mCallBack;

@@ -23,16 +23,13 @@ import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.SpinnerAdapter;
 import com.sunmi.pda.adapters.TransferOrderReceiveAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.MaterialVoucherTask;
 import com.sunmi.pda.asynctasks.PrototypeBorrowPostingTask;
 import com.sunmi.pda.controllers.MaterialVoucherController;
 import com.sunmi.pda.controllers.OfflineController;
 import com.sunmi.pda.controllers.StorageLocationController;
-import com.sunmi.pda.controllers.TransferOrderController;
 import com.sunmi.pda.controllers.UserController;
-import com.sunmi.pda.database.pojo.LogisticsProvider;
-import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.database.pojo.StorageLocation;
 import com.sunmi.pda.database.pojo.User;
@@ -40,20 +37,15 @@ import com.sunmi.pda.listeners.OnTaskEventListener;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.GeneralPostingRequest;
 import com.sunmi.pda.models.MaterialVoucher;
-import com.sunmi.pda.models.PrototypeBorrow;
 import com.sunmi.pda.models.SalesInvoiceQuery;
-import com.sunmi.pda.models.TransferOrder;
 import com.sunmi.pda.utils.DateUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class TransferOrderReceiveDetailActivity extends AppCompatActivity implements ActivityInitialization {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialVoucherController controller = app.getMaterialVoucherController();
     private static final StorageLocationController storageLocationController = app.getStorageLocationController();
     private static final UserController userController = app.getUserController();

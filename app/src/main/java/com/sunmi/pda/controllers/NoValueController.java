@@ -3,7 +3,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
 import com.sunmi.pda.models.HttpResponse;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class NoValueController {
     protected static final String TAG = NoValueController.class.getSimpleName();
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
 
     public NoValueRequest generateRequest(
             List<SerialInfo> serialInfos,

@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.sunmi.pda.R;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.controllers.PurchaseOrderController;
 import com.sunmi.pda.database.pojo.PurchaseOrder;
 import com.sunmi.pda.exceptions.AuthorizationException;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class PurchaseOrderTask extends AsyncTask<Void, Void, Object> {
 
-    private static final SunmiApplication app = SunmiApplication.getInstance();
+    private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final PurchaseOrderController purchaseOrderController = app.getPurchaseOrderController();
 
     private OnTaskEventListener<String> mCallBack;

@@ -3,7 +3,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.LogisticsProvider;
 import com.sunmi.pda.exceptions.AuthorizationException;
 import com.sunmi.pda.exceptions.GeneralException;
@@ -12,25 +12,19 @@ import com.sunmi.pda.models.GeneralMaterialDocumentItem;
 import com.sunmi.pda.models.GeneralMaterialDocumentItemResults;
 import com.sunmi.pda.models.GeneralPostingRequest;
 import com.sunmi.pda.models.HttpResponse;
-import com.sunmi.pda.models.SerialInfo;
-import com.sunmi.pda.models.SerialNumber;
-import com.sunmi.pda.models.SerialNumberResults;
 import com.sunmi.pda.utils.DateUtils;
 import com.sunmi.pda.utils.HttpRequestUtil;
 import com.sunmi.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LendBackController {
     protected static final String TAG = LendBackController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public GeneralPostingRequest buildRequest(List<GeneralMaterialDocumentItemResults> items, String locationTo,
                                               LogisticsProvider logisticsProvider, String logisticNumber,

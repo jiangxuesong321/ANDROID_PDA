@@ -1,20 +1,18 @@
 package com.sunmi.pda.database;
 
 import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.Login;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.database.pojo.Material;
 import com.sunmi.pda.log.LogUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Locale;
 
 public class DatabaseServiceMaterial implements DatabaseConstants{
 
     private final DatabaseHelper dbHelper;
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     protected static final String TAG = DatabaseServiceMaterial.class.getSimpleName();
 
     public DatabaseServiceMaterial() {

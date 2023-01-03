@@ -14,10 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
-import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.models.DeliveryStatus;
 import com.sunmi.pda.models.SalesInvoiceQuery;
 import com.sunmi.pda.utils.AppUtil;
@@ -28,7 +26,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SalesInvoiceHomeActivity extends AppCompatActivity implements ActivityInitialization{
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private EditText etRequestDeliveryDateFrom;
     private EditText etRequestDeliveryDateTo;
     private EditText evSalesInvoiceNumber;

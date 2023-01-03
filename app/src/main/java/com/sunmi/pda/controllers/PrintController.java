@@ -3,8 +3,7 @@ package com.sunmi.pda.controllers;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.database.pojo.BatchStock;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.log.LogUtils;
 import com.sunmi.pda.models.HttpResponse;
 import com.sunmi.pda.models.PrintLabel;
@@ -14,12 +13,11 @@ import com.sunmi.pda.utils.HttpRequestUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PrintController {
     protected static final String TAG = PrintController.class.getSimpleName();
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     public final static String SHIPPING_LABEL = "ShippingLabel";
     public final static String RECEIVE_LABEL = "ReceiveLabel";
 

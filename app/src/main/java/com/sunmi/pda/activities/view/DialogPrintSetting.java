@@ -7,17 +7,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.sunmi.pda.R;
-import com.sunmi.pda.application.SunmiApplication;
-import com.sunmi.pda.controllers.MaterialController;
-import com.sunmi.pda.database.pojo.Material;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.utils.AppUtil;
 
 
 public class DialogPrintSetting extends Dialog {
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
 
 
     private Button btnOk;

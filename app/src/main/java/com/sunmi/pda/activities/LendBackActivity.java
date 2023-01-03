@@ -21,7 +21,7 @@ import com.sunmi.pda.activities.view.NoticeDialog;
 import com.sunmi.pda.activities.view.WaitDialog;
 import com.sunmi.pda.adapters.LendBackAdapter;
 import com.sunmi.pda.application.AppConstants;
-import com.sunmi.pda.application.SunmiApplication;
+import com.sunmi.pda.application.AndroidApplication;
 import com.sunmi.pda.asynctasks.SerialInfoPostingTask;
 import com.sunmi.pda.asynctasks.StockTransferPostingTask;
 import com.sunmi.pda.controllers.LendBackController;
@@ -33,13 +33,10 @@ import com.sunmi.pda.database.pojo.Login;
 import com.sunmi.pda.database.pojo.Offline;
 import com.sunmi.pda.database.pojo.User;
 import com.sunmi.pda.listeners.OnTaskEventListener;
-import com.sunmi.pda.models.BusinessOrderQuery;
 import com.sunmi.pda.models.GeneralPostingRequest;
 import com.sunmi.pda.models.SerialInfo;
 import com.sunmi.pda.models.SerialNumberResults;
 import com.sunmi.pda.utils.Util;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +44,7 @@ import java.util.Locale;
 
 public class LendBackActivity extends AppCompatActivity implements ActivityInitialization, LendBackAdapter.DeleteCallback {
 
-    private final static SunmiApplication app = SunmiApplication.getInstance();
+    private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final LendBackController controller = app.getLendBackController();
     private static final UserController userController = app.getUserController();
     private static final ScanController scanController = app.getScanController();
