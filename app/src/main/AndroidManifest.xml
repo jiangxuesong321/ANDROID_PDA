@@ -20,18 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan|stateHidden">
-<!--        <activity-->
-<!--            android:name=".activities.NoValueOutBoundActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_no_value_out_bound"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:windowSoftInputMode="adjustPan|stateHidden" />-->
-<!--        <activity-->
-<!--            android:name=".activities.NoValueInBoundActivity"-->
-<!--            android:exported="true"-->
-<!--            android:label="@string/title_activity_no_value_in_bound"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:windowSoftInputMode="adjustPan|stateHidden" />-->
+        <activity
+            android:name=".activities.NoValueOutBoundActivity"
+            android:exported="false"
+            android:label="@string/title_activity_no_value_out_bound"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activities.NoValueInBoundActivity"
+            android:exported="true"
+            android:label="@string/title_activity_no_value_in_bound"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.PoOrderDetailActivity"
             android:exported="true"
