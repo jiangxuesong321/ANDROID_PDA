@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sunmi.pda">
+    package="com.android.pda">
 
     <application
-        android:name=".application.AndroidApplication"
+        android:name="com.android.pda.application.AndroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.PoOrderDetailActivity"
+            android:name="com.android.pda.activities.PoOrderDetailActivity"
             android:exported="true"
             android:label="@string/title_activity_po_order_detail"
             android:screenOrientation="portrait"
@@ -46,7 +46,7 @@
                     android:screenOrientation="portrait"
                     android:windowSoftInputMode="adjustPan|stateHidden"/>-->
         <activity
-            android:name=".activities.OrderQueryHomeActivity"
+            android:name="com.android.pda.activities.OrderQueryHomeActivity"
             android:exported="true"
             android:label="@string/title_order_query"
             android:screenOrientation="portrait"
@@ -54,182 +54,182 @@
 
 
         <activity
-            android:name=".activities.StockTransferActivity"
+            android:name="com.android.pda.activities.StockTransferActivity"
             android:exported="true"
             android:label="@string/title_stock_transfer"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.TransferOrderHomeActivity"
+            android:name="com.android.pda.activities.TransferOrderHomeActivity"
             android:exported="true"
             android:label="@string/title_transfer_order"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.TransferOrderDetailActivity"
+            android:name="com.android.pda.activities.TransferOrderDetailActivity"
             android:exported="true"
             android:label="@string/title_transfer_order_detail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.TransferOrderReceiveDetailActivity"
+            android:name="com.android.pda.activities.TransferOrderReceiveDetailActivity"
             android:exported="true"
             android:label="@string/title_transfer_order_detail_receive"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.SalesInvoiceListHomeActivity"
+            android:name="com.android.pda.activities.SalesInvoiceListHomeActivity"
             android:exported="true"
             android:label="@string/title_sales_invoice"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.SalesInvoiceResultActivity"
+            android:name="com.android.pda.activities.SalesInvoiceResultActivity"
             android:exported="true"
             android:label="@string/title_sales_invoice"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.SalesInvoiceHomeActivity"
+            android:name="com.android.pda.activities.SalesInvoiceHomeActivity"
             android:exported="true"
             android:label="@string/title_sales_invoice"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.SalesInvoiceDetailActivity"
+            android:name="com.android.pda.activities.SalesInvoiceDetailActivity"
             android:exported="true"
             android:label="@string/title_sales_invoice_detail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.PoOrderResultActivity"
+            android:name="com.android.pda.activities.PoOrderResultActivity"
             android:exported="true"
             android:label="@string/title_activity_po_order"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.PoHomeActivity"
+            android:name="com.android.pda.activities.PoHomeActivity"
             android:exported="true"
             android:label="@string/title_activity_po_home"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.DeliveryScanActivity"
+            android:name="com.android.pda.activities.DeliveryScanActivity"
             android:exported="true"
             android:label="@string/text_scan_out"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.MaterialActivity"
+            android:name="com.android.pda.activities.MaterialActivity"
             android:exported="true"
             android:label="@string/text_material"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.LogisticsProviderActivity"
+            android:name="com.android.pda.activities.LogisticsProviderActivity"
             android:exported="true"
             android:label="@string/text_logistics_provider"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.StorageLocationActivity"
+            android:name="com.android.pda.activities.StorageLocationActivity"
             android:exported="true"
             android:label="@string/text_location"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.android.pda.activities.LoginActivity"
             android:exported="true"
             android:label="@string/text_location"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".activities.PrototypeBorrowHomeActivity"
+            android:name="com.android.pda.activities.PrototypeBorrowHomeActivity"
             android:exported="true"
             android:label="@string/text_prototype_borrow"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.PrototypeBorrowDetailActivity"
+            android:name="com.android.pda.activities.PrototypeBorrowDetailActivity"
             android:exported="true"
             android:label="@string/text_prototype_borrow_detail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.PickingDetailActivity"
+            android:name="com.android.pda.activities.PickingDetailActivity"
             android:exported="true"
             android:label="@string/text_picking_detail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.PickingHomeActivity"
+            android:name="com.android.pda.activities.PickingHomeActivity"
             android:exported="true"
             android:label="@string/text_picking"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.MasterDataActivity"
+            android:name="com.android.pda.activities.MasterDataActivity"
             android:exported="true"
             android:label="@string/text_basic_data"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.UserActivity"
+            android:name="com.android.pda.activities.UserActivity"
             android:exported="true"
             android:label="@string/text_user"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.LendBackActivity"
+            android:name="com.android.pda.activities.LendBackActivity"
             android:exported="true"
             android:label="@string/text_returning_material"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.LendBacDetailActivity"
+            android:name="com.android.pda.activities.LendBacDetailActivity"
             android:exported="true"
             android:label="@string/text_returning_material"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name=".activities.InOutboundReportActivity"
+            android:name="com.android.pda.activities.InOutboundReportActivity"
             android:exported="true"
             android:label="@string/title_storage_report"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.SnSearchActivity"
+            android:name="com.android.pda.activities.SnSearchActivity"
             android:exported="true"
             android:label="@string/title_serial_query"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.SnSearchDetailActivity"
+            android:name="com.android.pda.activities.SnSearchDetailActivity"
             android:exported="true"
             android:label="@string/title_serial_query_detail"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name=".activities.PrintHomeActivity"
+            android:name="com.android.pda.activities.PrintHomeActivity"
             android:exported="true"
             android:label="@string/text_print"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
-            android:name=".activities.PrintResultActivity"
-            android:exported="true"
-            android:label="@string/text_print"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-
-        <activity
-            android:name=".activities.PrintDetailActivity"
+            android:name="com.android.pda.activities.PrintResultActivity"
             android:exported="true"
             android:label="@string/text_print"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.android.pda.activities.PrintDetailActivity"
+            android:exported="true"
+            android:label="@string/text_print"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+
+        <activity
+            android:name="com.android.pda.activities.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
@@ -267,7 +267,7 @@
                     </intent-filter>
                 </activity>-->
         <receiver
-            android:name=".broadcastreceivers.AlarmsBroadcastReceiver"
+            android:name="com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver"
             android:enabled="true"
             android:exported="false" >
         </receiver>

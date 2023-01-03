@@ -53,7 +53,7 @@
         android:layout_marginEnd="16dp"
         android:orientation="horizontal">
 
-        <com.sunmi.pda.activities.view.MultiSelectionSpinner
+        <com.android.pda.activities.view.MultiSelectionSpinner
             android:id="@+id/sp_delivery_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         android:layout_marginEnd="16dp"
         android:orientation="horizontal">
 
-        <com.sunmi.pda.activities.view.MultiSelectionSpinner
+        <com.android.pda.activities.view.MultiSelectionSpinner
             android:id="@+id/sp_storage_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

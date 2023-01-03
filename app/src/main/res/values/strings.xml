@@ -405,4 +405,5 @@
     <string name="text_not_out_count">未发数量</string>
 
     <string name="text_excess_gi"> 出库数量不能大于工单数量</string>
+
 </resources>
