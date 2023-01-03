@@ -12,9 +12,7 @@ import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
 import com.android.pda.controllers.BatchStockController;
 import com.android.pda.controllers.InOutboundReportController;
 import com.android.pda.controllers.LogisticsProviderController;
-import com.android.pda.controllers.NoValueController;
 import com.android.pda.controllers.OfflineController;
-import com.android.pda.controllers.OrderInvoiceOthersController;
 import com.android.pda.controllers.PickingController;
 import com.android.pda.controllers.PrintController;
 import com.android.pda.controllers.PrototypeBorrowController;
@@ -59,7 +57,6 @@ public class AndroidApplication extends Application {
     private static OfflineController offlineController;
     private static InOutboundReportController inOutboundReportController;
     private static PrintController printController;
-    private static NoValueController noValueController;
     private static PurchaseOrderSubContractController purchaseOrderSubContractController;
     private static PurchaseOrderGiController purchaseOrderGiController;
     private static PurchaseOrderGrController purchaseOrderGrController;
@@ -210,20 +207,6 @@ public class AndroidApplication extends Application {
             transferOrderController = new TransferOrderController();
         }
         return transferOrderController;
-    }
-
-    public NoValueController getNoValueController() {
-        if (noValueController == null) {
-            noValueController = new NoValueController();
-        }
-        return noValueController;
-    }
-    private static OrderInvoiceOthersController orderInvoiceOthersController;
-    public OrderInvoiceOthersController getOrderInvoiceOthersController() {
-        if (orderInvoiceOthersController == null) {
-            orderInvoiceOthersController = new OrderInvoiceOthersController();
-        }
-        return orderInvoiceOthersController;
     }
 
 
