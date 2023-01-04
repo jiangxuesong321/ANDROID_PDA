@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
                     if (StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_c))) {
 //                        startActivity(SalesInvoiceListHomeActivity.createIntent(getApplicationContext()));
                     } else {
-                        // 商米 同 沃有
+                        // 组织 A 同 组织 D
 //                        startActivity(SalesInvoiceHomeActivity.createIntent(getApplicationContext()));
                     }
                 } else {

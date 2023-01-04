@@ -102,7 +102,7 @@
     <string name="text_update_user_data">请更新用户数据！</string>
     <string name="text_version">版本信息</string>
     <!--登录-->
-    <string name="login_title">商米PDA</string>
+    <string name="login_title">PDA</string>
     <string name="login_account">账号</string>
     <string name="login_app_title">条码管理系统</string>
     <string name="login_pwd">密码</string>

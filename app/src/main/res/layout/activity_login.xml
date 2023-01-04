@@ -10,7 +10,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="0dp"
-        android:src="@mipmap/rb_logo" />
+        android:src="@mipmap/pda_logo" />
 
     <TextView
         android:id="@+id/tv_title"
