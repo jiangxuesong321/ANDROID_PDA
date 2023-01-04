@@ -184,10 +184,10 @@ public class SnSearchDetailActivity extends AppCompatActivity implements Activit
     public void exportExcel(List<SerialInfo> serialInfos) throws IOException, WriteException, BiffException {
         String[] title = {"物料编码", "物料描述", "批次", "序列号", "工厂描述", "库存地点", "库存地点描述", "数量"};
         //8个参数
-        File file = new File(FileUtil.getSDPath() + "/Sunmi");
+        File file = new File(FileUtil.getSDPath() + "/Pda");
         FileUtil.makeDir(file);
         String fileName = "物料编码" + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

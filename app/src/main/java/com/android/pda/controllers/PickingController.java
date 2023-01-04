@@ -318,14 +318,14 @@ public class PickingController {
     public void exportExcel(List<Picking> pickings, String functionId) throws IOException, WriteException, BiffException {
         String[] title = { "单据日期","单据类型","仓库名称", "单号","物料号","名称",
                 "规格", "单位", "数量","批次", "备注", "收件人", "地址", "联系方式", "物流商", "型号"};
-        File file = new File(FileUtil.getSDPath() + "/Sunmi");
+        File file = new File(FileUtil.getSDPath() + "/Pda");
         FileUtil.makeDir(file);
         String type = app.getString(R.string.text_picking);
         if (StringUtils.equalsIgnoreCase(functionId, AppConstants.FUNCTION_ID_PICKING)){
             type = app.getString(R.string.text_picking_material);
         }
         String fileName = type + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

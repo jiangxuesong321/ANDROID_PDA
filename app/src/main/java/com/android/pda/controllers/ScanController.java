@@ -7,7 +7,6 @@ import com.android.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -22,34 +21,37 @@ public class ScanController {
     public final static int ERROR_SN_EMPTY = 4;
     public final static int ERROR_SN_INVALID = 5;
     public final static int ERROR_SN_INVALID_LENGTH = 6;
-    public final static int ERROR_SN_LENGTH_SHANGMI = 7;
+    public final static int ERROR_SN_LENGTH_COMPANY = 7;
 
     private static final MaterialController materialController = app.getMaterialController();
 
     /**
-     * 对本次扫描的条码，查重、code前n位与material的barCode比对
+     * 对本次扫描的条码，查重、code 前 n 位与 material 的 barCode 比对
      * @param snList 已验证过的条码数组
-     * @param codes 本次扫描出的条码，1个或多个
+     * @param codes 本次扫描出的条码，1 个或多个
      * @param maxCount
-     * @param matBarCode material的barCode
-     * @param group 商米/川田，商米比对前4位，川田比对前9位
+     * @param matBarCode material 的 barCode
+     * @param group Company A/Company B，Company A 比对前 4 位，Company B 比对前 9 位
      * @return
      */
     public int verifyScanData(List<String> snList, List<String> codes, double maxCount, String matBarCode, String group){
 
         HashSet<String> set = new HashSet<>(snList);
         set.retainAll(codes);
+        // 判断重复扫描
         if(set.size() > 0){
             return ERROR_REPEAT_SCAN;
         }
+        // 判断是否超出允许最大扫描数
         int scanCount = snList.size() + codes.size();
         if(scanCount > maxCount){
             return ERROR_MAX_COUNT;
         }
-        if(StringUtils.equalsIgnoreCase(group, app.getString(R.string.text_sunmi))){
+        // 校验 组织 A 物料匹配
+        if(StringUtils.equalsIgnoreCase(group, app.getString(R.string.text_company_name_a))){
             for(String code : codes){
                 if(code.length() != 13){
-                    return ERROR_SN_LENGTH_SHANGMI;
+                    return ERROR_SN_LENGTH_COMPANY;
                 }
                 if(code.length() > 4){
                     String matFromCode = code.substring(0,4);
@@ -63,14 +65,16 @@ public class ScanController {
                     return ERROR_NOT_MATCH_MATERIAL;
                 }
             }
-        } else if(StringUtils.equalsIgnoreCase(group, app.getString(R.string.text_shanghai_sunmi))){
+            // 校验 组织 B 条码长度
+        } else if(StringUtils.equalsIgnoreCase(group, app.getString(R.string.text_company_name_b))){
             for(String code : codes){
                 if(code.length() != 13){
-                    return ERROR_SN_LENGTH_SHANGMI;
+                    return ERROR_SN_LENGTH_COMPANY;
                 }
             }
             return -1;
-        }else if(StringUtils.equalsIgnoreCase(group, app.getString(R.string.text_chuantian))){
+            // 校验 组织 C 物料匹配
+        }else if(StringUtils.equalsIgnoreCase(group, app.getString(R.string.text_company_name_c))){
 
             for(String code : codes){
                 if (code.length() < 9 || matBarCode.length() < 9) {
@@ -86,6 +90,12 @@ public class ScanController {
         return -1;
     }
 
+    /**
+     * 校验是否重复扫描
+     * @param snList
+     * @param codes
+     * @return
+     */
     public int verifyDupScanData(List<String> snList, List<String> codes){
 
         HashSet<String> set = new HashSet<>(snList);
@@ -98,7 +108,13 @@ public class ScanController {
         return -1;
     }
 
-
+    /**
+     * 校验手工输入内容
+     * @param sn
+     * @param maxCount
+     * @param sCount
+     * @return
+     */
     public int verifyManualSN(String sn, double maxCount, String sCount){
         int count = 0;
         if (Util.isStringInt(sCount)) {
@@ -119,21 +135,5 @@ public class ScanController {
             }
         }
         return -1;
-    }
-
-    public List<String> testScan(String materialNumber, int maxCount, String s){
-
-        List<String> snList = new ArrayList<>();
-        String materialBarCode = "";
-        materialBarCode = "KA17250" + s;
-        for(int i = 1; i <= maxCount; i++){
-            String str = String.format("%0" + 5 + "d", i);
-            System.out.println("str---->" + materialBarCode + str);
-            snList.add(materialBarCode + str);
-
-        }
-        System.out.println("TEST snList----" + snList);
-        System.out.println("TEST snList----" + snList.size());
-        return snList;
     }
 }

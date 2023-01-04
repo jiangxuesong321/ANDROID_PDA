@@ -86,9 +86,9 @@
     <string name="text_address">地址</string>
     <string name="text_scan">扫码</string>
     <string name="text_delete">删除</string>
-    <string name="text_chuantian">川田</string>
-    <string name="text_sunmi">商米</string>
-    <string name="text_shanghai_sunmi">上海商米</string>
+    <string name="text_company_name_a">组织A</string>
+    <string name="text_company_name_b">组织B</string>
+    <string name="text_company_name_c">组织C</string>
     <string name="text_scan_out">扫码出库</string>
     <string name="text_scan_in">扫码入库</string>
     <string name="next">Next</string>
@@ -270,9 +270,9 @@
     <string name="error_require_field_empty">请输入物料信息!</string>
     <string name="text_add">添加</string>
     <string name="error_sn_empty">请输入产品码!</string>
-    <string name="error_sn_length_shangmi">序列号应为13位!</string>
-    <string name="error_sn_length_chuantian">序列号应为16位!</string>
-    <string name="error_sn_code_chuantian">序列号13至16位应为流水码数字!</string>
+    <string name="error_sn_length_company_a">序列号应为13位!</string>
+    <string name="error_sn_length_company_b">序列号应为16位!</string>
+    <string name="error_sn_code_company_b">序列号13至16位应为流水码数字!</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -323,7 +323,7 @@
     <string name="title_storage_report">出入库报表</string>
     <string name="title_serial_query">序列号查询</string>
     <string name="title_serial_query_detail">序列号查询</string>
-    <string name="text_export_success">数据已导出至SUNMI文件夹</string>
+    <string name="text_export_success">数据已导出至PDA文件夹</string>
     <string name="text_export">导出</string>
 
     <string name="text_location_size_more_100">要查询的仓库数量不可以超过100个</string>

@@ -333,7 +333,7 @@ public class PickingDetailActivity extends AppCompatActivity implements Activity
         String logisticNumber = etLogisticNumber.getText().toString();
         if(StringUtils.isEmpty(logisticNumber)){
             if(user != null){
-                if(StringUtils.contains(user.getGroup(), app.getString(R.string.text_sunmi))){
+                if(StringUtils.contains(user.getGroup(), app.getString(R.string.text_company_name_a))){
                     displayDialog(getString(R.string.error_require_fields), AppConstants.REQUEST_STAY, 1);
                     return;
                 }

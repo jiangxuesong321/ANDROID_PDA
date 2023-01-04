@@ -111,7 +111,7 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
         spinnerAdapter = new SpinnerAdapter(getApplicationContext(),
                 R.layout.li_spinner_adapter, storageLocations);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //加载适配器
+        // 加载适配器
         spinner.setAdapter(spinnerAdapter);
         int position = storageLocationController.getStorageLocationPosition(storageLocation, storageLocations);
         spinner.setSelection(position);
@@ -165,7 +165,7 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
         LogUtils.d("storageLocations","storageLocations---->" + JSON.toJSONString(storageLocations));
         login = loginController.getLoginUser();
         user = userController.getUserById(login.getZuid());
-        if (user != null && StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_chuantian))) {
+        if (user != null && StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_c))) {
             llManualAdd.setVisibility(View.VISIBLE);
             btnAddSn.setVisibility(View.GONE);
         } else {
@@ -279,8 +279,8 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
 
     /**
      * 根据输入的序列号和数量辅助添加序列号
-     * 只针对川田用户
-     * 序列号组成：13~16位是流水码，总共16位，前8位是条形码，后八是生产周期和流水，13-16位
+     * 只针对组织 C 用户
+     * 序列号组成：13~16 位是流水码，总共 16 位，前 8 位是条形码，后八是生产周期和流水，13-16 位
      * @param view
      */
     public void onClickAdd(View view){
@@ -295,9 +295,10 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
             }
         }
 
+        // 手工输入后校验
         int errorId = scanController.verifyManualSN(sn,maxCount, sCount);
         if(errorId < 0){
-            //满足辅助添加sn需求
+            // 满足辅助添加 sn 需求
             addSN(sn, sCount);
         }else{
             switch (errorId){
@@ -308,15 +309,20 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
                     displayDialog( app.getString(R.string.error_sn_empty), -1, 1);
                     break;
                 case ScanController.ERROR_SN_INVALID_LENGTH:
-                    displayDialog( app.getString(R.string.error_sn_length_chuantian), -1, 1);
+                    displayDialog( app.getString(R.string.error_sn_length_company_b), -1, 1);
                     break;
                 case ScanController.ERROR_SN_INVALID:
-                    displayDialog( app.getString(R.string.error_sn_code_chuantian), -1, 1);
+                    displayDialog( app.getString(R.string.error_sn_code_company_b), -1, 1);
                     break;
             }
         }
     }
 
+    /**
+     * 添加手工输入的序列号
+     * @param sn
+     * @param sCount
+     */
     private void addSN(String sn, String sCount) {
         String sn_code = sn.substring(12, 16);
         String sn_prefix = sn.substring(0, 12);
@@ -419,6 +425,12 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
         lvScan.setSelection(scannerAdapter.getCount() -1 );
     }
 
+    /**
+     * 删除提示
+     * @param message
+     * @param action
+     * @param buttonCount
+     */
     private void displayDialog(String message, int action, int buttonCount){
         NoticeDialog noticeDialog = new NoticeDialog(this, message, buttonCount);
         noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
@@ -473,9 +485,9 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
     }
 
     private int verifyCode (String code, List<String> codes) {
-        System.out.println("matFromCode 川田--->" + JSON.toJSONString(material));
-        System.out.println("matFromCode 川田--->" + JSON.toJSONString(codes));
-        System.out.println("matFromCode 川田--->" + material.getBarCode());
+        System.out.println("matFromCode Company C--->" + JSON.toJSONString(material));
+        System.out.println("matFromCode Company C--->" + JSON.toJSONString(codes));
+        System.out.println("matFromCode Company C--->" + material.getBarCode());
         int errorId = scanController.verifyScanData(snList, codes, maxCount, material.getBarCode(), user.getGroup());
         if(errorId < 0){
             //没有错误，验证通过
@@ -493,8 +505,8 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
                     String msg = String.format(tmp, codes.toString(), material.getBarCode());
                     displayDialog( msg, -1, 1);
                     break;
-                case ScanController.ERROR_SN_LENGTH_SHANGMI:
-                    displayDialog( app.getString(R.string.error_sn_length_shangmi), -1, 1);
+                case ScanController.ERROR_SN_LENGTH_COMPANY:
+                    displayDialog( app.getString(R.string.error_sn_length_company_a), -1, 1);
                     break;
             }
         }
@@ -526,7 +538,7 @@ public class DeliveryScanActivity extends AppCompatActivity implements ActivityI
                 scanOver();
                 break;
             case R.id.action_menu_delete:
-                //删除所有条码
+                // 删除所有条码
                 if (snList.size() > 0) {
                     displayDialog(getString(R.string.text_confirm_delete_all_sn), ACTION_DELETE_ALL_SN, 2);
                 } else {

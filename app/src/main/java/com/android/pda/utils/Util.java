@@ -91,6 +91,11 @@ public class Util {
         return Math.ceil(d) == Math.floor(d);
     }
 
+    /**
+     * 校验 String 是否为 Int 数值
+     * @param s
+     * @return
+     */
     public static boolean isStringInt(String s)
     {
         try {

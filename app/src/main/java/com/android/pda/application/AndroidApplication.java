@@ -225,7 +225,7 @@ public class AndroidApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        LogUtils.setLogDir(FileUtil.getSDPath() + "/Sunmi/Log");
+        LogUtils.setLogDir(FileUtil.getSDPath() + "/Pda/Log");
     }
 
     public void setAlarm() {
@@ -236,7 +236,7 @@ public class AndroidApplication extends Application {
         cal.set(Calendar.SECOND, 00);
         cal.set(Calendar.MILLISECOND, 00);
 
-        LogUtils.d("SunmiApplication", "Alarm set at: " + DateUtils.dateToString(cal.getTime(), DateUtils.FormatFullDate));
+        LogUtils.d("Application", "Alarm set at: " + DateUtils.dateToString(cal.getTime(), DateUtils.FormatFullDate));
 
         Intent intent = new Intent(AndroidApplication.getInstance(), AlarmsBroadcastReceiver.class);
         int RequestCode = REQUESTCODE_MATERIAL_SYNC;

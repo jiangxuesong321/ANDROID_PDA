@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     finish();
                 } else {
-                    LogUtils.setLogDir(FileUtil.getSDPath() + "/Sunmi/Log");
+                    LogUtils.setLogDir(FileUtil.getSDPath() + "/Pda/Log");
                 }
                 break;
             default:
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
                     user = userController.getLoginUser();
                 }
                 if (user != null) {
-                    if (StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_chuantian))) {
+                    if (StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_c))) {
 //                        startActivity(SalesInvoiceListHomeActivity.createIntent(getApplicationContext()));
                     } else {
                         // 商米 同 沃有

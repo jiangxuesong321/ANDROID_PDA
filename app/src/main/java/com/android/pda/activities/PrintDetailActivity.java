@@ -239,10 +239,10 @@ public class PrintDetailActivity extends AppCompatActivity implements ActivityIn
         String count = tvCountValue.getText().toString();
         final String labelX = "60";
         final String valueX = "240";
-        String title = "SUNMI";
+        String title = "COMPANY NAME";
         try {
             zplPrinterHelper.start();
-            if (user != null && StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_chuantian))) {
+            if (user != null && StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_c))) {
                 title = "CITAQ";
             }
             zplPrinterHelper.printText(labelX,"20",0,"N",4,title);

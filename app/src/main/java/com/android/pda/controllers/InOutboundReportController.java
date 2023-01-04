@@ -205,10 +205,10 @@ public class InOutboundReportController {
         String[] title = { "单据日期", "单据类型","仓库名称", "单号","客户名称", "物料号","名称",
                 "规格","单位","数量","收件人", "地址", "联系方式",
                 "物流商", "物流单号", "批次", "序列号", "型号", "客户PO号"};
-        File file = new File(FileUtil.getSDPath() + "/Sunmi");
+        File file = new File(FileUtil.getSDPath() + "/Pda");
         FileUtil.makeDir(file);
         String fileName = "出入库报表" + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

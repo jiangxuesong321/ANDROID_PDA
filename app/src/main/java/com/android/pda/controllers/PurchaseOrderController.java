@@ -343,10 +343,10 @@ public class PurchaseOrderController {
         String[] title = { "PurchaseOrder","PurchaseOrderItem","Supplier","CreationDate",
                 "Material","PurchaseOrderItemText","Plant","StorageLocation", "DeliveryDate",
                 "Unit", "OrderQuantity", "OpenQuantity"};
-        File file = new File(FileUtil.getSDPath() + "/Sunmi");
+        File file = new File(FileUtil.getSDPath() + "/Pda");
         FileUtil.makeDir(file);
         String fileName = "采购单" + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

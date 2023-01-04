@@ -211,7 +211,7 @@ public class PoOrderGrDetailActivity extends AppCompatActivity implements Activi
             String deliveryNumber = etDeliveryNumberValue.getText().toString();
             if(StringUtils.isEmpty(deliveryNumber)){
                 if(user != null){
-                    if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_sunmi))){
+                    if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_a))){
                         displayDialog(getString(R.string.error_require_delivery_number), AppConstants.REQUEST_STAY, 1);
                         return;
                     }

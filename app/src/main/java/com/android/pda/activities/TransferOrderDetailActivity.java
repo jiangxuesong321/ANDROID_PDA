@@ -415,7 +415,7 @@ public class TransferOrderDetailActivity extends AppCompatActivity implements Ac
         }
         if(logisticsProvider == null){
             if(user != null){
-                if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_sunmi))){
+                if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_a))){
                     displayDialog(getString(R.string.error_require_fields), AppConstants.REQUEST_FAILED, 1);
                     return;
                 }
@@ -424,7 +424,7 @@ public class TransferOrderDetailActivity extends AppCompatActivity implements Ac
         String logisticNumber = etLogisticNumber.getText().toString();
         if(StringUtils.isEmpty(logisticNumber)){
             if(user != null){
-                if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_sunmi))){
+                if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_a))){
                     displayDialog(getString(R.string.error_require_fields), AppConstants.REQUEST_FAILED, 1);
                     return;
                 }

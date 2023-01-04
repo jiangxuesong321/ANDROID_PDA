@@ -258,7 +258,7 @@ public class PoOrderSubContractDetailActivity extends AppCompatActivity implemen
             String logisticNumber = etLogisticsValue.getText().toString();
             if(StringUtils.isEmpty(logisticNumber)){
                 if(user != null){
-                    if(StringUtils.contains(user.getGroup(), app.getString(R.string.text_sunmi))){
+                    if(StringUtils.contains(user.getGroup(), app.getString(R.string.text_company_name_a))){
                         displayDialog(getString(R.string.error_require_fields), AppConstants.REQUEST_STAY, 1);
                         return;
                     }
@@ -279,7 +279,7 @@ public class PoOrderSubContractDetailActivity extends AppCompatActivity implemen
         }else{
             if(StringUtils.isEmpty(deliveryNumber)){
                 if(user != null){
-                    if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_sunmi))){
+                    if(StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_a))){
                         displayDialog(getString(R.string.error_require_delivery_number), AppConstants.REQUEST_STAY, 1);
                         return;
                     }
