@@ -20,14 +20,12 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
     private Handler mHandler;
     private String userId;
     private String pwd;
-    private String env;
     private int loginFlag;
 
-    public LoginAsyncTask(Handler handler, String userId, String pwd, String env, int loginFlag) {
+    public LoginAsyncTask(Handler handler, String userId, String pwd, int loginFlag) {
         this.mHandler = handler;
         this.userId = userId;
         this.pwd = pwd;
-        this.env = env;
         this.loginFlag = loginFlag;
     }
 
@@ -39,9 +37,9 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
 
     private void login() {
         try {
-            String loginErrorMsg = loginController.login(userId, pwd, env);
+            String loginErrorMsg = loginController.login(userId, pwd);
             if (loginErrorMsg.equalsIgnoreCase("")) {
-                String permissionErrorMsg = loginController.getUserPermission(userId, env);
+                String permissionErrorMsg = loginController.getUserPermission(userId);
                 permissionErrorMsg = "";
                 if (permissionErrorMsg.equalsIgnoreCase("")) {
                     Login login = loginController.getLoginUser();

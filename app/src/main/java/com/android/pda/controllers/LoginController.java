@@ -28,7 +28,7 @@ public class LoginController {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private Login login;
 
-    public String login(String userId, String pwd, String env) throws Exception {
+    public String login(String userId, String pwd) throws Exception {
         isLogin = true;
         String encryptPwd = Algorithm.encrypt(pwd);
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_login) + app.getString(R.string.sap_url_client);
@@ -65,7 +65,7 @@ public class LoginController {
         }
     }
 
-    public String getUserPermission(String userId, String env) throws Exception {
+    public String getUserPermission(String userId) throws Exception {
         if (userId == null) {
             return null;
         }
