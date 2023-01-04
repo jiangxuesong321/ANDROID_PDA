@@ -16,10 +16,7 @@ import com.android.pda.database.pojo.Material;
 import com.android.pda.database.pojo.User;
 
 /**
- * -- used for communication with the database
- * 
- * @author David.shi
- * 
+ * Used for communication with the database
  */
 class DatabaseHelper implements DatabaseConstants {
 	private final static AndroidApplication app = AndroidApplication.getInstance();
@@ -45,10 +42,8 @@ class DatabaseHelper implements DatabaseConstants {
 	}
 
 	/**
-	 * Create the materials DB Helper
-	 * 
-	 * @param
-	 * @return
+	 * Login DB Helper
+	 * @return Login
 	 */
 	private SimplePojoDBObject<Login> createLoginDB() {
 		return new SimplePojoDBObject<Login>(app, TABLE_LOGIN, DatabaseOpenHelper.class) {
@@ -104,6 +99,10 @@ class DatabaseHelper implements DatabaseConstants {
 		};
 	}
 
+	/**
+	 * User DB Helper
+	 * @return User
+	 */
 	private SimplePojoDBObject<User> createUserDB() {
 		return new SimplePojoDBObject<User>(app, TABLE_USER, DatabaseOpenHelper.class) {
 			@Override
@@ -150,6 +149,10 @@ class DatabaseHelper implements DatabaseConstants {
 		};
 	}
 
+	/**
+	 * Plant Master DB Helper
+	 * @return StorageLocation
+	 */
 	private SimplePojoDBObject<StorageLocation> createPlantDB() {
 		return new SimplePojoDBObject<StorageLocation>(app, TABLE_PLANT_MASTER, DatabaseOpenHelper.class) {
 			@Override
@@ -197,6 +200,10 @@ class DatabaseHelper implements DatabaseConstants {
 		};
 	}
 
+	/**
+	 * Logistics DB Helper
+	 * @return LogisticsProvider
+	 */
 	private SimplePojoDBObject<LogisticsProvider> createLogisticsProviderDB() {
 		return new SimplePojoDBObject<LogisticsProvider>(app, TABLE_LOGISTICS_PROVIDER, DatabaseOpenHelper.class) {
 			@Override
@@ -235,6 +242,10 @@ class DatabaseHelper implements DatabaseConstants {
 		};
 	}
 
+	/**
+	 * Material Info DB Helper
+	 * @return Material
+	 */
 	private SimplePojoDBObject<Material> createMaterialDB() {
 		return new SimplePojoDBObject<Material>(app, TABLE_MATERIAL, DatabaseOpenHelper.class) {
 			@Override
@@ -296,6 +307,10 @@ class DatabaseHelper implements DatabaseConstants {
 		};
 	}
 
+	/**
+	 * 暂存数据 DB Helper
+	 * @return Offline
+	 */
 	private SimplePojoDBObject<Offline> createOfflineDB() {
 		return new SimplePojoDBObject<Offline>(app, TABLE_OFFLINE, DatabaseOpenHelper.class) {
 			@Override

@@ -28,6 +28,13 @@ public class LoginController {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private Login login;
 
+    /**
+     * 用户登录校验
+     * @param userId 用户ID
+     * @param pwd 密码
+     * @return
+     * @throws Exception
+     */
     public String login(String userId, String pwd) throws Exception {
         isLogin = true;
         String encryptPwd = Algorithm.encrypt(pwd);
@@ -65,6 +72,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * 根据用户 ID 获取用户权限信息
+     * @param userId 用户ID
+     * @return
+     * @throws Exception
+     */
     public String getUserPermission(String userId) throws Exception {
         if (userId == null) {
             return null;
@@ -142,13 +155,13 @@ public class LoginController {
     public void deleteLoginUser() {
         login = null;
         app.getDBService().getDatabaseServiceLogin().deleteData();
-/*        app.getDBService().getDatabaseServiceOffline().deleteData();
-        app.getDBService().getDatabaseServicePlant().deleteData();
-        app.getDBService().getDatabaseServiceUser().deleteData();
-        app.getDBService().getDatabaseServiceLogisticsProvider().deleteData();
-        app.getDBService().getDatabaseServiceMaterial().deleteData();*/
     }
 
+    /**
+     * 用户 FUNC 分号分隔处理
+     * @param logins
+     * @return
+     */
     private String findUniqueFunc(List<Login> logins) {
         Set<String> set = new HashSet<String>();
         for (Login login : logins) {
@@ -157,6 +170,11 @@ public class LoginController {
         return setToString((HashSet) set);
     }
 
+    /**
+     * 用户 Factory 分号分隔处理
+     * @param logins
+     * @return
+     */
     private String findUniqueFactory(List<Login> logins) {
         Set<String> set = new HashSet<String>();
         for (Login login : logins) {
@@ -165,6 +183,11 @@ public class LoginController {
         return setToString((HashSet) set);
     }
 
+    /**
+     * 用户 Store Location 分号分隔处理
+     * @param logins
+     * @return
+     */
     private String findUniqueLoc(List<Login> logins) {
         Set<String> set = new HashSet<String>();
         for (Login login : logins) {
@@ -173,6 +196,11 @@ public class LoginController {
         return setToString((HashSet) set);
     }
 
+    /**
+     * Set 分隔处理转 String
+     * @param set
+     * @return
+     */
     private String setToString(HashSet set) {
         String[] hashSetToArray = new String[set.size()];
         set.toArray(hashSetToArray);

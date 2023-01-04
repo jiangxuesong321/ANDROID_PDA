@@ -63,12 +63,6 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         etPwd = findViewById(R.id.et_pwd);
     }
 
-    private void hideSoftInput(EditText editText) {
-        editText.setInputType(InputType.TYPE_NULL);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-    }
-
     @Override
     public void initData() {
 
@@ -114,17 +108,15 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
 
     }
 
+    /**
+     * 用户登录校验
+     * @param view
+     */
     public void login(View view) {
         String userId = etUser.getText().toString();
         String pwd = etPwd.getText().toString();
-        if (userId == null || userId.isEmpty()) {
-//            etUser.setBackground(getResources().getDrawable(R.drawable.group_error));
-        }
 
-        if (pwd == null || pwd.isEmpty()) {
-            //  etPwd.setBackground(getResources().getDrawable(R.drawable.group_error));
-        }
-
+        // 配置 Host Url
         AppUtil.saveServiceHost(getApplicationContext(), "https://sapqas.sunmi.com");
         LogUtils.e(TAG, "Selected Host-------->" + AppUtil.getServiceHost(getApplicationContext()));
 
@@ -137,6 +129,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         }
     }
 
+    /**
+     * 负责接收登录校验后 Handler Message 结果处理
+     */
     private Handler loginHandler = new Handler() {
         public void handleMessage(Message msg) {
 
@@ -156,8 +151,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         ;
     };
 
-    //hide progressDialog
-
+    /**
+     * 隐藏弹出的等待对话框
+     */
     private void hideWaitDialog() {
         runOnUiThread(new Runnable() {
             public void run() {
@@ -171,6 +167,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         });
     }
 
+    /**
+     * 登录成功，下载指定主数据，并隐藏进度框
+     */
     private void loginSucceed() {
         if (loginController.getLoginUser() != null) {
             //TODO: download master data for first login
@@ -201,6 +200,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         }
     }
 
+    /**
+     * 下载物料主数据信息
+     */
     private void downloadMaterial() {
         MaterialTask task = new MaterialTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
@@ -223,6 +225,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    /**
+     * 下载库存地点信息
+     */
     private void downloadLocation() {
         StorageLocationTask task = new StorageLocationTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
@@ -245,6 +250,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    /**
+     * 下载用户主数据信息
+     */
     private void downloadUser() {
         UserTask task = new UserTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
@@ -267,6 +275,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    /**
+     * 下载物流商主数据
+     */
     private void downloadLogisticsProvider() {
         LogisticsProviderTask task = new LogisticsProviderTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
@@ -289,6 +300,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    /**
+     * 用户点击登录，弹出等待窗口
+     */
     private void showWaitDialog() {
         if (isFinishing()) {
             return;
@@ -305,6 +319,10 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         });
     }
 
+    /**
+     * 关闭进度对话，提示错误信息对话框
+     * @param message
+     */
     private void displayDialog(String message) {
         hideWaitDialog();
         NoticeDialog noticeDialog = new NoticeDialog(this, message, 1);

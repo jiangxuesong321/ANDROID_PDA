@@ -120,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
     }
 
 
+    /**
+     * 配置 Adapter，绘制对应 FUNC 主菜单页面
+     * @param funcList
+     */
     public void initData(List<String> funcList) {
         menuList = userController.getUserMenuList(getApplicationContext());
         MenuItemAdapter adapter = new MenuItemAdapter(this, menuList.getMenuItemList());
@@ -142,6 +146,13 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
     }
 
+    /**
+     * 菜单点击触发事件，跳转对应 Activity
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String funcId = menuList.getMenuItemList().get(position).getId();
@@ -210,6 +221,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         }
     }
 
+    /**
+     * 主菜单界面退出登录
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         displayDialog(getString(R.string.text_confirm_logout), AppConstants.REQUEST_LOGOUT, 2);
@@ -240,6 +256,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * 更新 / 退出 / 暂存 Dialog
+     * @param message
+     * @param action
+     * @param buttonCount
+     */
     private void displayDialog(String message, int action, int buttonCount) {
         NoticeDialog noticeDialog = new NoticeDialog(this, message, buttonCount);
         //for offline
@@ -254,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
                 if (AppConstants.REQUEST_OFFLINE_DATA == action) {
                     startActivity(StockTransferActivity.createIntent(app, offlineStockTransfer));
                 }
+                // 退出登录
                 if (AppConstants.REQUEST_LOGOUT == action) {
                     loginController.deleteLoginUser();
                     startActivity(LoginActivity.createIntent(getApplicationContext()));

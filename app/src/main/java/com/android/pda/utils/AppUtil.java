@@ -65,13 +65,7 @@ public class AppUtil {
 	}
 	
 	public static String getServiceHost(Context context){
-		String url = context.getString(R.string.sap_url_host_q);
-		String oldVersionString = "";
-		if(StringUtils.equalsIgnoreCase("P", context.getString(R.string.default_environment))){
-			oldVersionString = getVersionPreferences(context).getString(PROPERTY_APP_SERVICE_HOST,  app.getString(R.string.sap_url_host));
-		}else{
-			oldVersionString = getVersionPreferences(context).getString(PROPERTY_APP_SERVICE_HOST,  app.getString(R.string.sap_url_host_q));
-		}
+		String oldVersionString = getVersionPreferences(context).getString(PROPERTY_APP_SERVICE_HOST,  app.getString(R.string.sap_url_host_q));
 		return oldVersionString;
 	}
 

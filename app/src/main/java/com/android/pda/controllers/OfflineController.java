@@ -14,6 +14,17 @@ public class OfflineController {
     protected static final String TAG = OfflineController.class.getSimpleName();
     private final static AndroidApplication app = AndroidApplication.getInstance();
 
+    /**
+     * 暂存数据
+     * @param id
+     * @param orderBody
+     * @param orderNumber
+     * @param logisticsProvider
+     * @param logisticNumber
+     * @param plant
+     * @param sendStorageLocation
+     * @param receiveStorageLocation
+     */
     public void saveOfflineData(String id, String orderBody, String orderNumber,
                                 LogisticsProvider logisticsProvider, String logisticNumber, String plant,
                                 StorageLocation sendStorageLocation, StorageLocation receiveStorageLocation){
@@ -35,13 +46,21 @@ public class OfflineController {
         app.getDBService().getDatabaseServiceOffline().createData(offline);
     }
 
-
+    /**
+     * 获取指定 ID 暂存数据
+     * @param id
+     * @return
+     */
     public Offline getOfflineData(String id){
         Offline offline = app.getDBService().getDatabaseServiceOffline().getDataByKey(id);
         LogUtils.i(TAG, "Offline Data--->" + JSON.toJSONString(offline));
         return offline;
     }
 
+    /**
+     * 删除指定 ID 暂存数据
+     * @param id
+     */
     public void clearOfflineData(String id){
         LogUtils.i(TAG, "clearOfflineData Data--->" + JSON.toJSONString(id));
         app.getDBService().getDatabaseServiceOffline().deleteDataByKey(id);

@@ -31,14 +31,20 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPreExecute() {
-        //showProgressDialog();
         super.onPreExecute();
     }
 
+    /**
+     * 1. 用户登录校验
+     * 2. 用户权限获取
+     */
     private void login() {
         try {
+            // 用户登录校验
             String loginErrorMsg = loginController.login(userId, pwd);
+
             if (loginErrorMsg.equalsIgnoreCase("")) {
+                // 登录成功，获取用户权限信息
                 String permissionErrorMsg = loginController.getUserPermission(userId);
                 permissionErrorMsg = "";
                 if (permissionErrorMsg.equalsIgnoreCase("")) {
@@ -75,7 +81,7 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    //send handler message
+    // 发送对应 Message 交由 Handler 处理对应结果
     private void sendMessageByWhat(int messageWhat, String errorMsg) {
         Message message = new Message();
         message.what = messageWhat;
