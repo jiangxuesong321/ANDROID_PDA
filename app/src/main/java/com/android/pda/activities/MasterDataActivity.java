@@ -23,6 +23,9 @@ import com.android.pda.controllers.UserController;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.utils.AppUtil;
 
+/**
+ * @description  基础数据（物料 & 库存地点 & 用户 & 物流商 信息）下载 & 查看
+ */
 
 public class MasterDataActivity extends AppCompatActivity implements ActivityInitialization{
     private final static AndroidApplication app = AndroidApplication.getInstance();

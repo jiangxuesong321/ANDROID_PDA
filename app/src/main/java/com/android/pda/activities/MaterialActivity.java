@@ -21,6 +21,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @description 根据物料编码查询物料信息
+ */
+
 public class MaterialActivity extends AppCompatActivity implements ActivityInitialization{
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialController materialController = app.getMaterialController();
@@ -45,21 +49,25 @@ public class MaterialActivity extends AppCompatActivity implements ActivityIniti
         return intent;
     }
 
+    /**
+     * 配置 Adapter 展示查询后的物料信息
+     */
     private void showMaterial() {
         adapter = new MaterialAdapter(getApplicationContext(), materials);
-        //this.lvPurchase.setDivider(new ColorDrawable(getApplicationContext().getResources().getColor(R.color.colorDivider)));
         this.lvMaterial.setDividerHeight(1);
         this.lvMaterial.setAdapter(adapter);
-        //this.lvPurchase.setOnItemClickListener(this);
     }
 
     @Override
     public void initView() {
         lvMaterial = findViewById(R.id.lv_material);
         etMaterialValue = findViewById(R.id.et_material_value);
-
     }
 
+    /**
+     * 根据物料编号查询信息
+     * @param view
+     */
     public void search(View view){
         String material = etMaterialValue.getText().toString();
         if(StringUtils.isEmpty(material)){
@@ -75,6 +83,10 @@ public class MaterialActivity extends AppCompatActivity implements ActivityIniti
         }
     }
 
+    /**
+     * 消息提示
+     * @param message
+     */
     private void displayDialog(String message){
         NoticeDialog noticeDialog = new NoticeDialog(this, message, 1);
         noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
@@ -89,7 +101,6 @@ public class MaterialActivity extends AppCompatActivity implements ActivityIniti
     }
     @Override
     public void initData() {
-        //materials = materialController.getMaterial();
     }
 
     @Override

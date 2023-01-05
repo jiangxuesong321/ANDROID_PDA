@@ -84,12 +84,12 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         } else {
             Login login = loginController.getLoginUser();
             if (login != null) {
-                //登陆状态，显示菜单页面。
+                // 登陆状态，显示菜单页面
                 List<String> funcList = Util.splitCode(loginController.getLoginUser().getZfunc());
                 initData(funcList);
 
             } else {
-                //登出状态，显示登录页面。
+                // 登出状态，显示登录页面
                 startActivity(LoginActivity.createIntent(getApplicationContext()));
                 finish();
             }
@@ -241,6 +241,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         return intent;
     }
 
+    /**
+     * 构建菜单样式 & 对应用户 ID 展示
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

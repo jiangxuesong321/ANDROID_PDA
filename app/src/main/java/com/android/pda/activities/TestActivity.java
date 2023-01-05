@@ -19,7 +19,7 @@ import com.android.pda.log.LogUtils;
 
 public class TestActivity extends AppCompatActivity {
     private final static AndroidApplication app = AndroidApplication.getInstance();
-    private static final String ACTION_DATA_CODE_RECEIVED = "com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED";
+    private static final String ACTION_DATA_CODE_RECEIVED = "com.android.scanner.ACTION_DATA_CODE_RECEIVED";
     private static final String DATA = "data";
     private static final String SOURCE = "source_byte";
 

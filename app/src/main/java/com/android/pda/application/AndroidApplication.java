@@ -228,6 +228,9 @@ public class AndroidApplication extends Application {
         LogUtils.setLogDir(FileUtil.getSDPath() + "/Pda/Log");
     }
 
+    /**
+     * 定时广播更新主数据
+     */
     public void setAlarm() {
         // setup of Alarm for sync MasterData
         Calendar cal = Calendar.getInstance();

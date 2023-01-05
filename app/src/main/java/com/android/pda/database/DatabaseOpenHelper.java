@@ -24,7 +24,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements DatabaseCons
 		database.execSQL(MATERIAL_CREATE);
 		database.execSQL(USER_CREATE);
 		database.execSQL(OFFLINE_CREATE);
-		Log.i(TAG, "Create tabls is succeed...");
+		Log.i(TAG, "Create tables is succeed...");
 	}
 
 	@Override

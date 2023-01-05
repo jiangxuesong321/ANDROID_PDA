@@ -44,7 +44,7 @@ public class AppUtil {
 	public static final String PROPERTY_LAST_INPUT_PURCHASE_ORDER_PGR = "PurchaseOrder_Pgr";
 
 
-	private static final String PREFERENCES = "com.sunmi.pda";
+	private static final String PREFERENCES = "com.android.pda";
 	private static final AndroidApplication app = AndroidApplication.getInstance();
 	
 	public static void saveServiceHost(Context context, String host){

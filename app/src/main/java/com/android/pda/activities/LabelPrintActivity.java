@@ -28,7 +28,7 @@ import ZPL.ZPLPrinterHelper;
 
 public class LabelPrintActivity extends AppCompatActivity implements ActivityInitialization{
     private final static AndroidApplication app = AndroidApplication.getInstance();
-    private static final String ACTION_DATA_CODE_RECEIVED = "com.sunmi.scanner.ACTION_DATA_CODE_RECEIVED";
+    private static final String ACTION_DATA_CODE_RECEIVED = "com.android.scanner.ACTION_DATA_CODE_RECEIVED";
     private static final String DATA = "data";
     private static final String SOURCE = "source_byte";
     private RelativeLayout relativeLayoutLabel;

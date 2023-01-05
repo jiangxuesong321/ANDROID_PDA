@@ -48,12 +48,19 @@ public class MaterialController {
             index = index + 1;
             urlTop += "&$top=" + top + "&$skip=" + skip;
             ;
+            // 传入配置的 url & 查询条件，同步数据
             httpResponse = sync(url + urlTop);
             isFinished = httpResponse.isFinished();
         }
         return httpResponse;
     }
 
+    /**
+     * 根据 查询条件 同步数据
+     * @param url
+     * @return
+     * @throws Exception
+     */
     private HttpResponse sync(String url)throws Exception{
         LogUtils.d(TAG, "Url--->" + url);
         HttpRequestUtil http = new HttpRequestUtil();
@@ -62,11 +69,13 @@ public class MaterialController {
         JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
         JSONObject d = jsonObject.getJSONObject("d");
         JSONArray jsonArray = d.getJSONArray("results");
+
+        // 同步时间更新
         if(jsonArray != null && jsonArray.size() > 0){
             String now = DateUtils.dateToString(new Date(), DateUtils.FormatFullDate);
             AppUtil.saveLastChangeDate(app, AppUtil.PROPERTY_LAST_CHANGE_DATE_MATERIAL, now);
         }else{
-            //httpResponse.setError(app.getString(R.string.text_no_master_data));
+            // httpResponse.setError(app.getString(R.string.text_no_master_data));
             httpResponse.setFinished(true);
         }
         List<Material> all = new ArrayList<>();

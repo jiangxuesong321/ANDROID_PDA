@@ -21,6 +21,11 @@ public class AlarmsBroadcastReceiver extends BroadcastReceiver {
 	public AlarmsBroadcastReceiver() {
 	}
 
+	/**
+	 * 接收广播，更新主数据信息
+	 * @param context
+	 * @param intent
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		try {
@@ -29,7 +34,7 @@ public class AlarmsBroadcastReceiver extends BroadcastReceiver {
 			if (e_requestCode == AndroidApplication.REQUESTCODE_MATERIAL_SYNC) {
 				MasterTask task = new MasterTask(context, null);
 				task.execute();
-				LogUtils.d(TAG, "AlarmsBroadcast Receivered...");
+				LogUtils.d(TAG, "AlarmsBroadcast Received...");
 			}
 		} catch (Exception e) {
 			LogUtils.i(TAG, e.getMessage());

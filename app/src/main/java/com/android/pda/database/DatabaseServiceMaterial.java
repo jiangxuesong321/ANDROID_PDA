@@ -50,9 +50,11 @@ public class DatabaseServiceMaterial implements DatabaseConstants{
                 new String[] { id }
         );
     }
+
     public void deleteData(){
         PojoDBObjectHelper.deleteAll(dbHelper.material);
     }
+
     public List<Material> getAllData(String material){
         if(material != null){
             material = material.toUpperCase();

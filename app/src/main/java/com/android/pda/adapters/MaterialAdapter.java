@@ -15,6 +15,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+/**
+ * @description 物料主数据 ListView ViewHolder 构造
+ */
+
 public class MaterialAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private List<Material> objects;
@@ -54,6 +58,7 @@ public class MaterialAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        // 行颜色交替
         if (position % 2 != 0) {
             if(position > 0){
                 convertView.setBackgroundColor(context.getColor(R.color.bg_colorFourthPrimary));
