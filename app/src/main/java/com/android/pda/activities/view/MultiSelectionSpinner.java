@@ -20,6 +20,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @description 构建多选下拉列表样式
+ */
 
 public class MultiSelectionSpinner extends AppCompatSpinner implements
         DialogInterface.OnMultiChoiceClickListener {

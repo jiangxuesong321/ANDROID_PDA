@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     }
 
     /**
-     * 登录成功，下载指定主数据，并隐藏进度框
+     * 登录成功，下载业务主数据信息，并隐藏进度框
      */
     private void loginSucceed() {
         if (loginController.getLoginUser() != null) {
@@ -184,7 +184,6 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
                 finish();
             }
         }
-
     }
 
     private int finishedCount;

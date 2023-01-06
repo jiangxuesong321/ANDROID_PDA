@@ -33,6 +33,7 @@ public class InOutboundReportController {
     private final static AndroidApplication app = AndroidApplication.getInstance();
 
     public boolean syncData(InOutboundReportQuery query) throws Exception {
+        // 拼接查询条件 -> 单据类型
         String filter = "";
         if(query.getOrderIndices() != null && query.getOrderIndices().size() > 0){
             filter = "$filter=(";
@@ -48,6 +49,7 @@ public class InOutboundReportController {
             filter = filter + ")";
         }
 
+        // 拼接查询条件 -> 仓储位置（仓库）
         if(query.getStorageLocations() != null && query.getStorageLocations().size() >0){
             if(StringUtils.isNotEmpty(filter)){
                 filter += " and (";
@@ -84,6 +86,8 @@ public class InOutboundReportController {
                 filter = filter + "StoreLocation eq '" + query.getStorageLocation() + "'";
             }
         }*/
+
+        // 拼接查询条件 -> 计划收货时间
         if(StringUtils.isNotEmpty(query.getDeliveryDateFromTo())
                 || StringUtils.isNotEmpty(query.getDeliveryDateFrom())){
             if(StringUtils.isNotEmpty(query.getDeliveryDateFromTo())){
@@ -128,6 +132,7 @@ public class InOutboundReportController {
             index = index + 1;
             urlTop += "&$top=" + top + "&$skip=" + skip;
             ;
+            // 请求查询
             all = sync(url + urlTop, all);
 
             if(all != null && all.size() > 0){
@@ -143,6 +148,13 @@ public class InOutboundReportController {
         return success;
     }
 
+    /**
+     * 请求查询出入库报表
+     * @param url
+     * @param all
+     * @return
+     * @throws Exception
+     */
     private List<InOutboundReport> sync(String url, List<InOutboundReport> all)throws Exception{
         LogUtils.d(TAG, "Url--->" + url);
         HttpRequestUtil http = new HttpRequestUtil();

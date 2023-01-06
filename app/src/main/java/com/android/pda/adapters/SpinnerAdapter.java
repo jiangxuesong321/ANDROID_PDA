@@ -16,6 +16,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+/**
+ * @description 构建下拉条目数据
+ */
+
 public class SpinnerAdapter extends ArrayAdapter<StorageLocation> {
     private LayoutInflater layoutInflater;
     private List<StorageLocation> objects;

@@ -41,6 +41,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * @description 出入库报表
+ */
+
 public class InOutboundReportActivity extends AppCompatActivity implements ActivityInitialization{
     private final static AndroidApplication app = AndroidApplication.getInstance();
 
@@ -149,6 +153,9 @@ public class InOutboundReportActivity extends AppCompatActivity implements Activ
 
     }
 
+    /**
+     * 监听触发日期选择 Dialog 弹出
+     */
     @Override
     public void initListener() {
         etDeliveryDateFrom.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -209,6 +216,10 @@ public class InOutboundReportActivity extends AppCompatActivity implements Activ
 
     }
 
+    /**
+     * 出入库报表查询
+     * @param view
+     */
     public void search(View view){
         StorageLocation storageLocation = (StorageLocation) spinnerLocation.getSelectedItem();
 
@@ -231,6 +242,12 @@ public class InOutboundReportActivity extends AppCompatActivity implements Activ
         downloadInOutReport(deliveryDateFrom, deliveryDateFromTo, storageLocations);
     }
 
+    /**
+     * 根据填充条件，查询出入库报表
+     * @param deliveryDateFrom
+     * @param deliveryDateFromTo
+     * @param storageLocations
+     */
     private void downloadInOutReport(String deliveryDateFrom, String deliveryDateFromTo, List<String> storageLocations) {
 
         if(StringUtils.isNotEmpty(deliveryDateFromTo)){

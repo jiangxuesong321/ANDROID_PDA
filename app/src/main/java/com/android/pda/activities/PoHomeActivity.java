@@ -176,7 +176,12 @@ public class PoHomeActivity extends AppCompatActivity implements ActivityInitial
     }
 
 
-
+    /**
+     * 数据暂存提示
+     * @param message
+     * @param action
+     * @param buttonCount
+     */
     private void displayDialog(String message, int action, int buttonCount){
         NoticeDialog noticeDialog = new NoticeDialog(this, message, buttonCount);
         if(AppConstants.REQUEST_OFFLINE_DATA == action){
@@ -226,6 +231,7 @@ public class PoHomeActivity extends AppCompatActivity implements ActivityInitial
             }
 
         }else{
+            // 校验异常（表单不完整，提示信息）
             displayDialog(error, AppConstants.REQUEST_STAY, 1);
         }
     }

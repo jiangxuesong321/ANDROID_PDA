@@ -174,24 +174,6 @@ public class Util {
         return strList;
 
     }
-    public static String rawRead(Context context){
-        String ret = "";
-        InputStream is = context.getResources().openRawResource(R.raw.my_raw);
-        InputStreamReader isr = new InputStreamReader(is);
-        StringBuilder result = new StringBuilder();
-        BufferedReader bufferedReader = new BufferedReader(isr);
-        String line = "";
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                result.append(line);
-            }
-            return result.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ret;
-
-    }
 
     public static String removeEnter(String str){
         String dest = "";

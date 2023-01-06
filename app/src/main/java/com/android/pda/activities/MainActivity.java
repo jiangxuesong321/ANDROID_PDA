@@ -37,6 +37,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+/**
+ * @description MenuList 展示菜单主界面
+ */
 
 public class MainActivity extends AppCompatActivity implements ActivityInitialization, AdapterView.OnItemClickListener {
     private final static AndroidApplication app = AndroidApplication.getInstance();
@@ -75,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         }
     }
 
+    /**
+     * 用户校验不存在则转到 LoginActivity 用户登录
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -94,8 +100,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
                 finish();
             }
         }
-
-
     }
 
     @Override

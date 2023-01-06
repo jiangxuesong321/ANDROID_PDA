@@ -12,6 +12,7 @@ import com.android.pda.models.InOutboundReportQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
+
 public class InOutboundReportTask extends AsyncTask<Void, Void, Object> {
 
     private static final AndroidApplication app = AndroidApplication.getInstance();
