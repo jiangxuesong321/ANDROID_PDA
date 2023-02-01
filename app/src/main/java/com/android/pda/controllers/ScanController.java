@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ScanController {
 
-    protected static final String TAG = PurchaseOrderController.class.getSimpleName();
+//    protected static final String TAG = PurchaseOrderController.class.getSimpleName();
     private final static AndroidApplication app = AndroidApplication.getInstance();
     public final static int ERROR_REPEAT_SCAN = 0;
     public final static int ERROR_MAX_COUNT = 1;

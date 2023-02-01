@@ -9,26 +9,13 @@ import android.database.CursorWindow;
 
 import com.android.pda.R;
 import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
-import com.android.pda.controllers.BatchStockController;
-import com.android.pda.controllers.InOutboundReportController;
 import com.android.pda.controllers.LogisticsProviderController;
 import com.android.pda.controllers.OfflineController;
-import com.android.pda.controllers.PickingController;
-import com.android.pda.controllers.PrintController;
-import com.android.pda.controllers.PrototypeBorrowController;
-import com.android.pda.controllers.PurchaseOrderGiController;
-import com.android.pda.controllers.PurchaseOrderGrController;
-import com.android.pda.controllers.PurchaseOrderSubContractController;
 import com.android.pda.controllers.ScanController;
-import com.android.pda.controllers.SerialInfoController;
-import com.android.pda.controllers.StockTransferController;
 import com.android.pda.controllers.StorageLocationController;
 import com.android.pda.controllers.MaterialController;
-import com.android.pda.controllers.PurchaseOrderController;
-import com.android.pda.controllers.TransferOrderController;
 import com.android.pda.controllers.LoginController;
 import com.android.pda.controllers.UserController;
-import com.android.pda.controllers.MaterialVoucherController;
 import com.android.pda.database.DatabaseService;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.OdataService;
@@ -47,103 +34,18 @@ public class AndroidApplication extends Application {
     private static StorageLocationController storageLocationController;
     private static LogisticsProviderController logisticsProviderController;
     private static MaterialController materialController;
-    private static PurchaseOrderController poController;
-    private static BatchStockController batchStockController;
     private static LoginController loginController;
     private static ScanController scanController;
     private static UserController userController;
-    private static PrototypeBorrowController prototypeBorrowController;
-    private static PickingController pickingController;
     private static OfflineController offlineController;
-    private static InOutboundReportController inOutboundReportController;
-    private static PrintController printController;
-    private static PurchaseOrderSubContractController purchaseOrderSubContractController;
-    private static PurchaseOrderGiController purchaseOrderGiController;
-    private static PurchaseOrderGrController purchaseOrderGrController;
     public final static int REQUESTCODE_MATERIAL_SYNC = 7700;
     private boolean alarmSet = false;
-
-    public static PurchaseOrderGrController getPurchaseOrderGrController() {
-        if (purchaseOrderGrController == null) {
-            purchaseOrderGrController = new PurchaseOrderGrController();
-        }
-        return purchaseOrderGrController;
-    }
-
-    public static PurchaseOrderGiController getPurchaseOrderGiController() {
-        if (purchaseOrderGiController == null) {
-            purchaseOrderGiController = new PurchaseOrderGiController();
-        }
-        return purchaseOrderGiController;
-    }
-
-    public static PurchaseOrderSubContractController getPurchaseOrderSubContractController() {
-        if (purchaseOrderSubContractController == null) {
-            purchaseOrderSubContractController = new PurchaseOrderSubContractController();
-        }
-        return purchaseOrderSubContractController;
-    }
-
-    public static PrintController getPrintController() {
-        if (printController == null) {
-            printController = new PrintController();
-        }
-        return printController;
-    }
-
-    public static InOutboundReportController getInOutboundReportController() {
-        if (inOutboundReportController == null) {
-            inOutboundReportController = new InOutboundReportController();
-        }
-        return inOutboundReportController;
-    }
 
     public static OfflineController getOfflineController() {
         if (offlineController == null) {
             offlineController = new OfflineController();
         }
         return offlineController;
-    }
-    private static MaterialVoucherController materialVoucherController;
-    private static StockTransferController stockTransferController;
-    private static SerialInfoController serialInfoController;
-
-
-    public static PickingController getPickingController(){
-        if (pickingController == null) {
-            pickingController = new PickingController();
-        }
-        return pickingController;
-    }
-    private static TransferOrderController transferOrderController;
-
-    public static PrototypeBorrowController getPrototypeBorrowController(){
-        if (prototypeBorrowController == null) {
-            prototypeBorrowController = new PrototypeBorrowController();
-        }
-        return prototypeBorrowController;
-    }
-
-
-    public static SerialInfoController getSerialInfoController(){
-        if (serialInfoController == null) {
-            serialInfoController = new SerialInfoController();
-        }
-        return serialInfoController;
-    }
-
-    public static StockTransferController getStockTransferController(){
-        if (stockTransferController == null) {
-            stockTransferController = new StockTransferController();
-        }
-        return stockTransferController;
-    }
-
-    public static MaterialVoucherController getMaterialVoucherController(){
-        if (materialVoucherController == null) {
-            materialVoucherController = new MaterialVoucherController();
-        }
-        return materialVoucherController;
     }
 
     public static ScanController getScanController(){
@@ -174,20 +76,6 @@ public class AndroidApplication extends Application {
         return materialController;
     }
 
-    public PurchaseOrderController getPurchaseOrderController() {
-        if (poController == null) {
-            poController = new PurchaseOrderController();
-        }
-        return poController;
-    }
-
-    public BatchStockController getBatchStockController() {
-        if (batchStockController == null) {
-            batchStockController = new BatchStockController();
-        }
-        return batchStockController;
-    }
-
     public LoginController getLoginController() {
         if (loginController == null) {
             loginController = new LoginController();
@@ -201,14 +89,6 @@ public class AndroidApplication extends Application {
         }
         return userController;
     }
-
-    public TransferOrderController getTransferOrderController() {
-        if (transferOrderController == null) {
-            transferOrderController = new TransferOrderController();
-        }
-        return transferOrderController;
-    }
-
 
     @Override
     public void onCreate() {

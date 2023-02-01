@@ -23,7 +23,6 @@ import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
 import com.android.pda.controllers.LoginController;
 import com.android.pda.controllers.OfflineController;
-import com.android.pda.controllers.PrintController;
 import com.android.pda.controllers.UserController;
 import com.android.pda.database.pojo.Login;
 import com.android.pda.database.pojo.Offline;
@@ -165,63 +164,6 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
             case AppConstants.FUNCTION_ID_BASE_DATA: //基础数据
                 startActivity(MasterDataActivity.createIntent(getApplicationContext()));
                 break;
-            case AppConstants.FUNCTION_ID_SALES_INVOICE: //销售发货
-                if (user == null) {
-                    user = userController.getLoginUser();
-                }
-                if (user != null) {
-                    if (StringUtils.equalsIgnoreCase(user.getGroup(), app.getString(R.string.text_company_name_c))) {
-//                        startActivity(SalesInvoiceListHomeActivity.createIntent(getApplicationContext()));
-                    } else {
-                        // 组织 A 同 组织 D
-//                        startActivity(SalesInvoiceHomeActivity.createIntent(getApplicationContext()));
-                    }
-                } else {
-                    displayDialog(getString(R.string.text_update_user_data), AppConstants.REQUEST_STAY, 1);
-                }
-                break;
-            case AppConstants.FUNCTION_ID_PURCHASE_ORDER: //采购收货
-                startActivity(PoHomeActivity.createIntent(getApplicationContext()));
-                break;
-            case AppConstants.FUNCTION_ID_LEND: //借出发货
-                startActivity(PrototypeBorrowHomeActivity.createIntent(getApplicationContext()));
-                break;
-            case AppConstants.FUNCTION_ID_PICKING_MATERIAL: //领料单发料
-                startActivity(PickingHomeActivity.createIntent(getApplicationContext(), 4));
-                break;
-            case AppConstants.FUNCTION_ID_PICKING: //借机领用
-                startActivity(PickingHomeActivity.createIntent(getApplicationContext(), 5));
-                break;
-            case AppConstants.FUNCTION_ID_STOCK_MOVE: //库存转移
-                offlineStockTransfer = offlineController.getOfflineData(AppConstants.FUNCTION_ID_STOCK_MOVE);
-                //for offline
-                if (offlineStockTransfer != null) {
-                    displayDialog(getString(R.string.text_offline_warning), AppConstants.REQUEST_OFFLINE_DATA, 2);
-                } else {
-                    startActivity(StockTransferActivity.createIntent(getApplicationContext(), null));
-                }
-                break;
-            case AppConstants.FUNCTION_ID_TRANSFER_OUT: //调拨发出
-                startActivity(TransferOrderHomeActivity.createIntent(getApplicationContext(), AppConstants.FUNCTION_ID_TRANSFER_OUT));
-                break;
-            case AppConstants.FUNCTION_ID_TRANSFER_IN: //调拨接收
-                startActivity(TransferOrderHomeActivity.createIntent(getApplicationContext(), AppConstants.FUNCTION_ID_TRANSFER_IN));
-                break;
-            case AppConstants.FUNCTION_ID_SN_SEARCH: //序列号查询
-                startActivity(SnSearchActivity.createIntent(getApplicationContext()));
-                break;
-            case AppConstants.FUNCTION_ID_SN_REPORT: //出入库报表
-                startActivity(InOutboundReportActivity.createIntent(getApplicationContext()));
-                break;
-            case AppConstants.FUNCTION_ID_PRINT_MANUAL:
-                startActivity(PrintDetailActivity.createIntent(getApplicationContext(), null, ""));
-                break;
-            case AppConstants.FUNCTION_ID_PRINT_SHIPPING_LABEL:
-                startActivity(PrintHomeActivity.createIntent(getApplicationContext(), PrintController.SHIPPING_LABEL));
-                break;
-            case AppConstants.FUNCTION_ID_PRINT_RECEIVE_LABEL:
-                startActivity(PrintHomeActivity.createIntent(getApplicationContext(), PrintController.RECEIVE_LABEL));
-                break;
         }
     }
 
@@ -281,10 +223,10 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
             @Override
             public void callOk() {
-                //for offline
-                if (AppConstants.REQUEST_OFFLINE_DATA == action) {
-                    startActivity(StockTransferActivity.createIntent(app, offlineStockTransfer));
-                }
+//                //for offline
+//                if (AppConstants.REQUEST_OFFLINE_DATA == action) {
+//                    startActivity(StockTransferActivity.createIntent(app, offlineStockTransfer));
+//                }
                 // 退出登录
                 if (AppConstants.REQUEST_LOGOUT == action) {
                     loginController.deleteLoginUser();
@@ -295,15 +237,14 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
             @Override
             public void callClose() {
-                //for offline
-                if (AppConstants.REQUEST_OFFLINE_DATA == action) {
-                    offlineController.clearOfflineData(AppConstants.FUNCTION_ID_STOCK_MOVE);
-                    startActivity(StockTransferActivity.createIntent(app, null));
-                }
+//                //for offline
+//                if (AppConstants.REQUEST_OFFLINE_DATA == action) {
+//                    offlineController.clearOfflineData(AppConstants.FUNCTION_ID_STOCK_MOVE);
+//                    startActivity(StockTransferActivity.createIntent(app, null));
+//                }
             }
         });
         noticeDialog.create();
-
     }
 
 }

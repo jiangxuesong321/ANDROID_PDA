@@ -46,53 +46,6 @@
                 android:enabled="true"
                 android:exported="false" >
         </receiver>
-
-        <activity
-            android:name="com.android.pda.activities.PoOrderDetailActivity"
-            android:exported="true"
-            android:label="@string/title_activity_po_order_detail"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name="com.android.pda.activities.StockTransferActivity"
-            android:exported="true"
-            android:label="@string/title_stock_transfer"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.TransferOrderHomeActivity"
-            android:exported="true"
-            android:label="@string/title_transfer_order"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.TransferOrderDetailActivity"
-            android:exported="true"
-            android:label="@string/title_transfer_order_detail"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.TransferOrderReceiveDetailActivity"
-            android:exported="true"
-            android:label="@string/title_transfer_order_detail_receive"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.PoOrderResultActivity"
-            android:exported="true"
-            android:label="@string/title_activity_po_order"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.android.pda.activities.PoHomeActivity"
-            android:exported="true"
-            android:label="@string/title_activity_po_home"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.android.pda.activities.DeliveryScanActivity"
-            android:exported="true"
-            android:label="@string/text_scan_out"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name="com.android.pda.activities.MaterialActivity"
             android:exported="true"
@@ -117,30 +70,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name="com.android.pda.activities.PrototypeBorrowHomeActivity"
-            android:exported="true"
-            android:label="@string/text_prototype_borrow"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.PrototypeBorrowDetailActivity"
-            android:exported="true"
-            android:label="@string/text_prototype_borrow_detail"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.PickingDetailActivity"
-            android:exported="true"
-            android:label="@string/text_picking_detail"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.PickingHomeActivity"
-            android:exported="true"
-            android:label="@string/text_picking"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
             android:name="com.android.pda.activities.MasterDataActivity"
             android:exported="true"
             android:label="@string/text_basic_data"
@@ -150,45 +79,6 @@
             android:name="com.android.pda.activities.UserActivity"
             android:exported="true"
             android:label="@string/text_user"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-
-        <activity
-            android:name="com.android.pda.activities.InOutboundReportActivity"
-            android:exported="true"
-            android:label="@string/title_storage_report"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.SnSearchActivity"
-            android:exported="true"
-            android:label="@string/title_serial_query"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.SnSearchDetailActivity"
-            android:exported="true"
-            android:label="@string/title_serial_query_detail"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-
-        <activity
-            android:name="com.android.pda.activities.PrintHomeActivity"
-            android:exported="true"
-            android:label="@string/text_print"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity
-            android:name="com.android.pda.activities.PrintResultActivity"
-            android:exported="true"
-            android:label="@string/text_print"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
-
-        <activity
-            android:name="com.android.pda.activities.PrintDetailActivity"
-            android:exported="true"
-            android:label="@string/text_print"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
     </application>

@@ -14,7 +14,7 @@ public class OdataService {
     }
 
     public String getHost() {
-        //host = "https://vhsscqs4ci.sap.sunmi.com:44300";
+        //host = "https://xxx.xxx.com:44300";
         return host;
     }
 
