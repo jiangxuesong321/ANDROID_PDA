@@ -216,12 +216,14 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
             case AppConstants.FUNCTION_ID_PRINT_MANUAL:
                 startActivity(PrintDetailActivity.createIntent(getApplicationContext(), null, ""));
                 break;
-            case AppConstants.FUNCTION_ID_PRINT_SHIPPING_LABEL:
+            case AppConstants.FUNCTION_ID_PRINT_SHIPPING_LABEL:  //发货标签打印
                 startActivity(PrintHomeActivity.createIntent(getApplicationContext(), PrintController.SHIPPING_LABEL));
                 break;
-            case AppConstants.FUNCTION_ID_PRINT_RECEIVE_LABEL:
+            case AppConstants.FUNCTION_ID_PRINT_RECEIVE_LABEL:   //收货标签打印
                 startActivity(PrintHomeActivity.createIntent(getApplicationContext(), PrintController.RECEIVE_LABEL));
                 break;
+            case AppConstants.FUNCTION_ID_D66_TEST:
+                startActivity(D66TestActivity.createIntent(getApplicationContext(), AppConstants.FUNCTION_ID_D66_TEST));
         }
     }
 

@@ -53,6 +53,17 @@ public class MenuList {
         if(funcList.contains("15")){
             this.menuItemList.add(new MenuItemData("15", mContext.getString(R.string.text_receive_label)));
         }
+        if(funcList.contains("16")){
+            this.menuItemList.add(new MenuItemData("16", mContext.getString(R.string.text_d66_label)));
+        }
+//        if(StringUtils.equalsIgnoreCase(mContext.getString(R.string.default_environment), "Q")){
+//            if(funcList.contains("19")){
+//                this.menuItemList.add(new MenuItemData(AppConstants.FUNCTION_ID_PURCHASE_ORDER_SUBCONTRACT_OUT, mContext.getString(R.string.text_po_sub_contract_out)));
+//            }
+//            if(funcList.contains("20")){
+//                this.menuItemList.add(new MenuItemData(AppConstants.FUNCTION_ID_PURCHASE_ORDER_SUBCONTRACT_IN, mContext.getString(R.string.text_po_sub_contract_in)));
+//            }
+//        }
     }
 
     public List<MenuItemData> getMenuItemList() {

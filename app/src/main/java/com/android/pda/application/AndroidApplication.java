@@ -10,6 +10,7 @@ import android.database.CursorWindow;
 import com.android.pda.R;
 import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
 import com.android.pda.controllers.BatchStockController;
+import com.android.pda.controllers.D66TestController;
 import com.android.pda.controllers.InOutboundReportController;
 import com.android.pda.controllers.LogisticsProviderController;
 import com.android.pda.controllers.OfflineController;
@@ -60,6 +61,7 @@ public class AndroidApplication extends Application {
     private static PurchaseOrderSubContractController purchaseOrderSubContractController;
     private static PurchaseOrderGiController purchaseOrderGiController;
     private static PurchaseOrderGrController purchaseOrderGrController;
+    private static D66TestController d66TestController;
     public final static int REQUESTCODE_MATERIAL_SYNC = 7700;
     private boolean alarmSet = false;
 
@@ -207,6 +209,13 @@ public class AndroidApplication extends Application {
             transferOrderController = new TransferOrderController();
         }
         return transferOrderController;
+    }
+
+    public D66TestController getD66TestController() {
+        if (d66TestController == null) {
+            d66TestController = new D66TestController();
+        }
+        return d66TestController;
     }
 
 

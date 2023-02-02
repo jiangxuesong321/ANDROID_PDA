@@ -51,7 +51,8 @@ public class AppConstants {
 
     public static final String FUNCTION_ID_PRINT_RECEIVE_LABEL = "15";
 
-    public static final String FUNCTION_ID_NO_VALUE_IN_BOUND = "16";
+    //    public static final String FUNCTION_ID_NO_VALUE_IN_BOUND = "16";
+    public static final String FUNCTION_ID_D66_TEST = "16";
 
     public static final String FUNCTION_ID_NO_VALUE_OUT_BOUND = "17";
 

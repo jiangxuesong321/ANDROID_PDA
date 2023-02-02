@@ -6,8 +6,8 @@ android {
         applicationId "com.android.pda"
         minSdkVersion 24
         targetSdkVersion 24
-        versionCode 211
-        versionName "2.1.1"
+        versionCode 211      //给系统识别应用版本的数值
+        versionName "2.1.1"  //给用户看的版本号字段
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
