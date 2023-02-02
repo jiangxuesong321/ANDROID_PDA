@@ -25,9 +25,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
 
-        <!--
-            启动 Activity
-        -->
+        <!-- 启动 Activity   intent-filter部分其实就表示默认展示页面-->
         <activity
                 android:name="com.android.pda.activities.MainActivity"
                 android:exported="true"
@@ -36,7 +34,6 @@
                 android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
