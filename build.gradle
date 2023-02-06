@@ -1,12 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+//根目录的构建脚本
 buildscript {
-    
+    //指定了仓库
     repositories {
         google()
         jcenter()
     }
     dependencies {
+        //gradle 插件版本
         classpath 'com.android.tools.build:gradle:3.2.0'
         
 
@@ -14,14 +15,15 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+//所有的仓库依赖地址
 allprojects {
+    //项目本身需要的依赖，配置所有的Module公共依赖
     repositories {
         google()
         jcenter()
     }
 }
-
+//任务,清除所有build文件 执行Build -> Clean Project 触发这个指令
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
