@@ -54,8 +54,8 @@ public class SalesInvoiceController {
         String locations = userController.getUserLocationString();
         String filter = buildFilter(query);
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_sales_invoice) + app.getString(R.string.url_language_param)
-                + app.getString(R.string.sap_url_client) + "&$orderby=DeliveryDocument,DeliveryDocumentItem"
-                + "&" + filter;
+                + app.getString(R.string.sap_url_client); //+ "&$orderby=DeliveryDocument,DeliveryDocumentItem"
+//                + "&" + filter;
 
         LogUtils.d(TAG, "Url--->" + url);
         HttpRequestUtil http = new HttpRequestUtil();
