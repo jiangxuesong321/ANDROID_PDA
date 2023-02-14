@@ -19,7 +19,8 @@
     <!--<string name="sap_url_client">\?sap-client=110</string>-->
     <string name="sap_url_client">\?sap-client=200</string>
     <string name="sap_url_plant">/sap/opu/odata/sap/ZSTORAGELOCATION_CDS/ZSTORAGELOCATION</string>
-    <string name="sap_url_logistics_provider">/sap/opu/odata/sap/ZCDS_LOGISTICS_PROVIDER_CDS/ZCDS_LOGISTICS_PROVIDER</string>
+<!--    <string name="sap_url_logistics_provider">/sap/opu/odata/sap/ZCDS_LOGISTICS_PROVIDER_CDS/ZCDS_LOGISTICS_PROVIDER</string>-->
+ <string name="sap_url_logistics_provider">/sap/opu/odata/sap/ZCDS_LOGISTICS_PROVIDER_SRV/ZCDS_LOGISTICS_PROVIDER</string>
     <string name="sap_url_material">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_CDS/ZCDS_PDA_MATERIAL</string>
     <string name="sap_url_material_picking">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_PICKING_CDS/ZCDS_PDA_MATERIAL_PICKING</string>
     <string name="sap_url_po">/sap/opu/odata/sap/ZPDA_PO_DOWNLOAD_CDS/ZPDA_PO_DOWNLOAD</string>
