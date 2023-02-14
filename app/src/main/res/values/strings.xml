@@ -65,8 +65,8 @@
 
 <!--    <string name="sap_url_login">zcl_mm_002</string>-->
     <string name="sap_url_login">/sap/zcl_mm_002</string>
-<!--    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>-->
-    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_PDA_UPERMISSION_CDS_SRV/ZCDS_UPERMISSION</string>
+   <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>
+<!--    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_PDA_UPERMISSION_CDS_SRV/ZCDS_UPERMISSION</string>-->
     <string name="sap_username">EXT_USER</string>
     <string name="sap_password">Admin@123</string>
 
