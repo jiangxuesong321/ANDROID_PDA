@@ -14,7 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.Credentials;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HttpRequestUtil {
 	public static final int HTTP_DELETE_METHOD = 0;
@@ -27,6 +33,7 @@ public class HttpRequestUtil {
 	private final static SunmiApplication app = SunmiApplication.getInstance();
 	static public OkHttpClient client;
 	private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+	protected static final String TAG = HttpRequestUtil.class.getSimpleName();
 
 	static {
 		client = new OkHttpClient.Builder().connectTimeout(180000L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
@@ -111,7 +118,14 @@ public class HttpRequestUtil {
 		builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
 		builder.addHeader("Accept", "application/json");
 //		builder.addHeader("Cookie", "ApplicationGatewayAffinityCORS=fd8cdebd503d5ba81352b643c6b2b0b0dd270b53be94fc932ea5bc98b36f3367;");
-		builder.addHeader("Cookie", "SAP_SESSIONID_D66_200=Wxj1Hvid23pwzDTULMFMik0oM9esDRHtkXYADCmArRw%3d;");
+		Map<String,String> CookieMap = new HashMap<>();
+		try {
+			 CookieMap = getCookie();
+		}catch(Exception e){
+			LogUtils.d(TAG, "获取cookie信息失败:" + e);
+		}
+//		builder.addHeader("Cookie", "SAP_SESSIONID_D66_200=Wxj1Hvid23pwzDTULMFMik0oM9esDRHtkXYADCmArRw%3d;");
+		builder.addHeader("Cookie", CookieMap.get("Cookie"));
 
 		if (headers != null) {
 			for (Map.Entry<String, String> entry : headers.entrySet()) {
@@ -161,6 +175,45 @@ public class HttpRequestUtil {
 		//System.out.println("Cookie---->" + httpResponse.getCookie());
 		headers.put("x-csrf-token", httpResponse.getToken());
 		headers.put("Cookie", httpResponse.getCookie());
+		return headers;
+	}
+
+	public Map<String, String> getCookie() throws Exception {
+		OkHttpClient clientCookie = new OkHttpClient.Builder().connectTimeout(1800L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
+				.readTimeout(1800L, TimeUnit.MILLISECONDS).build();
+		String urlString = app.getOdataService().getHost() + "/sap/opu/odata/sap/ZCL_ZTEST_ATOM_SRV/?$format=json";
+		Map<String, String> header = new HashMap<>();
+		header.put("x-csrf-token", "fetch");
+		header.put("Accept", "application/json");
+		String credential = Credentials.basic("dlw_atom", "Admin@123");
+		header.put("Authorization", credential);
+		Request.Builder builder = new Request.Builder();
+		if (header != null) {
+			for (Map.Entry<String, String> entry : header.entrySet()) {
+				System.out.println(entry.getKey() + "---->" + entry.getValue());
+				builder.addHeader(entry.getKey(), entry.getValue());
+			}
+		}
+		builder.url(urlString);
+		Request request = builder.get().build();
+		Call call = clientCookie.newCall(request);
+		Response response = call.execute();
+		String cookie = "";
+		for (String headerParam : response.headers("set-cookie")) {
+			if (headerParam.contains("SAP_SESSIONID_D66")){
+				cookie = headerParam;
+			}
+		}
+		int code = response.code();
+		String result = response.body().string();
+		HttpResponse httpResponse = new HttpResponse(code, result);
+		if (!StringUtils.isEmpty(cookie)) {
+			httpResponse.setCookie(cookie);
+		}
+		Map<String, String> headers = new HashMap<>();
+		headers.put("x-csrf-token", response.headers().get("x-csrf-token"));
+		headers.put("Cookie", httpResponse.getCookie());
+
 		return headers;
 	}
 }

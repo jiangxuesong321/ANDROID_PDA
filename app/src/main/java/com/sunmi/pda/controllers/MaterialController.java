@@ -35,7 +35,7 @@ public class MaterialController {
         String lastUpdateDate = AppUtil.getLastChangeDate(app, AppUtil.PROPERTY_LAST_CHANGE_DATE_MATERIAL);
         if(StringUtils.isNotEmpty(lastUpdateDate)){
             lastUpdateDate = lastUpdateDate.replace(" ", "T");
-            url = url + "&$filter=(LastChangeDate ge datetime'" + lastUpdateDate + "')";
+//            url = url + "&$filter=(LastChangeDate ge datetime'" + lastUpdateDate + "')";
         }
         HttpResponse httpResponse = null;
 
@@ -80,7 +80,8 @@ public class MaterialController {
                 String batchFlag = objectI.getBooleanValue("BatchFlag") == false? "0": "1";
                 String serialFlag = objectI.getString("SerialFlag");
                 String barcode = objectI.getString("BarCode");
-                long creationDate = DateUtils.jsonDateTimeToTimeStamp(objectI.getString("CreationDate"), objectI.getString("CreationTime"));
+//                long creationDate = DateUtils.jsonDateTimeToTimeStamp(objectI.getString("CreationDate"), objectI.getString("CreationTime"));
+                long creationDate = DateUtils.jsonDateToTimeStamp(objectI.getString("CreationDate"));
                 long lastChangeDate = DateUtils.jsonDateToTimeStamp(objectI.getString("LastChangeDate"));
                 Material material = new Material(materialNr, materialName, unit, batchFlag, serialFlag, barcode, creationDate, lastChangeDate);
                 all.add(material);
