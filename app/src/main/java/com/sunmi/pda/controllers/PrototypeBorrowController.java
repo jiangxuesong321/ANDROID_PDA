@@ -57,9 +57,9 @@ public class PrototypeBorrowController {
     public List<PrototypeBorrow> syncData(BusinessOrderQuery query) throws Exception {
         String filter = buildFilter(query);  //"$filter=ReservationNumber eq '" + query.getNumber() + "'";
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_prototype_borrow) + app.getString(R.string.url_language_param)  + app.getString(R.string.sap_url_client);
-        if (filter.length() > 0) {
-            url = url + "&" + filter;
-        }
+//        if (filter.length() > 0) {
+//            url = url + "&" + filter;
+//        }
         LogUtils.d(TAG, "Url--->" + url);
         HttpRequestUtil http = new HttpRequestUtil();
         HttpResponse httpResponse = http.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, null, null);
