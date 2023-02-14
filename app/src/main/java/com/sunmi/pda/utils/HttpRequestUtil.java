@@ -110,7 +110,8 @@ public class HttpRequestUtil {
 		}
 		builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
 		builder.addHeader("Accept", "application/json");
-		builder.addHeader("Cookie", "ApplicationGatewayAffinityCORS=fd8cdebd503d5ba81352b643c6b2b0b0dd270b53be94fc932ea5bc98b36f3367;");
+//		builder.addHeader("Cookie", "ApplicationGatewayAffinityCORS=fd8cdebd503d5ba81352b643c6b2b0b0dd270b53be94fc932ea5bc98b36f3367;");
+		builder.addHeader("Cookie", "SAP_SESSIONID_D66_200=Wxj1Hvid23pwzDTULMFMik0oM9esDRHtkXYADCmArRw%3d;");
 
 		if (headers != null) {
 			for (Map.Entry<String, String> entry : headers.entrySet()) {

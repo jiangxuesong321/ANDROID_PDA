@@ -175,10 +175,10 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
             env = tvProduction.getText().toString();
         }
         if(StringUtils.equalsIgnoreCase(env, getString(R.string.login_prd))){
-            AppUtil.saveServiceHost(getApplicationContext(), "https://sap.sunmi.com");
+            AppUtil.saveServiceHost(getApplicationContext(), "http://112.103.135.105:8081");
         }else{
             LogUtils.e(TAG, "Selected env-------->" + env);
-            AppUtil.saveServiceHost(getApplicationContext(), "https://sapqas.sunmi.com");
+            AppUtil.saveServiceHost(getApplicationContext(), "http://112.103.135.105:8081");
         }
         LogUtils.e(TAG, "Selected env-------->" + AppUtil.getServiceHost(getApplicationContext()));
         if((userId != null && !userId.isEmpty()) && (pwd != null && !pwd.isEmpty())){

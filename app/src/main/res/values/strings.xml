@@ -12,12 +12,12 @@
     <string name="default_environment">Q</string>
     <!--<string name="default_environment">P</string>-->
     <!--P-->
-    <string name="sap_url_host">https://sap.sunmi.com</string>
+    <string name="sap_url_host">http://112.103.135.105:8081</string>
 
 
-    <string name="sap_url_host_q">https://sapqas.sunmi.com</string>
+    <string name="sap_url_host_q">http://112.103.135.105:8081</string>
     <!--<string name="sap_url_client">\?sap-client=110</string>-->
-    <string name="sap_url_client">\?sap-client=100</string>
+    <string name="sap_url_client">\?sap-client=200</string>
     <string name="sap_url_plant">/sap/opu/odata/sap/ZSTORAGELOCATION_CDS/ZSTORAGELOCATION</string>
     <string name="sap_url_logistics_provider">/sap/opu/odata/sap/ZCDS_LOGISTICS_PROVIDER_CDS/ZCDS_LOGISTICS_PROVIDER</string>
     <string name="sap_url_material">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_CDS/ZCDS_PDA_MATERIAL</string>
@@ -38,7 +38,8 @@
     <string name="sap_url_sales_invoice_posting_temp">/sap/pda_outb_dn_chg</string>
     <string name="sap_url_material_lend">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_LEND_CDS/ZCDS_PDA_MATERIAL_LEND</string>
     <string name="sap_url_transfer_order">/sap/opu/odata/sap/ZCDS_PDA_TRANSFER_ORDER_CDS/ZCDS_PDA_TRANSFER_ORDER</string>
-    <string name="sap_url_user">/sap/opu/odata/sap/ZCDS_UMAIN_DATA_CDS/ZCDS_UMAIN_DATA</string>
+<!--    <string name="sap_url_user">/sap/opu/odata/sap/ZCDS_UMAIN_DATA_CDS/ZCDS_UMAIN_DATA</string>-->
+    <string name="sap_url_user">/sap/opu/odata/sap/ZCDS_UMAIN_DATA_CDS_SRV/ZCDS_UMAIN_DATA</string>
     <string name="sap_url_serialInfo">/sap/serial_query</string>
 
     <string name="sap_url_shipping_label">/sap/opu/odata/sap/ZCDS_SHIPPING_LABEL_CDS/ZCDS_SHIPPING_LABEL</string>
@@ -62,10 +63,12 @@
     <string name="sap_url_po_gr">/sap/opu/odata/sap/ZCDS_PDA_PO_GR_DOWNLOAD_CDS/ZCDS_PDA_PO_GR_DOWNLOAD</string>
     <string name="sap_url_po_gr_post">sap/pda_po_gr</string>
 
-    <string name="sap_url_login">/zcl_mm_002</string>
-    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>
+<!--    <string name="sap_url_login">zcl_mm_002</string>-->
+    <string name="sap_url_login">/sap/zcl_mm_002</string>
+<!--    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>-->
+    <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_PDA_UPERMISSION_CDS_SRV/ZCDS_UPERMISSION</string>
     <string name="sap_username">EXT_USER</string>
-    <string name="sap_password">Sunmi@1qaz2wsx$</string>
+    <string name="sap_password">Admin@123</string>
 
     <!--Constants-->
     <string name="storage_location_all">0001</string>
