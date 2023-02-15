@@ -32,7 +32,7 @@
     <string name="sap_url_prototype_borrow">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_LEND_CDS/ZCDS_PDA_MATERIAL_LEND</string>
     <string name="sap_url_picking">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_PICKING_CDS/ZCDS_PDA_MATERIAL_PICKING</string>
     <string name="sap_url_material_voucher">/sap/opu/odata/sap/ZCDS_MATERIAL_VOUCHER_CDS/ZCDS_MATERIAL_VOUCHER</string>
-    <string name="sap_url_stock_in_out">/sap/opu/odata/sap/ZCDS_PDA_STOCK_IN_OUT_CDS/ZCDS_PDA_STOCK_IN_OUT</string>
+    <string name="sap_url_stock_in_out">/sap/opu/odata/sap/ZCDS_PDA_STOCK_IN_OUT_SRV_01/ZCDS_PDA_STOCK_IN_OUT</string>
     <string name="sap_url_order_invoice_others">/sap/opu/odata/sap/ZCDS_PDA_MATERIAL_ALL_CDS/ZCDS_PDA_MATERIAL_ALL</string>
 
     <string name="sap_url_sales_invoice_posting">/sap/pda_outb_dn</string>
