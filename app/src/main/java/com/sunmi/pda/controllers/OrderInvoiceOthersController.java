@@ -245,10 +245,10 @@ public class OrderInvoiceOthersController {
             String[] title = { "单据日期","申请类型","库存地点","预留号","物料","物料描述","规格","型号", "单位",
                     "数量", "批次", "备注", "收货人","收货地","收货人联系方式",  "物流商"};
             //34个参数
-            File file = new File(FileUtil.getSDPath() + "/Sunmi");
+            File file = new File(FileUtil.getSDPath() + "/Pda");
             FileUtil.makeDir(file);
             String fileName = "发货指令单" + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-            String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+            String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
             File fileXls = new File(filePath);
             if (!fileXls.exists()) {
                 fileXls.createNewFile();

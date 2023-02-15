@@ -208,7 +208,7 @@ public class InOutboundReportController {
         File file = new File(FileUtil.getSDPath() + "/Sunmi");
         FileUtil.makeDir(file);
         String fileName = "出入库报表" + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

@@ -261,7 +261,7 @@ public class SunmiApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        LogUtils.setLogDir(FileUtil.getSDPath() + "/Sunmi/Log");
+        LogUtils.setLogDir(FileUtil.getSDPath() + "/Pda/Log");
     }
 
     public void setAlarm() {

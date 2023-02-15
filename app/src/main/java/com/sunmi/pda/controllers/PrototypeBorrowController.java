@@ -320,10 +320,10 @@ public class PrototypeBorrowController {
     public void exportExcel(List<PrototypeBorrow> prototypeBorrows) throws IOException, WriteException, BiffException {
         String[] title = { "单据日期","单据类型","仓库名称", "单号","物料号","名称",
                 "规格", "单位", "数量","批次", "备注", "收件人", "地址", "联系方式", "物流商", "型号"};
-        File file = new File(FileUtil.getSDPath() + "/Sunmi");
+        File file = new File(FileUtil.getSDPath() + "/Pda");
         FileUtil.makeDir(file);
         String fileName = "样机借用发货单" + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

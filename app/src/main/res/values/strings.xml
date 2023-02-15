@@ -327,7 +327,7 @@
     <string name="title_storage_report">出入库报表</string>
     <string name="title_serial_query">序列号查询</string>
     <string name="title_serial_query_detail">序列号查询</string>
-    <string name="text_export_success">数据已导出至SUNMI文件夹</string>
+    <string name="text_export_success">数据已导出至PDA文件夹</string>
     <string name="text_export">导出</string>
 
     <string name="text_location_size_more_100">要查询的仓库数量不可以超过100个</string>

@@ -328,7 +328,7 @@ public class PickingController {
             type = app.getString(R.string.text_picking_material);
         }
         String fileName = type + DateUtils.dateToString(new Date(), DateUtils.FormatYMDHMS) + ".xls";
-        String filePath = FileUtil.getSDPath() + "/Sunmi/" + fileName;
+        String filePath = FileUtil.getSDPath() + "/Pda/" + fileName;
         File fileXls = new File(filePath);
         if (!fileXls.exists()) {
             fileXls.createNewFile();

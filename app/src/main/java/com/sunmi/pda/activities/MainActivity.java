@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     finish();
                 }else{
-                    LogUtils.setLogDir(FileUtil.getSDPath() + "/Sunmi/Log");
+                    LogUtils.setLogDir(FileUtil.getSDPath() + "/Pda/Log");
                 }
                 break;
             default:
