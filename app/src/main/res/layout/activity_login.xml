@@ -8,14 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="118dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="0dp"
-        android:src="@mipmap/ic_logo" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="36dp"
         android:gravity="center"
         android:paddingTop="0dp"
         android:text="@string/login_app_title"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -225,7 +225,7 @@
         android:layout_below="@+id/rl_production"
         android:text="@string/login_btn_text"
         android:textSize="@dimen/text_size_btn"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/bg_colorSecondPrimary"
         android:textColor="#ffffff"
         android:onClick="login"/>
