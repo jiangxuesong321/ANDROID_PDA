@@ -434,7 +434,8 @@ public class NoValueInBoundActivity extends AppCompatActivity implements Activit
         int index = 0;
         StorageLocation _plant = null;
 //        String _defaultPlant = offline == null ? "110Z" : offline.getPlant();
-        String _defaultPlant = "110Z";
+//        String _defaultPlant = "110Z";
+        String _defaultPlant = "1600";
         for (int i = 0; i < plants.size(); i++) {
             if (StringUtils.equalsIgnoreCase(plants.get(i).getPlant(), _defaultPlant)) {
                 _plant = plants.get(i);

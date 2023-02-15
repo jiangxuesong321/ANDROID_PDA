@@ -53,9 +53,9 @@ public class PickingController {
     public List<Picking> syncData(BusinessOrderQuery query, int functionId) throws Exception {
         String filter = buildFilter(query, functionId);//"$filter=ReservedNo eq '" + query.getNumber() + "'";
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_picking) + app.getString(R.string.url_language_param) + app.getString(R.string.sap_url_client);
-        if (filter.length() > 0) {
-            url = url + "&" + filter;
-        }
+//        if (filter.length() > 0) {
+//            url = url + "&" + filter;
+//        }
 
         LogUtils.d(TAG, "Url--->" + url);
         HttpRequestUtil http = new HttpRequestUtil();
