@@ -1,12 +1,11 @@
 package com.android.pda.asynctasks;
 
-import com.android.pda.R;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.controllers.LoginController;
 import com.android.pda.database.pojo.Login;
@@ -46,7 +45,6 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
             if (loginErrorMsg.equalsIgnoreCase("")) {
                 // 登录成功，获取用户权限信息
                 String permissionErrorMsg = loginController.getUserPermission(userId);
-                permissionErrorMsg = "";
                 if (permissionErrorMsg.equalsIgnoreCase("")) {
                     Login login = loginController.getLoginUser();
                     if (login != null) {

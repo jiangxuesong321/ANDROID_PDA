@@ -1,7 +1,6 @@
 package com.android.pda.controllers;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
@@ -10,7 +9,6 @@ import com.android.pda.log.LogUtils;
 import com.android.pda.models.HttpResponse;
 import com.android.pda.utils.Algorithm;
 import com.android.pda.utils.HttpRequestUtil;
-import com.android.pda.utils.Util;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,8 +28,9 @@ public class LoginController {
 
     /**
      * 用户登录校验
+     *
      * @param userId 用户ID
-     * @param pwd 密码
+     * @param pwd    密码
      * @return
      * @throws Exception
      */
@@ -72,65 +71,92 @@ public class LoginController {
         }
     }
 
+//    /**
+//     * 根据用户 ID 获取用户权限信息
+//     *
+//     * @param userId 用户ID
+//     * @return
+//     * @throws Exception
+//     */
+//    public String getUserPermission(String userId) throws Exception {
+//        if (userId == null) {
+//            return null;
+//        }
+//
+//        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_permission) + app.getString(R.string.sap_url_client) + "&$filter=zuid eq '" + userId + "'";
+//        String zuname = "";
+//        LogUtils.e(TAG, "Login url--------->" + url);
+//
+//        HttpRequestUtil http = new HttpRequestUtil();
+//        HttpResponse httpResponse = http.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, null, null);
+//
+//        LogUtils.d(TAG, "Response--->" + httpResponse.getResponseString());
+//        LogUtils.d(TAG, "Code--->" + httpResponse.getCode());
+//        if (httpResponse.getCode() != 200) {
+//            return Util.parseSapError(httpResponse.getResponseString());
+//        }
+//        try {
+//            JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
+//            JSONObject d = jsonObject.getJSONObject("d");
+//            JSONArray jsonArray = d.getJSONArray("results");
+//            List<Login> all = new ArrayList<>();
+//
+//            for (int i = 0; i < jsonArray.size(); i++) {
+//                try {
+//                    JSONObject objectI = jsonArray.getJSONObject(i);
+//                    String zuid = objectI.getString("zuid");
+//                    String zfunc = objectI.getString("zfunc");
+//                    String zfactory = objectI.getString("zfactory");
+//                    String zstore_loc = objectI.getString("zstore_loc");
+//                    zuname = objectI.getString("zuname");
+//
+//                    Login login = new Login(zuid, zfunc, zfactory, zstore_loc, zuname, "");
+//
+//                    all.add(login);
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    LogUtils.e(TAG, "get userPermission Error ------> " + e.getMessage());
+//                }
+//            }
+//            String funcs = findUniqueFunc(all);
+//            String facs = findUniqueFactory(all);
+//            String locs = findUniqueLoc(all);
+//            System.out.println("Zujson---" + all.get(0).getZujson());
+//            Login user = new Login(userId, funcs, facs, locs, zuname, all.get(0).getZujson());
+//            user.setZujson(JSON.toJSONString(all));
+//            List<Login> logins = new ArrayList<>();
+//            logins.add(user);
+//            app.getDBService().getDatabaseServiceLogin().createData(logins);
+//
+//            return "";
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            LogUtils.e(TAG, "Login Error ------> " + e.getMessage());
+//            return app.getString(R.string.text_service_failed);
+//        }
+//    }
+
     /**
-     * 根据用户 ID 获取用户权限信息
+     * 根据用户 ID 获取用户权限信息,权限默认给全部99
+     *
      * @param userId 用户ID
      * @return
      * @throws Exception
      */
     public String getUserPermission(String userId) throws Exception {
+        List<Login> all = new ArrayList<>();
         if (userId == null) {
             return null;
         }
-
-        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_permission) + app.getString(R.string.sap_url_client) + "&$filter=zuid eq '" + userId + "'";
-        String zuname = "";
-        LogUtils.e(TAG, "Login url--------->" + url);
-
-        HttpRequestUtil http = new HttpRequestUtil();
-        HttpResponse httpResponse = http.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, null, null);
-
-        LogUtils.d(TAG, "Response--->" + httpResponse.getResponseString());
-        LogUtils.d(TAG, "Code--->" + httpResponse.getCode());
-        if (httpResponse.getCode() != 200) {
-            return Util.parseSapError(httpResponse.getResponseString());
-        }
         try {
-            JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
-            JSONObject d = jsonObject.getJSONObject("d");
-            JSONArray jsonArray = d.getJSONArray("results");
-            List<Login> all = new ArrayList<>();
-
-            for (int i = 0; i < jsonArray.size(); i++) {
-                try {
-                    JSONObject objectI = jsonArray.getJSONObject(i);
-                    String zuid = objectI.getString("zuid");
-                    String zfunc = objectI.getString("zfunc");
-                    String zfactory = objectI.getString("zfactory");
-                    String zstore_loc = objectI.getString("zstore_loc");
-                    zuname = objectI.getString("zuname");
-
-                    Login login = new Login(zuid, zfunc, zfactory, zstore_loc, zuname, "");
-
-                    all.add(login);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtils.e(TAG, "get userPermission Error ------> " + e.getMessage());
-                }
-            }
-            String funcs = findUniqueFunc(all);
-            String facs = findUniqueFactory(all);
-            String locs = findUniqueLoc(all);
-            System.out.println("Zujson---" + all.get(0).getZujson());
-            Login user = new Login(userId, funcs, facs, locs, zuname, all.get(0).getZujson());
+            Login user = new Login(userId, "99", "", "", "", "");
             user.setZujson(JSON.toJSONString(all));
             List<Login> logins = new ArrayList<>();
             logins.add(user);
             app.getDBService().getDatabaseServiceLogin().createData(logins);
-
             return "";
-
         } catch (Exception e) {
             e.printStackTrace();
             LogUtils.e(TAG, "Login Error ------> " + e.getMessage());
@@ -159,6 +185,7 @@ public class LoginController {
 
     /**
      * 用户 FUNC 分号分隔处理
+     *
      * @param logins
      * @return
      */
@@ -172,6 +199,7 @@ public class LoginController {
 
     /**
      * 用户 Factory 分号分隔处理
+     *
      * @param logins
      * @return
      */
@@ -185,6 +213,7 @@ public class LoginController {
 
     /**
      * 用户 Store Location 分号分隔处理
+     *
      * @param logins
      * @return
      */
@@ -198,6 +227,7 @@ public class LoginController {
 
     /**
      * Set 分隔处理转 String
+     *
      * @param set
      * @return
      */
