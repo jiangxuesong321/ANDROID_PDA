@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         String pwd = etPwd.getText().toString();
 
         // 配置 Host Url
-        AppUtil.saveServiceHost(getApplicationContext(), "https://sapqas.sunmi.com");
+        AppUtil.saveServiceHost(getApplicationContext(), application.getString(R.string.sap_url_host_q));
         LogUtils.e(TAG, "Selected Host-------->" + AppUtil.getServiceHost(getApplicationContext()));
 
         if ((userId != null && !userId.isEmpty()) && (pwd != null && !pwd.isEmpty())) {
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
             LogUtils.e(TAG, "Login msg.what--------->" + msg.what);
             switch (msg.what) {
                 case 1:
-//                    loginSucceed();
+                    loginSucceed();
                     break;
                 case 0:
                     Bundle bundle = msg.getData();
@@ -175,9 +175,9 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
             if (count == 0) {
                 // don not download material when login
                 //downloadMaterial();
-                downloadLocation();
-                downloadUser();
-                downloadLogisticsProvider();
+//                downloadLocation();
+//                downloadUser();
+//                downloadLogisticsProvider();
             } else {
                 hideWaitDialog();
                 startActivity(MainActivity.createIntent(getApplicationContext()));
