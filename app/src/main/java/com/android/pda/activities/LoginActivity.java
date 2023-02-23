@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
             LogUtils.e(TAG, "Login msg.what--------->" + msg.what);
             switch (msg.what) {
                 case 1:
-                    loginSucceed();
+//                    loginSucceed();
                     break;
                 case 0:
                     Bundle bundle = msg.getData();
