@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.pda.R;
@@ -33,6 +34,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     private EditText etUser;
     private EditText etPwd;
     private ProgressDialog progressDialog;
+    private Spinner sp_dropdown;  //下拉列表展示
+    private String[] subjects;    // 环境下拉列表
 
     protected static final String TAG = LoginActivity.class.getSimpleName();
     private static final AndroidApplication application = AndroidApplication.getInstance();
@@ -44,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sp_dropdown = findViewById(R.id.sp_dropdown);
+        subjects = getResources().getStringArray(R.array.subjects);
         initView();
         initListener();
     }

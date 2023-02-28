@@ -9,6 +9,10 @@
 
     <!--Q-->
     <!--<string name="sap_url_host">https://sapqas.sunmi.com</string>-->
+    <string-array name="subjects">
+        <item>PRD</item>
+        <item>QAS</item>
+    </string-array>
     <string name="default_environment">Q</string>
     <!--<string name="default_environment">P</string>-->
     <!--P-->
@@ -107,8 +111,8 @@
     <string name="login_app_title">条码管理系统</string>
     <string name="login_pwd">密码</string>
     <string name="login_btn_text">登录</string>
-<!--    <string name="login_qas">QAS</string>-->
-<!--    <string name="login_prd">Production</string>-->
+    <!--    <string name="login_qas">QAS</string>-->
+    <!--    <string name="login_prd">Production</string>-->
     <string name="alert_waiting">正在连接服务请稍候...</string>
     <string name="login_failed">登录失败</string>
     <string name="text_material">物料</string>
