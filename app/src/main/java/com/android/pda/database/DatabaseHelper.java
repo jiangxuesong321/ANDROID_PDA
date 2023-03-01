@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils.InsertHelper;
 
+import com.android.pda.database.pojo.UserInfo;
 import com.delawareconsulting.libtools.database.PojoDBObject;
 import com.delawareconsulting.libtools.database.PojoDBObjectHelper;
 import com.delawareconsulting.libtools.database.SimplePojoDBObject;
@@ -27,6 +28,7 @@ class DatabaseHelper implements DatabaseConstants {
 	PojoDBObject<Material> material;
 	PojoDBObject<User> user;
 	PojoDBObject<Offline> offline;
+	PojoDBObject<UserInfo> userInfo;
 
 	public DatabaseHelper() {
 		login = createLoginDB();
@@ -35,6 +37,7 @@ class DatabaseHelper implements DatabaseConstants {
 		material = createMaterialDB();
 		user = createUserDB();
 		offline = createOfflineDB();
+		userInfo = createUserInfoDB();
 	}
 
 	public void deleteAll() {
@@ -145,6 +148,52 @@ class DatabaseHelper implements DatabaseConstants {
 				helper.bind(colName, pojo.getUserName());
 				helper.bind(colGroup, pojo.getGroup());
 				helper.bind(colDepart, pojo.getDepart());
+			}
+		};
+	}
+
+	/**
+	 * UserInfo DB Helper
+	 * @return User
+	 */
+	private SimplePojoDBObject<UserInfo> createUserInfoDB() {
+		return new SimplePojoDBObject<UserInfo>(app, TABLE_USER_INFO, DatabaseOpenHelper.class) {
+			@Override
+			public UserInfo convertToPojo(Cursor cursor) {
+				String id = cursor.getString(cursor.getColumnIndexOrThrow(USER_INFO_COLUMN_ID));
+				String name = cursor.getString(cursor.getColumnIndexOrThrow(USER_INFO_COLUMN_NAME));
+				String apiKey = cursor.getString(cursor.getColumnIndexOrThrow(USER_INFO_COLUMN_APIKEY));
+				return new UserInfo(id, name, apiKey);
+			}
+
+			@Override
+			public ContentValues createContentValues(UserInfo pojo) {
+				ContentValues cv = new ContentValues(3);
+				cv.put(USER_INFO_COLUMN_ID, pojo.getUserId());
+				cv.put(USER_INFO_COLUMN_NAME, pojo.getUserName());
+				cv.put(USER_INFO_COLUMN_APIKEY, pojo.getApiKey());
+				return cv;
+			}
+
+			@Override
+			public String getIdWhereClause() {
+				return USER_INFO_COLUMN_ID + " = ?";
+			}
+
+			@Override
+			public String[] getIdWhereArgs(UserInfo pojo) {
+				return new String[] { pojo.getUserId() };
+			}
+
+			@Override
+			public void prepareInsertHelper(InsertHelper helper, UserInfo pojo) {
+				final int colId = helper.getColumnIndex(USER_INFO_COLUMN_ID);
+				final int colName = helper.getColumnIndex(USER_INFO_COLUMN_NAME);
+				final int colApiKey = helper.getColumnIndex(USER_INFO_COLUMN_APIKEY);
+
+				helper.bind(colId, pojo.getUserId());
+				helper.bind(colName, pojo.getUserName());
+				helper.bind(colApiKey, pojo.getApiKey());
 			}
 		};
 	}

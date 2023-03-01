@@ -1,26 +1,13 @@
 <resources>
     <string name="app_name">条码管理系统</string>
-    <!--<string name="sap_url_host">https://vhsscqs4ci.sap.sunmi.com:44300</string>-->
-    <!--    <string name="sap_url_host">https://vhsscds4ci.sap.sunmi.com:44300</string>-->
-    <!--vhsscds4ci ->  vhsscqs4ci-->
-
-    <!--D-->
-    <!--<string name="sap_url_host">https://sapdev.sunmi.com</string>-->
-
-    <!--Q-->
-    <!--<string name="sap_url_host">https://sapqas.sunmi.com</string>-->
     <string-array name="subjects">
         <item>PRD</item>
         <item>QAS</item>
     </string-array>
     <string name="default_environment">Q</string>
     <!--<string name="default_environment">P</string>-->
-    <!--P-->
     <string name="sap_url_host">https://sap.sunmi.com</string>
-
-
     <string name="sap_url_host_q">https://sapqas.sunmi.com</string>
-    <!--<string name="sap_url_client">\?sap-client=110</string>-->
     <string name="sap_url_client">\?sap-client=100</string>
     <string name="sap_url_plant">/sap/opu/odata/sap/ZSTORAGELOCATION_CDS/ZSTORAGELOCATION</string>
     <string name="sap_url_logistics_provider">/sap/opu/odata/sap/ZCDS_LOGISTICS_PROVIDER_CDS/ZCDS_LOGISTICS_PROVIDER</string>
@@ -110,6 +97,7 @@
     <string name="login_account">账号</string>
     <string name="login_app_title">条码管理系统</string>
     <string name="login_pwd">密码</string>
+    <string name="login_environ">环境</string>
     <string name="login_btn_text">登录</string>
     <!--    <string name="login_qas">QAS</string>-->
     <!--    <string name="login_prd">Production</string>-->

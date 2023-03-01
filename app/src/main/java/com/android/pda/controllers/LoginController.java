@@ -5,10 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.database.pojo.Login;
+import com.android.pda.database.pojo.UserInfo;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.HttpResponse;
 import com.android.pda.utils.Algorithm;
-import com.android.pda.utils.HttpRequestUtil;
+import com.android.pda.utils.HttpRequestUtilNew;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,24 +37,37 @@ public class LoginController {
      */
     public String login(String userId, String pwd) throws Exception {
         isLogin = true;
+        HttpRequestUtilNew httpUtil = new HttpRequestUtilNew();
         String encryptPwd = Algorithm.encrypt(pwd);
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_login) + app.getString(R.string.sap_url_client);
+        url = "https://api.sap.com/api/1.0/apikey/self";
+        userId = "1393143765@qq.com";
+        pwd = "320924sonG";
         String postJson = "{\n" +
                 "  \"ZUID\": \"" + userId + "\", \n" +
                 "  \"ZUPWD\": \"" + pwd + "\"\n" +
                 "}";
-        LogUtils.e(TAG, "Login url--------->" + url);
-        LogUtils.e(TAG, "Login postJson--------->" + postJson);
-        HttpRequestUtil http = new HttpRequestUtil();
-        HttpResponse httpResponse = http.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, postJson, null);
-
-        LogUtils.d(TAG, "Response--->" + httpResponse.getResponseString());
+        LogUtils.e(TAG, "Login url and postJson--------->" + url + "---" + postJson);
         try {
-            JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
-            String result = jsonObject.getString("msgtyp");
-            String msgtxt = jsonObject.getString("msgtxt");
-            result = "S";
+            HttpResponse httpResponse = httpUtil.login(userId, pwd, url);
+            LogUtils.d(TAG, "Response--->" + httpResponse.getResponseString());
+            //解析http的返回结果
+            String result = "";
+            if (httpResponse != null && httpResponse.getCode() == 200) {
+                result = "S";
+            } else {
+                result = "E";
+            }
+            //如果http无响应的情况
+            if (StringUtils.isEmpty(result)) {
+                result = "";
+            }
+            String msgtxt = "";
             if (StringUtils.equalsIgnoreCase(result, "S")) {
+                JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
+                String apiKey = jsonObject.getString("apikey");
+                UserInfo userInfo = new UserInfo(userId, userId, apiKey);
+                app.getDBService().getDatabaseServiceUserInfo().createData(userInfo);
                 return "";
             } else if (StringUtils.equalsIgnoreCase(result, "E")) {
                 if (msgtxt != null) {

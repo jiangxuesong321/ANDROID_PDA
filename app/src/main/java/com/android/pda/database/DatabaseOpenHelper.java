@@ -24,6 +24,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements DatabaseCons
 		database.execSQL(MATERIAL_CREATE);
 		database.execSQL(USER_CREATE);
 		database.execSQL(OFFLINE_CREATE);
+		database.execSQL(USER_INFO_CREATE);
 		Log.i(TAG, "Create tables is succeed...");
 	}
 
@@ -37,6 +38,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements DatabaseCons
 			database.execSQL(MATERIAL_CREATE);
 			database.execSQL(USER_CREATE);
 			database.execSQL(OFFLINE_CREATE);
+			database.execSQL(USER_INFO_CREATE);
 			database.execSQL("ALTER TABLE TABLE_LOGIN ADD userJson TEXT");
 		}
 	}

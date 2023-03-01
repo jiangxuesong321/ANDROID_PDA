@@ -201,9 +201,13 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         View view = menuItemLayout.getActionView();
         TextView textView = view.findViewById(R.id.tv_user);
         //System.out.println("Id---->" +userController.getLoginUser().getUserId());
-        if (userController.getLoginUser() != null) {
-            textView.setText(userController.getLoginUser().getUserId());
+        Login loginInfo = loginController.getLoginUser();
+        if (loginInfo != null){
+            textView.setText(loginInfo.getZuid());
         }
+//        if (userController.getLoginUser() != null) {
+//            textView.setText(userController.getLoginUser().getUserId());
+//        }
         return super.onCreateOptionsMenu(menu);
     }
 

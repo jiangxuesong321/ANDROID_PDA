@@ -11,20 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.pda.R;
 import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.asynctasks.LoginAsyncTask;
-import com.android.pda.asynctasks.LogisticsProviderTask;
-import com.android.pda.asynctasks.MaterialTask;
-import com.android.pda.asynctasks.StorageLocationTask;
-import com.android.pda.asynctasks.UserTask;
 import com.android.pda.controllers.LoginController;
 import com.android.pda.controllers.MaterialController;
 import com.android.pda.controllers.StorageLocationController;
-import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.log.LogUtils;
 import com.android.pda.utils.AppUtil;
 
@@ -36,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     private ProgressDialog progressDialog;
     private Spinner sp_dropdown;  //下拉列表展示
     private String[] subjects;    // 环境下拉列表
+    private Spinner etSpinner;
 
     protected static final String TAG = LoginActivity.class.getSimpleName();
     private static final AndroidApplication application = AndroidApplication.getInstance();
@@ -64,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     public void initView() {
         etUser = findViewById(R.id.et_user);
         etPwd = findViewById(R.id.et_pwd);
+        etSpinner = findViewById(R.id.sp_dropdown);
     }
 
     @Override
@@ -113,16 +109,22 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
 
     /**
      * 用户登录校验
+     *
      * @param view
      */
     public void login(View view) {
         String userId = etUser.getText().toString();
         String pwd = etPwd.getText().toString();
+        String host = etSpinner.getSelectedItem().toString();
+        System.out.println("所选择的登入环境：" + host);
 
-        // 配置 Host Url
-        AppUtil.saveServiceHost(getApplicationContext(), application.getString(R.string.sap_url_host_q));
-        LogUtils.e(TAG, "Selected Host-------->" + AppUtil.getServiceHost(getApplicationContext()));
-
+        // 配置 Host Url,如果是PRD，则把PRD的环境信息存储
+        if (StringUtils.equalsIgnoreCase(host, "PRD")) {
+            AppUtil.saveServiceHost(getApplicationContext(), application.getString(R.string.sap_url_host));
+        } else {
+            AppUtil.saveServiceHost(getApplicationContext(), application.getString(R.string.sap_url_host_q));
+        }
+        LogUtils.e(TAG, "Login Selected Host-------->" + AppUtil.getServiceHost(getApplicationContext()));
         if ((userId != null && !userId.isEmpty()) && (pwd != null && !pwd.isEmpty())) {
             showWaitDialog();
             LoginAsyncTask task = new LoginAsyncTask(loginHandler, userId.toUpperCase(), pwd, LoginController.FLAG_LOGIN);
@@ -176,18 +178,18 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
     private void loginSucceed() {
         if (loginController.getLoginUser() != null) {
             //TODO: download master data for first login
-            int count = storageLocationController.getStorageLocationCount();
-            if (count == 0) {
-                // don not download material when login
-                //downloadMaterial();
-//                downloadLocation();
-//                downloadUser();
-//                downloadLogisticsProvider();
-            } else {
+//            int count = storageLocationController.getStorageLocationCount();
+//            if (count == 0) {
+//                // don not download material when login
+//                //downloadMaterial();
+////                downloadLocation();
+////                downloadUser();
+////                downloadLogisticsProvider();
+//            } else {
                 hideWaitDialog();
                 startActivity(MainActivity.createIntent(getApplicationContext()));
                 finish();
-            }
+//            }
         }
     }
 
@@ -202,105 +204,105 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         }
     }
 
-    /**
-     * 下载物料主数据信息
-     */
-    private void downloadMaterial() {
-        MaterialTask task = new MaterialTask(getApplicationContext(), new OnTaskEventListener<String>() {
-            @Override
-            public void onSuccess(String result) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_material_succeed), Toast.LENGTH_LONG).show();
-            }
+//    /**
+//     * 下载物料主数据信息
+//     */
+//    private void downloadMaterial() {
+//        MaterialTask task = new MaterialTask(getApplicationContext(), new OnTaskEventListener<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_material_succeed), Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFailure(String error) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_material_failed) + ": " + error, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void bindModel(Object o) {
+//
+//            }
+//        });
+//        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//    }
 
-            @Override
-            public void onFailure(String error) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_material_failed) + ": " + error, Toast.LENGTH_LONG).show();
-            }
+//    /**
+//     * 下载库存地点信息
+//     */
+//    private void downloadLocation() {
+//        StorageLocationTask task = new StorageLocationTask(getApplicationContext(), new OnTaskEventListener<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_location_succeed), Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFailure(String error) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_location_failed) + ": " + error, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void bindModel(Object o) {
+//
+//            }
+//        });
+//        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//    }
 
-            @Override
-            public void bindModel(Object o) {
-
-            }
-        });
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    /**
-     * 下载库存地点信息
-     */
-    private void downloadLocation() {
-        StorageLocationTask task = new StorageLocationTask(getApplicationContext(), new OnTaskEventListener<String>() {
-            @Override
-            public void onSuccess(String result) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_location_succeed), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(String error) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_location_failed) + ": " + error, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void bindModel(Object o) {
-
-            }
-        });
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    /**
-     * 下载用户主数据信息
-     */
-    private void downloadUser() {
-        UserTask task = new UserTask(getApplicationContext(), new OnTaskEventListener<String>() {
-            @Override
-            public void onSuccess(String result) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_user_succeed), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(String error) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_user_failed) + ": " + error, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void bindModel(Object o) {
-
-            }
-        });
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    /**
-     * 下载物流商主数据
-     */
-    private void downloadLogisticsProvider() {
-        LogisticsProviderTask task = new LogisticsProviderTask(getApplicationContext(), new OnTaskEventListener<String>() {
-            @Override
-            public void onSuccess(String result) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_logistics_succeed), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(String error) {
-                downloadFinished();
-                Toast.makeText(getApplicationContext(), getString(R.string.text_download_logistics_failed) + ": " + error, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void bindModel(Object o) {
-
-            }
-        });
-        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
+//    /**
+//     * 下载用户主数据信息
+//     */
+//    private void downloadUser() {
+//        UserTask task = new UserTask(getApplicationContext(), new OnTaskEventListener<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_user_succeed), Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFailure(String error) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_user_failed) + ": " + error, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void bindModel(Object o) {
+//
+//            }
+//        });
+//        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//    }
+//
+//    /**
+//     * 下载物流商主数据
+//     */
+//    private void downloadLogisticsProvider() {
+//        LogisticsProviderTask task = new LogisticsProviderTask(getApplicationContext(), new OnTaskEventListener<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_logistics_succeed), Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFailure(String error) {
+//                downloadFinished();
+//                Toast.makeText(getApplicationContext(), getString(R.string.text_download_logistics_failed) + ": " + error, Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void bindModel(Object o) {
+//
+//            }
+//        });
+//        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//    }
 
     /**
      * 用户点击登录，弹出等待窗口
@@ -323,6 +325,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
 
     /**
      * 关闭进度对话，提示错误信息对话框
+     *
      * @param message
      */
     private void displayDialog(String message) {

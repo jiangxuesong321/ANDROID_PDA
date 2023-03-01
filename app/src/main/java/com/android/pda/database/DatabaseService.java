@@ -28,6 +28,7 @@ public class DatabaseService implements DatabaseConstants {
 		this.databaseServiceLogin = new DatabaseServiceLogin();
 		this.databaseServiceUser = new DatabaseServiceUser();
 		this.databaseServiceOffline = new DatabaseServiceOffline();
+		this.databaseServiceUserInfo = new DatabaseServiceUserInfo();
 	}
 
 	public DatabaseServiceStorageLocation databaseServiceStorageLocation;
@@ -36,6 +37,11 @@ public class DatabaseService implements DatabaseConstants {
 	public DatabaseServiceLogin databaseServiceLogin;
 	public DatabaseServiceUser databaseServiceUser;
 	public DatabaseServiceOffline databaseServiceOffline;
+	public DatabaseServiceUserInfo databaseServiceUserInfo;
+
+	public DatabaseServiceUserInfo getDatabaseServiceUserInfo() {
+		return databaseServiceUserInfo;
+	}
 
 	public DatabaseServiceStorageLocation getDatabaseServicePlant() {
 		return databaseServiceStorageLocation;

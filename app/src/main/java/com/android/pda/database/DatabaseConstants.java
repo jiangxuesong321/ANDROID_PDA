@@ -49,6 +49,20 @@ interface DatabaseConstants {
 					+ USER_COLUMN_DEPART + " text "
 					+ ");";
 
+	// Table UserInfo
+	static final String TABLE_USER_INFO = "UserInfo";
+	static final String USER_INFO_COLUMN_ID = "userId";
+	static final String USER_INFO_COLUMN_NAME = "userName";
+	static final String USER_INFO_COLUMN_APIKEY = "apiKey";
+
+
+	public static final String USER_INFO_CREATE =
+			"create table if not exists " + TABLE_USER_INFO  + "("
+					+ USER_INFO_COLUMN_ID + " text not null primary key, "
+					+ USER_INFO_COLUMN_NAME + " text, "
+					+ USER_INFO_COLUMN_APIKEY + " text "
+					+ ");";
+
 	static final String TABLE_OFFLINE = "Offline";
 	static final String OFFLINE_ID = "Id";
 	static final String OFFLINE_ORDER_BODY = "OrderBody";
