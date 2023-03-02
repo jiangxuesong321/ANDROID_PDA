@@ -19,7 +19,9 @@ public class AppConstants {
     public static final String SOURCE = "source_byte";
 
     //•	00 基础数据
-    public static final String FUNCTION_ID_BASE_DATA = "00";
+//    public static final String FUNCTION_ID_BASE_DATA = "00";
+    //. 00 采购入库
+    public static final String FUNCTION_ID_PO_STORAGE = "00";
     //•	01 销售发货
     public static final String FUNCTION_ID_SALES_INVOICE = "01";
     //•	02 采购收货

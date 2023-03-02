@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="match_parent"
+        tools:context=".activities.POStorageHomeActivity">
+
+    <TextView
+            android:id="@+id/tv_label_po_doc_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/text_po_doc_num"
+            android:textSize="@dimen/text_size_label_title" />
+
+    <RelativeLayout
+            android:id="@+id/rl_po"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_below="@id/tv_label_po_doc_num">
+
+        <EditText
+                android:id="@+id/et_po_doc_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:textSize="@dimen/text_size_label_title" />
+    </RelativeLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_btn_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal">
+
+        <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_colorSecondPrimary"
+                android:textColor="@color/text_colorSecondPrimary"
+                android:layout_weight="1"
+                android:onClick="confirm"
+                android:text="@string/text_do"
+                android:textSize="@dimen/text_size_btn" />
+
+    </LinearLayout>
+
+</RelativeLayout>
