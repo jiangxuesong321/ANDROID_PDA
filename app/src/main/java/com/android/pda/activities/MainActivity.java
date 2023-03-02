@@ -32,8 +32,6 @@ import com.android.pda.models.MenuList;
 import com.android.pda.utils.FileUtil;
 import com.android.pda.utils.Util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 
 /**
@@ -161,8 +159,8 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         String funcId = menuList.getMenuItemList().get(position).getId();
 
         switch (funcId) {
-            case AppConstants.FUNCTION_ID_BASE_DATA: //基础数据
-                startActivity(MasterDataActivity.createIntent(getApplicationContext()));
+            case AppConstants.FUNCTION_ID_PO_STORAGE: // 采购入库
+                startActivity(POStorageHomeActivity.createIntent(getApplicationContext()));
                 break;
         }
     }

@@ -85,6 +85,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="text_master_data">基础数据</string>
+    <string name="text_po_storage">采购入库</string>
     <string name="error_order_not_found">无此单据、或单据已发货、或用户无权限，请确认输入的单据号码</string>
     <string name="error_no_material_data">请下载物料数据</string>
     <string name="error_no_location_data">请下载库存地点数据</string>
@@ -106,6 +107,7 @@
     <string name="text_material">物料</string>
     <string name="text_material_label">物料标签</string>
     <string name="text_supplier">供应商</string>
+    <string name="text_vendor">供应商</string>
     <string name="text_delivery_number">送货单号</string>
     <string name="text_po_number">采购订单号</string>
     <string name="text_sales_number">销售订单号</string>
@@ -126,6 +128,7 @@
     <string name="text_bar_code">条形码</string>
     <string name="text_delivery_date">送货日期</string>
     <string name="text_search">查询</string>
+    <string name="text_do">确认</string>
     <string name="text_to">到</string>
     <string name="text_create_date">创建日期</string>
     <string name="text_detail">详细</string>
@@ -205,6 +208,11 @@
 
     <string name="text_please_select">请选择</string>
     <string name="text_export_failed">导出文件失败</string>
+
+    <!--采购入库-->
+    <string name="title_po_storage">采购入库</string>
+    <string name="text_po_doc_num">采购订单号</string>
+    <string name="text_storage_bin">仓位</string>
 
     <!--借出单-->
     <string name="text_prototype_borrow">样机借用发货</string>
