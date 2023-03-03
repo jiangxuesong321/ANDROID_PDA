@@ -39,11 +39,19 @@
                 android:name=".activities.POStorageHomeActivity"
                 android:exported="true"
                 android:label="@string/title_po_storage" />
-
         <activity
                 android:name=".activities.POStorageResultActivity"
-                android:label="@string/title_po_storage"
-                android:exported="true" />
+                android:exported="true"
+                android:label="@string/title_po_storage" />
+        <activity
+                android:name=".activities.ProductionStorageHomeActivity"
+                android:exported="true"
+                android:label="@string/title_production_storage" />
+
+        <activity
+                android:name=".activities.ProductionStorageResultActivity"
+                android:exported="true"
+                android:label="@string/title_production_storage" />
 
         <receiver
                 android:name=".broadcastreceivers.AlarmsBroadcastReceiver"

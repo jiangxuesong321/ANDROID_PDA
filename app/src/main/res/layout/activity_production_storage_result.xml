@@ -4,10 +4,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.ProductionStorageResultActivity">
+        tools:context=".activities.POStorageResultActivity">
 
     <LinearLayout
-            android:id="@+id/ll_po_number"
+            android:id="@+id/ll_plant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -16,33 +16,33 @@
             android:layout_marginEnd="8dp">
 
         <TextView
-                android:id="@+id/tv_po_number"
+                android:id="@+id/tv_plant"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:gravity="left"
-                android:text="@string/text_po_number"
+                android:text="@string/text_plant"
                 android:textSize="@dimen/text_size_label_title" />
 
         <EditText
-                android:id="@+id/et_po_number"
+                android:id="@+id/et_plant"
                 android:layout_width="0dp"
                 android:layout_weight="5"
-                android:text="10101010101010"
+                android:text="1000"
                 android:enabled="false"
                 android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/ll_vendor"
+            android:id="@+id/ll_ori_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="8dp"
-            android:layout_below="@+id/ll_po_number"
+            android:layout_below="@+id/ll_plant"
             android:layout_marginEnd="8dp">
 
         <TextView
@@ -53,22 +53,53 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:gravity="left"
-                android:text="@string/text_vendor"
+                android:text="@string/text_ori_location"
                 android:textSize="@dimen/text_size_label_title" />
 
         <EditText
-                android:id="@+id/et_vendor"
+                android:id="@+id/et_ori_location"
                 android:layout_width="0dp"
                 android:layout_weight="5"
-                android:text="10101010101010"
+                android:text="1001 生产实验室"
                 android:enabled="false"
                 android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/ll_to_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="8dp"
+            android:layout_below="@+id/ll_ori_location"
+            android:layout_marginEnd="8dp">
+
+        <TextView
+                android:id="@+id/tv_to_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="left"
+                android:text="@string/text_to_location"
+                android:textSize="@dimen/text_size_label_title" />
+
+
+        <Spinner
+                android:id="@+id/sp_to_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-8dp"
+                android:layout_marginEnd="-8dp"
+                android:layout_weight="4" />
     </LinearLayout>
 
     <View
             android:id="@+id/v_top_line"
             android:layout_width="match_parent"
-            android:layout_below="@id/ll_vendor"
+            android:layout_below="@id/ll_to_location"
             android:layout_marginTop="8dp"
             android:layout_height="1dp"
             android:background="@color/text_light_gray_color" />
@@ -182,7 +213,7 @@
             android:background="@color/text_light_gray_color" />
 
     <ListView
-            android:id="@+id/lv_po_item"
+            android:id="@+id/lv_material_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/ll_btn_group"

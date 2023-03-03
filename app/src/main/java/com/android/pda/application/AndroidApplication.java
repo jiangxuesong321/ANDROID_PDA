@@ -11,6 +11,8 @@ import com.android.pda.R;
 import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
 import com.android.pda.controllers.LogisticsProviderController;
 import com.android.pda.controllers.OfflineController;
+import com.android.pda.controllers.POStorageController;
+import com.android.pda.controllers.ProductionStorageController;
 import com.android.pda.controllers.ScanController;
 import com.android.pda.controllers.StorageLocationController;
 import com.android.pda.controllers.MaterialController;
@@ -38,6 +40,8 @@ public class AndroidApplication extends Application {
     private static ScanController scanController;
     private static UserController userController;
     private static OfflineController offlineController;
+    private static POStorageController poStorageController;
+    private static ProductionStorageController productionStorageController;
     public final static int REQUESTCODE_MATERIAL_SYNC = 7700;
     private boolean alarmSet = false;
 
@@ -88,6 +92,20 @@ public class AndroidApplication extends Application {
             userController = new UserController();
         }
         return userController;
+    }
+
+    public POStorageController getPoStorageController() {
+        if (poStorageController == null) {
+            poStorageController = new POStorageController();
+        }
+        return poStorageController;
+    }
+
+    public ProductionStorageController getProductionStorageController() {
+        if (productionStorageController == null) {
+            productionStorageController = new ProductionStorageController();
+        }
+        return productionStorageController;
     }
 
     @Override

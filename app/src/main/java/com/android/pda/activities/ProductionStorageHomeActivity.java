@@ -4,29 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.android.pda.R;
 import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
-import com.android.pda.controllers.MaterialController;
-import com.android.pda.controllers.POStorageController;
+import com.android.pda.controllers.ProductionStorageController;
 import com.android.pda.models.POStorageQuery;
 import com.android.pda.utils.AppUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class POStorageHomeActivity extends AppCompatActivity implements ActivityInitialization {
+public class ProductionStorageHomeActivity extends AppCompatActivity implements ActivityInitialization {
     private final static AndroidApplication app = AndroidApplication.getInstance();
-    private static final POStorageController poStorageController = app.getPoStorageController();
+    private static final ProductionStorageController productionStorageController = app.getProductionStorageController();
 
     private EditText etMaterialDocument;
     private final static int REQUESTCODE = 10001;
@@ -34,7 +28,7 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postorage_home);
+        setContentView(R.layout.activity_production_storage_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initIntent();
         initView();
@@ -43,7 +37,7 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
     }
 
     public static Intent createIntent(Context context) {
-        Intent intent = new Intent(context, POStorageHomeActivity.class);
+        Intent intent = new Intent(context, ProductionStorageHomeActivity.class);
         return intent;
     }
 
@@ -75,7 +69,7 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
     }
 
     /**
-     * 采购入库查询功能
+     * 生产入库查询功能
      *
      * @param view
      */
@@ -86,11 +80,11 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
 
         // 查询参数校验（物料凭证）
         POStorageQuery query = new POStorageQuery(materialDocument);
-        String error = poStorageController.verifyQuery(query);
+        String error = productionStorageController.verifyQuery(query);
 
         if (StringUtils.isEmpty(error)) {
             // TODO: 暂无接口，后续修改
-            startActivityForResult(POStorageResultActivity.createIntent(app, query), REQUESTCODE);
+            startActivityForResult(ProductionStorageResultActivity.createIntent(app, query), REQUESTCODE);
         } else {
             displayDialog(error, AppConstants.REQUEST_STAY, 1);
         }

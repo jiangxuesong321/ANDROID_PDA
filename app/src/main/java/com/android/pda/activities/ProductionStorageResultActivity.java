@@ -7,29 +7,35 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSON;
 import com.android.pda.R;
 import com.android.pda.activities.view.WaitDialog;
-import com.android.pda.adapters.POStorageAdapter;
+import com.android.pda.adapters.SpinnerAdapter;
+import com.android.pda.database.pojo.StorageLocation;
+import com.android.pda.log.LogUtils;
 import com.android.pda.models.POStorageQuery;
-import com.android.pda.utils.AppUtil;
 
-public class POStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
+import java.util.List;
 
-    private static final String INTENT_KEY_PO_STORAGE = "POStorage";
-    private final static int REQUESTCODE = 10000;
+public class ProductionStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
 
-    private ListView lvPOItem;
-    private EditText etPONumber;
-    private EditText etVendor;
+    private static final String INTENT_KEY_PRODUCTION_STORAGE = "ProductionStorage";
+
+    private Spinner spinnerLocation;
+    private SpinnerAdapter locationSpinnerAdapter;
+    private List<StorageLocation> storageLocations;
+
+    private ListView lvMaterialItem;
+    private EditText etPlant;
+    private EditText etOriLocation;
     private WaitDialog waitDialog;
-
-    private POStorageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postorage_result);
+        setContentView(R.layout.activity_production_storage_result);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initIntent();
         initView();
@@ -38,32 +44,29 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
     }
 
     public static Intent createIntent(Context context, POStorageQuery query) {
-        Intent intent = new Intent(context, POStorageResultActivity.class);
+        Intent intent = new Intent(context, ProductionStorageResultActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(INTENT_KEY_PO_STORAGE, query);
+        bundle.putSerializable(INTENT_KEY_PRODUCTION_STORAGE, query);
         intent.putExtras(bundle);
-        return intent;
-    }
-
-    public static Intent createIntent(Context context) {
-        Intent intent = new Intent(context, POStorageResultActivity.class);
         return intent;
     }
 
     @Override
     public void initView() {
-        lvPOItem = findViewById(R.id.lv_po_item);
-        etPONumber = findViewById(R.id.et_po_number);
-        etVendor = findViewById(R.id.et_vendor);
+        spinnerLocation = findViewById(R.id.sp_to_location);
 
         waitDialog = new WaitDialog();
-        lvPOItem.setDividerHeight(1);
     }
 
     @Override
     public void initData() {
-        String materialDocument = AppUtil.getLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_MATERIAL_DOC_NUMBER);
-        etPONumber.setText(materialDocument);
+//        StorageLocation storageLocation = new StorageLocation("1000","1001", "瑞博生物", "大仓仓库");
+//        storageLocations.add(0, storageLocation);
+//        LogUtils.d("storageLocations","storageLocations---->" + JSON.toJSONString(storageLocations));
+//        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
+//                R.layout.li_spinner_adapter, storageLocations);
+//        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerLocation.setAdapter(locationSpinnerAdapter);
     }
 
     @Override

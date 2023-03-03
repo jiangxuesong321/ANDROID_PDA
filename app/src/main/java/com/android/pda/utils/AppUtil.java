@@ -17,6 +17,7 @@ public class AppUtil {
 
 	private static final String PROPERTY_APP_SERVICE_HOST = "serviceHost";
 
+	public static final String PROPERTY_LAST_INPUT_MATERIAL_DOC_NUMBER = "MaterialDocumentNumber";
 	public static final String PROPERTY_LAST_INPUT_PURCHASE_ORDER = "PurchaseOrder";
 	public static final String PROPERTY_LAST_INPUT_PROTOTYPE_BORROW = "PrototypeBorrow";
 	public static final String PROPERTY_LAST_INPUT_SALES_INVOICE = "SalesInvoice";

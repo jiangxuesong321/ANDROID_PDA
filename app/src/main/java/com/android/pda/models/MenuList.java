@@ -16,7 +16,8 @@ public class MenuList {
     public MenuList(List<String> funcList, Context mContext) {
         this.funcList = funcList;
 //TODO: test data
-        this.menuItemList.add(new MenuItemData(AppConstants.FUNCTION_ID_PO_STORAGE, mContext.getString(R.string.text_po_storage)));
+        this.menuItemList.add(new MenuItemData(AppConstants.FUNCTION_ID_PO_STORAGE, mContext.getString(R.string.title_po_storage)));
+        this.menuItemList.add(new MenuItemData(AppConstants.FUNCTION_ID_PROD_STORAGE, mContext.getString(R.string.title_production_storage)));
     }
 
     public List<MenuItemData> getMenuItemList() {

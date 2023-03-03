@@ -3,17 +3,17 @@ package com.android.pda.models;
 import java.io.Serializable;
 
 public class POStorageQuery implements Serializable {
-    String purchaseOrderNumber;
+    String MaterialDocument;
 
-    public POStorageQuery(String purchaseOrderNumber) {
-        this.purchaseOrderNumber = purchaseOrderNumber;
+    public POStorageQuery(String materialDocument) {
+        MaterialDocument = materialDocument;
     }
 
-    public String getPurchaseOrderNumber() {
-        return purchaseOrderNumber;
+    public String getMaterialDocument() {
+        return MaterialDocument;
     }
 
-    public void setPurchaseOrderNumber(String purchaseOrderNumber) {
-        this.purchaseOrderNumber = purchaseOrderNumber;
+    public void setMaterialDocument(String materialDocument) {
+        MaterialDocument = materialDocument;
     }
 }
