@@ -39,7 +39,7 @@ public class LoginController {
         isLogin = true;
         HttpRequestUtil httpUtil = new HttpRequestUtil();
         String encryptPwd = Algorithm.encrypt(pwd);
-        userId = userId.toLowerCase();
+//        userId = userId.toLowerCase();
         String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_login) + "?$format=json&$filter=userId eq ' " + userId + " '";
         String postJson = "{\n" +
                 "  \"ZUID\": \"" + userId + "\", \n" +

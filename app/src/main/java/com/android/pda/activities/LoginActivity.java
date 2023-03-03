@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityInitiali
         LogUtils.e(TAG, "Login Selected Host-------->" + AppUtil.getServiceHost(getApplicationContext()));
         if ((userId != null && !userId.isEmpty()) && (pwd != null && !pwd.isEmpty())) {
             showWaitDialog();
-            LoginAsyncTask task = new LoginAsyncTask(loginHandler, userId.toUpperCase(), pwd, LoginController.FLAG_LOGIN);
+            LoginAsyncTask task = new LoginAsyncTask(loginHandler, userId, pwd, LoginController.FLAG_LOGIN);
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             etUser.setBackground(null);
             etPwd.setBackground(null);
