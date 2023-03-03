@@ -1,15 +1,15 @@
 package com.android.pda.controllers;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.database.pojo.Login;
-import com.android.pda.database.pojo.UserInfo;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.HttpResponse;
 import com.android.pda.utils.Algorithm;
-import com.android.pda.utils.HttpRequestUtilNew;
+import com.android.pda.utils.HttpRequestUtil;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,24 +37,33 @@ public class LoginController {
      */
     public String login(String userId, String pwd) throws Exception {
         isLogin = true;
-        HttpRequestUtilNew httpUtil = new HttpRequestUtilNew();
+        HttpRequestUtil httpUtil = new HttpRequestUtil();
         String encryptPwd = Algorithm.encrypt(pwd);
-        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_login) + app.getString(R.string.sap_url_client);
-        url = "https://api.sap.com/api/1.0/apikey/self";
-        userId = "1393143765@qq.com";
-        pwd = "320924sonG";
+        userId = userId.toLowerCase();
+        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_login) + "?$format=json&$filter=userId eq ' " + userId + " '";
         String postJson = "{\n" +
                 "  \"ZUID\": \"" + userId + "\", \n" +
                 "  \"ZUPWD\": \"" + pwd + "\"\n" +
                 "}";
         LogUtils.e(TAG, "Login url and postJson--------->" + url + "---" + postJson);
         try {
-            HttpResponse httpResponse = httpUtil.login(userId, pwd, url);
+            String msgtxt = "";
+            HttpResponse httpResponse = httpUtil.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, postJson, null);
             LogUtils.d(TAG, "Response--->" + httpResponse.getResponseString());
             //解析http的返回结果
             String result = "";
             if (httpResponse != null && httpResponse.getCode() == 200) {
-                result = "S";
+                JSONObject jsonResponse = JSONObject.parseObject(httpResponse.getResponseString());
+                JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+                JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
+                String realPassWord = jsonObject.getString("password");
+                if (pwd.equals(realPassWord)) {
+                    result = "S";
+                } else {
+                    result = "E";
+                    msgtxt = app.getString(R.string.sap_login_error);
+                }
             } else {
                 result = "E";
             }
@@ -62,12 +71,7 @@ public class LoginController {
             if (StringUtils.isEmpty(result)) {
                 result = "";
             }
-            String msgtxt = "";
             if (StringUtils.equalsIgnoreCase(result, "S")) {
-                JSONObject jsonObject = JSONObject.parseObject(httpResponse.getResponseString());
-                String apiKey = jsonObject.getString("apikey");
-                UserInfo userInfo = new UserInfo(userId, userId, apiKey);
-                app.getDBService().getDatabaseServiceUserInfo().createData(userInfo);
                 return "";
             } else if (StringUtils.equalsIgnoreCase(result, "E")) {
                 if (msgtxt != null) {
