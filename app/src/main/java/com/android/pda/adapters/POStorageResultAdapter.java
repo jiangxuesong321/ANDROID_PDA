@@ -103,6 +103,16 @@ public class POStorageResultAdapter extends BaseAdapter {
 //            });
 //        }
 
+        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    ((EditText) v).setSelection(0);
+                }
+            }
+        });
+
+
         return convertView;
     }
 
@@ -147,6 +157,10 @@ public class POStorageResultAdapter extends BaseAdapter {
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            if (holder.column6.hasFocus()) {
+                int position = (Integer) holder.column6.getTag();
+                objects.get(position).setBatch(s.toString().trim());
+            }
         }
 
         @Override

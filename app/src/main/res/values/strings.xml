@@ -13,7 +13,7 @@
     <string name="text_po_number">采购订单号</string>
     <string name="text_vendor">供应商</string>
     <string name="text_operation">操作</string>
-    <string name="sap_url_material_doc_specific">API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentItem</string>
+    <string name="sap_url_material_doc_specific">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV//A_MaterialDocumentHeader</string>
 
     <!--生产入库-->
     <string name="title_production_storage">生产入库</string>

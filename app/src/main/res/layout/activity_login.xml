@@ -136,12 +136,12 @@
                 android:layout_marginRight="16dp">
 
                 <Spinner
-                    android:id="@+id/sp_dropdown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/subjects"
-                    android:textSize="14sp"
-                    android:spinnerMode="dropdown" />
+                        android:id="@+id/sp_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/subjects"
+                        android:textSize="14sp"
+                        android:spinnerMode="dropdown" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
