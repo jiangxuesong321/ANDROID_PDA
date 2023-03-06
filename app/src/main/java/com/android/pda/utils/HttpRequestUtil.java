@@ -122,6 +122,7 @@ public class HttpRequestUtil {
             try {
                 String csrfToken = getCsrfToken();
                 builder.addHeader("X-CSRF-TOKEN", csrfToken);
+                System.out.println("post 获取的token是:" + csrfToken);
             } catch (Exception e) {
                 LogUtils.e(TAG, "get csrfToken error" + e.getMessage());
                 e.printStackTrace();

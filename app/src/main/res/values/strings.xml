@@ -32,6 +32,8 @@
     <string name="sap_login_error">用户名或密码不正确，请检查</string>
     <string name="sap_url_material_header">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
     <string name="sap_url_material_item">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentItem</string>
+    <string name="sap_url_material_create">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="text_posting_error">请先扫描货位号再过账</string>
 
 
 

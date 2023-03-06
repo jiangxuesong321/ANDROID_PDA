@@ -10,14 +10,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.android.pda.R;
-import com.android.pda.activities.view.DialogInput;
+import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.adapters.POStorageResultAdapter;
 import com.android.pda.application.AndroidApplication;
+import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.POStoragePostingTask;
 import com.android.pda.controllers.UserController;
 import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.User;
+import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.utils.AppUtil;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +33,7 @@ import java.util.List;
  */
 //public class POStorageResultActivity extends AppCompatActivity implements ActivityInitialization,
 //        POStorageResultAdapter.OnItemClickListener, POStorageResultAdapter.SplitCallback, DialogInput.InputCallback {
-    public class POStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
+public class POStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
     private static final String INTENT_KEY_PO_STORAGE = "POStorage";
     private static final String INTENT_KEY_ITEM = "Item";
     private static final String INTENT_KEY_DATA = "Data";
@@ -150,7 +155,58 @@ import java.util.List;
      * @param view
      */
     public void confirm(View view) {
-        System.out.println("需要过账的数据："+list);
+        System.out.println("需要过账的数据：" + list);
+        //检查是否货位号都已经扫码
+        for (MaterialDocument materialDocument : list) {
+            if (StringUtils.isEmpty(materialDocument.getStorageBin())) {
+                displayDialog(getString(R.string.text_posting_error), AppConstants.REQUEST_BACK);
+                waitDialog.hideWaitDialog(POStorageResultActivity.this);
+                return;
+            }
+        }
 
+        POStoragePostingTask task = new POStoragePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+            }
+
+            @Override
+            public void onFailure(String error) {
+                waitDialog.hideWaitDialog(POStorageResultActivity.this);
+                displayDialog(error, AppConstants.REQUEST_FAILED);
+            }
+
+            @Override
+            public void bindModel(Object o) {
+                // 查询参数校验（物料凭证）
+//                List<MaterialDocument> materialDocumentList = (List<MaterialDocument>) o;
+//                if (materialDocumentList != null && materialDocumentList.size() > 0) {
+//                    startActivityForResult(POStorageResultActivity.createIntent(app, materialDocumentList), 10000);
+//                } else {
+//                    displayDialog(getString(R.string.text_service_on_result), AppConstants.REQUEST_BACK);
+//                }
+//                waitDialog.hideWaitDialog(POStorageResultActivity.this);
+            }
+        }, list);
+        task.execute();
+    }
+
+    private void displayDialog(String message, int action) {
+        NoticeDialog noticeDialog = new NoticeDialog(this, message, 1);
+        noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
+            @Override
+            public void callOk() {
+
+            }
+
+            @Override
+            public void callClose() {
+                if (AppConstants.REQUEST_SUCCEED == action) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
+        noticeDialog.create();
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
+import com.android.pda.database.pojo.Login;
 import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.HttpResponse;
@@ -16,6 +17,7 @@ import java.util.List;
 public class POStorageController {
     protected static final String TAG = POStorageController.class.getSimpleName();
     private final static AndroidApplication app = AndroidApplication.getInstance();
+    private static final LoginController loginController = app.getLoginController();
 
     public List<MaterialDocument> syncData(POStorageQuery query) throws Exception {
         List<MaterialDocument> materialDocumentList = new ArrayList<>();
@@ -68,9 +70,9 @@ public class POStorageController {
      * @return
      */
 
-    public List<MaterialDocument> getMaterialDocumentItemList(MaterialDocument query) {
-        List<MaterialDocument> materialDocumentItem = new ArrayList<>();
-        HttpRequestUtil httpUtil = new HttpRequestUtil();
+        public List<MaterialDocument> getMaterialDocumentItemList(MaterialDocument query) {
+            List<MaterialDocument> materialDocumentItem = new ArrayList<>();
+            HttpRequestUtil httpUtil = new HttpRequestUtil();
         try {
             String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_item) + "?$format=json&$filter=MaterialDocument eq '" + query.getMaterialDocument() + "'" +
                     " and MaterialDocumentYear eq '" + query.getMaterialDocumentYear() + "'";
@@ -91,6 +93,7 @@ public class POStorageController {
                     materialDocument.setStorageLocation(objectMaterialDocument.getString("StorageLocation"));
                     materialDocument.setGoodsMovementType(objectMaterialDocument.getString("GoodsMovementType"));
                     materialDocument.setPurchaseOrder(objectMaterialDocument.getString("PurchaseOrder"));
+                    materialDocument.setPurchaseOrderItem(objectMaterialDocument.getString("PurchaseOrderItem"));
                     materialDocument.setEntryUnit(objectMaterialDocument.getString("EntryUnit"));
                     materialDocument.setQuantityInEntryUnit(objectMaterialDocument.getString("QuantityInEntryUnit"));
                     materialDocument.setSupplier(objectMaterialDocument.getString("Supplier"));
@@ -102,5 +105,51 @@ public class POStorageController {
             LogUtils.e(TAG, "function getMaterialDocumentItemList failed:" + e);
         }
         return materialDocumentItem;
+    }
+
+    /**
+     * 获取物料凭证行项目列表
+     *
+     * @param list
+     * @return
+     */
+
+    public String createMaterialDocument(List<MaterialDocument> list) {
+        String result = "";
+        HttpRequestUtil httpUtil = new HttpRequestUtil();
+        try{
+            String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_create);
+            Login loginInfo = loginController.getLoginUser();
+            JSONObject param = new JSONObject();
+            param.put("CreatedByUser",loginInfo.getZuid());
+            param.put("GoodsMovementCode","101");
+            JSONArray jaItem = new JSONArray();
+            for (MaterialDocument materialDocument: list) {
+                JSONObject objectItem = new JSONObject();
+                objectItem.put("Material",materialDocument.getMaterial());
+                objectItem.put("Plant",materialDocument.getPlant());
+                objectItem.put("StorageLocation",materialDocument.getStorageLocation());
+                objectItem.put("Batch",materialDocument.getBatch());
+                objectItem.put("Supplier",materialDocument.getSupplier());
+                objectItem.put("PurchaseOrder",materialDocument.getPurchaseOrder());
+                objectItem.put("PurchaseOrderItem",materialDocument.getPurchaseOrderItem());
+                objectItem.put("QuantityInEntryUnit",materialDocument.getQuantityInEntryUnit());
+                objectItem.put("EntryUnit",materialDocument.getEntryUnit());
+                jaItem.add(objectItem);
+            }
+            param.put("to_MaterialDocumentItem",jaItem);
+            String paramJson = param.toJSONString();
+            HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, paramJson, null);
+            if (httpResponseItem != null && httpResponseItem.getCode() == 200) {
+                JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
+                JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+                JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.e(TAG, "function createMaterialDocument failed:" + e);
+        }
+
+        return result;
     }
 }

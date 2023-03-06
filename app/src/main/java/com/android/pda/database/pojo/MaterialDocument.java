@@ -26,13 +26,18 @@ public class MaterialDocument implements Serializable {
 
     String purchaseOrder;
 
+    String PurchaseOrderItem;
+
     String quantityInEntryUnit;
 
     String entryUnit;
 
     String storageBin;
 
-    public MaterialDocument(String materialDocument, String materialDocumentYear, String plant, String storageLocation, String materialDocumentItem, String material, String description, String batch, String goodsMovementType, String supplier, String purchaseOrder, String quantityInEntryUnit, String entryUnit, String storageBin) {
+    public MaterialDocument(String materialDocument, String materialDocumentYear, String plant, String storageLocation,
+                            String materialDocumentItem, String material, String description, String batch,
+                            String goodsMovementType, String supplier, String purchaseOrder, String quantityInEntryUnit,
+                            String entryUnit, String storageBin, String PurchaseOrderItem) {
         this.materialDocument = materialDocument;
         this.materialDocumentYear = materialDocumentYear;
         this.plant = plant;
@@ -47,10 +52,19 @@ public class MaterialDocument implements Serializable {
         this.quantityInEntryUnit = quantityInEntryUnit;
         this.entryUnit = entryUnit;
         this.storageBin = storageBin;
+        this.PurchaseOrderItem = PurchaseOrderItem;
     }
 
     public MaterialDocument() {
 
+    }
+
+    public String getPurchaseOrderItem() {
+        return PurchaseOrderItem;
+    }
+
+    public void setPurchaseOrderItem(String purchaseOrderItem) {
+        PurchaseOrderItem = purchaseOrderItem;
     }
 
     public String getMaterialDocument() {

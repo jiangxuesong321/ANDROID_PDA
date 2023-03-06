@@ -88,7 +88,7 @@ public class POStorageResultAdapter extends BaseAdapter {
         viewHolder.column3.setText(String.valueOf(objects.get(position).getDescription()));
         viewHolder.column4.setText(objects.get(position).getBatch());
         viewHolder.column5.setText(String.valueOf(objects.get(position).getQuantityInEntryUnit()));
-//        viewHolder.column6.setEnabled(true);
+        viewHolder.column6.setEnabled(true);
 //        if(StringUtils.isNotEmpty(objects.get(position).getSerialFlag())){
 //            viewHolder.column8.setText(context.getString(R.string.text_scan));
 //        }else{
@@ -136,6 +136,7 @@ public class POStorageResultAdapter extends BaseAdapter {
     }
 
     private SplitCallback splitCallback;
+
     public void setSplitCallback(SplitCallback splitCallback) {
         this.splitCallback = splitCallback;
     }
@@ -152,15 +153,11 @@ public class POStorageResultAdapter extends BaseAdapter {
 
         public Watcher(ViewHolder holder) {
             this.holder = holder;
-            this.isBatch = isBatch;
+//            this.isBatch = isBatch;
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            if (holder.column6.hasFocus()) {
-                int position = (Integer) holder.column6.getTag();
-                objects.get(position).setBatch(s.toString().trim());
-            }
         }
 
         @Override
@@ -169,9 +166,10 @@ public class POStorageResultAdapter extends BaseAdapter {
 
         @Override
         public void afterTextChanged(Editable s) {
-            int position = (Integer) holder.column6.getTag();
-            objects.get(position).setBatch(s.toString().trim());
-
+            if (holder.column6.hasFocus()) {
+                int position = (Integer) holder.column6.getTag();
+                objects.get(position).setStorageBin(s.toString().trim());
+            }
         }
     }
 
