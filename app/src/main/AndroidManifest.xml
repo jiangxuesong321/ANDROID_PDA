@@ -42,7 +42,8 @@
         <activity
                 android:name=".activities.POStorageResultActivity"
                 android:exported="true"
-                android:label="@string/title_po_storage" />
+                android:label="@string/title_po_storage"
+                android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
                 android:name=".activities.ProductionStorageHomeActivity"
                 android:exported="true"
@@ -51,7 +52,8 @@
         <activity
                 android:name=".activities.ProductionStorageResultActivity"
                 android:exported="true"
-                android:label="@string/title_production_storage" />
+                android:label="@string/title_production_storage"
+                android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <receiver
                 android:name=".broadcastreceivers.AlarmsBroadcastReceiver"

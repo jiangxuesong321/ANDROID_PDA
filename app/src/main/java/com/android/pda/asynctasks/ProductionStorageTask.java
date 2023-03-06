@@ -4,47 +4,42 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.android.pda.application.AndroidApplication;
+import com.android.pda.controllers.POStorageController;
 import com.android.pda.controllers.ProductionStorageController;
 import com.android.pda.controllers.UserController;
+import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.models.HttpResponse;
 import com.android.pda.models.ProductionStorageQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ProductionStorageTask extends AsyncTask<Void, Void, String> {
+import java.util.List;
+
+public class ProductionStorageTask extends AsyncTask<Void, Void, Object> {
 
     private static final AndroidApplication app = AndroidApplication.getInstance();
-    private static final UserController userController = app.getUserController();
+    private static final ProductionStorageController productionStorageController = app.getProductionStorageController();
+    private ProductionStorageQuery query;
 
     private OnTaskEventListener<String> mCallBack;
     private Context mContext;
-    private ProductionStorageQuery mQuery;
     public String error;
 
     public ProductionStorageTask(Context context, OnTaskEventListener callback, ProductionStorageQuery query) {
         mCallBack = callback;
         mContext = context;
-        mQuery = query;
+        this.query = query;
     }
 
     @Override
-    protected String doInBackground(Void... params) {
-        System.out.println("doInBackground--->");
+    protected Object doInBackground(Void... params) {
+
         try {
-            String materialDocumentYear = ProductionStorageController.getMaterialDocumentYear(mQuery);
-
-
-            HttpResponse httpResponse = null;
-//            httpResponse = ProductionStorageController.syncData(mQuery);
-            if (httpResponse != null) {
-                if (StringUtils.isEmpty(httpResponse.getError())) {
-                    return null;
-                } else {
-                    return httpResponse.getError();
-                }
+            List<MaterialDocument> materialDocumentList = productionStorageController.syncData(query);
+            if (materialDocumentList != null) {
+                return materialDocumentList;
             }
-            return null;
         } catch (Exception e) {
             e.printStackTrace();
             error = e.getMessage();
@@ -53,12 +48,13 @@ public class ProductionStorageTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Object o) {
         if (mCallBack != null) {
-            if (StringUtils.isEmpty(result)) {
+            if (StringUtils.isEmpty(error)) {
                 mCallBack.onSuccess(null);
+                mCallBack.bindModel(o);
             } else {
-                mCallBack.onFailure(result);
+                mCallBack.onFailure(error);
             }
         }
     }

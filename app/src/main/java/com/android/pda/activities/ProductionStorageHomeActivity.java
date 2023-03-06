@@ -13,8 +13,10 @@ import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.POStorageTask;
 import com.android.pda.asynctasks.ProductionStorageTask;
 import com.android.pda.controllers.ProductionStorageController;
+import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.models.POStorageQuery;
 import com.android.pda.models.ProductionStorage;
@@ -95,40 +97,38 @@ public class ProductionStorageHomeActivity extends AppCompatActivity implements 
         ProductionStorageQuery query = new ProductionStorageQuery(materialDocument);
         String error = productionStorageController.verifyQuery(query);
 
-        // 查询物料凭证参数对应 Document Year
-        getData();
-
+        // 查询物料凭证
         if (StringUtils.isEmpty(error)) {
-            // TODO: 暂无接口，后续修改
-            startActivityForResult(ProductionStorageResultActivity.createIntent(app, query), REQUESTCODE);
+            getData(materialDocument);
         } else {
             displayDialog(error, AppConstants.REQUEST_STAY, 1);
         }
     }
 
-    private void getData(){
+    private void getData(String materialDocument) {
         waitDialog.showWaitDialog(ProductionStorageHomeActivity.this);
+        ProductionStorageQuery query = new ProductionStorageQuery(materialDocument);
         ProductionStorageTask task = new ProductionStorageTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
             public void onSuccess(String result) {
-                waitDialog.hideWaitDialog(ProductionStorageHomeActivity.this);
             }
 
             @Override
             public void onFailure(String error) {
                 waitDialog.hideWaitDialog(ProductionStorageHomeActivity.this);
-                displayDialog(error, AppConstants.REQUEST_BACK, 1);
+                displayDialog(error, AppConstants.REQUEST_FAILED);
             }
 
             @Override
             public void bindModel(Object o) {
-                List<ProductionStorage> productionStorageList= (List<ProductionStorage>) o;
-                if(productionStorageList!= null && productionStorageList.size() > 0 ){
-                    list = productionStorageList;
-//                    initData();
+                // 查询参数校验（物料凭证）
+                List<MaterialDocument> materialDocumentList = (List<MaterialDocument>) o;
+                if (materialDocumentList != null && materialDocumentList.size() > 0) {
+                    startActivityForResult(ProductionStorageResultActivity.createIntent(app, materialDocumentList), 10000);
                 } else {
-                    displayDialog(app.getString(R.string.error_order_not_found), AppConstants.REQUEST_BACK , 1);
+                    displayDialog(getString(R.string.text_service_on_result), AppConstants.REQUEST_BACK);
                 }
+                waitDialog.hideWaitDialog(ProductionStorageHomeActivity.this);
             }
         }, query);
         task.execute();
@@ -165,5 +165,24 @@ public class ProductionStorageHomeActivity extends AppCompatActivity implements 
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void displayDialog(String message, int action) {
+        NoticeDialog noticeDialog = new NoticeDialog(this, message, 1);
+        noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
+            @Override
+            public void callOk() {
+
+            }
+
+            @Override
+            public void callClose() {
+                if (AppConstants.REQUEST_SUCCEED == action) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
+        noticeDialog.create();
     }
 }
