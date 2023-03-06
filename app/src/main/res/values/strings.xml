@@ -30,6 +30,8 @@
     <string name="sap_username">API_PDA_USER</string>
     <string name="sap_password">NqqetLojm@NvzjTfTiPcQqogJsvqLPdEG8Ktpmfq</string>
     <string name="sap_login_error">用户名或密码不正确，请检查</string>
+    <string name="sap_url_material_header">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="sap_url_material_item">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentItem</string>
 
 
 

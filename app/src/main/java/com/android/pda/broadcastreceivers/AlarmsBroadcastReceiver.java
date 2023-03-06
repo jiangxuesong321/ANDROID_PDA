@@ -32,8 +32,8 @@ public class AlarmsBroadcastReceiver extends BroadcastReceiver {
 			Bundle bundle = intent.getExtras();
 			int e_requestCode = bundle.getInt("RequestCode");
 			if (e_requestCode == AndroidApplication.REQUESTCODE_MATERIAL_SYNC) {
-				MasterTask task = new MasterTask(context, null);
-				task.execute();
+//				MasterTask task = new MasterTask(context, null);
+//				task.execute();
 				LogUtils.d(TAG, "AlarmsBroadcast Received...");
 			}
 		} catch (Exception e) {
