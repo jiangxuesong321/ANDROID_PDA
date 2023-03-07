@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
     /**
      * 配置 Adapter，绘制对应 FUNC 主菜单页面
+     *
      * @param funcList
      */
     public void initData(List<String> funcList) {
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
     /**
      * 菜单点击触发事件，跳转对应 Activity
+     *
      * @param parent
      * @param view
      * @param position
@@ -160,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
         switch (funcId) {
             case AppConstants.FUNCTION_ID_PO_STORAGE: // 采购入库
-                startActivity(POStorageHomeActivity.createIntent(getApplicationContext()));
+                startActivity(POStorageMainActivity.createIntent(getApplicationContext()));
                 break;
             case AppConstants.FUNCTION_ID_PROD_STORAGE: // 生产入库
                 startActivity(ProductionStorageHomeActivity.createIntent(getApplicationContext()));
@@ -170,15 +172,14 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
     /**
      * 主菜单界面退出登录
+     *
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         displayDialog(getString(R.string.text_confirm_logout), AppConstants.REQUEST_LOGOUT, 2);
-
         return super.onOptionsItemSelected(item);
-
     }
 
     public static Intent createIntent(Context context) {
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
     /**
      * 构建菜单样式 & 对应用户 ID 展示
+     *
      * @param menu
      * @return
      */
@@ -203,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
         TextView textView = view.findViewById(R.id.tv_user);
         //System.out.println("Id---->" +userController.getLoginUser().getUserId());
         Login loginInfo = loginController.getLoginUser();
-        if (loginInfo != null){
+        if (loginInfo != null) {
             textView.setText(loginInfo.getZuid());
         }
 //        if (userController.getLoginUser() != null) {
@@ -214,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
 
     /**
      * 更新 / 退出 / 暂存 Dialog
+     *
      * @param message
      * @param action
      * @param buttonCount

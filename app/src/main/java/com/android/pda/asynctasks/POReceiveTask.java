@@ -6,40 +6,43 @@ import android.os.AsyncTask;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.controllers.POStorageController;
 import com.android.pda.database.pojo.MaterialDocument;
+import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.listeners.OnTaskEventListener;
+import com.android.pda.models.POStorageQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class POStoragePostingTask extends AsyncTask<Void, Void, Object> {
+public class POReceiveTask extends AsyncTask<Void, Void, Object> {
 
     private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final POStorageController poStorageController = app.getPoStorageController();
-    private List<MaterialDocument> list;
+    private POStorageQuery query;
 
     private OnTaskEventListener<String> mCallBack;
     private Context mContext;
     public String error;
 
-    public POStoragePostingTask(Context context, OnTaskEventListener callback, List<MaterialDocument> materialDocument) {
+    public POReceiveTask(Context context, OnTaskEventListener callback, POStorageQuery query) {
         mCallBack = callback;
         mContext = context;
-        this.list = materialDocument;
+        this.query = query;
     }
 
     @Override
     protected Object doInBackground(Void... params) {
-        Map<String, String> materialDocumentInfo = new HashMap<>();
+
         try {
-            materialDocumentInfo = poStorageController.createMaterialDocument(list);
+            List<PurchaseOrder> PurchaseOrderList = poStorageController.syncPOData(query);
+            if (PurchaseOrderList != null) {
+                return PurchaseOrderList;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             error = e.getMessage();
         }
-        return materialDocumentInfo;
+        return null;
     }
 
     @Override
@@ -53,4 +56,5 @@ public class POStoragePostingTask extends AsyncTask<Void, Void, Object> {
             }
         }
     }
+
 }

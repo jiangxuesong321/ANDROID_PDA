@@ -5,8 +5,11 @@ import java.io.Serializable;
 public class POStorageQuery implements Serializable {
     String MaterialDocument;
 
-    public POStorageQuery(String materialDocument) {
+    String poNumber;
+
+    public POStorageQuery(String materialDocument, String poNumber) {
         MaterialDocument = materialDocument;
+        this.poNumber = poNumber;
     }
 
     public String getMaterialDocument() {
@@ -15,5 +18,13 @@ public class POStorageQuery implements Serializable {
 
     public void setMaterialDocument(String materialDocument) {
         MaterialDocument = materialDocument;
+    }
+
+    public String getPoNumber() {
+        return poNumber;
+    }
+
+    public void setPoNumber(String poNumber) {
+        this.poNumber = poNumber;
     }
 }

@@ -12,12 +12,14 @@ import android.widget.ListView;
 import com.android.pda.R;
 import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
+import com.android.pda.adapters.POReceiveResultAdapter;
 import com.android.pda.adapters.POStorageResultAdapter;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
 import com.android.pda.asynctasks.POStoragePostingTask;
 import com.android.pda.controllers.UserController;
 import com.android.pda.database.pojo.MaterialDocument;
+import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.database.pojo.User;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.utils.AppUtil;
@@ -34,8 +36,8 @@ import java.util.Map;
  */
 //public class POStorageResultActivity extends AppCompatActivity implements ActivityInitialization,
 //        POStorageResultAdapter.OnItemClickListener, POStorageResultAdapter.SplitCallback, DialogInput.InputCallback {
-public class POStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
-    private static final String INTENT_KEY_PO_STORAGE = "POStorage";
+public class POReceiveResultActivity extends AppCompatActivity implements ActivityInitialization {
+    private static final String INTENT_KEY_PO_RECEIVE = "POReceive";
     private static final String INTENT_KEY_ITEM = "Item";
     private static final String INTENT_KEY_DATA = "Data";
     private final static int REQUESTCODE = 10000;
@@ -48,13 +50,13 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
     private WaitDialog waitDialog;
     private User user;
 
-    private POStorageResultAdapter adapter;
-    private List<MaterialDocument> list = new ArrayList<>();
+    private POReceiveResultAdapter adapter;
+    private List<PurchaseOrder> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postorage_result);
+        setContentView(R.layout.activity_poreceice_result);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
 //        initIntent();
@@ -64,10 +66,10 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
         bindView();
     }
 
-    public static Intent createIntent(Context context, List<MaterialDocument> materialDocumentList) {
-        Intent intent = new Intent(context, POStorageResultActivity.class);
+    public static Intent createIntent(Context context, List<PurchaseOrder> poList) {
+        Intent intent = new Intent(context, POReceiveResultActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(INTENT_KEY_PO_STORAGE, (Serializable) materialDocumentList);
+        bundle.putSerializable(INTENT_KEY_PO_RECEIVE, (Serializable) poList);
         intent.putExtras(bundle);
         return intent;
     }
@@ -84,15 +86,14 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
 
     @Override
     public void initData() {
-        String materialDocument = AppUtil.getLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_MATERIAL_DOC_NUMBER);
-        etPONumber.setText(materialDocument);
+        String poNumber = AppUtil.getLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_PURCHASE_ORDER);
+        etPONumber.setText(poNumber);
         user = userController.getLoginUser();
-        List<MaterialDocument> materialDocumentList = (List<MaterialDocument>) this.getIntent().getSerializableExtra(INTENT_KEY_PO_STORAGE);
-        list = materialDocumentList;
-        MaterialDocument materialDocumentOne = materialDocumentList.get(0);
-        etVendor.setText(materialDocumentOne.getSupplier());
-        System.out.println("供应商为:" + materialDocumentOne.getSupplier());
-        adapter = new POStorageResultAdapter(getApplicationContext(), list);
+        List<PurchaseOrder> poList = (List<PurchaseOrder>) this.getIntent().getSerializableExtra(INTENT_KEY_PO_RECEIVE);
+        list = poList;
+        PurchaseOrder materialDocumentOne = poList.get(0);
+        etVendor.setText(materialDocumentOne.getSupplierMaterialNumber());
+        adapter = new POReceiveResultAdapter(getApplicationContext(), list);
 //        adapter.setClickListener(this);
 //        adapter.setSplitCallback(this);
 //        lvPOItem.setAdapter(adapter);
@@ -153,44 +154,44 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
     /**
      * 点击确认过账，开始创建物料凭证
      *
-     * @param view
+     * @param
      */
     public void confirm(View view) {
         System.out.println("需要过账的数据：" + list);
         //检查是否货位号都已经扫码
-        for (MaterialDocument materialDocument : list) {
-            if (StringUtils.isEmpty(materialDocument.getStorageBin())) {
-                displayDialog(getString(R.string.text_posting_error), AppConstants.REQUEST_BACK);
-                waitDialog.hideWaitDialog(POStorageResultActivity.this);
-                return;
-            }
-        }
-
-        POStoragePostingTask task = new POStoragePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
-            @Override
-            public void onSuccess(String result) {
-            }
-
-            @Override
-            public void onFailure(String error) {
-                waitDialog.hideWaitDialog(POStorageResultActivity.this);
-                displayDialog(error, AppConstants.REQUEST_FAILED);
-            }
-
-            @Override
-            public void bindModel(Object o) {
-                Map<String, String> materialDocumentInfo = (Map<String, String>) o;
-                // 查询参数校验（物料凭证）
-                if (StringUtils.isNotEmpty(materialDocumentInfo.get("materialDocument"))) {
-                    displayDialog(getString(R.string.text_to_material_doc_success) + materialDocumentInfo.get("materialDocument"), AppConstants.REQUEST_BACK);
-                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
-                } else {
-                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
-                }
-                waitDialog.hideWaitDialog(POStorageResultActivity.this);
-            }
-        }, list);
-        task.execute();
+//        for (PurchaseOrder purchaseOrder : list) {
+//            if (StringUtils.isEmpty(purchaseOrder.getStorageBin())) {
+//                displayDialog(getString(R.string.text_posting_error), AppConstants.REQUEST_BACK);
+//                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+//                return;
+//            }
+//        }
+//
+//        POStoragePostingTask task = new POStoragePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//            }
+//
+//            @Override
+//            public void onFailure(String error) {
+//                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+//                displayDialog(error, AppConstants.REQUEST_FAILED);
+//            }
+//
+//            @Override
+//            public void bindModel(Object o) {
+//                Map<String, String> materialDocumentInfo = (Map<String, String>) o;
+//                // 查询参数校验（物料凭证）
+//                if (StringUtils.isNotEmpty(materialDocumentInfo.get("materialDocument"))) {
+//                    displayDialog(getString(R.string.text_to_material_doc_success) + materialDocumentInfo.get("materialDocument"), AppConstants.REQUEST_BACK);
+//                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
+//                } else {
+//                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
+//                }
+//                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+//            }
+//        }, list);
+//        task.execute();
     }
 
     private void displayDialog(String message, int action) {

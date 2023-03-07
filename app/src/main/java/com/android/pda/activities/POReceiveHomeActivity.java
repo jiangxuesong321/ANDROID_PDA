@@ -13,9 +13,11 @@ import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.POReceiveTask;
 import com.android.pda.asynctasks.POStorageTask;
 import com.android.pda.controllers.POStorageController;
 import com.android.pda.database.pojo.MaterialDocument;
+import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.models.POStorageQuery;
 import com.android.pda.utils.AppUtil;
@@ -27,18 +29,18 @@ import java.util.List;
 /**
  * @description 采购入库初始页，查询凭证的界面
  */
-public class POStorageHomeActivity extends AppCompatActivity implements ActivityInitialization {
+public class POReceiveHomeActivity extends AppCompatActivity implements ActivityInitialization {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final POStorageController poStorageController = app.getPoStorageController();
 
-    private EditText etMaterialDocument;
+    private EditText etPoNumber;
     private final static int REQUESTCODE = 10001;
     private WaitDialog waitDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postorage_home);
+        setContentView(R.layout.activity_poreceive_home);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initIntent();
         initView();
@@ -47,14 +49,14 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
     }
 
     public static Intent createIntent(Context context) {
-        Intent intent = new Intent(context, POStorageHomeActivity.class);
+        Intent intent = new Intent(context, POReceiveHomeActivity.class);
         return intent;
     }
 
     // TODO: 初始化视图（视图控件对象获取）
     @Override
     public void initView() {
-        etMaterialDocument = findViewById(R.id.et_material_doc);
+        etPoNumber = findViewById(R.id.et_po_number);
         waitDialog = new WaitDialog();
     }
 
@@ -85,36 +87,36 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
      * @param view
      */
     public void confirm(View view) {
-        String materialDocument = etMaterialDocument.getText().toString();
+        String poNumber = etPoNumber.getText().toString();
         // TODO: SF 相关
-        AppUtil.saveLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_MATERIAL_DOC_NUMBER, materialDocument);
-        if (StringUtils.isEmpty(materialDocument)) {
-            displayDialog(app.getString(R.string.text_input_material_doc_num), AppConstants.REQUEST_STAY, 1);
+        AppUtil.saveLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_PURCHASE_ORDER, poNumber);
+        if (StringUtils.isEmpty(poNumber)) {
+            displayDialog(app.getString(R.string.text_input_po_num), AppConstants.REQUEST_STAY, 1);
             return;
         }
-        waitDialog.showWaitDialog(POStorageHomeActivity.this);
-        POStorageQuery query = new POStorageQuery(materialDocument,"");
-        POStorageTask task = new POStorageTask(getApplicationContext(), new OnTaskEventListener<String>() {
+        waitDialog.showWaitDialog(POReceiveHomeActivity.this);
+        POStorageQuery query = new POStorageQuery("",poNumber);
+        POReceiveTask task = new POReceiveTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
             public void onSuccess(String result) {
             }
 
             @Override
             public void onFailure(String error) {
-                waitDialog.hideWaitDialog(POStorageHomeActivity.this);
+                waitDialog.hideWaitDialog(POReceiveHomeActivity.this);
                 displayDialog(error, AppConstants.REQUEST_FAILED);
             }
 
             @Override
             public void bindModel(Object o) {
                 // 查询参数校验（物料凭证）
-                List<MaterialDocument> materialDocumentList = (List<MaterialDocument>) o;
-                if (materialDocumentList != null && materialDocumentList.size() > 0) {
-                    startActivityForResult(POStorageResultActivity.createIntent(app, materialDocumentList), 10000);
+                List<PurchaseOrder> poList = (List<PurchaseOrder>) o;
+                if (poList != null && poList.size() > 0) {
+                    startActivityForResult(POReceiveResultActivity.createIntent(app, poList), 10000);
                 } else {
                     displayDialog(getString(R.string.text_service_on_result), AppConstants.REQUEST_BACK);
                 }
-                waitDialog.hideWaitDialog(POStorageHomeActivity.this);
+                waitDialog.hideWaitDialog(POReceiveHomeActivity.this);
             }
         }, query);
         task.execute();

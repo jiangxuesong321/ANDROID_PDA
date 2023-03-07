@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.POStorageMainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        >
+
+        <Button
+            android:id="@+id/btn_checkSerial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@color/bg_colorSecondPrimary"
+            android:onClick="topostoragehome"
+            android:padding="8dp"
+            android:text="@string/text_po_title"
+            android:textColor="@color/text_colorSecondPrimary"
+            android:textSize="@dimen/text_size_btn">
+            >
+
+        </Button>
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@color/bg_colorSecondPrimary"
+            android:onClick="tomaterialstoragehome"
+            android:padding="8dp"
+            android:text="@string/text_material_title"
+            android:textColor="@color/text_colorSecondPrimary"
+            android:textSize="@dimen/text_size_btn">
+        </Button>
+
+    </LinearLayout>
+
+</RelativeLayout>

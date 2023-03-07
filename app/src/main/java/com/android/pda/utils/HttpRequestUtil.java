@@ -34,7 +34,7 @@ public class HttpRequestUtil {
 
     private final static AndroidApplication app = AndroidApplication.getInstance();
     static public OkHttpClient client;
-    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final MediaType JSON = MediaType.parse("application/json");
 
     static {
         client = new OkHttpClient.Builder().connectTimeout(180000L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
@@ -76,12 +76,12 @@ public class HttpRequestUtil {
             throw new AuthorizationException();
         }
 
-        String token = response.header("x-csrf-token");
-        String cookie = "";
-        String ifMatchValue = response.header("etag");
-        for (String header : response.headers("set-cookie")) {
-            cookie = cookie + header + ";";
-        }
+//        String token = response.header("x-csrf-token");
+//        String cookie = "";
+//        String ifMatchValue = response.header("etag");
+//        for (String header : response.headers("set-cookie")) {
+//            cookie = cookie + header + ";";
+//        }
 		/*if(response.headers("set-cookie").size() > 1){
 			cookie = response.headers("set-cookie").get(1);
 		}*/
@@ -95,15 +95,15 @@ public class HttpRequestUtil {
         }
         //System.out.println("result---->" + result);
         httpResponse = new HttpResponse(code, result);
-        if (!StringUtils.isEmpty(token)) {
-            httpResponse.setToken(token);
-        }
-        if (!StringUtils.isEmpty(cookie)) {
-            httpResponse.setCookie(cookie);
-        }
-        if (!StringUtils.isEmpty(ifMatchValue)) {
-            httpResponse.setIfMatchValue(ifMatchValue);
-        }
+//        if (!StringUtils.isEmpty(token)) {
+//            httpResponse.setToken(token);
+//        }
+//        if (!StringUtils.isEmpty(cookie)) {
+//            httpResponse.setCookie(cookie);
+//        }
+//        if (!StringUtils.isEmpty(ifMatchValue)) {
+//            httpResponse.setIfMatchValue(ifMatchValue);
+//        }
 
         return httpResponse;
     }
@@ -118,10 +118,11 @@ public class HttpRequestUtil {
         }
         builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
         builder.addHeader("Accept", "application/json");
+        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=z-AaD_kjABGxCcZev4Uh0Cksh2G77xHtvb4AFj4WEzw%3d; sap-usercontext=sap-client=100;");
         if (flag == HTTP_POST_METHOD) {
             try {
                 String csrfToken = getCsrfToken();
-                builder.addHeader("X-CSRF-TOKEN", csrfToken);
+                builder.addHeader("x-csrf-token", "yOZjyQH1VbGISgCcz2C_lQ==");
                 System.out.println("post 获取的token是:" + csrfToken);
             } catch (Exception e) {
                 LogUtils.e(TAG, "get csrfToken error" + e.getMessage());
@@ -169,6 +170,7 @@ public class HttpRequestUtil {
         Map<String, String> header = new HashMap<>();
         header.put("x-csrf-token", "fetch");
         header.put("Accept", "application/json");
+        header.put("Cookie", "SAP_SESSIONID_T9F_100=z-AaD_kjABGxCcZev4Uh0Cksh2G77xHtvb4AFj4WEzw%3d; sap-usercontext=sap-client=100;");
         String username = app.getOdataService().getUserName();
         String pwd = app.getOdataService().getPassword();
         if (username != null && pwd != null) {

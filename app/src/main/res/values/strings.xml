@@ -5,16 +5,31 @@
         <item>QAS</item>
     </string-array>
 
+    <string-array name="storage_locations">
+        <item></item>
+        <item>test01</item>
+        <item>test02</item>
+    </string-array>
+
     <!--采购入库-->
     <string name="title_po_storage">采购入库</string>
+    <string name="title_po_receive">采购收货</string>
+    <string name="title_po_shelving">入库上架</string>
     <string name="text_material_doc_num">物料凭证号</string>
     <string name="text_goods_bin">货位</string>
+    <string name="text_goods_bin_maturity_date">货架到期日</string>
     <string name="text_input_material_doc_num">请输入物料凭证号</string>
+    <string name="text_input_po_num">请输入采购订单号</string>
     <string name="text_po_number">采购订单号</string>
     <string name="text_vendor">供应商</string>
     <string name="text_operation">操作</string>
-    <string name="sap_url_material_doc_specific">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV//A_MaterialDocumentHeader</string>
-
+    <string name="sap_url_material_doc_specific">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="text_to_material_doc_error">过账失败，请检查</string>
+    <string name="text_to_material_doc_success">过账成功，物料凭证为:</string>
+    <string name="text_po_title">采购收货</string>
+    <string name="text_material_title">入库上架</string>
+    <string name="text_po_doc_num">采购订单号</string>
+    <string name="text_po_storage_location">存储地点</string>
     <!--生产入库-->
     <string name="title_production_storage">生产入库</string>
     <string name="text_plant">工厂</string>
@@ -33,6 +48,7 @@
     <string name="sap_url_material_header">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
     <string name="sap_url_material_item">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentItem</string>
     <string name="sap_url_material_create">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="sap_url_po_item">/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem</string>
     <string name="text_posting_error">请先扫描货位号再过账</string>
 
 

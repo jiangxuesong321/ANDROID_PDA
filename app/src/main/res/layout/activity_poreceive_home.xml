@@ -13,7 +13,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/text_material_doc_num"
+            android:text="@string/text_po_doc_num"
             android:textSize="@dimen/text_size_label_title" />
 
     <RelativeLayout
@@ -26,7 +26,7 @@
             android:layout_below="@id/tv_label_po_doc_num">
 
         <EditText
-                android:id="@+id/et_material_doc"
+                android:id="@+id/et_po_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
