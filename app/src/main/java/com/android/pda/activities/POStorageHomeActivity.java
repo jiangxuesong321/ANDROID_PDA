@@ -51,14 +51,12 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
         return intent;
     }
 
-    // TODO: 初始化视图（视图控件对象获取）
     @Override
     public void initView() {
         etMaterialDocument = findViewById(R.id.et_material_doc);
         waitDialog = new WaitDialog();
     }
 
-    // TODO: 初始化数据
     @Override
     public void initData() {
 
@@ -86,7 +84,7 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
      */
     public void confirm(View view) {
         String materialDocument = etMaterialDocument.getText().toString();
-        // TODO: SF 相关
+
         AppUtil.saveLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_MATERIAL_DOC_NUMBER, materialDocument);
         if (StringUtils.isEmpty(materialDocument)) {
             displayDialog(app.getString(R.string.text_input_material_doc_num), AppConstants.REQUEST_STAY, 1);

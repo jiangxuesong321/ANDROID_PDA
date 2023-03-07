@@ -36,6 +36,11 @@
     <string name="text_ori_location">源库存地点</string>
     <string name="text_to_location">目标库存地点</string>
 
+    <!--物料领用-->
+    <string name="title_material_picking">物料领用</string>
+    <string name="text_confirm_delete_all_material">确定删除所有物料吗？</string>
+    <string name="error_no_material_for_delete">尚未添加物料，无法删除</string>
+
     <string name="default_environment">Q</string>
     <!--<string name="default_environment">P</string>-->
     <string name="sap_url_host">https://my300472-api.saps4hanacloud.cn.p</string>
@@ -50,10 +55,6 @@
     <string name="sap_url_material_create">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
     <string name="sap_url_po_item">/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem</string>
     <string name="text_posting_error">请先扫描货位号再过账</string>
-
-
-
-
 
 
     <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>
@@ -101,7 +102,6 @@
 
     <string name="sap_url_po_gr">/sap/opu/odata/sap/ZCDS_PDA_PO_GR_DOWNLOAD_CDS/ZCDS_PDA_PO_GR_DOWNLOAD</string>
     <string name="sap_url_po_gr_post">sap/pda_po_gr</string>
-
 
 
     <!--Constants-->
@@ -153,12 +153,12 @@
     <string name="text_material">物料</string>
     <string name="text_material_label">物料标签</string>
     <string name="text_supplier">供应商</string>
-<!--    <string name="text_vendor">供应商</string>-->
+    <!--    <string name="text_vendor">供应商</string>-->
     <string name="text_delivery_number">送货单号</string>
-<!--    <string name="text_po_number">采购订单号</string>-->
+    <!--    <string name="text_po_number">采购订单号</string>-->
     <string name="text_sales_number">销售订单号</string>
     <string name="text_material_number">物料编码</string>
-<!--    <string name="text_plant">工厂</string>-->
+    <!--    <string name="text_plant">工厂</string>-->
     <string name="text_plant_desc">工厂描述</string>
     <string name="text_location">库存地点</string>
     <string name="text_location_desc">库存地点描述</string>
@@ -179,7 +179,7 @@
     <string name="text_create_date">创建日期</string>
     <string name="text_detail">详细</string>
     <string name="text_more">详情</string>
-<!--    <string name="text_operation">操作</string>-->
+    <!--    <string name="text_operation">操作</string>-->
     <string name="text_item">行号</string>
     <string name="text_unreceived_quantity">未收货</string>
     <string name="text_receipt_quantity">入库数量</string>

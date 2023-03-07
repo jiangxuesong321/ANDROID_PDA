@@ -27,6 +27,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+/**
+ * @description 生产入库主页面，物料凭证查询
+ */
 public class ProductionStorageHomeActivity extends AppCompatActivity implements ActivityInitialization {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final ProductionStorageController productionStorageController = app.getProductionStorageController();
@@ -55,14 +58,12 @@ public class ProductionStorageHomeActivity extends AppCompatActivity implements 
         return intent;
     }
 
-    // TODO: 初始化视图（视图控件对象获取）
     @Override
     public void initView() {
         waitDialog = new WaitDialog();
         etMaterialDocument = findViewById(R.id.et_material_doc);
     }
 
-    // TODO: 初始化数据
     @Override
     public void initData() {
 
@@ -90,7 +91,7 @@ public class ProductionStorageHomeActivity extends AppCompatActivity implements 
      */
     public void confirm(View view) {
         String materialDocument = etMaterialDocument.getText().toString();
-        // TODO: SF 相关
+
         AppUtil.saveLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_MATERIAL_DOC_NUMBER, materialDocument);
 
         // 查询参数校验（物料凭证）

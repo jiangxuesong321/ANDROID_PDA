@@ -167,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements ActivityInitializ
             case AppConstants.FUNCTION_ID_PROD_STORAGE: // 生产入库
                 startActivity(ProductionStorageHomeActivity.createIntent(getApplicationContext()));
                 break;
+            case AppConstants.FUNCTION_ID_MATERIAL_PICKING: // 物料领用
+                startActivity(MaterialPickingHomeActivity.createIntent(getApplicationContext()));
+                break;
         }
     }
 

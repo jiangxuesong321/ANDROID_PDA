@@ -17,15 +17,9 @@ import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.adapters.ProductionStorageResultAdapter;
 import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.application.AndroidApplication;
-import com.android.pda.application.AppConstants;
-import com.android.pda.asynctasks.ProductionStorageTask;
-import com.android.pda.controllers.ProductionStorageController;
 import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.StorageLocation;
-import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.log.LogUtils;
-import com.android.pda.models.POStorageQuery;
-import com.android.pda.models.ProductionStorage;
 import com.android.pda.models.ProductionStorageQuery;
 
 import org.apache.commons.lang3.StringUtils;
@@ -82,7 +76,7 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
 
     @Override
     public void initData() {
-        // TODO: 获取目标仓库地点
+        // TODO: 获取目标仓库地点，暂无对应 API
         // 填充 目标库存地点 Spinner
         storageLocations = new ArrayList<>();
         // 暂时使用模拟数据

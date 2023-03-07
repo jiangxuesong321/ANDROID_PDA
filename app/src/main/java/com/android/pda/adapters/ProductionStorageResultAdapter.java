@@ -141,7 +141,6 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
             if (holder.column6.hasFocus()) {
                 int position = (Integer) holder.column6.getTag();
                 objects.get(position).setStorageBin(s.toString().trim());
-                Log.d("Storage Bin", objects.get(position).getStorageBin());
             }
         }
     }

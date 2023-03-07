@@ -22,12 +22,14 @@ public class AppConstants {
 //    public static final String FUNCTION_ID_BASE_DATA = "00";
     //. 00 采购入库
     public static final String FUNCTION_ID_PO_STORAGE = "00";
-    //. 00 采购入库
+    //. 01 采购入库
     public static final String FUNCTION_ID_PROD_STORAGE = "01";
+    //. 02 物料领用
+    public static final String FUNCTION_ID_MATERIAL_PICKING = "02";
 //    //•	01 销售发货
 //    public static final String FUNCTION_ID_SALES_INVOICE = "01";
-    //•	02 采购收货
-    public static final String FUNCTION_ID_PURCHASE_ORDER = "02";
+//    //•	02 采购收货
+//    public static final String FUNCTION_ID_PURCHASE_ORDER = "02";
     //•	03 借出发货 --- 样机借用发货
     public static final String FUNCTION_ID_LEND = "03";
     //•	04 领料单发料 --- 材料领用

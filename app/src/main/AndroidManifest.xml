@@ -34,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.POStorageHomeActivity"
             android:exported="true"
@@ -69,6 +68,11 @@
             android:label="@string/title_production_storage"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
+        <activity
+                android:name=".activities.MaterialPickingHomeActivity"
+                android:label="@string/title_material_picking"
+                android:exported="true"
+                android:windowSoftInputMode="adjustPan|stateHidden"/>
         <receiver
             android:name=".broadcastreceivers.AlarmsBroadcastReceiver"
             android:enabled="true"
