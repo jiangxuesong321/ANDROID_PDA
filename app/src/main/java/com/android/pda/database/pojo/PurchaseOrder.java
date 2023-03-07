@@ -24,6 +24,29 @@ public class PurchaseOrder implements Serializable {
 
     String supplierMaterialNumber;
 
+    String companyCode;
+
+    String supplier;
+
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+
+
     public String getSupplierMaterialNumber() {
         return supplierMaterialNumber;
     }

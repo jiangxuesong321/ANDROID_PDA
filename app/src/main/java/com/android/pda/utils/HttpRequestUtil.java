@@ -118,11 +118,11 @@ public class HttpRequestUtil {
         }
         builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
         builder.addHeader("Accept", "application/json");
-        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=z-AaD_kjABGxCcZev4Uh0Cksh2G77xHtvb4AFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=4H9MMwt_-a1Z6L6syE2m3yL1rFG8txHtgqoAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         if (flag == HTTP_POST_METHOD) {
             try {
                 String csrfToken = getCsrfToken();
-                builder.addHeader("x-csrf-token", "yOZjyQH1VbGISgCcz2C_lQ==");
+                builder.addHeader("x-csrf-token", csrfToken);
                 System.out.println("post 获取的token是:" + csrfToken);
             } catch (Exception e) {
                 LogUtils.e(TAG, "get csrfToken error" + e.getMessage());
@@ -170,7 +170,7 @@ public class HttpRequestUtil {
         Map<String, String> header = new HashMap<>();
         header.put("x-csrf-token", "fetch");
         header.put("Accept", "application/json");
-        header.put("Cookie", "SAP_SESSIONID_T9F_100=z-AaD_kjABGxCcZev4Uh0Cksh2G77xHtvb4AFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        header.put("Cookie", "SAP_SESSIONID_T9F_100=4H9MMwt_-a1Z6L6syE2m3yL1rFG8txHtgqoAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         String username = app.getOdataService().getUserName();
         String pwd = app.getOdataService().getPassword();
         if (username != null && pwd != null) {

@@ -26,10 +26,13 @@
     <string name="sap_url_material_doc_specific">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
     <string name="text_to_material_doc_error">过账失败，请检查</string>
     <string name="text_to_material_doc_success">过账成功，物料凭证为:</string>
+    <string name="text_to_po_receive_create_success">采购订单收货成功，物料凭证为:</string>
     <string name="text_po_title">采购收货</string>
     <string name="text_material_title">入库上架</string>
     <string name="text_po_doc_num">采购订单号</string>
     <string name="text_po_storage_location">存储地点</string>
+    <string name="text_po_receive_sting_error">请先补充存储地点或数量再过账</string>
+    <string name="text_po_receive_post">收货过账</string>
     <!--生产入库-->
     <string name="title_production_storage">生产入库</string>
     <string name="text_plant">工厂</string>
@@ -53,6 +56,7 @@
     <string name="sap_url_material_header">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
     <string name="sap_url_material_item">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentItem</string>
     <string name="sap_url_material_create">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="sap_url_po_header">/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder</string>
     <string name="sap_url_po_item">/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem</string>
     <string name="text_posting_error">请先扫描货位号再过账</string>
 

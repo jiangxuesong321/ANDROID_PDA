@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.android.pda.R;
 import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.PurchaseOrder;
+import com.android.pda.database.pojo.StorageLocation;
 
 import java.util.List;
 
@@ -23,8 +25,10 @@ public class POReceiveResultAdapter extends BaseAdapter {
     private List<PurchaseOrder> objects;
     private Context context;
     private Spinner sp_dropdown;  //下拉列表展示
-    private String[] subjects;    // 环境下拉列表
+//    private String[] storageLocations;    // 环境下拉列表
     private Spinner etSpinner;
+    private List<StorageLocation> storageLocations;
+    private StorageLocationAdapter adapter;
     public POReceiveResultAdapter(Context context, List<PurchaseOrder> objects) {
         this.objects = objects;
         this.context = context;
@@ -58,10 +62,14 @@ public class POReceiveResultAdapter extends BaseAdapter {
             viewHolder.column5.setTag(position);
             viewHolder.column5.clearFocus();
             viewHolder.column5.addTextChangedListener(new Watcher(viewHolder));
+            viewHolder.column4.setTag(position);
+            viewHolder.column4.clearFocus();
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.column5.clearFocus();
             viewHolder.column5.setTag(position);
+            viewHolder.column4.clearFocus();
+            viewHolder.column4.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -90,7 +98,7 @@ public class POReceiveResultAdapter extends BaseAdapter {
         viewHolder.column1.setText(objects.get(position).getPurchaseOrderItem());
         viewHolder.column2.setText(objects.get(position).getMaterial());
         viewHolder.column3.setText(String.valueOf(objects.get(position).getDescription()));
-//        viewHolder.column4.setAdapter();
+//        viewHolder.column4.setAdapter(adapter);
         viewHolder.column5.setText(String.valueOf(objects.get(position).getOrderQuantity()));
         viewHolder.column4.setEnabled(true);
         viewHolder.column5.setEnabled(true);
@@ -108,12 +116,25 @@ public class POReceiveResultAdapter extends BaseAdapter {
 //            });
 //        }
 
-        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        viewHolder.column5.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     ((EditText) v).setSelection(0);
                 }
+            }
+        });
+
+        viewHolder.column4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String  storageLocation = adapterView.getSelectedItem().toString();
+                objects.get(position).setStorageLocation(storageLocation.toString().trim());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -177,5 +198,6 @@ public class POReceiveResultAdapter extends BaseAdapter {
             }
         }
     }
+
 
 }

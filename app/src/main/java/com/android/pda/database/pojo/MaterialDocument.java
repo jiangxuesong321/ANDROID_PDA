@@ -34,6 +34,8 @@ public class MaterialDocument implements Serializable {
 
     String storageBin;
 
+    String inventoryStockType;
+
     public MaterialDocument(String materialDocument, String materialDocumentYear, String plant, String storageLocation,
                             String materialDocumentItem, String material, String description, String batch,
                             String goodsMovementType, String supplier, String purchaseOrder, String quantityInEntryUnit,
@@ -53,6 +55,15 @@ public class MaterialDocument implements Serializable {
         this.entryUnit = entryUnit;
         this.storageBin = storageBin;
         this.PurchaseOrderItem = PurchaseOrderItem;
+        this.inventoryStockType = inventoryStockType;
+    }
+
+    public String getInventoryStockType() {
+        return inventoryStockType;
+    }
+
+    public void setInventoryStockType(String inventoryStockType) {
+        this.inventoryStockType = inventoryStockType;
     }
 
     public MaterialDocument() {

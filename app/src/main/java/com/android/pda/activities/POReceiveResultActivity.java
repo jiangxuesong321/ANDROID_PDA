@@ -13,13 +13,13 @@ import com.android.pda.R;
 import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.adapters.POReceiveResultAdapter;
-import com.android.pda.adapters.POStorageResultAdapter;
+import com.android.pda.adapters.StorageLocationAdapter;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
-import com.android.pda.asynctasks.POStoragePostingTask;
+import com.android.pda.asynctasks.POReceivePostingTask;
 import com.android.pda.controllers.UserController;
-import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.PurchaseOrder;
+import com.android.pda.database.pojo.StorageLocation;
 import com.android.pda.database.pojo.User;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.utils.AppUtil;
@@ -49,6 +49,9 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
     private EditText etVendor;
     private WaitDialog waitDialog;
     private User user;
+    private StorageLocationAdapter locationSpinnerAdapter;
+    private ListView lvStorageLocation;
+    private List<StorageLocation> storageLocations;
 
     private POReceiveResultAdapter adapter;
     private List<PurchaseOrder> list = new ArrayList<>();
@@ -84,6 +87,15 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
 //        lvPOItem.setDividerHeight(1);
     }
 
+    private void showStorageLocation() {
+//        storageLocations = storageLocationController.getStorageLocation();
+        locationSpinnerAdapter = new StorageLocationAdapter(getApplicationContext(), storageLocations);
+        //this.lvPurchase.setDivider(new ColorDrawable(getApplicationContext().getResources().getColor(R.color.colorDivider)));
+        this.lvStorageLocation.setDividerHeight(1);
+        this.lvStorageLocation.setAdapter(adapter);
+        //this.lvPurchase.setOnItemClickListener(this);
+    }
+
     @Override
     public void initData() {
         String poNumber = AppUtil.getLastInput(getApplicationContext(), AppUtil.PROPERTY_LAST_INPUT_PURCHASE_ORDER);
@@ -91,8 +103,8 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
         user = userController.getLoginUser();
         List<PurchaseOrder> poList = (List<PurchaseOrder>) this.getIntent().getSerializableExtra(INTENT_KEY_PO_RECEIVE);
         list = poList;
-        PurchaseOrder materialDocumentOne = poList.get(0);
-        etVendor.setText(materialDocumentOne.getSupplierMaterialNumber());
+        PurchaseOrder purchaseOrder = poList.get(0);
+        etVendor.setText(purchaseOrder.getSupplier());
         adapter = new POReceiveResultAdapter(getApplicationContext(), list);
 //        adapter.setClickListener(this);
 //        adapter.setSplitCallback(this);
@@ -117,20 +129,7 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
     }
 
     private void bindView() {
-//        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
-//                R.layout.li_spinner_adapter, storageLocations);
-//        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerLocation.setAdapter(locationSpinnerAdapter);
-//        if (offline != null) {
-//            //for offline
-//            int pos = storageLocationController.getStorageLocationPosition(offline.getReceiveLocation(), storageLocations);
-//            spinnerLocation.setSelection(pos);
-//            locationSpinnerAdapter.notifyDataSetChanged();
-////            lvMaterial = findViewById(R.id.lv_material);
-////            d66TestAdapter = new D66TestAdapter(getApplicationContext(), mList);
-////            this.lvMaterial.setDividerHeight(1);
-////            this.lvMaterial.setAdapter(d66TestAdapter);
-//        }
+
     }
 
     /**
@@ -152,46 +151,46 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
     }
 
     /**
-     * 点击确认过账，开始创建物料凭证
+     * 收货过账
      *
      * @param
      */
     public void confirm(View view) {
         System.out.println("需要过账的数据：" + list);
         //检查是否货位号都已经扫码
-//        for (PurchaseOrder purchaseOrder : list) {
-//            if (StringUtils.isEmpty(purchaseOrder.getStorageBin())) {
-//                displayDialog(getString(R.string.text_posting_error), AppConstants.REQUEST_BACK);
-//                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
-//                return;
-//            }
-//        }
-//
-//        POStoragePostingTask task = new POStoragePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//            }
-//
-//            @Override
-//            public void onFailure(String error) {
-//                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
-//                displayDialog(error, AppConstants.REQUEST_FAILED);
-//            }
-//
-//            @Override
-//            public void bindModel(Object o) {
-//                Map<String, String> materialDocumentInfo = (Map<String, String>) o;
-//                // 查询参数校验（物料凭证）
-//                if (StringUtils.isNotEmpty(materialDocumentInfo.get("materialDocument"))) {
-//                    displayDialog(getString(R.string.text_to_material_doc_success) + materialDocumentInfo.get("materialDocument"), AppConstants.REQUEST_BACK);
-//                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
-//                } else {
-//                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
-//                }
-//                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
-//            }
-//        }, list);
-//        task.execute();
+        for (PurchaseOrder purchaseOrder : list) {
+            if (StringUtils.isEmpty(purchaseOrder.getStorageLocation()) || StringUtils.isEmpty(purchaseOrder.getOrderQuantity())) {
+                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_BACK);
+                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+                return;
+            }
+        }
+
+        POReceivePostingTask task = new POReceivePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+            }
+
+            @Override
+            public void onFailure(String error) {
+                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+                displayDialog(error, AppConstants.REQUEST_FAILED);
+            }
+
+            @Override
+            public void bindModel(Object o) {
+                Map<String, String> POInfo = (Map<String, String>) o;
+                // 查询参数校验（物料凭证）
+                if (StringUtils.isNotEmpty(POInfo.get("purchaseOrder"))) {
+                    displayDialog(getString(R.string.text_to_po_receive_create_success) + POInfo.get("purchaseOrder"), AppConstants.REQUEST_BACK);
+                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
+                } else {
+                    displayDialog(getString(R.string.text_to_material_doc_error) + POInfo.get("error"), AppConstants.REQUEST_BACK);
+                }
+                waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+            }
+        }, list);
+        task.execute();
     }
 
     private void displayDialog(String message, int action) {
