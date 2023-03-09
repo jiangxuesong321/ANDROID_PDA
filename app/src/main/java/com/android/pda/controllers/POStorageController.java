@@ -307,7 +307,7 @@ public class POStorageController {
     }
 
     /**
-     * 获取物料凭证行项目列表
+     * 获取采购订单行项目列表
      *
      * @param purchaseOrderQuery
      * @return

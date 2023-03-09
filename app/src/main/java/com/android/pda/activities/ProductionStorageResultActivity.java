@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -17,8 +18,13 @@ import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.adapters.ProductionStorageResultAdapter;
 import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.application.AndroidApplication;
+import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.POReceivePostingTask;
+import com.android.pda.asynctasks.ProductionStoragePostingTask;
 import com.android.pda.database.pojo.MaterialDocument;
+import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.database.pojo.StorageLocation;
+import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.ProductionStorageQuery;
 import com.android.pda.utils.XmlUtils;
@@ -29,6 +35,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductionStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
@@ -135,6 +142,51 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
         }
     }
 
+    /**
+     * 收货过账
+     *
+     * @param
+     */
+    public void confirm(View view) {
+        //检查是否货位号都已经扫码
+        String targetStorageLocation = spToLocation.getSelectedItem().toString();
+        for (MaterialDocument materialDocument : list) {
+            materialDocument.setTargetStorageLocation(targetStorageLocation);
+            if (StringUtils.isEmpty(targetStorageLocation) || StringUtils.isEmpty(materialDocument.getStorageBin())) {
+                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_BACK);
+                waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
+                return;
+            }
+        }
+        waitDialog.showWaitDialog(ProductionStorageResultActivity.this);
+        ProductionStoragePostingTask task = new ProductionStoragePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+            }
+
+            @Override
+            public void onFailure(String error) {
+                waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
+                displayDialog(error, AppConstants.REQUEST_FAILED);
+            }
+
+            @Override
+            public void bindModel(Object o) {
+                Map<String, String> materialDocumentInfo = (Map<String, String>) o;
+                // 查询参数校验（物料凭证）
+                if (StringUtils.isNotEmpty(materialDocumentInfo.get("materialDocument"))) {
+                    displayDialog(getString(R.string.text_batch_char_value_update_success), AppConstants.REQUEST_BACK);
+//                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
+                } else {
+                    displayDialog(getString(R.string.text_batch_char_value_update_failed) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
+                }
+                waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
+
+            }
+        }, list);
+        task.execute();
+    }
+
     @Override
     public void initService() {
 
@@ -175,16 +227,20 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
         return super.onOptionsItemSelected(item);
     }
 
-    private void displayDialog(String message, int action, int buttonCount) {
-        NoticeDialog noticeDialog = new NoticeDialog(this, message, buttonCount);
-
+    private void displayDialog(String message, int action) {
+        NoticeDialog noticeDialog = new NoticeDialog(this, message, 1);
         noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
             @Override
             public void callOk() {
+
             }
 
             @Override
             public void callClose() {
+                if (AppConstants.REQUEST_BACK == action) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             }
         });
         noticeDialog.create();

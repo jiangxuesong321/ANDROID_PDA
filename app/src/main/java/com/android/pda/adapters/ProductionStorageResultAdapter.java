@@ -1,9 +1,11 @@
 package com.android.pda.adapters;
 
+
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.pda.R;
+import com.android.pda.activities.view.NoticeDialog;
+import com.android.pda.application.AppConstants;
 import com.android.pda.database.pojo.MaterialDocument;
 
 import java.util.List;
@@ -51,14 +55,18 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
             viewHolder.column4 = convertView.findViewById(R.id.tv_column4);
             viewHolder.column5 = convertView.findViewById(R.id.tv_column5);
             viewHolder.column6 = convertView.findViewById(R.id.et_column6);
+            viewHolder.column7 = convertView.findViewById(R.id.et_column7);
             convertView.setTag(viewHolder);
             viewHolder.column6.setTag(position);
             viewHolder.column6.clearFocus();
             viewHolder.column6.addTextChangedListener(new Watcher(viewHolder));
+            viewHolder.column7.setTag(position);
+            viewHolder.column7.clearFocus();
+            viewHolder.column7.addTextChangedListener(new Watcher(viewHolder));
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.column6.clearFocus();
-            viewHolder.column6.setTag(position);
+            viewHolder.column7.clearFocus();
+            viewHolder.column7.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -83,6 +91,14 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
                 }
             }
         });
+        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    ((EditText) v).setSelection(0);
+                }
+            }
+        });
 
 
         return convertView;
@@ -95,6 +111,7 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
         TextView column4;
         TextView column5;
         EditText column6;
+        EditText column7;
     }
 
     private OnItemClickListener itemClickListener;
@@ -142,7 +159,44 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
                 int position = (Integer) holder.column6.getTag();
                 objects.get(position).setStorageBin(s.toString().trim());
             }
+            if (holder.column7.hasFocus()) {
+                int position = (Integer) holder.column7.getTag();
+//                objects.get(position).setStorageBin(s.toString().trim());
+                // 创建对话框
+//                if (!s.toString().trim().equals(objects.get(position).getMaterial())) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                    builder.setTitle("警告");
+//                    builder.setMessage("您点击了列表项 " + position);
+//                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            // 点击对话框按钮时的处理
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                    builder.show();
+//                }
+            }
         }
     }
+
+//    private void displayDialog(String message, int action) {
+//        NoticeDialog noticeDialog = new NoticeDialog(context, message, 1);
+//        noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
+//            @Override
+//            public void callOk() {
+//
+//            }
+//
+//            @Override
+//            public void callClose() {
+//                if (AppConstants.REQUEST_BACK == action) {
+//                    dialog.dismiss();
+//                }
+//            }
+//        });
+//        noticeDialog.create();
+//    }
+
 
 }

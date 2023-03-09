@@ -190,6 +190,19 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/colorPrimary" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:text="@string/text_material"
+            android:textSize="@dimen/text_size_list_header"
+            android:background="@color/bg_colorFourthPrimary"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/colorPrimary" />
+
 
 <!--        <TextView-->
 <!--                android:layout_width="0dp"-->

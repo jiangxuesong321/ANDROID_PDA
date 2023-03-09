@@ -87,6 +87,19 @@
             android:imeOptions="actionDone"
             android:singleLine="false"
             android:textSize="@dimen/text_size_list" />
+        <EditText
+            android:id="@+id/et_column7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:singleLine="false"
+            android:textSize="@dimen/text_size_list" />
 
     </LinearLayout>
 </RelativeLayout>

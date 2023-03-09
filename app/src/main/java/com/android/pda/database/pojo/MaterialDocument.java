@@ -38,6 +38,8 @@ public class MaterialDocument implements Serializable {
 
     String goodsMovementRefDocType;
 
+    String targetStorageLocation;
+
     public MaterialDocument(String materialDocument, String materialDocumentYear, String plant, String storageLocation,
                             String materialDocumentItem, String material, String description, String batch,
                             String goodsMovementType, String supplier, String purchaseOrder, String quantityInEntryUnit,
@@ -62,6 +64,13 @@ public class MaterialDocument implements Serializable {
     }
 
 
+    public String getTargetStorageLocation() {
+        return targetStorageLocation;
+    }
+
+    public void setTargetStorageLocation(String targetStorageLocation) {
+        this.targetStorageLocation = targetStorageLocation;
+    }
 
     public String getGoodsMovementRefDocType() {
         return goodsMovementRefDocType;

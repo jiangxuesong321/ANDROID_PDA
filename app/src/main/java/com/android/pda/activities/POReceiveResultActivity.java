@@ -197,7 +197,6 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
      * @param
      */
     public void confirm(View view) {
-        System.out.println("需要过账的数据：" + list);
         //检查是否货位号都已经扫码
         for (PurchaseOrder purchaseOrder : list) {
             if (StringUtils.isEmpty(purchaseOrder.getStorageLocation()) || StringUtils.isEmpty(purchaseOrder.getOrderQuantity())) {
