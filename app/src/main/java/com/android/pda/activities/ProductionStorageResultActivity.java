@@ -21,18 +21,22 @@ import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.StorageLocation;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.ProductionStorageQuery;
+import com.android.pda.utils.XmlUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductionStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final String INTENT_KEY_PRODUCTION_STORAGE = "ProductionStorage";
 
     private Spinner spinnerLocation;
+    private SpinnerAdapter locationAdapter;
     private SpinnerAdapter locationSpinnerAdapter;
     private List<StorageLocation> storageLocations;
     private ProductionStorageResultAdapter adapter;
@@ -43,6 +47,7 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
     private ListView lvMaterialItem;
     private EditText etPlant;
     private EditText etOriLocation;
+    private Spinner spToLocation;
     private WaitDialog waitDialog;
 
     @Override
@@ -67,29 +72,16 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
 
     @Override
     public void initView() {
-        spinnerLocation = findViewById(R.id.sp_to_location);
+//        spinnerLocation = findViewById(R.id.sp_to_location);
         lvMaterialItem = findViewById(R.id.lv_material_item);
         etPlant = findViewById(R.id.et_plant);
         etOriLocation = findViewById(R.id.et_ori_location);
+        spToLocation = findViewById(R.id.sp_to_location);
         waitDialog = new WaitDialog();
     }
 
     @Override
     public void initData() {
-        // TODO: 获取目标仓库地点，暂无对应 API
-        // 填充 目标库存地点 Spinner
-        storageLocations = new ArrayList<>();
-        // 暂时使用模拟数据
-        storageLocations.add(new StorageLocation("1000", "1001", "瑞博生物", "大仓仓库"));
-        storageLocations.add(new StorageLocation("1000", "1002", "瑞博生物", "小仓仓库"));
-        storageLocations.add(0, new StorageLocation("", "", "", ""));
-
-        LogUtils.d("storageLocations", "storageLocations---->" + JSON.toJSONString(storageLocations));
-        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
-                R.layout.li_spinner_adapter, storageLocations);
-        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLocation.setAdapter(locationSpinnerAdapter);
-
         List<MaterialDocument> materialDocumentList = (List<MaterialDocument>) this.getIntent().getSerializableExtra(INTENT_KEY_PRODUCTION_STORAGE);
         list = materialDocumentList;
         ProductionStorageResultAdapter adapter = new ProductionStorageResultAdapter(getApplicationContext(), list);
@@ -105,6 +97,41 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
         if (StringUtils.isNotEmpty(materialDocumentList.get(0).getStorageLocation())) {
             etOriLocation.setText(materialDocumentList.get(0).getStorageLocation());
             Log.d("Current OriLocation: ", etOriLocation.getText().toString());
+        }
+
+        /*-- 配置 工厂 - 库存地点 数据源 --*/
+        storageLocations = new ArrayList<>();
+
+        InputStream inputStream = getResources().openRawResource(R.raw.storage_locations);
+
+        try {
+            storageLocations = XmlUtils.parse(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 工厂 - 库存地点 二级联动
+        String plantText = etPlant.getText().toString();
+        if (StringUtils.isNotEmpty(plantText)) {
+            List<StorageLocation> storageLocationArrayList = storageLocations;
+            List<StorageLocation> filteredList = storageLocationArrayList.stream()
+                    .filter(storageLocation -> storageLocation.getPlant().equals(plantText))
+                    .collect(Collectors.toList());
+            filteredList.add(0, new StorageLocation("", "", "", ""));
+
+            Log.d("filteredList", "filteredList---->" + JSON.toJSONString(filteredList));
+
+            if (locationAdapter == null) {
+                /*-- 配置 库存地点 Spinner 数据 --*/
+                locationAdapter = new SpinnerAdapter(getApplicationContext(),
+                        R.layout.li_spinner_adapter, filteredList);
+                locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spToLocation.setAdapter(locationAdapter);
+            } else {
+                locationAdapter.clear();
+                locationAdapter.addAll(filteredList);
+                locationAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -124,10 +151,10 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
     }
 
     private void bindView() {
-        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
-                R.layout.li_spinner_adapter, storageLocations);
-        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLocation.setAdapter(locationSpinnerAdapter);
+//        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
+//                R.layout.li_spinner_adapter, storageLocations);
+//        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerLocation.setAdapter(locationSpinnerAdapter);
     }
 
     /**

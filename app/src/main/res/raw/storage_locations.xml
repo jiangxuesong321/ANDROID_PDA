@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plants>
+    <!-- 1310 -->
+    <plant>
+        <id>1310</id>
+        <storagelocations>
+            <storagelocation>
+                <id>1001</id>
+                <storagelocationdesc>总仓 昆山 303 包材库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1002</id>
+                <storagelocationdesc>总仓 昆山 304 固体试剂</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1003</id>
+                <storagelocationdesc>总仓 昆山 305 冰箱2-8℃</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1004</id>
+                <storagelocationdesc>总仓 昆山 305 冰箱-20℃</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1005</id>
+                <storagelocationdesc>总仓 昆山 306 耗材库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1006</id>
+                <storagelocationdesc>总仓 昆山 307 留样库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1007</id>
+                <storagelocationdesc>总仓 昆山 308 GMP单体</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1008</id>
+                <storagelocationdesc>总仓 昆山 308 非GMP单体</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1009</id>
+                <storagelocationdesc>总仓 昆山 309 废品库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1010</id>
+                <storagelocationdesc>总仓 昆山 危险品库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1011</id>
+                <storagelocationdesc>总仓 昆山 剧毒品库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1012</id>
+                <storagelocationdesc>总仓 昆山 备品备件库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1013</id>
+                <storagelocationdesc>总仓 昆山 外仓</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1014</id>
+                <storagelocationdesc>总仓 昆山 车间仓库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1015</id>
+                <storagelocationdesc>部门仓 昆山 药理部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1016</id>
+                <storagelocationdesc>部门仓 昆山 药代-临床药理部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1017</id>
+                <storagelocationdesc>昆山外仓—柯乾</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1018</id>
+                <storagelocationdesc>昆山外仓—Almac</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1019</id>
+                <storagelocationdesc>昆山外仓—Ionis</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1020</id>
+                <storagelocationdesc>昆山外仓—AMP</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1021</id>
+                <storagelocationdesc>部门仓 昆山 药物化学和工艺研发</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1022</id>
+                <storagelocationdesc>部门仓 昆山 原料药开发和生产部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1023</id>
+                <storagelocationdesc>部门仓 昆山 制剂开发和生产部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1024</id>
+                <storagelocationdesc>部门仓 昆山 分析研发部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1025</id>
+                <storagelocationdesc>部门仓 昆山 药学项目管理部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1026</id>
+                <storagelocationdesc>昆山外仓—Avecia</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1027</id>
+                <storagelocationdesc>昆山外仓—Pyramid</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131A</id>
+                <storagelocationdesc>昆山外仓—凯莱英</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131B</id>
+                <storagelocationdesc>昆山外仓—健进制药</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131C</id>
+                <storagelocationdesc>昆山外仓—南京健友</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131E</id>
+                <storagelocationdesc>部门仓 昆山 核酸技术研究部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131F</id>
+                <storagelocationdesc>部门仓 昆山 核酸二部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131Q</id>
+                <storagelocationdesc>昆山外仓—威立特尔</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131R</id>
+                <storagelocationdesc>昆山外仓—上海泰锟</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131T</id>
+                <storagelocationdesc>昆山外仓—SciSafe</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131U</id>
+                <storagelocationdesc>昆山外仓—大田</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131V</id>
+                <storagelocationdesc>昆山外仓—生生</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>131W</id>
+                <storagelocationdesc>昆山外仓WorldCourier</storagelocationdesc>
+            </storagelocation>
+        </storagelocations>
+    </plant>
+
+    <!-- 1311 -->
+    <plant>
+        <id>1311</id>
+        <storagelocations>
+            <storagelocation>
+                <id>1101</id>
+                <storagelocationdesc>部门仓 大兴 生物实验室</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1102</id>
+                <storagelocationdesc>部门仓 大兴 生物冰箱2-8℃</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1103</id>
+                <storagelocationdesc>部门仓 大兴 生物冰箱-20℃</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1104</id>
+                <storagelocationdesc>部门仓 大兴 药化实验室</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1105</id>
+                <storagelocationdesc>部门仓 大兴 动物实验室</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1106</id>
+                <storagelocationdesc>总仓 大兴 低值耗材库</storagelocationdesc>
+            </storagelocation>
+        </storagelocations>
+    </plant>
+
+    <!-- 1320 -->
+
+    <plant>
+        <id>1320</id>
+        <storagelocations>
+            <storagelocation>
+                <id>2001</id>
+                <storagelocationdesc>瑞博开拓（预留）</storagelocationdesc>
+            </storagelocation>
+        </storagelocations>
+    </plant>
+
+    <!-- 1330 -->
+
+    <plant>
+        <id>1330</id>
+        <storagelocations>
+            <storagelocation>
+                <id>1301</id>
+                <storagelocationdesc>甲类库1-危化品</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1302</id>
+                <storagelocationdesc>固体试剂</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1303</id>
+                <storagelocationdesc>成品冷库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1304</id>
+                <storagelocationdesc>半成品冷库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1305</id>
+                <storagelocationdesc>原料冷库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1306</id>
+                <storagelocationdesc>易制毒库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1307</id>
+                <storagelocationdesc>耗材库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1308</id>
+                <storagelocationdesc>包材库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1309</id>
+                <storagelocationdesc>运输工具库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1310</id>
+                <storagelocationdesc>备品备件库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1311</id>
+                <storagelocationdesc>储罐1</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1312</id>
+                <storagelocationdesc>储罐2</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1313</id>
+                <storagelocationdesc>储罐3</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1314</id>
+                <storagelocationdesc>储罐4</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1315</id>
+                <storagelocationdesc>储罐5</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1316</id>
+                <storagelocationdesc>储罐6</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1317</id>
+                <storagelocationdesc>储罐7</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1318</id>
+                <storagelocationdesc>储罐8</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1319</id>
+                <storagelocationdesc>储罐9</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1320</id>
+                <storagelocationdesc>储罐10</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1321</id>
+                <storagelocationdesc>储罐11</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1322</id>
+                <storagelocationdesc>储罐12</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1323</id>
+                <storagelocationdesc>不良品仓库</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1324</id>
+                <storagelocationdesc>部门仓 生产部</storagelocationdesc>
+            </storagelocation>
+            <storagelocation>
+                <id>1325</id>
+                <storagelocationdesc>部门仓 研发部</storagelocationdesc>
+            </storagelocation>
+        </storagelocations>
+    </plant>
+</plants>

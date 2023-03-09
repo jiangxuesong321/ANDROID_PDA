@@ -32,13 +32,11 @@ public class POStorageMainActivity extends AppCompatActivity implements Activity
         return intent;
     }
 
-    // TODO: 初始化视图（视图控件对象获取）
     @Override
     public void initView() {
         waitDialog = new WaitDialog();
     }
 
-    // TODO: 初始化数据
     @Override
     public void initData() {
 

@@ -13,6 +13,22 @@ public class StorageLocation {
         this.storageLocationName = storageLocationName;
     }
 
+    public void setPlant(String plant) {
+        this.plant = plant;
+    }
+
+    public void setStorageLocation(String storageLocation) {
+        this.storageLocation = storageLocation;
+    }
+
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
+
+    public void setStorageLocationName(String storageLocationName) {
+        this.storageLocationName = storageLocationName;
+    }
+
     public String getPlant() {
         return plant;
     }
