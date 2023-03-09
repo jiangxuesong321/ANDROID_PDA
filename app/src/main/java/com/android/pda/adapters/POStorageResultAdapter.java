@@ -167,6 +167,7 @@ public class POStorageResultAdapter extends BaseAdapter {
         @Override
         public void afterTextChanged(Editable s) {
             if (holder.column6.hasFocus()) {
+                System.out.println("ddd"+s);
                 int position = (Integer) holder.column6.getTag();
                 objects.get(position).setStorageBin(s.toString().trim());
             }

@@ -91,7 +91,7 @@ public class POStorageHomeActivity extends AppCompatActivity implements Activity
             return;
         }
         waitDialog.showWaitDialog(POStorageHomeActivity.this);
-        POStorageQuery query = new POStorageQuery(materialDocument,"");
+        POStorageQuery query = new POStorageQuery(materialDocument, "");
         POStorageTask task = new POStorageTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
             public void onSuccess(String result) {

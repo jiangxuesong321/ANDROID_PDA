@@ -8,8 +8,6 @@ import com.android.pda.exceptions.GeneralException;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.HttpResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -118,7 +116,7 @@ public class HttpRequestUtil {
         }
         builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
         builder.addHeader("Accept", "application/json");
-        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=4H9MMwt_-a1Z6L6syE2m3yL1rFG8txHtgqoAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=0VHWg2Zy31DFBevZyEi8VlouzDe-NRHthzgAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         if (flag == HTTP_POST_METHOD) {
             try {
                 String csrfToken = getCsrfToken();
@@ -170,7 +168,8 @@ public class HttpRequestUtil {
         Map<String, String> header = new HashMap<>();
         header.put("x-csrf-token", "fetch");
         header.put("Accept", "application/json");
-        header.put("Cookie", "SAP_SESSIONID_T9F_100=4H9MMwt_-a1Z6L6syE2m3yL1rFG8txHtgqoAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        header.put("Connection", "keep-alive");
+        header.put("Cookie", "SAP_SESSIONID_T9F_100=0VHWg2Zy31DFBevZyEi8VlouzDe-NRHthzgAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         String username = app.getOdataService().getUserName();
         String pwd = app.getOdataService().getPassword();
         if (username != null && pwd != null) {
@@ -189,10 +188,59 @@ public class HttpRequestUtil {
         Call call = clientCookie.newCall(request);
         Response response = call.execute();
         int code = response.code();
+        String cookie = "";
+        for (String header1 : response.headers("set-cookie")) {
+            cookie = cookie + header1 + ";";
+        }
+        System.out.println("cookie" + cookie);
         if (response != null && response.headers() != null) {
             csrfToken = response.headers().get("x-csrf-token");
         }
 
+
         return csrfToken;
+    }
+
+    public Map<String, String> getIfMatch(String url) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        OkHttpClient clientCookie = new OkHttpClient.Builder().connectTimeout(1800L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
+                .readTimeout(1800L, TimeUnit.MILLISECONDS).build();
+        String urlString = url;
+        Map<String, String> header = new HashMap<>();
+        header.put("x-csrf-token", "fetch");
+        header.put("Accept", "application/json");
+        header.put("Connection", "keep-alive");
+        header.put("Cookie", "SAP_SESSIONID_T9F_100=0VHWg2Zy31DFBevZyEi8VlouzDe-NRHthzgAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        String username = app.getOdataService().getUserName();
+        String pwd = app.getOdataService().getPassword();
+        if (username != null && pwd != null) {
+            String credential = Credentials.basic(username, pwd);
+            header.put("Authorization", credential);
+        }
+        Request.Builder builder = new Request.Builder();
+        if (header != null) {
+            for (Map.Entry<String, String> entry : header.entrySet()) {
+                System.out.println(entry.getKey() + "---->" + entry.getValue());
+                builder.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        builder.url(urlString);
+        Request request = builder.get().build();
+        Call call = clientCookie.newCall(request);
+        Response response = call.execute();
+        int code = response.code();
+        if (code == 200) {
+            String cookie = "";
+            for (String header1 : response.headers("set-cookie")) {
+                cookie = cookie + header1 + ";";
+            }
+            System.out.println("cookie" + cookie);
+            if (response != null && response.headers() != null) {
+                map.put("x-csrf-token", response.headers().get("x-csrf-token"));
+                map.put("if-match", response.headers().get("etag"));
+            }
+
+        }
+        return map;
     }
 }

@@ -7,7 +7,7 @@
 
     <string-array name="storage_locations">
         <item></item>
-        <item>test01</item>
+        <item>1002</item>
         <item>test02</item>
     </string-array>
 
@@ -18,6 +18,7 @@
     <string name="text_material_doc_num">物料凭证号</string>
     <string name="text_goods_bin">货位</string>
     <string name="text_goods_bin_maturity_date">货架到期日</string>
+    <string name="text_goods_supplier_batch">供应商批次</string>
     <string name="text_input_material_doc_num">请输入物料凭证号</string>
     <string name="text_input_po_num">请输入采购订单号</string>
     <string name="text_po_number">采购订单号</string>
@@ -56,9 +57,18 @@
     <string name="sap_url_material_header">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
     <string name="sap_url_material_item">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentItem</string>
     <string name="sap_url_material_create">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/A_MaterialDocumentHeader</string>
+    <string name="sap_url_material_cancel">/sap/opu/odata/sap/API_MATERIAL_DOCUMENT_SRV/Cancel</string>
     <string name="sap_url_po_header">/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder</string>
     <string name="sap_url_po_item">/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem</string>
+    <string name="sap_url_batch_char_value_get">/sap/opu/odata/sap/API_BATCH_SRV/BatchCharcValue</string>
+    <string name="sap_url_supplier_update">/sap/opu/odata/sap/API_BATCH_SRV/Batch</string>
     <string name="text_posting_error">请先扫描货位号再过账</string>
+    <string name="text_batch_suppler_error">更新供应商批次失败，请检查</string>
+    <string name="text_batch_char_value_exist_error">货位已存在值，无法更新，请手动维护</string>
+    <string name="text_batch_char_value_update_success">上架完成，货位已更新</string>
+    <string name="text_batch_char_value_update_failed">货位更新失败，请检查</string>
+    <string name="text_batch_char_value_null">批次信息不存在，请检查</string>
+    <string name="text_url_get_error">请求访问失败，请检查</string>
 
 
     <string name="sap_url_permission">/sap/opu/odata/sap/ZCDS_UPERMISSION_CDS/ZCDS_UPERMISSION</string>

@@ -32,14 +32,14 @@ public class POStoragePostingTask extends AsyncTask<Void, Void, Object> {
 
     @Override
     protected Object doInBackground(Void... params) {
-        Map<String, String> materialDocumentInfo = new HashMap<>();
+        Map<String, String> updateInfo = new HashMap<>();
         try {
-            materialDocumentInfo = poStorageController.createMaterialDocument(list);
+            updateInfo = poStorageController.updateBatchCharcValue(list);
         } catch (Exception e) {
             e.printStackTrace();
             error = e.getMessage();
         }
-        return materialDocumentInfo;
+        return updateInfo;
     }
 
     @Override

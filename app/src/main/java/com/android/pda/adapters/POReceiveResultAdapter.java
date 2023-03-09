@@ -25,10 +25,12 @@ public class POReceiveResultAdapter extends BaseAdapter {
     private List<PurchaseOrder> objects;
     private Context context;
     private Spinner sp_dropdown;  //下拉列表展示
-//    private String[] storageLocations;    // 环境下拉列表
+    //    private String[] storageLocations;    // 环境下拉列表
     private Spinner etSpinner;
     private List<StorageLocation> storageLocations;
     private StorageLocationAdapter adapter;
+    private EditText tvColumn6;
+
     public POReceiveResultAdapter(Context context, List<PurchaseOrder> objects) {
         this.objects = objects;
         this.context = context;
@@ -57,19 +59,25 @@ public class POReceiveResultAdapter extends BaseAdapter {
             viewHolder.column3 = convertView.findViewById(R.id.tv_column3);
             viewHolder.column4 = convertView.findViewById(R.id.sp_column4);
             viewHolder.column5 = convertView.findViewById(R.id.et_column5);
-            viewHolder.column6 = convertView.findViewById(R.id.tv_column6);
+            viewHolder.column6 = convertView.findViewById(R.id.et_column6);
+            viewHolder.column7 = convertView.findViewById(R.id.et_column7);
             convertView.setTag(viewHolder);
             viewHolder.column5.setTag(position);
             viewHolder.column5.clearFocus();
             viewHolder.column5.addTextChangedListener(new Watcher(viewHolder));
             viewHolder.column4.setTag(position);
             viewHolder.column4.clearFocus();
+            viewHolder.column6.setTag(position);
+            viewHolder.column6.clearFocus();
+            viewHolder.column6.addTextChangedListener(new Watcher(viewHolder));
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.column5.clearFocus();
             viewHolder.column5.setTag(position);
             viewHolder.column4.clearFocus();
             viewHolder.column4.setTag(position);
+            viewHolder.column6.clearFocus();
+            viewHolder.column6.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -125,10 +133,19 @@ public class POReceiveResultAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    ((EditText) v).setSelection(0);
+                }
+            }
+        });
+
         viewHolder.column4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String  storageLocation = adapterView.getSelectedItem().toString();
+                String storageLocation = adapterView.getSelectedItem().toString();
                 objects.get(position).setStorageLocation(storageLocation.toString().trim());
             }
 
@@ -148,7 +165,8 @@ public class POReceiveResultAdapter extends BaseAdapter {
         TextView column3;
         Spinner column4;
         EditText column5;
-        TextView column6;
+        EditText column6;
+        EditText column7;
     }
 
     private OnItemClickListener itemClickListener;
@@ -195,6 +213,15 @@ public class POReceiveResultAdapter extends BaseAdapter {
             if (holder.column5.hasFocus()) {
                 int position = (Integer) holder.column5.getTag();
                 objects.get(position).setOrderQuantity(s.toString().trim());
+            }
+
+            if (holder.column6.hasFocus()) {
+                int position = (Integer) holder.column6.getTag();
+                objects.get(position).setSupplierBatch(s.toString().trim());
+            }
+            if (holder.column7.hasFocus()) {
+                int position = (Integer) holder.column7.getTag();
+                objects.get(position).setShelfLifeExpirationDate(s.toString().trim());
             }
         }
     }

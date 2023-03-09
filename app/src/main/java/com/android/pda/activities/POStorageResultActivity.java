@@ -58,7 +58,6 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
 //        initIntent();
-
 //        initListener();
         initData();
         bindView();
@@ -93,9 +92,6 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
         etVendor.setText(materialDocumentOne.getSupplier());
         System.out.println("供应商为:" + materialDocumentOne.getSupplier());
         adapter = new POStorageResultAdapter(getApplicationContext(), list);
-//        adapter.setClickListener(this);
-//        adapter.setSplitCallback(this);
-//        lvPOItem.setAdapter(adapter);
         this.lvPOItem.setDividerHeight(1);
         this.lvPOItem.setAdapter(adapter);
     }
@@ -116,20 +112,7 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
     }
 
     private void bindView() {
-//        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
-//                R.layout.li_spinner_adapter, storageLocations);
-//        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerLocation.setAdapter(locationSpinnerAdapter);
-//        if (offline != null) {
-//            //for offline
-//            int pos = storageLocationController.getStorageLocationPosition(offline.getReceiveLocation(), storageLocations);
-//            spinnerLocation.setSelection(pos);
-//            locationSpinnerAdapter.notifyDataSetChanged();
-////            lvMaterial = findViewById(R.id.lv_material);
-////            d66TestAdapter = new D66TestAdapter(getApplicationContext(), mList);
-////            this.lvMaterial.setDividerHeight(1);
-////            this.lvMaterial.setAdapter(d66TestAdapter);
-//        }
+
     }
 
     /**
@@ -165,7 +148,7 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
                 return;
             }
         }
-
+        waitDialog.showWaitDialog(POStorageResultActivity.this);
         POStoragePostingTask task = new POStoragePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
             public void onSuccess(String result) {
@@ -179,13 +162,13 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
 
             @Override
             public void bindModel(Object o) {
-                Map<String, String> materialDocumentInfo = (Map<String, String>) o;
+                Map<String, String> updateInfo = (Map<String, String>) o;
                 // 查询参数校验（物料凭证）
-                if (StringUtils.isNotEmpty(materialDocumentInfo.get("materialDocument"))) {
-                    displayDialog(getString(R.string.text_to_material_doc_success) + materialDocumentInfo.get("materialDocument"), AppConstants.REQUEST_BACK);
-                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
+                if (StringUtils.isNotEmpty(updateInfo.get("success"))) {
+                    displayDialog(updateInfo.get("success"), AppConstants.REQUEST_BACK);
+//                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
                 } else {
-                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
+                    displayDialog(updateInfo.get("error"), AppConstants.REQUEST_BACK);
                 }
                 waitDialog.hideWaitDialog(POStorageResultActivity.this);
             }
@@ -203,7 +186,7 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
 
             @Override
             public void callClose() {
-                if (AppConstants.REQUEST_SUCCEED == action) {
+                if (AppConstants.REQUEST_BACK == action) {
                     setResult(RESULT_OK);
                     finish();
                 }

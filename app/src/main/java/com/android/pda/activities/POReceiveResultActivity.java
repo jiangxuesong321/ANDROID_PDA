@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -47,11 +49,13 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
     private ListView lvPOItem;
     private EditText etPONumber;
     private EditText etVendor;
+    private EditText etPlant;
     private WaitDialog waitDialog;
     private User user;
     private StorageLocationAdapter locationSpinnerAdapter;
     private ListView lvStorageLocation;
     private List<StorageLocation> storageLocations;
+    private EditText etItemEndTime;
 
     private POReceiveResultAdapter adapter;
     private List<PurchaseOrder> list = new ArrayList<>();
@@ -60,6 +64,7 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poreceice_result);
+//        setContentView(R.layout.li_poreceive_result);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initView();
 //        initIntent();
@@ -83,7 +88,10 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
         lvPOItem = findViewById(R.id.lv_po_item);
         etPONumber = findViewById(R.id.et_po_number);
         etVendor = findViewById(R.id.et_vendor);
+        etPlant = findViewById(R.id.et_po_plant);
         waitDialog = new WaitDialog();
+//        etItemEndTime = findViewById(R.id.et_column6);
+//        hideSoftInput(etItemEndTime);
 //        lvPOItem.setDividerHeight(1);
     }
 
@@ -104,7 +112,9 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
         List<PurchaseOrder> poList = (List<PurchaseOrder>) this.getIntent().getSerializableExtra(INTENT_KEY_PO_RECEIVE);
         list = poList;
         PurchaseOrder purchaseOrder = poList.get(0);
+//        etPONumber.setText(purchaseOrder.getPurchaseOrder());
         etVendor.setText(purchaseOrder.getSupplier());
+        etPlant.setText(purchaseOrder.getPlant());
         adapter = new POReceiveResultAdapter(getApplicationContext(), list);
 //        adapter.setClickListener(this);
 //        adapter.setSplitCallback(this);
@@ -120,7 +130,38 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
 
     @Override
     public void initListener() {
-
+//        etItemEndTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                // TODO Auto-generated method stub
+//                if(hasFocus){
+//                    showDatePickerDialog(1);
+//                }
+//            }
+//        });
+//        etItemEndTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                showDatePickerDialog(1);
+//            }
+//        });
+//        etItemEndTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                // TODO Auto-generated method stub
+//                if(hasFocus){
+//                    showDatePickerDialog(2);
+//                }
+//            }
+//        });
+//        etItemEndTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                showDatePickerDialog(2);
+//            }
+//        });
     }
 
     @Override
@@ -165,7 +206,7 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
                 return;
             }
         }
-
+        waitDialog.showWaitDialog(POReceiveResultActivity.this);
         POReceivePostingTask task = new POReceivePostingTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
             public void onSuccess(String result) {
@@ -179,15 +220,16 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
 
             @Override
             public void bindModel(Object o) {
-                Map<String, String> POInfo = (Map<String, String>) o;
+                Map<String, String> materialDocumentInfo = (Map<String, String>) o;
                 // 查询参数校验（物料凭证）
-                if (StringUtils.isNotEmpty(POInfo.get("purchaseOrder"))) {
-                    displayDialog(getString(R.string.text_to_po_receive_create_success) + POInfo.get("purchaseOrder"), AppConstants.REQUEST_BACK);
-                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
+                if (StringUtils.isNotEmpty(materialDocumentInfo.get("materialDocument"))) {
+                    displayDialog(getString(R.string.text_to_po_receive_create_success) + materialDocumentInfo.get("materialDocument"), AppConstants.REQUEST_BACK);
+//                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
                 } else {
-                    displayDialog(getString(R.string.text_to_material_doc_error) + POInfo.get("error"), AppConstants.REQUEST_BACK);
+                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
                 }
                 waitDialog.hideWaitDialog(POReceiveResultActivity.this);
+
             }
         }, list);
         task.execute();
@@ -203,12 +245,18 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
 
             @Override
             public void callClose() {
-                if (AppConstants.REQUEST_SUCCEED == action) {
+                if (AppConstants.REQUEST_BACK == action) {
                     setResult(RESULT_OK);
                     finish();
                 }
             }
         });
         noticeDialog.create();
+    }
+
+    private void hideSoftInput(EditText editText){
+        editText.setInputType(InputType.TYPE_NULL);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(),0);
     }
 }

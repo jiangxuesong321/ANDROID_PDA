@@ -41,7 +41,7 @@
         <activity
             android:name=".activities.POStorageMainActivity"
             android:exported="true"
-            android:label="@string/title_po_shelving" />
+            android:label="@string/title_po_storage" />
         <activity
             android:name=".activities.POStorageResultActivity"
             android:exported="true"

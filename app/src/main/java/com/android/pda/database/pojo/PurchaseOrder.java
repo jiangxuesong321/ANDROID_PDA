@@ -28,6 +28,25 @@ public class PurchaseOrder implements Serializable {
 
     String supplier;
 
+    String supplierBatch;
+
+    String shelfLifeExpirationDate;
+
+    public String getShelfLifeExpirationDate() {
+        return shelfLifeExpirationDate;
+    }
+
+    public void setShelfLifeExpirationDate(String shelfLifeExpirationDate) {
+        this.shelfLifeExpirationDate = shelfLifeExpirationDate;
+    }
+
+    public String getSupplierBatch() {
+        return supplierBatch;
+    }
+
+    public void setSupplierBatch(String supplierBatch) {
+        this.supplierBatch = supplierBatch;
+    }
 
     public String getCompanyCode() {
         return companyCode;

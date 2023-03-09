@@ -12,6 +12,8 @@ import com.android.pda.models.HttpResponse;
 import com.android.pda.models.POStorageQuery;
 import com.android.pda.utils.HttpRequestUtil;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,12 @@ public class POStorageController {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final LoginController loginController = app.getLoginController();
 
+    /**
+     * 获取物料凭证行项目信息
+     *
+     * @param query
+     * @return
+     */
     public List<MaterialDocument> syncData(POStorageQuery query) throws Exception {
         List<MaterialDocument> materialDocumentList = new ArrayList<>();
         MaterialDocument materialDocumentHeader = getMaterialDocumentHeader(query);
@@ -33,6 +41,12 @@ public class POStorageController {
         return materialDocumentList;
     }
 
+    /**
+     * 获取采购订单行项目信息
+     *
+     * @param query
+     * @return
+     */
     public List<PurchaseOrder> syncPOData(POStorageQuery query) throws Exception {
         List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
 
@@ -103,7 +117,14 @@ public class POStorageController {
                     materialDocument.setMaterialDocument(objectMaterialDocument.getString("MaterialDocument"));
                     materialDocument.setMaterialDocumentItem(objectMaterialDocument.getString("MaterialDocumentItem"));
                     materialDocument.setBatch(objectMaterialDocument.getString("Batch"));
-                    materialDocument.setDescription("");
+                    if (objectMaterialDocument.getString("PurchaseOrder") != null) {
+                        PurchaseOrder purchaseOrder = new PurchaseOrder();
+                        purchaseOrder.setPurchaseOrder(objectMaterialDocument.getString("PurchaseOrder"));
+                        List<PurchaseOrder> purchaseOrderList = getPOItemList(purchaseOrder);
+                        if (purchaseOrderList.size() > 0) {
+                            materialDocument.setDescription(purchaseOrderList.get(0).getDescription());
+                        }
+                    }
                     materialDocument.setInventoryStockType(objectMaterialDocument.getString("InventoryStockType"));
                     materialDocument.setPlant(objectMaterialDocument.getString("Plant"));
                     materialDocument.setStorageLocation(objectMaterialDocument.getString("StorageLocation"));
@@ -113,6 +134,7 @@ public class POStorageController {
                     materialDocument.setEntryUnit(objectMaterialDocument.getString("EntryUnit"));
                     materialDocument.setQuantityInEntryUnit(objectMaterialDocument.getString("QuantityInEntryUnit"));
                     materialDocument.setSupplier(objectMaterialDocument.getString("Supplier"));
+                    materialDocument.setGoodsMovementRefDocType(objectMaterialDocument.getString("GoodsMovementRefDocType"));
                     materialDocumentItem.add(materialDocument);
                 }
             }
@@ -124,61 +146,129 @@ public class POStorageController {
     }
 
     /**
-     * 获取物料凭证行项目列表
+     * 更新批次特性值货位信息
      *
      * @param list
      * @return
      */
-
-    public Map<String, String> createMaterialDocument(List<MaterialDocument> list) {
+    public Map<String, String> updateBatchCharcValue(List<MaterialDocument> list) {
         Map<String, String> result = new HashMap<>();
         HttpRequestUtil httpUtil = new HttpRequestUtil();
+        JSONObject param = new JSONObject();
         try {
-            String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_create);
-            Login loginInfo = loginController.getLoginUser();
-            JSONObject param = new JSONObject();
-//            param.put("CreatedByUser", "CB9980000012"); //loginInfo.getZuid());
-            param.put("GoodsMovementCode", "02");
-            JSONArray jaItem = new JSONArray();
-            for (MaterialDocument materialDocument : list) {
-                JSONObject objectItem = new JSONObject();
-                objectItem.put("Material", materialDocument.getMaterial());
-                objectItem.put("MaterialDocument", materialDocument.getMaterialDocument());
-                objectItem.put("MaterialDocumentItem", materialDocument.getMaterialDocumentItem());
-                objectItem.put("Plant", materialDocument.getPlant());
-                objectItem.put("StorageLocation", materialDocument.getStorageLocation());
-                objectItem.put("Batch", materialDocument.getBatch());
-                objectItem.put("Supplier", materialDocument.getSupplier());
-                objectItem.put("PurchaseOrder", materialDocument.getPurchaseOrder());
-                objectItem.put("PurchaseOrderItem", materialDocument.getPurchaseOrderItem());
-                objectItem.put("QuantityInEntryUnit", materialDocument.getQuantityInEntryUnit());
-                objectItem.put("EntryUnit", materialDocument.getEntryUnit());
-                objectItem.put("GoodsMovementType", "101");
-                objectItem.put("InventoryStockType",materialDocument.getInventoryStockType());
-                jaItem.add(objectItem);
-            }
-            param.put("to_MaterialDocumentItem", jaItem);
-            System.out.println("post json" + param.toJSONString());
-            String paramJson = param.toString();
-            HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, paramJson, null);
+            MaterialDocument materialDocument = list.get(0);
+            String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get) +
+                    "?$format=json&$filter=Batch eq '" + materialDocument.getBatch() + "'";
+            String paramJson = "{}";
+            HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, paramJson, null);
             if (httpResponseItem != null && httpResponseItem.getCode() == 200) {
                 JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
                 JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
                 JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                if (JaResults.size() > 0) {
+                    JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
+                    if (StringUtils.isEmpty(jsonObject.getString("CharcValue"))) {
+                        param.put("Material", jsonObject.getString("Material"));
+                        param.put("Batch", jsonObject.getString("Batch"));
+                        param.put("CharcInternalID", jsonObject.getString("CharcInternalID"));
+                        param.put("CharcValuePositionNumber", jsonObject.getString("CharcValuePositionNumber"));
+                        param.put("CharcValueDependency", jsonObject.getString("CharcValueDependency"));
+                        param.put("CharcValue", materialDocument.getStorageBin());
+                        //开始修改批次的特征值货位的信息
+                        String updateUrl = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get);
+                        HttpResponse httpResponseUpdate = httpUtil.callHttp(updateUrl, HttpRequestUtil.HTTP_POST_METHOD, param.toString(), null);
+                        if (httpResponseUpdate != null && (httpResponseUpdate.getCode() == 200 || httpResponseUpdate.getCode() == 201)) {
+                            result.put("success", app.getString(R.string.text_batch_char_value_update_success));
+                            return result;
+                        } else {
+                            result.put("error", app.getString(R.string.text_batch_char_value_update_failed));
+                            return result;
+                        }
+                    } else {
+                        result.put("error", app.getString(R.string.text_batch_char_value_exist_error));
+                        return result;
+                    }
+                } else {
+                    param.put("Material", materialDocument.getMaterial());
+                    param.put("Batch", materialDocument.getBatch());
+                    param.put("CharcInternalID", "4");
+                    param.put("CharcValuePositionNumber", "2");
+                    param.put("CharcValueDependency", "1");
+                    param.put("CharcValue", materialDocument.getStorageBin());
+                    //开始修改批次的特征值货位的信息
+                    String updateUrl = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get);
+                    HttpResponse httpResponseUpdate = httpUtil.callHttp(updateUrl, HttpRequestUtil.HTTP_POST_METHOD, param.toString(), null);
+                    if (httpResponseUpdate != null && (httpResponseUpdate.getCode() == 200 || httpResponseUpdate.getCode() == 201)) {
+                        result.put("success", app.getString(R.string.text_batch_char_value_update_success));
+                        return result;
+                    } else {
+                        result.put("error", app.getString(R.string.text_batch_char_value_update_failed));
+                        return result;
+                    }
+                }
             } else {
-                result.put("materialDocument", "");
-                JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
-                JSONObject jsonError = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("error")));
-                JSONObject jsonMessage = JSONObject.parseObject(JSONObject.toJSONString(jsonError.get("message")));
-                result.put("error", jsonMessage.getString("value"));
+                result.put("error", app.getString(R.string.text_url_get_error));
+                return result;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e(TAG, "function createMaterialDocument failed:" + e);
+            LogUtils.e(TAG, "function updateBatchCharcValue failed:" + e);
+            result.put("error", app.getString(R.string.text_url_get_error));
         }
-
         return result;
     }
+//    public Map<String, String> createMaterialDocument(List<MaterialDocument> list) {
+//        Map<String, String> result = new HashMap<>();
+//        HttpRequestUtil httpUtil = new HttpRequestUtil();
+//        try {
+//            String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_create);
+//            Login loginInfo = loginController.getLoginUser();
+//            JSONObject param = new JSONObject();
+//            long time = System.currentTimeMillis();
+//            String nowDate = "/Date(" + time + ")/";
+////            param.put("CreatedByUser", "dlw004"); //loginInfo.getZuid());
+//            param.put("GoodsMovementCode", "01");
+//            param.put("DocumentDate", nowDate);
+//            param.put("PostingDate", nowDate);
+//            JSONArray jaItem = new JSONArray();
+//            for (MaterialDocument materialDocument : list) {
+//                JSONObject objectItem = new JSONObject();
+//                objectItem.put("Material", materialDocument.getMaterial());
+//                objectItem.put("Plant", materialDocument.getPlant());
+//                objectItem.put("StorageLocation", materialDocument.getStorageBin());
+//                objectItem.put("Batch", materialDocument.getBatch());
+//                objectItem.put("Supplier", materialDocument.getSupplier());
+//                objectItem.put("PurchaseOrder", materialDocument.getPurchaseOrder());
+//                objectItem.put("PurchaseOrderItem", materialDocument.getPurchaseOrderItem());
+//                objectItem.put("QuantityInEntryUnit", materialDocument.getQuantityInEntryUnit());
+//                objectItem.put("EntryUnit", materialDocument.getEntryUnit());
+//                objectItem.put("GoodsMovementType", "101");
+//                objectItem.put("GoodsMovementRefDocType", materialDocument.getGoodsMovementRefDocType());
+//                objectItem.put("IsCompletelyDelivered", true);
+//                jaItem.add(objectItem);
+//            }
+//            param.put("to_MaterialDocumentItem", jaItem);
+//            System.out.println("post json" + param.toJSONString());
+//            String paramJson = param.toString();
+//            HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, paramJson, null);
+//            if (httpResponseItem != null && httpResponseItem.getCode() == 200) {
+//                JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
+//                JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+//                result.put("materialDocument", jsonD.getString("MaterialDocument"));
+//            } else {
+//                result.put("materialDocument", "");
+//                JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
+//                JSONObject jsonError = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("error")));
+//                JSONObject jsonMessage = JSONObject.parseObject(JSONObject.toJSONString(jsonError.get("message")));
+//                result.put("error", jsonMessage.getString("value"));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            LogUtils.e(TAG, "function createMaterialDocument failed:" + e);
+//        }
+//
+//        return result;
+//    }
 
     /**
      * 获取物料凭证抬头信息
@@ -215,6 +305,7 @@ public class POStorageController {
         }
         return poHeader;
     }
+
     /**
      * 获取物料凭证行项目列表
      *
@@ -243,7 +334,8 @@ public class POStorageController {
                     purchaseOrder.setDescription(objectPo.getString("PurchaseOrderItemText"));
                     purchaseOrder.setPlant(objectPo.getString("Plant"));
                     purchaseOrder.setStorageLocation(objectPo.getString("StorageLocation"));
-                    purchaseOrder.setOrderQuantity(objectPo.getString("OrderQuantity"));
+//                    purchaseOrder.setOrderQuantity(objectPo.getString("OrderQuantity"));
+                    purchaseOrder.setOrderQuantity("");
                     purchaseOrder.setPurchaseOrderQuantityUnit(objectPo.getString("PurchaseOrderQuantityUnit"));
                     purchaseOrder.setSupplierMaterialNumber(objectPo.getString("SupplierMaterialNumber"));
                     purchaseOrder.setSupplier(purchaseOrderQuery.getSupplier());
@@ -259,7 +351,7 @@ public class POStorageController {
     }
 
     /**
-     * 获取物料凭证行项目列表
+     * 采购收货创建物料凭证
      *
      * @param list
      * @return
@@ -272,34 +364,73 @@ public class POStorageController {
             String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_create);
             Login loginInfo = loginController.getLoginUser();
             JSONObject param = new JSONObject();
-//            param.put("CreatedByUser", "CB9980000012"); //loginInfo.getZuid());
+            long time = System.currentTimeMillis();
+            String nowDate = "/Date(" + time + ")/";
+//            param.put("CreatedByUser", "dlw004"); //loginInfo.getZuid());
             param.put("GoodsMovementCode", "01");
+            param.put("DocumentDate", nowDate);
+            param.put("PostingDate", nowDate);
             JSONArray jaItem = new JSONArray();
             for (PurchaseOrder purchaseOrder : list) {
                 JSONObject objectItem = new JSONObject();
                 objectItem.put("Material", purchaseOrder.getMaterial());
-//                objectItem.put("MaterialDocument", materialDocument.getMaterialDocument());
-//                objectItem.put("MaterialDocumentItem", materialDocument.getMaterialDocumentItem());
                 objectItem.put("Plant", purchaseOrder.getPlant());
                 objectItem.put("StorageLocation", purchaseOrder.getStorageLocation());
                 objectItem.put("Batch", purchaseOrder.getBatch());
                 objectItem.put("Supplier", purchaseOrder.getSupplier());
+//                objectItem.put("SupplierBatch", "1111");//purchaseOrder.getSupplierBatch());
                 objectItem.put("PurchaseOrder", purchaseOrder.getPurchaseOrder());
                 objectItem.put("PurchaseOrderItem", purchaseOrder.getPurchaseOrderItem());
-                objectItem.put("OrderQuantity", "2");//purchaseOrder.getOrderQuantity());
-//                objectItem.put("PurchaseOrderQuantityUnit", "KG"); //purchaseOrder.getPurchaseOrderQuantityUnit());
-//                objectItem.put("GoodsMovementType", "101");
-//                objectItem.put("InventoryStockType",materialDocument.getInventoryStockType());
+                objectItem.put("QuantityInEntryUnit", purchaseOrder.getOrderQuantity());
+                objectItem.put("EntryUnit", purchaseOrder.getPurchaseOrderQuantityUnit());
+                objectItem.put("GoodsMovementType", "101");
+                objectItem.put("IsCompletelyDelivered", true);
+                objectItem.put("ShelfLifeExpirationDate", "/Date(1688821378000)/");
+                objectItem.put("GoodsMovementRefDocType", "B");
                 jaItem.add(objectItem);
             }
             param.put("to_MaterialDocumentItem", jaItem);
             System.out.println("post json" + param.toJSONString());
             String paramJson = param.toString();
             HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, paramJson, null);
-            if (httpResponseItem != null && httpResponseItem.getCode() == 200) {
+            if (httpResponseItem != null && (httpResponseItem.getCode() == 200 || httpResponseItem.getCode() == 201)) {
                 JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
                 JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
-                JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                if (jsonD != null) {
+                    result.put("materialDocument", jsonD.getString("MaterialDocument"));
+                    //开始更新批次的供应商批次信息
+                    if (StringUtils.isNotEmpty(jsonD.getString("MaterialDocument"))) {
+                        MaterialDocument query = new MaterialDocument();
+                        query.setMaterialDocument(jsonD.getString("MaterialDocument"));
+                        query.setMaterialDocumentYear(jsonD.getString("MaterialDocumentYear"));
+                        List<MaterialDocument> mdList = getMaterialDocumentItemList(query);
+                        PurchaseOrder poInfo = list.get(0);
+                        String urlSupplier = app.getOdataService().getHost() + app.getString(R.string.sap_url_supplier_update) +
+                                "(Material='" + poInfo.getMaterial() + "',BatchIdentifyingPlant='',Batch='" + mdList.get(0).getBatch() + "')";
+                        Map<String, String> map = httpUtil.getIfMatch(urlSupplier);
+                        JSONObject paramUpdate = new JSONObject();
+                        JSONObject paramUpdateD = new JSONObject();
+                        paramUpdate.put("Supplier", poInfo.getSupplier());
+                        paramUpdate.put("BatchBySupplier", poInfo.getSupplierBatch());
+                        paramUpdate.put("BatchIsMarkedForDeletion", true);
+                        paramUpdate.put("MatlBatchIsInRstrcdUseStock", true);
+                        paramUpdateD.put("d", paramUpdate);
+                        HttpResponse httpResponseSupplier = httpUtil.callHttp(urlSupplier, HttpRequestUtil.HTTP_PATCH_METHOD, paramUpdateD.toString(), map);
+                        if (httpResponseSupplier.getCode() != 204) {
+                            result.put("materialDocument", "");
+                            result.put("error", app.getString(R.string.text_batch_suppler_error));
+                            //回滚操作，取消创建的物料凭证
+                            String urlCancel = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_cancel) +
+                                    "?MaterialDocumentYear='" + jsonD.getString("MaterialDocumentYear") + "'&MaterialDocument='" + jsonD.getString("MaterialDocument") + "'";
+                            HttpResponse httpResponseCancel = httpUtil.callHttp(urlCancel, HttpRequestUtil.HTTP_POST_METHOD, "{}", null);
+                            if (httpResponseCancel.getCode() != 200) {
+                                LogUtils.e(TAG, "回滚物料凭证失败：" + jsonD.getString("MaterialDocument"));
+                            }
+                        }else{
+                            LogUtils.i(TAG,"采购收货过账凭证:" + jsonD.getString("MaterialDocument"));
+                        }
+                    }
+                }
             } else {
                 result.put("materialDocument", "");
                 JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
@@ -307,8 +438,10 @@ public class POStorageController {
                 JSONObject jsonMessage = JSONObject.parseObject(JSONObject.toJSONString(jsonError.get("message")));
                 result.put("error", jsonMessage.getString("value"));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+            result.put("materialDocument", "");
             LogUtils.e(TAG, "function createMaterialDocument failed:" + e);
         }
 

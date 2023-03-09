@@ -9,7 +9,7 @@
     <dimen name="text_size_subtitle">16sp</dimen>
     <dimen name="text_size_label_title">15sp</dimen>
     <dimen name="text_size_label_text">14sp</dimen>
-    <dimen name="text_size_list_header">14sp</dimen>
+    <dimen name="text_size_list_header">13sp</dimen>
     <dimen name="text_size_list">13sp</dimen>
 
 </resources>
