@@ -1,6 +1,8 @@
 package com.android.pda.database.pojo;
 
-public class StorageLocation {
+import java.io.Serializable;
+
+public class StorageLocation implements Serializable {
     private String plant;
     private String storageLocation;
     private String plantName;

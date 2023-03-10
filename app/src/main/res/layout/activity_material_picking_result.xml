@@ -30,7 +30,6 @@
                 android:id="@+id/et_plant"
                 android:layout_width="0dp"
                 android:layout_weight="5"
-                android:text="1000"
                 android:enabled="false"
                 android:layout_height="wrap_content" />
     </LinearLayout>
@@ -60,7 +59,6 @@
                 android:id="@+id/et_ori_location"
                 android:layout_width="0dp"
                 android:layout_weight="5"
-                android:text="1001 生产实验室"
                 android:enabled="false"
                 android:layout_height="wrap_content" />
     </LinearLayout>
@@ -87,13 +85,12 @@
                 android:textSize="@dimen/text_size_label_title" />
 
 
-        <Spinner
-                android:id="@+id/sp_to_location"
+        <EditText
+                android:id="@+id/et_to_location"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-8dp"
-                android:layout_marginEnd="-8dp"
-                android:layout_weight="4" />
+                android:layout_weight="5"
+                android:enabled="false"
+                android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -32,6 +33,8 @@ import java.util.List;
 public class MaterialPickingResultActivity extends AppCompatActivity implements ActivityInitialization {
 
     private static final String INTENT_KEY_MATERIAL_PICKING = "MaterialPicking";
+    private static final String INTENT_KEY_ORI_LOCATION = "OriLocation";
+    private static final String INTENT_KEY_TO_LOCATION = "ToLocation";
 
     private Spinner spinnerLocation;
     private SpinnerAdapter locationSpinnerAdapter;
@@ -44,6 +47,7 @@ public class MaterialPickingResultActivity extends AppCompatActivity implements 
     private ListView lvMaterialItem;
     private EditText etPlant;
     private EditText etOriLocation;
+    private EditText etToLocation;
     private WaitDialog waitDialog;
 
     @Override
@@ -57,38 +61,33 @@ public class MaterialPickingResultActivity extends AppCompatActivity implements 
         initData();
     }
 
-    public static Intent createIntent(Context context, List<Material> materialList) {
+    public static Intent createIntent(Context context, List<Material> materialList, StorageLocation oriLocation, StorageLocation toLocation) {
         Intent intent = new Intent(context, MaterialPickingResultActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(INTENT_KEY_MATERIAL_PICKING, (Serializable) materialList);
+        bundle.putSerializable(INTENT_KEY_ORI_LOCATION, (Serializable) oriLocation);
+        bundle.putSerializable(INTENT_KEY_TO_LOCATION, (Serializable) toLocation);
         intent.putExtras(bundle);
         return intent;
     }
 
     @Override
     public void initView() {
-        spinnerLocation = findViewById(R.id.sp_to_location);
         lvMaterialItem = findViewById(R.id.lv_material_item);
         etPlant = findViewById(R.id.et_plant);
         etOriLocation = findViewById(R.id.et_ori_location);
+        etToLocation = findViewById(R.id.et_to_location);
         waitDialog = new WaitDialog();
     }
 
     @Override
     public void initData() {
-        // TODO: 获取目标仓库地点，暂无对应 API
-        // 填充 目标库存地点 Spinner
-        storageLocations = new ArrayList<>();
-        // 暂时使用模拟数据
-        storageLocations.add(new StorageLocation("1000", "1001", "瑞博生物", "大仓仓库"));
-        storageLocations.add(new StorageLocation("1000", "1002", "瑞博生物", "小仓仓库"));
-        storageLocations.add(0, new StorageLocation("", "", "", ""));
-
-        LogUtils.d("storageLocations", "storageLocations---->" + JSON.toJSONString(storageLocations));
-        locationSpinnerAdapter = new SpinnerAdapter(getApplicationContext(),
-                R.layout.li_spinner_adapter, storageLocations);
-        locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLocation.setAdapter(locationSpinnerAdapter);
+        // 展示携带的数据
+        StorageLocation oriLocation = (StorageLocation) this.getIntent().getSerializableExtra(INTENT_KEY_ORI_LOCATION);
+        etPlant.setText(oriLocation.getPlant());
+        etOriLocation.setText(oriLocation.getStorageLocation());
+        StorageLocation toLocation = (StorageLocation) this.getIntent().getSerializableExtra(INTENT_KEY_TO_LOCATION);
+        etToLocation.setText(toLocation.getStorageLocation());
     }
 
     @Override
@@ -104,5 +103,23 @@ public class MaterialPickingResultActivity extends AppCompatActivity implements 
     @Override
     public void initIntent() {
 
+    }
+
+    /**
+     * Rewrite onOptionsItemSelected 实现返回按钮功能
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

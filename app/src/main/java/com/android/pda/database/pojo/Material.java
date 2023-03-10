@@ -1,6 +1,8 @@
 package com.android.pda.database.pojo;
 
-public class Material {
+import java.io.Serializable;
+
+public class Material implements Serializable {
     private String material;
     private String materialName;
     private String unit;

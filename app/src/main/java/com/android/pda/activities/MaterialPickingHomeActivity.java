@@ -177,7 +177,8 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // do nothing
+                spOriLocation.setSelection(0);
+                spToLocation.setSelection(0);
             }
         });
 
@@ -332,7 +333,26 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
      */
     public void confirm(View view) {
         // TODO: 添加的物料编码有效性检查
+        StorageLocation oriLocation = (StorageLocation) spOriLocation.getSelectedItem();
+        StorageLocation toLocation = (StorageLocation) spToLocation.getSelectedItem();
 
-        startActivityForResult(MaterialPickingResultActivity.createIntent(app, materialList), 10000);
+        if (oriLocation != null && toLocation != null) {
+            // 配置传递参数
+            Log.d("MaterialList--->", JSON.toJSONString(materialList));
+            Log.d("oriLocation--->", JSON.toJSONString(oriLocation));
+            Log.d("toLocation--->", JSON.toJSONString(toLocation));
+
+            // 跳转前做非空校验
+            // 校验文本原因：每一个 Spinner 中都配置了一行空白行（默认显示）
+            if (StringUtils.isNotEmpty(oriLocation.getPlant()) && StringUtils.isNotEmpty(oriLocation.getStorageLocation()) && StringUtils.isNotEmpty(toLocation.getStorageLocation()) && materialList != null && materialList.size() > 0) {
+                startActivityForResult(MaterialPickingResultActivity.createIntent(app, materialList, oriLocation, toLocation), 10000);
+            } else {
+                displayDialog("请填写所有信息，并添加物料行项目", AppConstants.REQUEST_FAILED);
+            }
+        } else {
+            displayDialog("请填写所有信息，并添加物料行项目", AppConstants.REQUEST_FAILED);
+        }
+
+
     }
 }
