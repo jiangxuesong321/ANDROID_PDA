@@ -116,7 +116,7 @@ public class HttpRequestUtil {
         }
         builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
         builder.addHeader("Accept", "application/json");
-        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=0VHWg2Zy31DFBevZyEi8VlouzDe-NRHthzgAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=a4u7z-qbE8ueg2dcX8SHJ7Nb5MW-5BHtg6kAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         if (flag == HTTP_POST_METHOD) {
             try {
                 String csrfToken = getCsrfToken();
@@ -169,7 +169,7 @@ public class HttpRequestUtil {
         header.put("x-csrf-token", "fetch");
         header.put("Accept", "application/json");
         header.put("Connection", "keep-alive");
-        header.put("Cookie", "SAP_SESSIONID_T9F_100=0VHWg2Zy31DFBevZyEi8VlouzDe-NRHthzgAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        header.put("Cookie", "SAP_SESSIONID_T9F_100=a4u7z-qbE8ueg2dcX8SHJ7Nb5MW-5BHtg6kAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         String username = app.getOdataService().getUserName();
         String pwd = app.getOdataService().getPassword();
         if (username != null && pwd != null) {
@@ -210,7 +210,7 @@ public class HttpRequestUtil {
         header.put("x-csrf-token", "fetch");
         header.put("Accept", "application/json");
         header.put("Connection", "keep-alive");
-        header.put("Cookie", "SAP_SESSIONID_T9F_100=0VHWg2Zy31DFBevZyEi8VlouzDe-NRHthzgAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        header.put("Cookie", "SAP_SESSIONID_T9F_100=a4u7z-qbE8ueg2dcX8SHJ7Nb5MW-5BHtg6kAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         String username = app.getOdataService().getUserName();
         String pwd = app.getOdataService().getPassword();
         if (username != null && pwd != null) {

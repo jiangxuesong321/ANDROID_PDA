@@ -2,8 +2,8 @@ package com.android.pda.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,13 +19,10 @@ import com.android.pda.adapters.ProductionStorageResultAdapter;
 import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
-import com.android.pda.asynctasks.POReceivePostingTask;
 import com.android.pda.asynctasks.ProductionStoragePostingTask;
 import com.android.pda.database.pojo.MaterialDocument;
-import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.database.pojo.StorageLocation;
 import com.android.pda.listeners.OnTaskEventListener;
-import com.android.pda.log.LogUtils;
 import com.android.pda.models.ProductionStorageQuery;
 import com.android.pda.utils.XmlUtils;
 
@@ -149,7 +146,9 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
      */
     public void confirm(View view) {
         //检查是否货位号都已经扫码
-        String targetStorageLocation = spToLocation.getSelectedItem().toString();
+        StorageLocation storageLocation = (StorageLocation) spToLocation.getSelectedItem();
+        String targetStorageLocation = storageLocation.getStorageLocation();
+//        String targetStorageLocation = spToLocation.getSelectedItem().toString();
         for (MaterialDocument materialDocument : list) {
             materialDocument.setTargetStorageLocation(targetStorageLocation);
             if (StringUtils.isEmpty(targetStorageLocation) || StringUtils.isEmpty(materialDocument.getStorageBin())) {

@@ -207,17 +207,15 @@ public class ProductionStorageController {
                 objectItem.put("Material", materialDocument.getMaterial());
                 objectItem.put("Plant", materialDocument.getPlant());
                 objectItem.put("StorageLocation", materialDocument.getStorageLocation());
-                objectItem.put("IssuingOrReceivingStorageLoc", materialDocument.getTargetStorageLocation());
                 objectItem.put("Batch", materialDocument.getBatch());
-//                objectItem.put("Supplier", purchaseOrder.getSupplier());
-//                objectItem.put("SupplierBatch", "1111");//purchaseOrder.getSupplierBatch());
-                objectItem.put("PurchaseOrder", materialDocument.getPurchaseOrder());
-                objectItem.put("PurchaseOrderItem", materialDocument.getPurchaseOrderItem());
-                objectItem.put("QuantityInEntryUnit", materialDocument.getQuantityInEntryUnit());
+                objectItem.put("QuantityInEntryUnit", "1");//materialDocument.getQuantityInEntryUnit());
                 objectItem.put("EntryUnit", materialDocument.getEntryUnit());
                 objectItem.put("GoodsMovementType", "311");
                 objectItem.put("IsCompletelyDelivered", true);
-                objectItem.put("GoodsMovementRefDocType", "B");
+                objectItem.put("IssgOrRcvgBatch", materialDocument.getBatch());
+                objectItem.put("IssgOrRcvgMaterial", materialDocument.getMaterial());
+                objectItem.put("IssuingOrReceivingPlant", materialDocument.getPlant());
+                objectItem.put("IssuingOrReceivingStorageLoc", materialDocument.getTargetStorageLocation());
                 jaItem.add(objectItem);
             }
             param.put("to_MaterialDocumentItem", jaItem);
