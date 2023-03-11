@@ -1,12 +1,15 @@
 package com.android.pda.utils;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.exceptions.AuthorizationException;
 import com.android.pda.exceptions.GeneralException;
 import com.android.pda.log.LogUtils;
 import com.android.pda.models.HttpResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -74,12 +77,12 @@ public class HttpRequestUtil {
             throw new AuthorizationException();
         }
 
-//        String token = response.header("x-csrf-token");
-//        String cookie = "";
+        String token = response.header("x-csrf-token");
+        String cookie = "";
 //        String ifMatchValue = response.header("etag");
-//        for (String header : response.headers("set-cookie")) {
-//            cookie = cookie + header + ";";
-//        }
+        for (String header : response.headers("set-cookie")) {
+            cookie = cookie + header + ";";
+        }
 		/*if(response.headers("set-cookie").size() > 1){
 			cookie = response.headers("set-cookie").get(1);
 		}*/
@@ -93,12 +96,12 @@ public class HttpRequestUtil {
         }
         //System.out.println("result---->" + result);
         httpResponse = new HttpResponse(code, result);
-//        if (!StringUtils.isEmpty(token)) {
-//            httpResponse.setToken(token);
-//        }
-//        if (!StringUtils.isEmpty(cookie)) {
-//            httpResponse.setCookie(cookie);
-//        }
+        if (!StringUtils.isEmpty(token)) {
+            httpResponse.setToken(token);
+        }
+        if (!StringUtils.isEmpty(cookie)) {
+            httpResponse.setCookie(cookie);
+        }
 //        if (!StringUtils.isEmpty(ifMatchValue)) {
 //            httpResponse.setIfMatchValue(ifMatchValue);
 //        }
@@ -116,17 +119,30 @@ public class HttpRequestUtil {
         }
         builder.addHeader(CONTENT_TYPE, CONTENT_TYPE_VALUE);
         builder.addHeader("Accept", "application/json");
-        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=a4u7z-qbE8ueg2dcX8SHJ7Nb5MW-5BHtg6kAFj4WEzw%3d; sap-usercontext=sap-client=100;");
-        if (flag == HTTP_POST_METHOD) {
-            try {
-                String csrfToken = getCsrfToken();
-                builder.addHeader("x-csrf-token", csrfToken);
-                System.out.println("post 获取的token是:" + csrfToken);
-            } catch (Exception e) {
-                LogUtils.e(TAG, "get csrfToken error" + e.getMessage());
-                e.printStackTrace();
-            }
+//        builder.addHeader("Cookie", "SAP_SESSIONID_T9F_100=a4u7z-qbE8ueg2dcX8SHJ7Nb5MW-5BHtg6kAFj4WEzw%3d; sap-usercontext=sap-client=100;");
+        Map<String, String> CookieMap = new HashMap<>();
+        try {
+            CookieMap = getCookie();
+        } catch (Exception e) {
+            LogUtils.d(TAG, "获取cookie信息失败:" + e);
         }
+//		builder.addHeader("Cookie", "SAP_SESSIONID_D66_200=Wxj1Hvid23pwzDTULMFMik0oM9esDRHtkXYADCmArRw%3d;");
+        if (headers == null || !headers.containsKey("Cookie")) {
+            builder.addHeader("Cookie", CookieMap.get("Cookie"));
+        }
+        if (flag == HTTP_POST_METHOD) {
+            builder.addHeader("x-csrf-token", CookieMap.get("x-csrf-token"));
+        }
+//        if (flag == HTTP_POST_METHOD) {
+//            try {
+//                String csrfToken = getCsrfToken();
+//                builder.addHeader("x-csrf-token", csrfToken);
+//                System.out.println("post 获取的token是:" + csrfToken);
+//            } catch (Exception e) {
+//                LogUtils.e(TAG, "get csrfToken error" + e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
         if (headers != null) {
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 System.out.println(entry.getKey() + "---->" + entry.getValue());
@@ -169,7 +185,6 @@ public class HttpRequestUtil {
         header.put("x-csrf-token", "fetch");
         header.put("Accept", "application/json");
         header.put("Connection", "keep-alive");
-        header.put("Cookie", "SAP_SESSIONID_T9F_100=a4u7z-qbE8ueg2dcX8SHJ7Nb5MW-5BHtg6kAFj4WEzw%3d; sap-usercontext=sap-client=100;");
         String username = app.getOdataService().getUserName();
         String pwd = app.getOdataService().getPassword();
         if (username != null && pwd != null) {
@@ -201,7 +216,48 @@ public class HttpRequestUtil {
         return csrfToken;
     }
 
-    public Map<String, String> getIfMatch(String url) throws Exception {
+    public Map<String, String> getCookie() throws Exception {
+        OkHttpClient clientCookie = new OkHttpClient.Builder().connectTimeout(1800L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
+                .readTimeout(1800L, TimeUnit.MILLISECONDS).build();
+        String urlString = app.getOdataService().getHost() + app.getString(R.string.sap_url_login);
+        Map<String, String> header = new HashMap<>();
+        header.put("x-csrf-token", "fetch");
+        header.put("Accept", "application/json");
+        String username = app.getOdataService().getUserName();
+        String pwd = app.getOdataService().getPassword();
+        String credential = Credentials.basic(username, pwd);
+        header.put("Authorization", credential);
+        Request.Builder builder = new Request.Builder();
+        if (header != null) {
+            for (Map.Entry<String, String> entry : header.entrySet()) {
+                System.out.println(entry.getKey() + "---->" + entry.getValue());
+                builder.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        builder.url(urlString);
+        Request request = builder.get().build();
+        Call call = clientCookie.newCall(request);
+        Response response = call.execute();
+        String cookie = "";
+        for (String headerParam : response.headers("set-cookie")) {
+            if (headerParam.contains("SAP_SESSIONID_T9F_100")) {
+                cookie = headerParam;
+            }
+        }
+        int code = response.code();
+        String result = response.body().string();
+        HttpResponse httpResponse = new HttpResponse(code, result);
+        if (!StringUtils.isEmpty(cookie)) {
+            httpResponse.setCookie(cookie);
+        }
+        Map<String, String> headers = new HashMap<>();
+        headers.put("x-csrf-token", response.headers().get("x-csrf-token"));
+        headers.put("Cookie", httpResponse.getCookie());
+
+        return headers;
+    }
+
+    public Map<String, String> getIfMatch1(String url) throws Exception {
         Map<String, String> map = new HashMap<>();
         OkHttpClient clientCookie = new OkHttpClient.Builder().connectTimeout(1800L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
                 .readTimeout(1800L, TimeUnit.MILLISECONDS).build();
@@ -240,6 +296,52 @@ public class HttpRequestUtil {
                 map.put("if-match", response.headers().get("etag"));
             }
 
+        }
+        return map;
+    }
+
+    public Map<String, String> getIfMatch(String url) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        OkHttpClient clientCookie = new OkHttpClient.Builder().connectTimeout(1800L, TimeUnit.MILLISECONDS).retryOnConnectionFailure(true)
+                .readTimeout(1800L, TimeUnit.MILLISECONDS).build();
+        Map<String, String> header = new HashMap<>();
+        header.put("x-csrf-token", "fetch");
+        header.put("Accept", "application/json");
+        String username = app.getOdataService().getUserName();
+        String pwd = app.getOdataService().getPassword();
+        String credential = Credentials.basic(username, pwd);
+        header.put("Authorization", credential);
+        Request.Builder builder = new Request.Builder();
+        if (header != null) {
+            for (Map.Entry<String, String> entry : header.entrySet()) {
+                System.out.println(entry.getKey() + "---->" + entry.getValue());
+                builder.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        builder.url(url);
+        Request request = builder.get().build();
+        Call call = clientCookie.newCall(request);
+        Response response = call.execute();
+        String cookie = "";
+        for (String headerParam : response.headers("set-cookie")) {
+            if (headerParam.contains("SAP_SESSIONID_T9F_100")) {
+                cookie = headerParam;
+            }
+        }
+        int code = response.code();
+        String result = response.body().string();
+        HttpResponse httpResponse = new HttpResponse(code, result);
+        if (!StringUtils.isEmpty(cookie)) {
+            httpResponse.setCookie(cookie);
+        }
+        Map<String, String> headers = new HashMap<>();
+        map.put("x-csrf-token", response.headers().get("x-csrf-token"));
+        map.put("Cookie", httpResponse.getCookie());
+        if (httpResponse != null && httpResponse.getCode() == 200) {
+            JSONObject jsonResponse = JSONObject.parseObject(httpResponse.getResponseString());
+            JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+            JSONObject jsonMetadata = JSONObject.parseObject(JSONObject.toJSONString(jsonD.get("__metadata")));
+            map.put("if-match", jsonMetadata.getString("etag"));
         }
         return map;
     }

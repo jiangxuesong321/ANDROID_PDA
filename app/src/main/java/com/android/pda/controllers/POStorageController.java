@@ -135,6 +135,13 @@ public class POStorageController {
                     materialDocument.setQuantityInEntryUnit(objectMaterialDocument.getString("QuantityInEntryUnit"));
                     materialDocument.setSupplier(objectMaterialDocument.getString("Supplier"));
                     materialDocument.setGoodsMovementRefDocType(objectMaterialDocument.getString("GoodsMovementRefDocType"));
+                    //获取供应商批次
+                    if (StringUtils.isNotEmpty(materialDocument.getBatch()) && StringUtils.isNotEmpty(materialDocument.getPlant())) {
+                        String supplierBatch = getSupplierBatch(materialDocument);
+                        if (StringUtils.isNotEmpty(supplierBatch)) {
+                            materialDocument.setSupplierBatch(supplierBatch);
+                        }
+                    }
                     materialDocumentItem.add(materialDocument);
                 }
             }
@@ -192,7 +199,7 @@ public class POStorageController {
                     param.put("Material", materialDocument.getMaterial());
                     param.put("Batch", materialDocument.getBatch());
                     param.put("CharcInternalID", "4");
-                    param.put("CharcValuePositionNumber", "2");
+                    param.put("CharcValuePositionNumber", "1");
                     param.put("CharcValueDependency", "1");
                     param.put("CharcValue", materialDocument.getStorageBin());
                     //开始修改批次的特征值货位的信息
@@ -407,6 +414,7 @@ public class POStorageController {
                         PurchaseOrder poInfo = list.get(0);
                         String urlSupplier = app.getOdataService().getHost() + app.getString(R.string.sap_url_supplier_update) +
                                 "(Material='" + poInfo.getMaterial() + "',BatchIdentifyingPlant='',Batch='" + mdList.get(0).getBatch() + "')";
+                        //获取etag
                         Map<String, String> map = httpUtil.getIfMatch(urlSupplier);
                         JSONObject paramUpdate = new JSONObject();
                         JSONObject paramUpdateD = new JSONObject();
@@ -426,8 +434,8 @@ public class POStorageController {
                             if (httpResponseCancel.getCode() != 200) {
                                 LogUtils.e(TAG, "回滚物料凭证失败：" + jsonD.getString("MaterialDocument"));
                             }
-                        }else{
-                            LogUtils.i(TAG,"采购收货过账凭证:" + jsonD.getString("MaterialDocument"));
+                        } else {
+                            LogUtils.i(TAG, "采购收货过账凭证:" + jsonD.getString("MaterialDocument"));
                         }
                     }
                 }
@@ -446,5 +454,35 @@ public class POStorageController {
         }
 
         return result;
+    }
+
+    /**
+     * 根据工厂批次获取供应商批次的值
+     *
+     * @param materialDocument
+     * @return
+     */
+
+    public String getSupplierBatch(MaterialDocument materialDocument) {
+        String supplierBatch = "";
+        HttpRequestUtil httpUtil = new HttpRequestUtil();
+        try {
+            String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_supplier_update) +
+                    "?$format=json&$filter=Batch eq '" + materialDocument.getBatch() + "'";
+            HttpResponse httpResponse = httpUtil.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, null, null);
+            if (httpResponse != null && httpResponse.getCode() == 200) {
+                JSONObject jsonResponse = JSONObject.parseObject(httpResponse.getResponseString());
+                JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+                JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                if (JaResults.size() > 0) {
+                    JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
+                    supplierBatch = jsonObject.getString("BatchBySupplier");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.e(TAG, "function getSupplierBatch failed:" + e);
+        }
+        return supplierBatch;
     }
 }

@@ -225,7 +225,7 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
                     displayDialog(getString(R.string.text_to_po_receive_create_success) + materialDocumentInfo.get("materialDocument"), AppConstants.REQUEST_BACK);
 //                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
                 } else {
-                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
+                    displayDialog(getString(R.string.text_to_material_doc_error) + materialDocumentInfo.get("error"), AppConstants.REQUEST_FAILED);
                 }
                 waitDialog.hideWaitDialog(POReceiveResultActivity.this);
 

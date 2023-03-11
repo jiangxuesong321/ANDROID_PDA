@@ -35,7 +35,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ProductionStorageResultActivity extends AppCompatActivity implements ActivityInitialization {
+public class ProductionStorageResultActivity extends AppCompatActivity implements ActivityInitialization,
+        ProductionStorageResultAdapter.CheckCallback {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final String INTENT_KEY_PRODUCTION_STORAGE = "ProductionStorage";
 
@@ -91,6 +92,7 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
         ProductionStorageResultAdapter adapter = new ProductionStorageResultAdapter(getApplicationContext(), list);
         this.lvMaterialItem.setDividerHeight(1);
         this.lvMaterialItem.setAdapter(adapter);
+        adapter.setCheckCallback(this);
 
         // 填充工厂
         if (StringUtils.isNotEmpty(materialDocumentList.get(0).getPlant())) {
@@ -148,11 +150,16 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
         //检查是否货位号都已经扫码
         StorageLocation storageLocation = (StorageLocation) spToLocation.getSelectedItem();
         String targetStorageLocation = storageLocation.getStorageLocation();
-//        String targetStorageLocation = spToLocation.getSelectedItem().toString();
+        //校验仓位是否已经扫码
         for (MaterialDocument materialDocument : list) {
             materialDocument.setTargetStorageLocation(targetStorageLocation);
             if (StringUtils.isEmpty(targetStorageLocation) || StringUtils.isEmpty(materialDocument.getStorageBin())) {
-                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_BACK);
+                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_FAILED);
+                waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
+                return;
+            }
+            if (!materialDocument.getMaterial().equals(materialDocument.getInputMaterial()) || StringUtils.isEmpty(materialDocument.getInputMaterial())) {
+                displayDialog(getString(R.string.text_material_not_same), AppConstants.REQUEST_FAILED);
                 waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
                 return;
             }
@@ -177,7 +184,7 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
                     displayDialog(getString(R.string.text_batch_char_value_update_success), AppConstants.REQUEST_BACK);
 //                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
                 } else {
-                    displayDialog(getString(R.string.text_batch_char_value_update_failed) + materialDocumentInfo.get("error"), AppConstants.REQUEST_BACK);
+                    displayDialog(getString(R.string.text_batch_char_value_update_failed) + materialDocumentInfo.get("error"), AppConstants.REQUEST_FAILED);
                 }
                 waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
 
@@ -243,5 +250,15 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
             }
         });
         noticeDialog.create();
+    }
+
+    @Override
+    public void onCallBack(int position, String material) {
+        if (StringUtils.isNotEmpty(material)) {
+            if (!list.get(position).getMaterial().equals(material)) {
+                displayDialog(getString(R.string.text_material_not_same), AppConstants.REQUEST_FAILED);
+            }
+        }
+
     }
 }

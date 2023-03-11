@@ -2,8 +2,6 @@ package com.android.pda.adapters;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,8 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.pda.R;
-import com.android.pda.activities.view.NoticeDialog;
-import com.android.pda.application.AppConstants;
 import com.android.pda.database.pojo.MaterialDocument;
 
 import java.util.List;
@@ -159,24 +155,30 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
                 int position = (Integer) holder.column6.getTag();
                 objects.get(position).setStorageBin(s.toString().trim());
             }
-            if (holder.column7.hasFocus()) {
-                int position = (Integer) holder.column7.getTag();
-//                objects.get(position).setStorageBin(s.toString().trim());
-                // 创建对话框
-//                if (!s.toString().trim().equals(objects.get(position).getMaterial())) {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                    builder.setTitle("警告");
-//                    builder.setMessage("您点击了列表项 " + position);
-//                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            // 点击对话框按钮时的处理
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                    builder.show();
+//            if (holder.column7.hasFocus()) {
+//                String inputMaterial = s.toString().trim();
+//                int position = (Integer) holder.column7.getTag();
+//                if (objects.get(position).getMaterial().length() == inputMaterial.length()) {
+//                    objects.get(position).setInputMaterial(s.toString().trim());
+//                    // 创建对话框
+//                    checkCallback.onCallBack(position, inputMaterial);
 //                }
-            }
+//            }
+            holder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        if (!holder.column7.hasFocus()) {
+
+                            String inputMaterial = s.toString().trim();
+                            int position = (Integer) holder.column7.getTag();
+                            objects.get(position).setInputMaterial(s.toString().trim());
+                            // 创建对话框
+                            checkCallback.onCallBack(position, inputMaterial);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -199,4 +201,13 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
 //    }
 
 
+    private CheckCallback checkCallback;
+
+    public interface CheckCallback {
+        void onCallBack(int position, String material);
+    }
+
+    public void setCheckCallback(CheckCallback checkCallback) {
+        this.checkCallback = checkCallback;
+    }
 }

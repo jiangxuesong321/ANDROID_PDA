@@ -49,15 +49,16 @@ public class POStorageResultAdapter extends BaseAdapter {
             viewHolder.column3 = convertView.findViewById(R.id.tv_column3);
             viewHolder.column4 = convertView.findViewById(R.id.tv_column4);
             viewHolder.column5 = convertView.findViewById(R.id.tv_column5);
-            viewHolder.column6 = convertView.findViewById(R.id.et_column6);
+            viewHolder.column6 = convertView.findViewById(R.id.tv_column6);
+            viewHolder.column7 = convertView.findViewById(R.id.et_column7);
             convertView.setTag(viewHolder);
-            viewHolder.column6.setTag(position);
-            viewHolder.column6.clearFocus();
-            viewHolder.column6.addTextChangedListener(new Watcher(viewHolder));
+            viewHolder.column7.setTag(position);
+            viewHolder.column7.clearFocus();
+            viewHolder.column7.addTextChangedListener(new Watcher(viewHolder));
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.column6.clearFocus();
-            viewHolder.column6.setTag(position);
+            viewHolder.column7.clearFocus();
+            viewHolder.column7.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -85,10 +86,11 @@ public class POStorageResultAdapter extends BaseAdapter {
 
         viewHolder.column1.setText(objects.get(position).getMaterialDocumentItem());
         viewHolder.column2.setText(objects.get(position).getMaterial());
-        viewHolder.column3.setText(String.valueOf(objects.get(position).getDescription()));
+        viewHolder.column3.setText(objects.get(position).getDescription());
         viewHolder.column4.setText(objects.get(position).getBatch());
         viewHolder.column5.setText(String.valueOf(objects.get(position).getQuantityInEntryUnit()));
-        viewHolder.column6.setEnabled(true);
+        viewHolder.column6.setText(objects.get(position).getSupplierBatch());
+        viewHolder.column7.setEnabled(true);
 //        if(StringUtils.isNotEmpty(objects.get(position).getSerialFlag())){
 //            viewHolder.column8.setText(context.getString(R.string.text_scan));
 //        }else{
@@ -103,7 +105,7 @@ public class POStorageResultAdapter extends BaseAdapter {
 //            });
 //        }
 
-        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
@@ -122,7 +124,8 @@ public class POStorageResultAdapter extends BaseAdapter {
         TextView column3;
         TextView column4;
         TextView column5;
-        EditText column6;
+        TextView column6;
+        EditText column7;
     }
 
     private OnItemClickListener itemClickListener;
@@ -166,9 +169,8 @@ public class POStorageResultAdapter extends BaseAdapter {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (holder.column6.hasFocus()) {
-                System.out.println("ddd"+s);
-                int position = (Integer) holder.column6.getTag();
+            if (holder.column7.hasFocus()) {
+                int position = (Integer) holder.column7.getTag();
                 objects.get(position).setStorageBin(s.toString().trim());
             }
         }

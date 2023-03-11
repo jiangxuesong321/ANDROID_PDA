@@ -90,7 +90,6 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
         list = materialDocumentList;
         MaterialDocument materialDocumentOne = materialDocumentList.get(0);
         etVendor.setText(materialDocumentOne.getSupplier());
-        System.out.println("供应商为:" + materialDocumentOne.getSupplier());
         adapter = new POStorageResultAdapter(getApplicationContext(), list);
         this.lvPOItem.setDividerHeight(1);
         this.lvPOItem.setAdapter(adapter);
@@ -168,7 +167,7 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
                     displayDialog(updateInfo.get("success"), AppConstants.REQUEST_BACK);
 //                    startActivityForResult(POStorageHomeActivity.createIntent(app), 10000);
                 } else {
-                    displayDialog(updateInfo.get("error"), AppConstants.REQUEST_BACK);
+                    displayDialog(updateInfo.get("error"), AppConstants.REQUEST_FAILED);
                 }
                 waitDialog.hideWaitDialog(POStorageResultActivity.this);
             }

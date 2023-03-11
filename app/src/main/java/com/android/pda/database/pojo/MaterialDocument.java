@@ -40,6 +40,10 @@ public class MaterialDocument implements Serializable {
 
     String targetStorageLocation;
 
+    String inputMaterial;
+
+    String supplierBatch;
+
     public MaterialDocument(String materialDocument, String materialDocumentYear, String plant, String storageLocation,
                             String materialDocumentItem, String material, String description, String batch,
                             String goodsMovementType, String supplier, String purchaseOrder, String quantityInEntryUnit,
@@ -63,6 +67,21 @@ public class MaterialDocument implements Serializable {
         this.goodsMovementRefDocType = goodsMovementRefDocType;
     }
 
+    public String getSupplierBatch() {
+        return supplierBatch;
+    }
+
+    public void setSupplierBatch(String supplierBatch) {
+        this.supplierBatch = supplierBatch;
+    }
+
+    public String getInputMaterial() {
+        return inputMaterial;
+    }
+
+    public void setInputMaterial(String inputMaterial) {
+        this.inputMaterial = inputMaterial;
+    }
 
     public String getTargetStorageLocation() {
         return targetStorageLocation;
