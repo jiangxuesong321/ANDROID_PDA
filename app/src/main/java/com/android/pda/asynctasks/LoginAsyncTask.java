@@ -10,6 +10,8 @@ import com.android.pda.application.AndroidApplication;
 import com.android.pda.controllers.LoginController;
 import com.android.pda.database.pojo.Login;
 
+import java.util.Map;
+
 
 public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
     private static final AndroidApplication application = AndroidApplication.getInstance();
@@ -40,11 +42,12 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Void> {
     private void login() {
         try {
             // 用户登录校验
-            String loginErrorMsg = loginController.login(userId, pwd);
-
+            Map<String, String> result = loginController.login(userId, pwd);
+            String loginErrorMsg = result.get("error");
+            String city = result.get("city");
             if (loginErrorMsg.equalsIgnoreCase("")) {
                 // 登录成功，获取用户权限信息
-                String permissionErrorMsg = loginController.getUserPermission(userId);
+                String permissionErrorMsg = loginController.getUserPermission(userId,city);
                 if (permissionErrorMsg.equalsIgnoreCase("")) {
                     Login login = loginController.getLoginUser();
                     if (login != null) {

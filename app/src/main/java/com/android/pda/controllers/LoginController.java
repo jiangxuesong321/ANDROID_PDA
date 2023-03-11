@@ -14,8 +14,10 @@ import com.android.pda.utils.HttpRequestUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class LoginController {
@@ -35,7 +37,8 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    public String login(String userId, String pwd) throws Exception {
+    public Map<String, String> login(String userId, String pwd) throws Exception {
+        Map<String, String> resultMap = new HashMap<>();
         isLogin = true;
         HttpRequestUtil httpUtil = new HttpRequestUtil();
         String encryptPwd = Algorithm.encrypt(pwd);
@@ -58,6 +61,7 @@ public class LoginController {
                 JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
                 JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
                 String realPassWord = jsonObject.getString("password");
+                resultMap.put("city", jsonObject.getString("city"));
                 if (pwd.equals(realPassWord)) {
                     result = "S";
                 } else {
@@ -72,20 +76,25 @@ public class LoginController {
                 result = "";
             }
             if (StringUtils.equalsIgnoreCase(result, "S")) {
-                return "";
+                resultMap.put("error", "");
+                return resultMap;
             } else if (StringUtils.equalsIgnoreCase(result, "E")) {
                 if (msgtxt != null) {
-                    return msgtxt + ", Post Data: " + postJson;
+                    resultMap.put("error", msgtxt + ", Post Data: " + postJson);
+                    return resultMap;
                 } else {
-                    return app.getString(R.string.login_failed) + ", Post Data: " + postJson;
+                    resultMap.put("error", app.getString(R.string.login_failed) + ", Post Data: " + postJson);
+                    return resultMap;
                 }
             } else {
-                return app.getString(R.string.text_service_failed);
+                resultMap.put("error", app.getString(R.string.text_service_failed));
+                return resultMap;
             }
         } catch (Exception e) {
             e.printStackTrace();
             LogUtils.e(TAG, "Login Error ------> " + e.getMessage());
-            return app.getString(R.string.text_service_failed);
+            resultMap.put("error", app.getString(R.string.text_service_failed));
+            return resultMap;
         }
     }
 
@@ -163,14 +172,15 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    public String getUserPermission(String userId) throws Exception {
+    public String getUserPermission(String userId, String city) throws Exception {
         List<Login> all = new ArrayList<>();
         if (userId == null) {
             return null;
         }
         try {
-            Login user = new Login(userId, "99", "", "", "", "");
+            Login user = new Login(userId, "99", "", "", "", "", city);
             user.setZujson(JSON.toJSONString(all));
+            user.setZcity("suzhou");
             List<Login> logins = new ArrayList<>();
             logins.add(user);
             app.getDBService().getDatabaseServiceLogin().createData(logins);
@@ -190,7 +200,7 @@ public class LoginController {
         if (login == null) {
             List<Login> users = app.getDBService().getDatabaseServiceLogin().getAllData();
             if (users != null && users.size() > 0) {
-                login = new Login(users.get(0).getZuid(), users.get(0).getZfunc(), users.get(0).getZfactory(), users.get(0).getZstore_loc(), users.get(0).getZuname(), users.get(0).getZujson());
+                login = new Login(users.get(0).getZuid(), users.get(0).getZfunc(), users.get(0).getZfactory(), users.get(0).getZstore_loc(), users.get(0).getZuname(), users.get(0).getZujson(), users.get(0).getZcity());
             }
         }
         return login;

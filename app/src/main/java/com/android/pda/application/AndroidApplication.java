@@ -9,14 +9,14 @@ import android.database.CursorWindow;
 
 import com.android.pda.R;
 import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
+import com.android.pda.controllers.LoginController;
 import com.android.pda.controllers.LogisticsProviderController;
+import com.android.pda.controllers.MaterialController;
 import com.android.pda.controllers.OfflineController;
 import com.android.pda.controllers.POStorageController;
 import com.android.pda.controllers.ProductionStorageController;
 import com.android.pda.controllers.ScanController;
 import com.android.pda.controllers.StorageLocationController;
-import com.android.pda.controllers.MaterialController;
-import com.android.pda.controllers.LoginController;
 import com.android.pda.controllers.UserController;
 import com.android.pda.database.DatabaseService;
 import com.android.pda.log.LogUtils;
@@ -52,7 +52,7 @@ public class AndroidApplication extends Application {
         return offlineController;
     }
 
-    public static ScanController getScanController(){
+    public static ScanController getScanController() {
         if (scanController == null) {
             scanController = new ScanController();
         }
@@ -156,10 +156,10 @@ public class AndroidApplication extends Application {
     }
 
     public OdataService getOdataService() {
-        if(odataService == null){
+        if (odataService == null) {
             odataService = new OdataService(AppUtil.getServiceHost(instance),
                     instance.getString(R.string.sap_username), instance.getString(R.string.sap_password));
-        }else{
+        } else {
             odataService.setHost(AppUtil.getServiceHost(instance));
         }
         return odataService;

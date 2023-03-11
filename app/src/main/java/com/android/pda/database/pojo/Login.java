@@ -7,17 +7,23 @@ public class Login {
     private String zstore_loc;
     private String zuname;
     private String zujson;
+    private String zcity;
 
     public Login() {
     }
 
-    public Login(String zuid, String zfunc, String zfactory, String zstore_loc, String zuname, String zujson) {
+    public Login(String zuid, String zfunc, String zfactory, String zstore_loc, String zuname, String zujson, String zcity) {
         this.zuid = zuid;
         this.zfunc = zfunc;
         this.zfactory = zfactory;
         this.zstore_loc = zstore_loc;
         this.zuname = zuname;
         this.zujson = zujson;
+        this.zcity = zcity;
+    }
+
+    public String getZcity() {
+        return zcity;
     }
 
     public String getZuid() {
@@ -66,5 +72,9 @@ public class Login {
 
     public void setZuname(String zuname) {
         this.zuname = zuname;
+    }
+
+    public void setZcity(String zcity) {
+        this.zcity = zcity;
     }
 }

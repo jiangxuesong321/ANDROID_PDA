@@ -2,13 +2,12 @@ package com.android.pda.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -20,20 +19,16 @@ import com.android.pda.R;
 import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.adapters.MaterialPickingHomeAdapter;
-import com.android.pda.adapters.ProductionStorageResultAdapter;
 import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.adapters.SpinnerPlantAdapter;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
 import com.android.pda.database.pojo.Material;
 import com.android.pda.database.pojo.StorageLocation;
-import com.android.pda.log.LogUtils;
 import com.android.pda.utils.XmlUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -295,7 +290,6 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
             }
 
             materialList.add(material);
-
             adapter = new MaterialPickingHomeAdapter(getApplicationContext(), materialList);
             this.lvMaterialItem.setDividerHeight(1);
             this.lvMaterialItem.setAdapter((ListAdapter) adapter);

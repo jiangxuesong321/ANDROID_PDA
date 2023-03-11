@@ -22,6 +22,7 @@ interface DatabaseConstants {
 	static final String LOGIN_COLUMN_STORAGE_LOCATION = "storageLocation";
 	static final String LOGIN_COLUMN_NAME = "userName";
 	static final String LOGIN_COLUMN_JSON = "userJson";
+	static final String LOGIN_COLUMN_CITY = "city";
 
 	public static final String LOGIN_CREATE =
 			"create table if not exists " + TABLE_LOGIN + "("
@@ -30,7 +31,8 @@ interface DatabaseConstants {
 			+ LOGIN_COLUMN_FACTORY + " text, "
 			+ LOGIN_COLUMN_STORAGE_LOCATION + " text, "
 			+ LOGIN_COLUMN_NAME + " text, "
-					+ LOGIN_COLUMN_JSON + " text "
+					+ LOGIN_COLUMN_JSON + " text, "
+					+ LOGIN_COLUMN_CITY + " text "
 		    + ");";
 
 	// Table User
