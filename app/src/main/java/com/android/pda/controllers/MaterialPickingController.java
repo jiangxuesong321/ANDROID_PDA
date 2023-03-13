@@ -122,10 +122,10 @@ public class MaterialPickingController {
                         Login loginInfo = loginController.getLoginUser();
                         String city = loginInfo.getZcity();
                         String CharcInternalID = "";
-                        if (city != null && city.equals("北京")) {
-                            CharcInternalID = "4";
-                        } else if (city != null && city.equals("苏州")) {
-                            CharcInternalID = "8";
+                        if (city != null && city.equals(app.getString(R.string.text_login_user_city_beijing))) {
+                            CharcInternalID = app.getString(R.string.text_storage_bin_city_beijing);
+                        } else if (city != null && city.equals(app.getString(R.string.text_login_user_city_suzhou))) {
+                            CharcInternalID = app.getString(R.string.text_storage_bin_city_suzhou);
                         }
                         for (int i = 0; i < JaResults.size(); i++) {
                             JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(i)));

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.android.pda.R;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.database.pojo.Login;
+import com.android.pda.database.pojo.Material;
 import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.log.LogUtils;
@@ -110,13 +111,9 @@ public class ProductionStorageController {
                     materialDocument.setMaterialDocument(objectMaterialDocument.getString("MaterialDocument"));
                     materialDocument.setMaterialDocumentItem(objectMaterialDocument.getString("MaterialDocumentItem"));
                     materialDocument.setBatch(objectMaterialDocument.getString("Batch"));
-                    if (StringUtils.isNotEmpty(objectMaterialDocument.getString("PurchaseOrder"))) {
-                        PurchaseOrder purchaseOrder = new PurchaseOrder();
-                        purchaseOrder.setPurchaseOrder(objectMaterialDocument.getString("PurchaseOrder"));
-                        List<PurchaseOrder> purchaseOrderList = getPOItemList(purchaseOrder);
-                        if (purchaseOrderList.size() > 0) {
-                            materialDocument.setDescription(purchaseOrderList.get(0).getDescription());
-                        }
+                    if (StringUtils.isNotEmpty(objectMaterialDocument.getString("Material"))) {
+                        Material material = getMaterialDescription(materialDocument.getMaterial());
+                        materialDocument.setDescription(material.getMaterialName());
                     } else {
                         materialDocument.setDescription("");
                     }
@@ -237,6 +234,8 @@ public class ProductionStorageController {
                             HttpResponse httpResponseCancel = httpUtil.callHttp(urlCancel, HttpRequestUtil.HTTP_POST_METHOD, "{}", null);
                             if (httpResponseCancel.getCode() != 200) {
                                 LogUtils.e(TAG, "回滚物料凭证失败：" + jsonD.getString("MaterialDocument"));
+                                result.put("materialDocument", "");
+                                result.put("error", updateResult.get("error"));
                             }
                         } else {
                             result.put("materialDocument", jsonD.getString("MaterialDocument"));
@@ -281,33 +280,46 @@ public class ProductionStorageController {
                 JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
                 JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
                 JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                Login loginInfo = loginController.getLoginUser();
+                String city = loginInfo.getZcity();
+                String CharcInternalID = "";
+                if (city != null && city.equals(app.getString(R.string.text_login_user_city_beijing))) {
+                    CharcInternalID = app.getString(R.string.text_storage_bin_city_beijing);
+                } else if (city != null && city.equals(app.getString(R.string.text_login_user_city_suzhou))) {
+                    CharcInternalID = app.getString(R.string.text_storage_bin_city_suzhou);
+                }
+
                 if (JaResults.size() > 0) {
-                    JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
-                    if (StringUtils.isEmpty(jsonObject.getString("CharcValue"))) {
-                        param.put("Material", jsonObject.getString("Material"));
-                        param.put("Batch", jsonObject.getString("Batch"));
-                        param.put("CharcInternalID", jsonObject.getString("CharcInternalID"));
-                        param.put("CharcValuePositionNumber", jsonObject.getString("CharcValuePositionNumber"));
-                        param.put("CharcValueDependency", jsonObject.getString("CharcValueDependency"));
-                        param.put("CharcValue", materialDocument.getStorageBin());
-                        //开始修改批次的特征值货位的信息
-                        String updateUrl = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get);
-                        HttpResponse httpResponseUpdate = httpUtil.callHttp(updateUrl, HttpRequestUtil.HTTP_POST_METHOD, param.toString(), null);
-                        if (httpResponseUpdate != null && (httpResponseUpdate.getCode() == 200 || httpResponseUpdate.getCode() == 201)) {
-                            result.put("success", app.getString(R.string.text_batch_char_value_update_success));
-                            return result;
-                        } else {
-                            result.put("error", app.getString(R.string.text_batch_char_value_update_failed));
-                            return result;
+                    for (int i = 0; i < JaResults.size(); i++) {
+                        JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(i)));
+                        if (jsonObject.getString("CharcInternalID") != null && jsonObject.getString("CharcInternalID").equals(CharcInternalID)) {
+                            if (StringUtils.isEmpty(jsonObject.getString("CharcValue"))) {
+                                param.put("Material", jsonObject.getString("Material"));
+                                param.put("Batch", jsonObject.getString("Batch"));
+                                param.put("CharcInternalID", jsonObject.getString("CharcInternalID"));
+                                param.put("CharcValuePositionNumber", jsonObject.getString("CharcValuePositionNumber"));
+                                param.put("CharcValueDependency", jsonObject.getString("CharcValueDependency"));
+                                param.put("CharcValue", materialDocument.getStorageBin());
+                                //开始修改批次的特征值货位的信息
+                                String updateUrl = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get);
+                                HttpResponse httpResponseUpdate = httpUtil.callHttp(updateUrl, HttpRequestUtil.HTTP_POST_METHOD, param.toString(), null);
+                                if (httpResponseUpdate != null && (httpResponseUpdate.getCode() == 200 || httpResponseUpdate.getCode() == 201)) {
+                                    result.put("success", app.getString(R.string.text_batch_char_value_update_success));
+                                    return result;
+                                } else {
+                                    result.put("error", app.getString(R.string.text_batch_char_value_update_failed));
+                                    return result;
+                                }
+                            } else {
+                                result.put("error", app.getString(R.string.text_batch_char_value_exist_error));
+                                return result;
+                            }
                         }
-                    } else {
-                        result.put("error", app.getString(R.string.text_batch_char_value_exist_error));
-                        return result;
                     }
                 } else {
                     param.put("Material", materialDocument.getMaterial());
                     param.put("Batch", materialDocument.getBatch());
-                    param.put("CharcInternalID", "4");
+                    param.put("CharcInternalID", CharcInternalID);
                     param.put("CharcValuePositionNumber", "2");
                     param.put("CharcValueDependency", "1");
                     param.put("CharcValue", materialDocument.getStorageBin());
@@ -332,5 +344,39 @@ public class ProductionStorageController {
             result.put("error", app.getString(R.string.text_url_get_error));
         }
         return result;
+    }
+
+    /**
+     * 根据物料编码获取
+     *
+     * @param material
+     * @return
+     */
+    public Material getMaterialDescription(String material) {
+        Material materialInfo = new Material();
+        String description = "";
+        HttpRequestUtil httpUtil = new HttpRequestUtil();
+        materialInfo.setMaterial(material);
+        String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_get_material_description) + "?$format=json&$filter=Product eq '" + material + "'";
+        try {
+            HttpResponse httpResponse = httpUtil.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, null, null);
+            if (httpResponse != null && httpResponse.getCode() == 200) {
+                JSONObject jsonResponse = JSONObject.parseObject(httpResponse.getResponseString());
+                JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+                JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                if (JaResults.size() > 0) {
+                    JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
+                    description = jsonObject.getString("ProductDescription");
+                    materialInfo.setMaterialName(description);
+                } else {
+                    materialInfo.setMaterialName(description);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.e(TAG, "function getPOHeader failed:" + e);
+        }
+
+        return materialInfo;
     }
 }

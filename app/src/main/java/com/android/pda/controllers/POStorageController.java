@@ -172,33 +172,45 @@ public class POStorageController {
                 JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
                 JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
                 JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                Login loginInfo = loginController.getLoginUser();
+                String city = loginInfo.getZcity();
+                String CharcInternalID = "";
+                if (city != null && city.equals(app.getString(R.string.text_login_user_city_beijing))) {
+                    CharcInternalID = app.getString(R.string.text_storage_bin_city_beijing);
+                } else if (city != null && city.equals(app.getString(R.string.text_login_user_city_suzhou))) {
+                    CharcInternalID = app.getString(R.string.text_storage_bin_city_suzhou);
+                }
                 if (JaResults.size() > 0) {
-                    JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
-                    if (StringUtils.isEmpty(jsonObject.getString("CharcValue"))) {
-                        param.put("Material", jsonObject.getString("Material"));
-                        param.put("Batch", jsonObject.getString("Batch"));
-                        param.put("CharcInternalID", jsonObject.getString("CharcInternalID"));
-                        param.put("CharcValuePositionNumber", jsonObject.getString("CharcValuePositionNumber"));
-                        param.put("CharcValueDependency", jsonObject.getString("CharcValueDependency"));
-                        param.put("CharcValue", materialDocument.getStorageBin());
-                        //开始修改批次的特征值货位的信息
-                        String updateUrl = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get);
-                        HttpResponse httpResponseUpdate = httpUtil.callHttp(updateUrl, HttpRequestUtil.HTTP_POST_METHOD, param.toString(), null);
-                        if (httpResponseUpdate != null && (httpResponseUpdate.getCode() == 200 || httpResponseUpdate.getCode() == 201)) {
-                            result.put("success", app.getString(R.string.text_batch_char_value_update_success));
-                            return result;
-                        } else {
-                            result.put("error", app.getString(R.string.text_batch_char_value_update_failed));
-                            return result;
+                    for (int i = 0; i < JaResults.size(); i++) {
+                        JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(i)));
+                        if (jsonObject.getString("CharcInternalID") != null && jsonObject.getString("CharcInternalID").equals(CharcInternalID)) {
+                            if (StringUtils.isEmpty(jsonObject.getString("CharcValue"))) {
+                                param.put("Material", jsonObject.getString("Material"));
+                                param.put("Batch", jsonObject.getString("Batch"));
+                                param.put("CharcInternalID", jsonObject.getString("CharcInternalID"));
+                                param.put("CharcValuePositionNumber", jsonObject.getString("CharcValuePositionNumber"));
+                                param.put("CharcValueDependency", jsonObject.getString("CharcValueDependency"));
+                                param.put("CharcValue", materialDocument.getStorageBin());
+                                //开始修改批次的特征值货位的信息
+                                String updateUrl = app.getOdataService().getHost() + app.getString(R.string.sap_url_batch_char_value_get);
+                                HttpResponse httpResponseUpdate = httpUtil.callHttp(updateUrl, HttpRequestUtil.HTTP_POST_METHOD, param.toString(), null);
+                                if (httpResponseUpdate != null && (httpResponseUpdate.getCode() == 200 || httpResponseUpdate.getCode() == 201)) {
+                                    result.put("success", app.getString(R.string.text_batch_char_value_update_success));
+                                    return result;
+                                } else {
+                                    result.put("error", app.getString(R.string.text_batch_char_value_update_failed));
+                                    return result;
+                                }
+                            } else {
+                                result.put("error", app.getString(R.string.text_batch_char_value_exist_error));
+                                return result;
+                            }
                         }
-                    } else {
-                        result.put("error", app.getString(R.string.text_batch_char_value_exist_error));
-                        return result;
                     }
                 } else {
                     param.put("Material", materialDocument.getMaterial());
                     param.put("Batch", materialDocument.getBatch());
-                    param.put("CharcInternalID", "4");
+                    param.put("CharcInternalID", CharcInternalID);
                     param.put("CharcValuePositionNumber", "1");
                     param.put("CharcValueDependency", "1");
                     param.put("CharcValue", materialDocument.getStorageBin());
