@@ -14,26 +14,26 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-public class MaterialPickingTask extends AsyncTask<Void, Void, Object> {
+public class MaterialPickingBinTask extends AsyncTask<Void, Void, Object> {
     private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialPickingController materialPickingController = app.getMaterialPickingController();
-    private MaterialPickingQuery query;
 
     private OnTaskEventListener<String> mCallBack;
     private Context mContext;
     public String error;
+    private List<Material> materialChooseList;
 
-    public MaterialPickingTask(Context context, OnTaskEventListener callback, MaterialPickingQuery query) {
+    public MaterialPickingBinTask(Context context, OnTaskEventListener callback, List<Material> materialList) {
         mCallBack = callback;
         mContext = context;
-        this.query = query;
+        this.materialChooseList = materialList;
     }
 
     @Override
     protected Object doInBackground(Void... params) {
 
         try {
-            List<MaterialInfo> materialList = materialPickingController.syncData(query);
+            List<Material> materialList = materialPickingController.getMaterialStorageBin(materialChooseList);
             if (materialList != null) {
                 return materialList;
             }
@@ -56,7 +56,3 @@ public class MaterialPickingTask extends AsyncTask<Void, Void, Object> {
         }
     }
 }
-
-
-
-

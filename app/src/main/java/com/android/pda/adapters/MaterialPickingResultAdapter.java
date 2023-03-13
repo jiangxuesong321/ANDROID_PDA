@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.android.pda.R;
 import com.android.pda.database.pojo.Material;
+
 import java.util.List;
 
 public class MaterialPickingResultAdapter extends BaseAdapter {
@@ -69,14 +70,25 @@ public class MaterialPickingResultAdapter extends BaseAdapter {
         viewHolder.column1.setText(Integer.toString((position + 1) * 10));
         viewHolder.column2.setText(objects.get(position).getMaterial());
         viewHolder.column3.setText(String.valueOf(objects.get(position).getMaterialName()));
-        viewHolder.column4.setText(objects.get(position).getBatchFlag());
-        viewHolder.column5.setText(String.valueOf(objects.get(position).getUnit()));
+        viewHolder.column4.setText(objects.get(position).getBatch());
+        viewHolder.column5.setText(String.valueOf(objects.get(position).getMatlWrhsStkQtyInMatlBaseUnit()));
 
-        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    ((EditText) v).setSelection(0);
+//                }
+//            }
+//        });
+        viewHolder.column6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ((EditText) v).setSelection(0);
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                if (isChecked) {
+                    objects.get(position).setBatchFlag("choose");
+                } else {
+                    objects.get(position).setBatchFlag("");
                 }
             }
         });

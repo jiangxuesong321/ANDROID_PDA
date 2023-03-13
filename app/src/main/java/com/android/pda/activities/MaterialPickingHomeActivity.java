@@ -23,11 +23,12 @@ import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.adapters.SpinnerPlantAdapter;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.MaterialDescriptionTask;
 import com.android.pda.asynctasks.MaterialPickingTask;
 import com.android.pda.database.pojo.Material;
+import com.android.pda.database.pojo.MaterialInfo;
 import com.android.pda.database.pojo.StorageLocation;
 import com.android.pda.listeners.OnTaskEventListener;
-import com.android.pda.log.LogUtils;
 import com.android.pda.models.MaterialPickingQuery;
 import com.android.pda.utils.XmlUtils;
 
@@ -180,10 +181,6 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
             }
         });
 
-
-        // 获取物料描述
-        getMaterialDescription(materialList);
-
     }
 
     @Override
@@ -295,8 +292,8 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
                     }
                 }
             }
-
-            materialList.add(material);
+            getMaterialDescription(materialNumber);
+//            materialList.add(material);
             adapter = new MaterialPickingHomeAdapter(getApplicationContext(), materialList);
             this.lvMaterialItem.setDividerHeight(1);
             this.lvMaterialItem.setAdapter((ListAdapter) adapter);
@@ -336,29 +333,71 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
         // TODO: 添加的物料编码有效性检查
         StorageLocation oriLocation = (StorageLocation) spOriLocation.getSelectedItem();
         StorageLocation toLocation = (StorageLocation) spToLocation.getSelectedItem();
+        StorageLocation plant = (StorageLocation) spPlant.getSelectedItem();
 
         if (oriLocation != null && toLocation != null) {
             // 配置传递参数
-            Log.d("MaterialList--->", JSON.toJSONString(materialList));
-            Log.d("oriLocation--->", JSON.toJSONString(oriLocation));
-            Log.d("toLocation--->", JSON.toJSONString(toLocation));
-
+            for (Material item : materialList) {
+                item.setPlant(plant.getPlant());
+                item.setOriStorageLocation(oriLocation.getStorageLocation());
+                item.setTargetStorageLocation(toLocation.getStorageLocation());
+            }
             // 跳转前做非空校验
             // 校验文本原因：每一个 Spinner 中都配置了一行空白行（默认显示）
-            if (StringUtils.isNotEmpty(oriLocation.getPlant()) && StringUtils.isNotEmpty(oriLocation.getStorageLocation()) && StringUtils.isNotEmpty(toLocation.getStorageLocation()) && materialList != null && materialList.size() > 0) {
-                startActivityForResult(MaterialPickingResultActivity.createIntent(app, materialList, oriLocation, toLocation), 10000);
-            } else {
-                displayDialog("请填写所有信息，并添加物料行项目", AppConstants.REQUEST_FAILED);
-            }
+            MaterialPickingQuery materialPickingQuery = new MaterialPickingQuery(materialList);
+            waitDialog.showWaitDialog(MaterialPickingHomeActivity.this);
+            MaterialPickingTask task = new MaterialPickingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                }
+
+                @Override
+                public void onFailure(String error) {
+                    waitDialog.hideWaitDialog(MaterialPickingHomeActivity.this);
+                    displayDialog(error, AppConstants.REQUEST_FAILED);
+                }
+
+                @Override
+                public void bindModel(Object o) {
+                    List<MaterialInfo> materialList = (List<MaterialInfo>) o;
+                    List<Material> newMaterialList = new ArrayList<>();
+                    materialList.forEach(e -> {
+                        Material material = new Material();
+                        material.setMaterial(e.getMaterial());
+                        material.setMaterialName(e.getMaterialName());
+                        material.setPlant(e.getPlant());
+                        material.setOriStorageLocation(e.getOriStorageLocation());
+                        material.setTargetStorageLocation(e.getTargetStorageLocation());
+                        material.setBatch(e.getBatch());
+                        material.setMatlWrhsStkQtyInMatlBaseUnit(e.getMatlWrhsStkQtyInMatlBaseUnit());
+                        material.setInventoryStockType(e.getInventoryStockType());
+                        material.setMaterialBaseUnit(e.getMaterialBaseUnit());
+                        newMaterialList.add(material);
+                    });
+                    if (materialList.size() > 0) {
+                        startActivityForResult(MaterialPickingResultActivity.createIntent(app, newMaterialList, oriLocation, toLocation), 10000);
+                    } else {
+                        displayDialog(getString(R.string.text_service_on_result), AppConstants.REQUEST_BACK);
+                    }
+                    waitDialog.hideWaitDialog(MaterialPickingHomeActivity.this);
+                }
+            }, materialPickingQuery);
+            task.execute();
+
+
+//            if (StringUtils.isNotEmpty(oriLocation.getPlant()) && StringUtils.isNotEmpty(oriLocation.getStorageLocation()) && StringUtils.isNotEmpty(toLocation.getStorageLocation()) && materialList != null && materialList.size() > 0) {
+//                startActivityForResult(MaterialPickingResultActivity.createIntent(app, materialList, oriLocation, toLocation), 10000);
+//            } else {
+//                displayDialog("请填写所有信息，并添加物料行项目", AppConstants.REQUEST_FAILED);
+//            }
         } else {
             displayDialog("请填写所有信息，并添加物料行项目", AppConstants.REQUEST_FAILED);
         }
     }
 
-    private void getMaterialDescription(List<Material> materialList) {
+    private void getMaterialDescription(String material) {
         waitDialog.showWaitDialog(MaterialPickingHomeActivity.this);
-        MaterialPickingQuery query = new MaterialPickingQuery(materialList);
-        MaterialPickingTask task = new MaterialPickingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+        MaterialDescriptionTask task = new MaterialDescriptionTask(getApplicationContext(), new OnTaskEventListener<String>() {
             @Override
             public void onSuccess(String result) {
             }
@@ -371,16 +410,16 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
 
             @Override
             public void bindModel(Object o) {
-                List<Material> materialList = (List<Material>) o;
-                if (materialList != null && materialList.size() > 0) {
-//                    startActivityForResult(MaterialPickingHomeActivity.createIntent(app, materialDescriptionList), 10000);
+                Material materialInfo = (Material) o;
+                if (materialInfo != null) {
+                    materialList.add(materialInfo);
                     adapter.notifyDataSetChanged();
                 } else {
                     displayDialog(getString(R.string.text_service_on_result), AppConstants.REQUEST_BACK);
                 }
                 waitDialog.hideWaitDialog(MaterialPickingHomeActivity.this);
             }
-        }, query);
+        }, material);
         task.execute();
     }
 }

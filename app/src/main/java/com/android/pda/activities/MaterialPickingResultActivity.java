@@ -2,34 +2,31 @@ package com.android.pda.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.alibaba.fastjson.JSON;
 import com.android.pda.R;
+import com.android.pda.activities.view.NoticeDialog;
 import com.android.pda.activities.view.WaitDialog;
 import com.android.pda.adapters.MaterialPickingResultAdapter;
-import com.android.pda.adapters.POStorageResultAdapter;
-import com.android.pda.adapters.ProductionStorageResultAdapter;
 import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.application.AndroidApplication;
+import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.MaterialPickingBinTask;
 import com.android.pda.database.pojo.Material;
-import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.StorageLocation;
-import com.android.pda.log.LogUtils;
+import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.models.ProductionStorageQuery;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description 物料领用详情页，点击确定过账的页面
@@ -139,9 +136,61 @@ public class MaterialPickingResultActivity extends AppCompatActivity implements 
 
     /**
      * 提交并转至过账页面
+     *
      * @param view
      */
     public void confirm(View view) {
-        startActivityForResult(MaterialPickingPostActivity.createIntent(app, materialList, oriLocation, toLocation), 10000);
+        List<Material> chooseList = materialList.stream().filter(e ->
+                e.getBatchFlag() != null && e.getBatchFlag().equals("choose")
+        ).collect(Collectors.toList());
+        waitDialog.showWaitDialog(MaterialPickingResultActivity.this);
+        MaterialPickingBinTask task = new MaterialPickingBinTask(getApplicationContext(), new OnTaskEventListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+            }
+
+            @Override
+            public void onFailure(String error) {
+                waitDialog.hideWaitDialog(MaterialPickingResultActivity.this);
+                displayDialog(error, AppConstants.REQUEST_FAILED);
+            }
+
+            @Override
+            public void bindModel(Object o) {
+                List<Material> materialChooseList = (List<Material>) o;
+                if (materialChooseList.size() > 0) {
+                    startActivityForResult(MaterialPickingPostActivity.createIntent(app, materialChooseList, oriLocation, toLocation), 10000);
+                } else {
+                    displayDialog(getString(R.string.text_item_on_least_select_one), AppConstants.REQUEST_FAILED);
+                }
+                waitDialog.hideWaitDialog(MaterialPickingResultActivity.this);
+            }
+        }, chooseList);
+        task.execute();
+
+//        if (chooseList.size() > 0) {
+//            startActivityForResult(MaterialPickingPostActivity.createIntent(app, chooseList, oriLocation, toLocation), 10000);
+//        } else {
+//            displayDialog(getString(R.string.text_item_on_least_select_one), AppConstants.REQUEST_FAILED);
+//        }
+    }
+
+    private void displayDialog(String message, int action) {
+        NoticeDialog noticeDialog = new NoticeDialog(this, message, 1);
+        noticeDialog.setButtonCallback(new NoticeDialog.ButtonCallback() {
+            @Override
+            public void callOk() {
+
+            }
+
+            @Override
+            public void callClose() {
+                if (AppConstants.REQUEST_SUCCEED == action) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
+        noticeDialog.create();
     }
 }

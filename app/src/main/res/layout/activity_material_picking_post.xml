@@ -30,7 +30,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_material"
@@ -43,7 +43,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2.5"
+                android:layout_weight="2"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_material_desc"
                 android:textSize="@dimen/text_size_list_header"
@@ -82,7 +82,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_ori_bin"
                 android:textSize="@dimen/text_size_list_header"
@@ -95,7 +95,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_confirm_bin"
                 android:textSize="@dimen/text_size_list_header"

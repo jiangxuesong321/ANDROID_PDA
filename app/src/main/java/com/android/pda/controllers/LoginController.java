@@ -180,7 +180,6 @@ public class LoginController {
         try {
             Login user = new Login(userId, "99", "", "", "", "", city);
             user.setZujson(JSON.toJSONString(all));
-            user.setZcity("suzhou");
             List<Login> logins = new ArrayList<>();
             logins.add(user);
             app.getDBService().getDatabaseServiceLogin().createData(logins);

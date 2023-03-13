@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.android.pda.R;
 import com.android.pda.database.pojo.Material;
-import com.android.pda.database.pojo.MaterialDocument;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -62,8 +59,8 @@ public class MaterialPickingHomeAdapter extends BaseAdapter {
 
         serialNumber = Integer.toString(position + 1);
 
-        viewHolder.column1.setText(serialNumber);
-        viewHolder.column2.setText(objects.get(position).getMaterial());
+        viewHolder.column1.setText(objects.get(position).getMaterial());
+        viewHolder.column2.setText(objects.get(position).getMaterialName());
 
         viewHolder.column3.setOnClickListener(new View.OnClickListener() {
             @Override

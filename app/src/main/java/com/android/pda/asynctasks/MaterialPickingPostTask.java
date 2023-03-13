@@ -6,42 +6,40 @@ import android.os.AsyncTask;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.controllers.MaterialPickingController;
 import com.android.pda.database.pojo.Material;
-import com.android.pda.database.pojo.MaterialInfo;
 import com.android.pda.listeners.OnTaskEventListener;
-import com.android.pda.models.MaterialPickingQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class MaterialPickingTask extends AsyncTask<Void, Void, Object> {
+public class MaterialPickingPostTask extends AsyncTask<Void, Void, Object> {
     private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialPickingController materialPickingController = app.getMaterialPickingController();
-    private MaterialPickingQuery query;
 
     private OnTaskEventListener<String> mCallBack;
     private Context mContext;
     public String error;
+    private List<Material> materialChooseList;
 
-    public MaterialPickingTask(Context context, OnTaskEventListener callback, MaterialPickingQuery query) {
+    public MaterialPickingPostTask(Context context, OnTaskEventListener callback, List<Material> materialList) {
         mCallBack = callback;
         mContext = context;
-        this.query = query;
+        this.materialChooseList = materialList;
     }
 
     @Override
     protected Object doInBackground(Void... params) {
-
+        Map<String, String> result = new HashMap<>();
         try {
-            List<MaterialInfo> materialList = materialPickingController.syncData(query);
-            if (materialList != null) {
-                return materialList;
-            }
+            result = materialPickingController.createMaterialDocument(materialChooseList);
+
         } catch (Exception e) {
             e.printStackTrace();
             error = e.getMessage();
         }
-        return null;
+        return result;
     }
 
     @Override
@@ -56,7 +54,3 @@ public class MaterialPickingTask extends AsyncTask<Void, Void, Object> {
         }
     }
 }
-
-
-
-

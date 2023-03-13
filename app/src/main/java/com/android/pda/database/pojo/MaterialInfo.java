@@ -2,7 +2,8 @@ package com.android.pda.database.pojo;
 
 import java.io.Serializable;
 
-public class Material implements Serializable {
+public class MaterialInfo implements Serializable {
+
     String material;
     String materialName;
     String unit;
@@ -11,7 +12,6 @@ public class Material implements Serializable {
     String barCode;
     long creationDate;
     long lastChangeDate;
-
     String plant;
     String oriStorageLocation;
     String targetStorageLocation;
@@ -20,88 +20,70 @@ public class Material implements Serializable {
     String matlWrhsStkQtyInMatlBaseUnit;
     String materialBaseUnit;
     String inventoryStockType;
-    String CharcValue;
-    String storageBin;
-    String confirmStorageBin;
-    String inputMaterial;
 
-    public Material(String material, String materialName, String unit, String batchFlag, String serialFlag, String barCode, long creationDate, long lastChangeDate) {
-        this.material = material;
-        this.materialName = materialName;
-        this.unit = unit;
-        this.batchFlag = batchFlag;
-        this.serialFlag = serialFlag;
-        this.barCode = barCode;
-        this.creationDate = creationDate;
-        this.lastChangeDate = lastChangeDate;
-    }
 
-    public Material() {
-
+    public String getMaterial() {
+        return material;
     }
 
     public void setMaterial(String material) {
         this.material = material;
     }
 
-    public void setMaterialName(String materialName) {
-        this.materialName = materialName;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public void setBatchFlag(String batchFlag) {
-        this.batchFlag = batchFlag;
-    }
-
-    public void setSerialFlag(String serialFlag) {
-        this.serialFlag = serialFlag;
-    }
-
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
-    }
-
-    public void setCreationDate(long creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public void setLastChangeDate(long lastChangeDate) {
-        this.lastChangeDate = lastChangeDate;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
     public String getMaterialName() {
         return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
     }
 
     public String getUnit() {
         return unit;
     }
 
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     public String getBatchFlag() {
         return batchFlag;
+    }
+
+    public void setBatchFlag(String batchFlag) {
+        this.batchFlag = batchFlag;
     }
 
     public String getSerialFlag() {
         return serialFlag;
     }
 
+    public void setSerialFlag(String serialFlag) {
+        this.serialFlag = serialFlag;
+    }
+
     public String getBarCode() {
         return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 
     public long getCreationDate() {
         return creationDate;
     }
 
+    public void setCreationDate(long creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public long getLastChangeDate() {
         return lastChangeDate;
+    }
+
+    public void setLastChangeDate(long lastChangeDate) {
+        this.lastChangeDate = lastChangeDate;
     }
 
     public String getPlant() {
@@ -166,37 +148,5 @@ public class Material implements Serializable {
 
     public void setInventoryStockType(String inventoryStockType) {
         this.inventoryStockType = inventoryStockType;
-    }
-
-    public String getCharcValue() {
-        return CharcValue;
-    }
-
-    public void setCharcValue(String charcValue) {
-        CharcValue = charcValue;
-    }
-
-    public String getConfirmStorageBin() {
-        return confirmStorageBin;
-    }
-
-    public void setConfirmStorageBin(String confirmStorageBin) {
-        this.confirmStorageBin = confirmStorageBin;
-    }
-
-    public String getInputMaterial() {
-        return inputMaterial;
-    }
-
-    public void setInputMaterial(String inputMaterial) {
-        this.inputMaterial = inputMaterial;
-    }
-
-    public String getStorageBin() {
-        return storageBin;
-    }
-
-    public void setStorageBin(String storageBin) {
-        this.storageBin = storageBin;
     }
 }

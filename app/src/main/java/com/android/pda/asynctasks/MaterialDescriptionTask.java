@@ -6,36 +6,34 @@ import android.os.AsyncTask;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.controllers.MaterialPickingController;
 import com.android.pda.database.pojo.Material;
-import com.android.pda.database.pojo.MaterialInfo;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.models.MaterialPickingQuery;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
-public class MaterialPickingTask extends AsyncTask<Void, Void, Object> {
+public class MaterialDescriptionTask  extends AsyncTask<Void, Void, Object> {
     private static final AndroidApplication app = AndroidApplication.getInstance();
     private static final MaterialPickingController materialPickingController = app.getMaterialPickingController();
     private MaterialPickingQuery query;
+    private String material;
 
     private OnTaskEventListener<String> mCallBack;
     private Context mContext;
     public String error;
 
-    public MaterialPickingTask(Context context, OnTaskEventListener callback, MaterialPickingQuery query) {
+    public MaterialDescriptionTask(Context context, OnTaskEventListener callback, String material) {
         mCallBack = callback;
         mContext = context;
-        this.query = query;
+        this.material = material;
     }
 
     @Override
     protected Object doInBackground(Void... params) {
 
         try {
-            List<MaterialInfo> materialList = materialPickingController.syncData(query);
-            if (materialList != null) {
-                return materialList;
+            Material materialInfo = materialPickingController.getMaterialDescription(material);
+            if (materialInfo != null) {
+                return materialInfo;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +54,3 @@ public class MaterialPickingTask extends AsyncTask<Void, Void, Object> {
         }
     }
 }
-
-
-
-

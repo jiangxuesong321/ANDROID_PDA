@@ -255,7 +255,7 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
     @Override
     public void onCallBack(int position, String material) {
         if (StringUtils.isNotEmpty(material)) {
-            if (!list.get(position).getMaterial().equals(material)) {
+            if (!list.get(position).getMaterial().contains(material)) {
                 displayDialog(getString(R.string.text_material_not_same), AppConstants.REQUEST_FAILED);
             }
         }

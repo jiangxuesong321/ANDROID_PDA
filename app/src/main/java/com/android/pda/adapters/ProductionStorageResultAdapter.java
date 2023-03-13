@@ -43,7 +43,7 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder; //viewholder的作用是因为Android有个recycler的反复循环器，viewholder就是借助他来做到循环利用itemview。
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.li_postorage_result, null);
+            convertView = layoutInflater.inflate(R.layout.li_production_storage_result, null);
             viewHolder = new ViewHolder();
             viewHolder.column1 = convertView.findViewById(R.id.tv_column1);
             viewHolder.column2 = convertView.findViewById(R.id.tv_column2);
@@ -167,15 +167,12 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
             holder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    if (!hasFocus) {
-                        if (!holder.column7.hasFocus()) {
-
-                            String inputMaterial = s.toString().trim();
-                            int position = (Integer) holder.column7.getTag();
-                            objects.get(position).setInputMaterial(s.toString().trim());
-                            // 创建对话框
-                            checkCallback.onCallBack(position, inputMaterial);
-                        }
+                    if (hasFocus) {
+                        String inputMaterial = s.toString().trim();
+                        int position = (Integer) holder.column7.getTag();
+                        objects.get(position).setInputMaterial(s.toString().trim());
+                        // 创建对话框
+                        checkCallback.onCallBack(position, inputMaterial);
                     }
                 }
             });
