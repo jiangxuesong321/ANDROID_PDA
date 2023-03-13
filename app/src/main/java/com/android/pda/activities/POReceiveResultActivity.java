@@ -1,5 +1,6 @@
 package com.android.pda.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -30,7 +32,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -115,7 +119,7 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
 //        etPONumber.setText(purchaseOrder.getPurchaseOrder());
         etVendor.setText(purchaseOrder.getSupplier());
         etPlant.setText(purchaseOrder.getPlant());
-        adapter = new POReceiveResultAdapter(getApplicationContext(), list);
+        adapter = new POReceiveResultAdapter(POReceiveResultActivity.this, getApplicationContext(), list);
 //        adapter.setClickListener(this);
 //        adapter.setSplitCallback(this);
 //        lvPOItem.setAdapter(adapter);

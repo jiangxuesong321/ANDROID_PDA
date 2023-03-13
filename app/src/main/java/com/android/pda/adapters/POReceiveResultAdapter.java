@@ -1,22 +1,29 @@
 package com.android.pda.adapters;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.pda.R;
 import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.database.pojo.StorageLocation;
+import com.android.pda.utils.DateUtils;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class POReceiveResultAdapter extends BaseAdapter {
@@ -31,7 +38,10 @@ public class POReceiveResultAdapter extends BaseAdapter {
     private StorageLocationAdapter adapter;
     private EditText tvColumn6;
 
-    public POReceiveResultAdapter(Context context, List<PurchaseOrder> objects) {
+    private Activity mActivity;
+
+    public POReceiveResultAdapter(Activity activity, Context context, List<PurchaseOrder> objects) {
+        mActivity = activity;
         this.objects = objects;
         this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -70,6 +80,9 @@ public class POReceiveResultAdapter extends BaseAdapter {
             viewHolder.column6.setTag(position);
             viewHolder.column6.clearFocus();
             viewHolder.column6.addTextChangedListener(new Watcher(viewHolder));
+//            viewHolder.column7.setTag(position);
+//            viewHolder.column7.clearFocus();
+//            viewHolder.column7.addTextChangedListener(new Watcher(viewHolder));
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.column5.clearFocus();
@@ -78,6 +91,8 @@ public class POReceiveResultAdapter extends BaseAdapter {
             viewHolder.column4.setTag(position);
             viewHolder.column6.clearFocus();
             viewHolder.column6.setTag(position);
+//            viewHolder.column7.clearFocus();
+//            viewHolder.column7.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -155,6 +170,26 @@ public class POReceiveResultAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Log.e("TOAST ------------> ", "OVOVOVOVOVO");
+//                    ((EditText) v).setSelection(0);
+
+                    Calendar c = Calendar.getInstance();
+                    new DatePickerDialog(mActivity, new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            Log.e("Activity ------------>", mActivity.getLocalClassName().toString());
+                            String date = year + "-" + DateUtils.getMonthOrDate(monthOfYear + 1) + "-" + DateUtils.getMonthOrDate(dayOfMonth);
+                            viewHolder.column7.setText(date);
+                        }
+                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            }
+        });
 
         return convertView;
     }
@@ -219,12 +254,13 @@ public class POReceiveResultAdapter extends BaseAdapter {
                 int position = (Integer) holder.column6.getTag();
                 objects.get(position).setSupplierBatch(s.toString().trim());
             }
+
             if (holder.column7.hasFocus()) {
                 int position = (Integer) holder.column7.getTag();
+                Log.e("setDate ------------->", s.toString().trim());
                 objects.get(position).setShelfLifeExpirationDate(s.toString().trim());
             }
         }
     }
-
 
 }

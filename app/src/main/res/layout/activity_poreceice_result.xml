@@ -199,7 +199,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="1dp"
-            android:layout_weight="1.8"
+            android:layout_weight="4"
             android:background="@color/bg_colorFourthPrimary"
             android:gravity="center"
             android:paddingTop="8dp"
@@ -208,6 +208,7 @@
             android:text="@string/text_goods_bin_maturity_date"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_list_header" />
+<!--            android:layout_weight="1.8"-->
 
 
 <!--        <TextView-->
