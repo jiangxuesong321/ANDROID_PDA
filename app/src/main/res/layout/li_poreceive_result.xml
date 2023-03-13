@@ -96,6 +96,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:inputType="none"
+            android:focusable="false"
             android:imeOptions="actionDone"
             android:textSize="@dimen/text_size_list" />
         <ImageView

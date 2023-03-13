@@ -170,24 +170,18 @@ public class POReceiveResultAdapter extends BaseAdapter {
             }
         });
 
-        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        viewHolder.column7.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    Log.e("TOAST ------------> ", "OVOVOVOVOVO");
-//                    ((EditText) v).setSelection(0);
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                new DatePickerDialog(mActivity, new DatePickerDialog.OnDateSetListener() {
 
-                    Calendar c = Calendar.getInstance();
-                    new DatePickerDialog(mActivity, new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            Log.e("Activity ------------>", mActivity.getLocalClassName().toString());
-                            String date = year + "-" + DateUtils.getMonthOrDate(monthOfYear + 1) + "-" + DateUtils.getMonthOrDate(dayOfMonth);
-                            viewHolder.column7.setText(date);
-                        }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
-                }
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        String date = year + "-" + DateUtils.getMonthOrDate(monthOfYear + 1) + "-" + DateUtils.getMonthOrDate(dayOfMonth);
+                        viewHolder.column7.setText(date);
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -257,7 +251,6 @@ public class POReceiveResultAdapter extends BaseAdapter {
 
             if (holder.column7.hasFocus()) {
                 int position = (Integer) holder.column7.getTag();
-                Log.e("setDate ------------->", s.toString().trim());
                 objects.get(position).setShelfLifeExpirationDate(s.toString().trim());
             }
         }
