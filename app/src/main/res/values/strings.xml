@@ -45,6 +45,11 @@
     <string name="title_material_picking">物料领用</string>
     <string name="text_confirm_delete_all_material">确定删除所有物料吗？</string>
     <string name="error_no_material_for_delete">尚未添加物料，无法删除</string>
+    <string name="text_select">选择</string>
+    <string name="text_ori_bin">所在货位</string>
+    <string name="text_confirm_bin">确认货位</string>
+    <string name="text_ready_picking">开始拣配</string>
+    <string name="sap_url_material_description_specific">/sap/opu/odata/sap/API_CLFN_PRODUCT_SRV/A_ProductDescription</string>
 
     <string name="default_environment">Q</string>
     <!--<string name="default_environment">P</string>-->

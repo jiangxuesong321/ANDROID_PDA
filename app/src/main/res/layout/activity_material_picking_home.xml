@@ -132,7 +132,7 @@
                 android:layout_marginRight="3dp"
                 android:background="@color/bg_colorSecondPrimary"
                 android:onClick="addMaterial"
-                android:text="@string/text_add"
+                android:text="@string/text_do"
                 android:textColor="@color/text_colorSecondPrimary"
                 android:textSize="@dimen/text_size_list_header" />
     </LinearLayout>

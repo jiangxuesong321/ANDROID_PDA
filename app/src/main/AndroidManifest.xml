@@ -20,9 +20,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan|stateHidden">
-        <activity
-                android:name=".activities.MaterialPickingResultActivity"
-                android:exported="true" />
+
         <!-- 启动 Activity   intent-filter部分其实就表示默认展示页面 -->
         <activity
                 android:name=".activities.MainActivity"
@@ -72,7 +70,16 @@
                 android:exported="true"
                 android:label="@string/title_material_picking"
                 android:windowSoftInputMode="adjustPan|stateHidden" />
-
+        <activity
+                android:name=".activities.MaterialPickingResultActivity"
+                android:exported="true"
+                android:label="@string/title_material_picking"
+                android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+                android:name=".activities.MaterialPickingPostActivity"
+                android:exported="true"
+                android:label="@string/title_material_picking"
+                android:windowSoftInputMode="adjustPan|stateHidden" />
         <receiver
                 android:name=".broadcastreceivers.AlarmsBroadcastReceiver"
                 android:enabled="true"

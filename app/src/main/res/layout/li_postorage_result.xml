@@ -44,7 +44,7 @@
             android:gravity="left"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="收款机-商米-T2"
+            android:text="收款机-T2"
             android:textSize="@dimen/text_size_list" />
 
         <TextView

@@ -4,108 +4,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MaterialPickingResultActivity">
-
-    <LinearLayout
-            android:id="@+id/ll_plant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
-
-        <TextView
-                android:id="@+id/tv_plant"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:gravity="left"
-                android:text="@string/text_plant"
-                android:textSize="@dimen/text_size_label_title" />
-
-        <EditText
-                android:id="@+id/et_plant"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:enabled="false"
-                android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/ll_ori_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="8dp"
-            android:layout_below="@+id/ll_plant"
-            android:layout_marginEnd="8dp">
-
-        <TextView
-                android:id="@+id/tv_vendor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:gravity="left"
-                android:text="@string/text_ori_location"
-                android:textSize="@dimen/text_size_label_title" />
-
-        <EditText
-                android:id="@+id/et_ori_location"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:enabled="false"
-                android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/ll_to_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="8dp"
-            android:layout_below="@+id/ll_ori_location"
-            android:layout_marginEnd="8dp">
-
-        <TextView
-                android:id="@+id/tv_to_location"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:gravity="left"
-                android:text="@string/text_to_location"
-                android:textSize="@dimen/text_size_label_title" />
-
-
-        <EditText
-                android:id="@+id/et_to_location"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:enabled="false"
-                android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <View
-            android:id="@+id/v_top_line"
-            android:layout_width="match_parent"
-            android:layout_below="@id/ll_to_location"
-            android:layout_marginTop="8dp"
-            android:layout_height="1dp"
-            android:background="@color/text_light_gray_color" />
+        tools:context=".activities.MaterialPickingPostActivity">
 
     <LinearLayout
             android:id="@+id/ll_list_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/v_top_line"
             android:gravity="center_vertical"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp">
@@ -139,7 +43,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="2.5"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_material_desc"
                 android:textSize="@dimen/text_size_list_header"
@@ -165,7 +69,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1.2"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_quantity"
                 android:textSize="@dimen/text_size_list_header"
@@ -178,9 +82,9 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_marginLeft="2dp"
-                android:text="@string/text_select"
+                android:text="@string/text_ori_bin"
                 android:textSize="@dimen/text_size_list_header"
                 android:background="@color/bg_colorFourthPrimary"
                 android:gravity="center"
@@ -188,18 +92,31 @@
                 android:paddingBottom="8dp"
                 android:textColor="@color/colorPrimary" />
 
-        <!--        <TextView-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_marginLeft="2dp"-->
-        <!--                android:text="@string/text_operation"-->
-        <!--                android:textSize="@dimen/text_size_list_header"-->
-        <!--                android:background="@color/bg_colorFourthPrimary"-->
-        <!--                android:gravity="center"-->
-        <!--                android:paddingTop="8dp"-->
-        <!--                android:paddingBottom="8dp"-->
-        <!--                android:textColor="@color/colorPrimary" />-->
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginLeft="2dp"
+                android:text="@string/text_confirm_bin"
+                android:textSize="@dimen/text_size_list_header"
+                android:background="@color/bg_colorFourthPrimary"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/colorPrimary" />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:layout_marginLeft="2dp"
+                android:text="@string/text_material"
+                android:textSize="@dimen/text_size_list_header"
+                android:background="@color/bg_colorFourthPrimary"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
     <View
@@ -240,7 +157,7 @@
                 android:textColor="@color/text_colorSecondPrimary"
                 android:layout_weight="1"
                 android:onClick="confirm"
-                android:text="@string/text_ready_picking"
+                android:text="@string/text_post"
                 android:textSize="@dimen/text_size_btn" />
 
     </LinearLayout>

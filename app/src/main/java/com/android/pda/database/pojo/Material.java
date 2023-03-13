@@ -23,6 +23,38 @@ public class Material implements Serializable {
         this.lastChangeDate = lastChangeDate;
     }
 
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public void setBatchFlag(String batchFlag) {
+        this.batchFlag = batchFlag;
+    }
+
+    public void setSerialFlag(String serialFlag) {
+        this.serialFlag = serialFlag;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
+
+    public void setCreationDate(long creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setLastChangeDate(long lastChangeDate) {
+        this.lastChangeDate = lastChangeDate;
+    }
+
     public String getMaterial() {
         return material;
     }

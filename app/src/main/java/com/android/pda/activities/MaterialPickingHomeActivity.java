@@ -23,8 +23,12 @@ import com.android.pda.adapters.SpinnerAdapter;
 import com.android.pda.adapters.SpinnerPlantAdapter;
 import com.android.pda.application.AndroidApplication;
 import com.android.pda.application.AppConstants;
+import com.android.pda.asynctasks.MaterialPickingTask;
 import com.android.pda.database.pojo.Material;
 import com.android.pda.database.pojo.StorageLocation;
+import com.android.pda.listeners.OnTaskEventListener;
+import com.android.pda.log.LogUtils;
+import com.android.pda.models.MaterialPickingQuery;
 import com.android.pda.utils.XmlUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -82,7 +86,6 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
         spPlant = findViewById(R.id.sp_plant);
         spOriLocation = findViewById(R.id.sp_ori_location);
         spToLocation = findViewById(R.id.sp_to_location);
-        spinnerLocation = findViewById(R.id.sp_to_location);
         etMaterialNumber = findViewById(R.id.et_material_value);
         lvMaterialItem = findViewById(R.id.lv_material_item);
         waitDialog = new WaitDialog();
@@ -176,6 +179,10 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
                 spToLocation.setSelection(0);
             }
         });
+
+
+        // 获取物料描述
+        getMaterialDescription(materialList);
 
     }
 
@@ -346,7 +353,34 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
         } else {
             displayDialog("请填写所有信息，并添加物料行项目", AppConstants.REQUEST_FAILED);
         }
+    }
 
+    private void getMaterialDescription(List<Material> materialList) {
+        waitDialog.showWaitDialog(MaterialPickingHomeActivity.this);
+        MaterialPickingQuery query = new MaterialPickingQuery(materialList);
+        MaterialPickingTask task = new MaterialPickingTask(getApplicationContext(), new OnTaskEventListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+            }
 
+            @Override
+            public void onFailure(String error) {
+                waitDialog.hideWaitDialog(MaterialPickingHomeActivity.this);
+                displayDialog(error, AppConstants.REQUEST_FAILED);
+            }
+
+            @Override
+            public void bindModel(Object o) {
+                List<Material> materialList = (List<Material>) o;
+                if (materialList != null && materialList.size() > 0) {
+//                    startActivityForResult(MaterialPickingHomeActivity.createIntent(app, materialDescriptionList), 10000);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    displayDialog(getString(R.string.text_service_on_result), AppConstants.REQUEST_BACK);
+                }
+                waitDialog.hideWaitDialog(MaterialPickingHomeActivity.this);
+            }
+        }, query);
+        task.execute();
     }
 }

@@ -12,6 +12,7 @@ import com.android.pda.broadcastreceivers.AlarmsBroadcastReceiver;
 import com.android.pda.controllers.LoginController;
 import com.android.pda.controllers.LogisticsProviderController;
 import com.android.pda.controllers.MaterialController;
+import com.android.pda.controllers.MaterialPickingController;
 import com.android.pda.controllers.OfflineController;
 import com.android.pda.controllers.POStorageController;
 import com.android.pda.controllers.ProductionStorageController;
@@ -42,6 +43,7 @@ public class AndroidApplication extends Application {
     private static OfflineController offlineController;
     private static POStorageController poStorageController;
     private static ProductionStorageController productionStorageController;
+    private static MaterialPickingController materialPickingController;
     public final static int REQUESTCODE_MATERIAL_SYNC = 7700;
     private boolean alarmSet = false;
 
@@ -106,6 +108,13 @@ public class AndroidApplication extends Application {
             productionStorageController = new ProductionStorageController();
         }
         return productionStorageController;
+    }
+
+    public MaterialPickingController getMaterialPickingController() {
+        if (materialPickingController == null) {
+            materialPickingController = new MaterialPickingController();
+        }
+        return materialPickingController;
     }
 
     @Override
