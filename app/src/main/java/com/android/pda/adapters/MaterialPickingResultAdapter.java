@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.pda.R;
@@ -49,14 +50,19 @@ public class MaterialPickingResultAdapter extends BaseAdapter {
             viewHolder.column2 = convertView.findViewById(R.id.tv_column2);
             viewHolder.column3 = convertView.findViewById(R.id.tv_column3);
             viewHolder.column4 = convertView.findViewById(R.id.tv_column4);
-            viewHolder.column5 = convertView.findViewById(R.id.tv_column5);
+            viewHolder.column5 = convertView.findViewById(R.id.et_column5);
             viewHolder.column6 = convertView.findViewById(R.id.cb_column6);
             convertView.setTag(viewHolder);
             viewHolder.column6.setTag(position);
             viewHolder.column6.clearFocus();
             viewHolder.column6.addTextChangedListener(new Watcher(viewHolder));
+            viewHolder.column5.setTag(position);
+            viewHolder.column5.clearFocus();
+            viewHolder.column5.addTextChangedListener(new MaterialPickingResultAdapter.Watcher(viewHolder));
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder.column5.clearFocus();
+            viewHolder.column5.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -71,7 +77,8 @@ public class MaterialPickingResultAdapter extends BaseAdapter {
         viewHolder.column2.setText(objects.get(position).getMaterial());
         viewHolder.column3.setText(String.valueOf(objects.get(position).getMaterialName()));
         viewHolder.column4.setText(objects.get(position).getBatch());
-        viewHolder.column5.setText(String.valueOf(objects.get(position).getMatlWrhsStkQtyInMatlBaseUnit()));
+//        viewHolder.column5.setText(String.valueOf(objects.get(position).getMatlWrhsStkQtyInMatlBaseUnit()));
+        viewHolder.column5.setEnabled(true);
 
 //        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
@@ -101,7 +108,7 @@ public class MaterialPickingResultAdapter extends BaseAdapter {
         TextView column2;
         TextView column3;
         TextView column4;
-        TextView column5;
+        EditText column5;
         CheckBox column6;
     }
 
@@ -149,6 +156,11 @@ public class MaterialPickingResultAdapter extends BaseAdapter {
             if (holder.column6.hasFocus()) {
                 int position = (Integer) holder.column6.getTag();
 //                objects.get(position).setStorageBin(s.toString().trim());
+            }
+
+            if (holder.column5.hasFocus()) {
+                int position = (Integer) holder.column5.getTag();
+                objects.get(position).setMatlWrhsStkQtyInMatlBaseUnit(s.toString().trim());
             }
         }
     }
