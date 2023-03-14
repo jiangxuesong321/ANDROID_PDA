@@ -134,7 +134,10 @@ public class POStorageController {
                     materialDocument.setPurchaseOrder(objectMaterialDocument.getString("PurchaseOrder"));
                     materialDocument.setPurchaseOrderItem(objectMaterialDocument.getString("PurchaseOrderItem"));
                     materialDocument.setEntryUnit(objectMaterialDocument.getString("EntryUnit"));
-                    materialDocument.setQuantityInEntryUnit(objectMaterialDocument.getString("QuantityInEntryUnit"));
+                    if (StringUtils.isNotEmpty(objectMaterialDocument.getString("QuantityInEntryUnit"))) {
+                        Integer quantity = (int) Float.parseFloat(objectMaterialDocument.getString("QuantityInEntryUnit"));
+                        materialDocument.setQuantityInEntryUnit(quantity + "");
+                    }
                     materialDocument.setSupplier(objectMaterialDocument.getString("Supplier"));
                     materialDocument.setSupplierName(getSupplierName(materialDocument.getSupplier()));
                     materialDocument.setGoodsMovementRefDocType(objectMaterialDocument.getString("GoodsMovementRefDocType"));
