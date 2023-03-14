@@ -56,7 +56,10 @@ public class MaterialPickingController {
                             info.setInventoryStockType(jsonObject.getString("InventoryStockType"));
                             info.setMaterialBaseUnit(jsonObject.getString("MaterialBaseUnit"));
                             info.setMatlWrhsStkQtyInMatlBaseUnit(jsonObject.getString("MatlWrhsStkQtyInMatlBaseUnit"));
-                            results.add(info);
+                            float quantity = Float.parseFloat(info.getMatlWrhsStkQtyInMatlBaseUnit());
+                            if (quantity > 0) {
+                                results.add(info);
+                            }
                         }
                     } else {
                         MaterialInfo info = new MaterialInfo();
