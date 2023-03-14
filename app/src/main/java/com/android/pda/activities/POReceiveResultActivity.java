@@ -1,6 +1,5 @@
 package com.android.pda.activities;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -27,15 +25,16 @@ import com.android.pda.database.pojo.StorageLocation;
 import com.android.pda.database.pojo.User;
 import com.android.pda.listeners.OnTaskEventListener;
 import com.android.pda.utils.AppUtil;
+import com.android.pda.utils.XmlUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @description 采购入库详情页，点击确定过账的页面
@@ -119,7 +118,27 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
 //        etPONumber.setText(purchaseOrder.getPurchaseOrder());
         etVendor.setText(purchaseOrder.getSupplier());
         etPlant.setText(purchaseOrder.getPlant());
-        adapter = new POReceiveResultAdapter(POReceiveResultActivity.this, getApplicationContext(), list);
+        /*-- 配置 工厂 - 库存地点 数据源 --*/
+        storageLocations = new ArrayList<>();
+
+        InputStream inputStream = getResources().openRawResource(R.raw.storage_locations);
+
+        try {
+            storageLocations = XmlUtils.parse(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 工厂 - 库存地点 二级联动
+        String plantText = etPlant.getText().toString();
+        if (StringUtils.isNotEmpty(plantText)) {
+            List<StorageLocation> storageLocationArrayList = storageLocations;
+            List<StorageLocation> filteredList = storageLocationArrayList.stream()
+                    .filter(storageLocation -> storageLocation.getPlant().equals(plantText))
+                    .collect(Collectors.toList());
+
+            filteredList.add(0, new StorageLocation("", "", "", ""));
+            adapter = new POReceiveResultAdapter(POReceiveResultActivity.this, getApplicationContext(), list, filteredList);
+        }
 //        adapter.setClickListener(this);
 //        adapter.setSplitCallback(this);
 //        lvPOItem.setAdapter(adapter);
@@ -257,9 +276,9 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
         noticeDialog.create();
     }
 
-    private void hideSoftInput(EditText editText){
+    private void hideSoftInput(EditText editText) {
         editText.setInputType(InputType.TYPE_NULL);
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(editText.getWindowToken(),0);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 }

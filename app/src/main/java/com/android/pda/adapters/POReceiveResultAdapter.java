@@ -3,6 +3,7 @@ package com.android.pda.adapters;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,7 +23,10 @@ import com.android.pda.database.pojo.MaterialDocument;
 import com.android.pda.database.pojo.PurchaseOrder;
 import com.android.pda.database.pojo.StorageLocation;
 import com.android.pda.utils.DateUtils;
+import com.android.pda.utils.XmlUtils;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -34,17 +38,19 @@ public class POReceiveResultAdapter extends BaseAdapter {
     private Spinner sp_dropdown;  //下拉列表展示
     //    private String[] storageLocations;    // 环境下拉列表
     private Spinner etSpinner;
+    private SpinnerAdapter locationAdapter;
     private List<StorageLocation> storageLocations;
     private StorageLocationAdapter adapter;
     private EditText tvColumn6;
 
     private Activity mActivity;
 
-    public POReceiveResultAdapter(Activity activity, Context context, List<PurchaseOrder> objects) {
+    public POReceiveResultAdapter(Activity activity, Context context, List<PurchaseOrder> objects, List<StorageLocation> storageLocations) {
         mActivity = activity;
         this.objects = objects;
         this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.storageLocations = storageLocations;
     }
 
     public int getCount() {
@@ -121,7 +127,11 @@ public class POReceiveResultAdapter extends BaseAdapter {
         viewHolder.column1.setText(objects.get(position).getPurchaseOrderItem());
         viewHolder.column2.setText(objects.get(position).getMaterial());
         viewHolder.column3.setText(String.valueOf(objects.get(position).getDescription()));
-//        viewHolder.column4.setAdapter(adapter);
+
+
+        locationAdapter = new SpinnerAdapter(context.getApplicationContext(),
+                R.layout.li_spinner_adapter, storageLocations);
+        viewHolder.column4.setAdapter(locationAdapter);
         viewHolder.column5.setText(String.valueOf(objects.get(position).getOrderQuantity()));
         viewHolder.column4.setEnabled(true);
         viewHolder.column5.setEnabled(true);
@@ -161,7 +171,8 @@ public class POReceiveResultAdapter extends BaseAdapter {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String storageLocation = adapterView.getSelectedItem().toString();
-                objects.get(position).setStorageLocation(storageLocation.toString().trim());
+                StorageLocation storageLocation1 = (StorageLocation) viewHolder.column4.getSelectedItem();
+                objects.get(position).setStorageLocation(storageLocation1.getStorageLocation());
             }
 
             @Override
@@ -187,6 +198,7 @@ public class POReceiveResultAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 
     public class ViewHolder {
         TextView column1;
