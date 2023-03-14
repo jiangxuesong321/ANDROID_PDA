@@ -114,21 +114,6 @@ public class POReceiveResultAdapter extends BaseAdapter {
         } else {
             convertView.setBackgroundColor(context.getColor(android.R.color.transparent));
         }
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MaterialDocument materialDocument = objects.get(position);
-//                itemClickListener.onItemClicked(position);
-//                //System.out.println("onClick---->" + position);
-//            }
-//        });
-        /*viewHolder.column4.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                objects.get(position).setBatch(s.toString());
-            }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-        });*/
 
         viewHolder.column1.setText(objects.get(position).getPurchaseOrderItem());
         viewHolder.column2.setText(objects.get(position).getMaterial());
@@ -141,37 +126,24 @@ public class POReceiveResultAdapter extends BaseAdapter {
         viewHolder.column5.setText(String.valueOf(objects.get(position).getOrderQuantity()));
         viewHolder.column4.setEnabled(true);
         viewHolder.column5.setEnabled(true);
-//        if(StringUtils.isNotEmpty(objects.get(position).getSerialFlag())){
-//            viewHolder.column8.setText(context.getString(R.string.text_scan));
-//        }else{
-//            if(objects.get(position).isSub()){
-//                viewHolder.column8.setText(context.getString(R.string.text_delete));
-//            }
-//            viewHolder.column8.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    splitCallback.onSplitCallBack(objects.get(position), position);
+
+//        viewHolder.column5.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    ((EditText) v).setSelection(0);
 //                }
-//            });
-//        }
-
-        viewHolder.column5.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ((EditText) v).setSelection(0);
-                }
-            }
-        });
-
-        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ((EditText) v).setSelection(0);
-                }
-            }
-        });
+//            }
+//        });
+//
+//        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    ((EditText) v).setSelection(0);
+//                }
+//            }
+//        });
 
         viewHolder.column4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
