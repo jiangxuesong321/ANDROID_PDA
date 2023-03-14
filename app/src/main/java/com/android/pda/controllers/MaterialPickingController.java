@@ -46,7 +46,6 @@ public class MaterialPickingController {
                         for (int i = 0; i < JaResults.size(); i++) {
                             MaterialInfo info = new MaterialInfo();
                             JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(i)));
-                            System.out.println(jsonObject);
                             info.setMaterial(materialList.get(j).getMaterial());
                             info.setMaterialName(materialList.get(j).getMaterialName());
                             info.setPlant(materialList.get(j).getPlant());
@@ -205,7 +204,6 @@ public class MaterialPickingController {
                 jaItem.add(objectItem);
             }
             param.put("to_MaterialDocumentItem", jaItem);
-            System.out.println("post json" + param.toJSONString());
             String paramJson = param.toString();
             HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, paramJson, null);
             if (httpResponseItem != null && (httpResponseItem.getCode() == 200 || httpResponseItem.getCode() == 201)) {

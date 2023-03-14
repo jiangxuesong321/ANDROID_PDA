@@ -298,7 +298,7 @@ public class MaterialPickingHomeActivity extends AppCompatActivity implements Ac
             this.lvMaterialItem.setDividerHeight(1);
             this.lvMaterialItem.setAdapter((ListAdapter) adapter);
             adapter.setDeleteCallback(this);
-
+            etMaterialNumber.setText("");
 //            } else {
             // 否则提示检查物料号是否正确
 //                displayDialog("请检查物料号是否正确", AppConstants.REQUEST_FAILED);

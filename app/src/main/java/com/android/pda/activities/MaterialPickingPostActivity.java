@@ -71,6 +71,7 @@ public class MaterialPickingPostActivity extends AppCompatActivity implements Ac
         adapter = new MaterialPickingPostAdapter(getApplicationContext(), materialList);
         this.lvMaterialItem.setDividerHeight(1);
         this.lvMaterialItem.setAdapter(adapter);
+        adapter.setCheckCallback(this);
     }
 
     @Override
@@ -170,7 +171,7 @@ public class MaterialPickingPostActivity extends AppCompatActivity implements Ac
 
         if (type != null && type.equals("storageBin")) {
             if (StringUtils.isNotEmpty(param)) {
-                if (!materialList.get(position).getStorageLocation().contains(param)) {
+                if (!materialList.get(position).getStorageBin().contains(param)) {
                     displayDialog(getString(R.string.text_storage_bin_not_same), AppConstants.REQUEST_FAILED);
                 }
             }
