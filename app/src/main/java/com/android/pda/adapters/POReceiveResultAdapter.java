@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,28 +80,31 @@ public class POReceiveResultAdapter extends BaseAdapter {
             viewHolder.column5 = convertView.findViewById(R.id.et_column5);
             viewHolder.column6 = convertView.findViewById(R.id.et_column6);
             viewHolder.column7 = convertView.findViewById(R.id.et_column7);
+            viewHolder.iVDelete = convertView.findViewById(R.id.iv_delete);
             convertView.setTag(viewHolder);
             viewHolder.column5.setTag(position);
-            viewHolder.column5.clearFocus();
+//            viewHolder.column5.clearFocus();
             viewHolder.column5.addTextChangedListener(new Watcher(viewHolder));
             viewHolder.column4.setTag(position);
-            viewHolder.column4.clearFocus();
+//            viewHolder.column4.clearFocus();
             viewHolder.column6.setTag(position);
-            viewHolder.column6.clearFocus();
+//            viewHolder.column6.clearFocus();
             viewHolder.column6.addTextChangedListener(new Watcher(viewHolder));
-//            viewHolder.column7.setTag(position);
+            viewHolder.column7.setTag(position);
 //            viewHolder.column7.clearFocus();
-//            viewHolder.column7.addTextChangedListener(new Watcher(viewHolder));
+            viewHolder.column7.addTextChangedListener(new Watcher(viewHolder));
+            viewHolder.iVDelete.setTag(position);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.column5.clearFocus();
+//            viewHolder.column5.clearFocus();
             viewHolder.column5.setTag(position);
-            viewHolder.column4.clearFocus();
+//            viewHolder.column4.clearFocus();
             viewHolder.column4.setTag(position);
-            viewHolder.column6.clearFocus();
+//            viewHolder.column6.clearFocus();
             viewHolder.column6.setTag(position);
 //            viewHolder.column7.clearFocus();
-//            viewHolder.column7.setTag(position);
+            viewHolder.column7.setTag(position);
+            viewHolder.iVDelete.setTag(position);
         }
 
         if (position % 2 != 0) {
@@ -196,9 +202,28 @@ public class POReceiveResultAdapter extends BaseAdapter {
             }
         });
 
+        /**
+         * 清空已选择日期
+         */
+        viewHolder.iVDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.column7.getText() != null) {
+                    viewHolder.column7.setText(null);
+                }
+            }
+        });
+
+        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                viewHolder.column7.setTag(hasFocus);
+            }
+        });
+
+
         return convertView;
     }
-
 
     public class ViewHolder {
         TextView column1;
@@ -208,6 +233,7 @@ public class POReceiveResultAdapter extends BaseAdapter {
         EditText column5;
         EditText column6;
         EditText column7;
+        ImageView iVDelete;
     }
 
     private OnItemClickListener itemClickListener;
@@ -261,9 +287,11 @@ public class POReceiveResultAdapter extends BaseAdapter {
                 objects.get(position).setSupplierBatch(s.toString().trim());
             }
 
-            if (holder.column7.hasFocus()) {
+            if (holder.column7.getTag() != null) {
                 int position = (Integer) holder.column7.getTag();
                 objects.get(position).setShelfLifeExpirationDate(s.toString().trim());
+                Log.e("date -------->", objects.get(position).getShelfLifeExpirationDate());
+                Log.e("column7.text -------->", holder.column7.getText().toString());
             }
         }
     }
