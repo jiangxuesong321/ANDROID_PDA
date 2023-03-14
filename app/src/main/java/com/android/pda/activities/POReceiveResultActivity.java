@@ -116,7 +116,7 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
         list = poList;
         PurchaseOrder purchaseOrder = poList.get(0);
 //        etPONumber.setText(purchaseOrder.getPurchaseOrder());
-        etVendor.setText(purchaseOrder.getSupplier());
+        etVendor.setText(purchaseOrder.getSupplierName());
         etPlant.setText(purchaseOrder.getPlant());
         /*-- 配置 工厂 - 库存地点 数据源 --*/
         storageLocations = new ArrayList<>();

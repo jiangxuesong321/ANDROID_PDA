@@ -44,6 +44,8 @@ public class MaterialDocument implements Serializable {
 
     String supplierBatch;
 
+    String supplierName;
+
     public MaterialDocument(String materialDocument, String materialDocumentYear, String plant, String storageLocation,
                             String materialDocumentItem, String material, String description, String batch,
                             String goodsMovementType, String supplier, String purchaseOrder, String quantityInEntryUnit,
@@ -229,5 +231,13 @@ public class MaterialDocument implements Serializable {
 
     public void setStorageBin(String storageBin) {
         this.storageBin = storageBin;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 }

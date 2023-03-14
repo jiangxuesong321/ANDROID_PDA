@@ -32,6 +32,8 @@ public class PurchaseOrder implements Serializable {
 
     String shelfLifeExpirationDate;
 
+    String supplierName;
+
     public String getShelfLifeExpirationDate() {
         return shelfLifeExpirationDate;
     }
@@ -144,5 +146,13 @@ public class PurchaseOrder implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 }

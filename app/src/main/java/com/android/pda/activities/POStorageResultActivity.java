@@ -89,7 +89,7 @@ public class POStorageResultActivity extends AppCompatActivity implements Activi
         List<MaterialDocument> materialDocumentList = (List<MaterialDocument>) this.getIntent().getSerializableExtra(INTENT_KEY_PO_STORAGE);
         list = materialDocumentList;
         MaterialDocument materialDocumentOne = materialDocumentList.get(0);
-        etVendor.setText(materialDocumentOne.getSupplier());
+        etVendor.setText(materialDocumentOne.getSupplierName());
         adapter = new POStorageResultAdapter(getApplicationContext(), list);
         this.lvPOItem.setDividerHeight(1);
         this.lvPOItem.setAdapter(adapter);

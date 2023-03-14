@@ -134,6 +134,7 @@ public class POStorageController {
                     materialDocument.setEntryUnit(objectMaterialDocument.getString("EntryUnit"));
                     materialDocument.setQuantityInEntryUnit(objectMaterialDocument.getString("QuantityInEntryUnit"));
                     materialDocument.setSupplier(objectMaterialDocument.getString("Supplier"));
+                    materialDocument.setSupplierName(getSupplierName(materialDocument.getSupplier()));
                     materialDocument.setGoodsMovementRefDocType(objectMaterialDocument.getString("GoodsMovementRefDocType"));
                     //获取供应商批次
                     if (StringUtils.isNotEmpty(materialDocument.getBatch()) && StringUtils.isNotEmpty(materialDocument.getPlant())) {
@@ -236,6 +237,7 @@ public class POStorageController {
         }
         return result;
     }
+
     /**
      * 获取采购订单抬头信息
      *
@@ -263,6 +265,7 @@ public class POStorageController {
                     poHeader.setPurchaseOrder(purchaseOrder);
                     poHeader.setCompanyCode(companyCode);
                     poHeader.setSupplier(supplier);
+                    poHeader.setSupplierName(getSupplierName(poHeader.getSupplier()));
                 }
             }
         } catch (Exception e) {
@@ -305,6 +308,7 @@ public class POStorageController {
                     purchaseOrder.setPurchaseOrderQuantityUnit(objectPo.getString("PurchaseOrderQuantityUnit"));
                     purchaseOrder.setSupplierMaterialNumber(objectPo.getString("SupplierMaterialNumber"));
                     purchaseOrder.setSupplier(purchaseOrderQuery.getSupplier());
+                    purchaseOrder.setSupplierName(purchaseOrderQuery.getSupplierName());
                     poItem.add(purchaseOrder);
                 }
             }
@@ -443,5 +447,37 @@ public class POStorageController {
             LogUtils.e(TAG, "function getSupplierBatch failed:" + e);
         }
         return supplierBatch;
+    }
+
+    /**
+     * 根据供应商id获取供应商描述信息
+     *
+     * @param supplier
+     * @return
+     */
+
+    public String getSupplierName(String supplier) {
+        String supplierName = "";
+        HttpRequestUtil httpUtil = new HttpRequestUtil();
+        try {
+            if (StringUtils.isNotEmpty(supplier)) {
+                String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_supplier_name) +
+                        "?$format=json&$filter=Supplier eq '" + supplier + "'";
+                HttpResponse httpResponse = httpUtil.callHttp(url, HttpRequestUtil.HTTP_GET_METHOD, null, null);
+                if (httpResponse != null && httpResponse.getCode() == 200) {
+                    JSONObject jsonResponse = JSONObject.parseObject(httpResponse.getResponseString());
+                    JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
+                    JSONArray JaResults = JSONObject.parseArray(JSONObject.toJSONString(jsonD.get("results")));
+                    if (JaResults.size() > 0) {
+                        JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(JaResults.get(0)));
+                        supplierName = jsonObject.getString("SupplierName");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.e(TAG, "function getSupplierBatch failed:" + e);
+        }
+        return supplierName;
     }
 }
