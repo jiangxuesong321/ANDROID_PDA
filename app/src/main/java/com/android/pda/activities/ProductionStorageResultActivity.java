@@ -154,7 +154,7 @@ public class ProductionStorageResultActivity extends AppCompatActivity implement
         for (MaterialDocument materialDocument : list) {
             materialDocument.setTargetStorageLocation(targetStorageLocation);
             if (StringUtils.isEmpty(targetStorageLocation) || StringUtils.isEmpty(materialDocument.getStorageBin())) {
-                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_FAILED);
+                displayDialog(getString(R.string.text_production_or_storage_bin_error), AppConstants.REQUEST_FAILED);
                 waitDialog.hideWaitDialog(ProductionStorageResultActivity.this);
                 return;
             }

@@ -222,8 +222,9 @@ public class POReceiveResultActivity extends AppCompatActivity implements Activi
     public void confirm(View view) {
         //检查是否货位号都已经扫码
         for (PurchaseOrder purchaseOrder : list) {
-            if (StringUtils.isEmpty(purchaseOrder.getStorageLocation()) || StringUtils.isEmpty(purchaseOrder.getOrderQuantity())) {
-                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_BACK);
+            if (StringUtils.isEmpty(purchaseOrder.getStorageLocation()) || StringUtils.isEmpty(purchaseOrder.getOrderQuantity())
+                    || StringUtils.isEmpty(purchaseOrder.getShelfLifeExpirationDate())) {
+                displayDialog(getString(R.string.text_po_receive_sting_error), AppConstants.REQUEST_FAILED);
                 waitDialog.hideWaitDialog(POReceiveResultActivity.this);
                 return;
             }

@@ -79,22 +79,22 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
         viewHolder.column4.setText(objects.get(position).getBatch());
         viewHolder.column5.setText(String.valueOf(objects.get(position).getQuantityInEntryUnit()));
 
-        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ((EditText) v).setSelection(0);
-                }
-            }
-        });
-        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    ((EditText) v).setSelection(0);
-                }
-            }
-        });
+//        viewHolder.column6.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    ((EditText) v).setSelection(0);
+//                }
+//            }
+//        });
+//        viewHolder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    ((EditText) v).setSelection(0);
+//                }
+//            }
+//        });
 
 
         return convertView;
@@ -164,18 +164,26 @@ public class ProductionStorageResultAdapter extends BaseAdapter {
 //                    checkCallback.onCallBack(position, inputMaterial);
 //                }
 //            }
-            holder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        String inputMaterial = s.toString().trim();
-                        int position = (Integer) holder.column7.getTag();
-                        objects.get(position).setInputMaterial(s.toString().trim());
-                        // 创建对话框
-                        checkCallback.onCallBack(position, inputMaterial);
-                    }
-                }
-            });
+//            holder.column7.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//                @Override
+//                public void onFocusChange(View v, boolean hasFocus) {
+//                    if (hasFocus) {
+//                        String inputMaterial = s.toString().trim();
+//                        int position = (Integer) holder.column7.getTag();
+//                        objects.get(position).setInputMaterial(s.toString().trim());
+//                        // 创建对话框
+//                        checkCallback.onCallBack(position, inputMaterial);
+//                    }
+//                }
+//            });
+
+            if (holder.column7.hasFocus()) {
+                String inputMaterial = s.toString().trim();
+                int position = (Integer) holder.column7.getTag();
+                objects.get(position).setInputMaterial(s.toString().trim());
+                // 创建对话框
+                checkCallback.onCallBack(position, inputMaterial);
+            }
         }
     }
 

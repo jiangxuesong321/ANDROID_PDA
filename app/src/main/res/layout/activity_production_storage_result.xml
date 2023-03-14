@@ -168,7 +168,7 @@
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1.3"
                 android:layout_marginLeft="2dp"
                 android:text="@string/text_quantity"
                 android:textSize="@dimen/text_size_list_header"

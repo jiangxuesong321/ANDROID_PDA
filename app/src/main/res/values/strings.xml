@@ -46,6 +46,7 @@
     <string name="text_plant">工厂</string>
     <string name="text_ori_location">源库存地点</string>
     <string name="text_to_location">目标库存地点</string>
+    <string name="text_production_or_storage_bin_error">请先补充目标库存地点或者行项目货位号再过账</string>
 
     <!--物料领用-->
     <string name="title_material_picking">物料领用</string>
