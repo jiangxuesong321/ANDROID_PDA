@@ -236,61 +236,8 @@ public class POStorageController {
         }
         return result;
     }
-//    public Map<String, String> createMaterialDocument(List<MaterialDocument> list) {
-//        Map<String, String> result = new HashMap<>();
-//        HttpRequestUtil httpUtil = new HttpRequestUtil();
-//        try {
-//            String url = app.getOdataService().getHost() + app.getString(R.string.sap_url_material_create);
-//            Login loginInfo = loginController.getLoginUser();
-//            JSONObject param = new JSONObject();
-//            long time = System.currentTimeMillis();
-//            String nowDate = "/Date(" + time + ")/";
-////            param.put("CreatedByUser", "dlw004"); //loginInfo.getZuid());
-//            param.put("GoodsMovementCode", "01");
-//            param.put("DocumentDate", nowDate);
-//            param.put("PostingDate", nowDate);
-//            JSONArray jaItem = new JSONArray();
-//            for (MaterialDocument materialDocument : list) {
-//                JSONObject objectItem = new JSONObject();
-//                objectItem.put("Material", materialDocument.getMaterial());
-//                objectItem.put("Plant", materialDocument.getPlant());
-//                objectItem.put("StorageLocation", materialDocument.getStorageBin());
-//                objectItem.put("Batch", materialDocument.getBatch());
-//                objectItem.put("Supplier", materialDocument.getSupplier());
-//                objectItem.put("PurchaseOrder", materialDocument.getPurchaseOrder());
-//                objectItem.put("PurchaseOrderItem", materialDocument.getPurchaseOrderItem());
-//                objectItem.put("QuantityInEntryUnit", materialDocument.getQuantityInEntryUnit());
-//                objectItem.put("EntryUnit", materialDocument.getEntryUnit());
-//                objectItem.put("GoodsMovementType", "101");
-//                objectItem.put("GoodsMovementRefDocType", materialDocument.getGoodsMovementRefDocType());
-//                objectItem.put("IsCompletelyDelivered", true);
-//                jaItem.add(objectItem);
-//            }
-//            param.put("to_MaterialDocumentItem", jaItem);
-//            System.out.println("post json" + param.toJSONString());
-//            String paramJson = param.toString();
-//            HttpResponse httpResponseItem = httpUtil.callHttp(url, HttpRequestUtil.HTTP_POST_METHOD, paramJson, null);
-//            if (httpResponseItem != null && httpResponseItem.getCode() == 200) {
-//                JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
-//                JSONObject jsonD = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("d")));
-//                result.put("materialDocument", jsonD.getString("MaterialDocument"));
-//            } else {
-//                result.put("materialDocument", "");
-//                JSONObject jsonResponse = JSONObject.parseObject(httpResponseItem.getResponseString());
-//                JSONObject jsonError = JSONObject.parseObject(JSONObject.toJSONString(jsonResponse.get("error")));
-//                JSONObject jsonMessage = JSONObject.parseObject(JSONObject.toJSONString(jsonError.get("message")));
-//                result.put("error", jsonMessage.getString("value"));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            LogUtils.e(TAG, "function createMaterialDocument failed:" + e);
-//        }
-//
-//        return result;
-//    }
-
     /**
-     * 获取物料凭证抬头信息
+     * 获取采购订单抬头信息
      *
      * @param query
      * @return

@@ -25,6 +25,12 @@ public class ProductionStorageController {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final LoginController loginController = app.getLoginController();
 
+    /**
+     * 获取物料凭证行项目信息
+     *
+     * @param query
+     * @return
+     */
     public List<MaterialDocument> syncData(ProductionStorageQuery query) throws Exception {
         List<MaterialDocument> materialDocumentList = new ArrayList<>();
         MaterialDocument materialDocumentHeader = getMaterialDocumentHeader(query);
@@ -36,6 +42,12 @@ public class ProductionStorageController {
         return materialDocumentList;
     }
 
+    /**
+     * 获取物料凭证抬头信息
+     *
+     * @param query
+     * @return
+     */
     public static MaterialDocument getMaterialDocumentHeader(ProductionStorageQuery query) {
         MaterialDocument materialDocumentHeader = new MaterialDocument();
         HttpRequestUtil httpUtil = new HttpRequestUtil();
@@ -81,7 +93,6 @@ public class ProductionStorageController {
             if (StringUtils.isEmpty(query.getMaterialDocument())) {
                 return app.getString(R.string.text_input_material_doc_num);
             }
-            // TODO: verify the digit
         }
         return null;
     }
@@ -347,7 +358,7 @@ public class ProductionStorageController {
     }
 
     /**
-     * 根据物料编码获取
+     * 根据物料编码获取物料描述信息
      *
      * @param material
      * @return

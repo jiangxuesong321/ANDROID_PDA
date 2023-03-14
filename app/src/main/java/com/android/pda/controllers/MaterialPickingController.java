@@ -22,6 +22,12 @@ public class MaterialPickingController {
     private final static AndroidApplication app = AndroidApplication.getInstance();
     private static final LoginController loginController = app.getLoginController();
 
+    /**
+     * 根据物料编码库存信息
+     *
+     * @param query
+     * @return
+     */
     public List<MaterialInfo> syncData(MaterialPickingQuery query) throws Exception {
         List<MaterialInfo> results = new ArrayList<>();
         HttpRequestUtil httpUtil = new HttpRequestUtil();
@@ -79,6 +85,12 @@ public class MaterialPickingController {
         return results;
     }
 
+    /**
+     * 根据物料编码获取物料描述信息
+     *
+     * @param material
+     * @return
+     */
     public Material getMaterialDescription(String material) {
         Material materialInfo = new Material();
         String description = "";
@@ -107,6 +119,12 @@ public class MaterialPickingController {
         return materialInfo;
     }
 
+    /**
+     * 根据物料编码获取获取信息
+     *
+     * @param materialList
+     * @return
+     */
     public List<Material> getMaterialStorageBin(List<Material> materialList) {
         HttpRequestUtil httpUtil = new HttpRequestUtil();
         try {
@@ -149,12 +167,11 @@ public class MaterialPickingController {
     }
 
     /**
-     * 生产入库创建物料凭证
+     * 物料领用创建物料凭证
      *
      * @param list
      * @return
      */
-
     public Map<String, String> createMaterialDocument(List<Material> list) {
         Map<String, String> result = new HashMap<>();
         HttpRequestUtil httpUtil = new HttpRequestUtil();
